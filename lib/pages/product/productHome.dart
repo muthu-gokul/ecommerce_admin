@@ -174,6 +174,7 @@ class _ProductHomeState extends State<ProductHome> {
                     Navigator.push(context, pr.PageRoute().slideFromLeftToRight(CategoryAddNew()));
                   },
                   searchFunc: (v){},
+                  showAdd: true,
                   headerWidget: Row(
                     children: [
                       GridHeader(
@@ -251,6 +252,7 @@ class _ProductHomeState extends State<ProductHome> {
                   headerHeight: headerHeight,
                   headerWidth: width,
                   showDeleteAll: showDeleteAll,
+                  showAdd: true,
                   gridHeaderList: [],
                   filterOnTap: (i){},
                   addBtnTap: (){

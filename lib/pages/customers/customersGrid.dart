@@ -6,6 +6,7 @@ import 'package:ecommerce_admin/pages/customers/customerView.dart';
 import 'package:ecommerce_admin/widgets/buttons/actionBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/addBtn.dart';
 import 'package:ecommerce_admin/widgets/grid/gridContents.dart';
+import 'package:ecommerce_admin/widgets/grid/gridFooter.dart';
 import 'package:ecommerce_admin/widgets/grid/gridWithWidgetParam.dart';
 import 'package:ecommerce_admin/widgets/popOver/src/popover.dart';
 import 'package:ecommerce_admin/widgets/popOver/src/popover_direction.dart';
@@ -143,156 +144,22 @@ class _CustomersGridState extends State<CustomersGrid> {
                     ).values.toList(),
                   )
               ),
-              Align(
-                alignment: Alignment.center,
-                child: Container(
-                  height: 50,
+              GridFooter(
                   width: width-70,
-                  margin: EdgeInsets.only(top: 20),
-                  alignment: Alignment.topCenter,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(7)
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Spacer(),
-                      Builder(
-                        builder: (BuildContext ctx1) => GestureDetector(
-                          onTap: (){
-                            showPopover(
-                              barrierColor: Colors.transparent,
-                              context: ctx1,
-                              transitionDuration: const Duration(milliseconds: 150),
-                              bodyBuilder: (context) => Column(
-                                children: [
-                                  SizedBox(height: 10,),
-                                  GestureDetector(
-                                    onTap: (){
-                                      Navigator.pop(context);
-                                      setState(() {
-                                        pn.perPage=10;
-                                      });
-                                      pn.init(true);
-                                    },
-                                    child: Container(
-                                      height: 25,
-                                        width: 80,
-                                        alignment: Alignment.center,
-                                        color: Colors.transparent,
-                                        child: Text("10")
-                                    ),
-                                  ),
-                                  GestureDetector(
-                                    onTap: (){
-                                      Navigator.pop(context);
-                                      setState(() {
-                                        pn.perPage=20;
-                                      });
-                                      pn.init(true);
-                                    },
-                                    child: Container(
-                                      height: 25,
-                                        width: 80,
-                                        alignment: Alignment.center,
-                                        color: Colors.transparent,
-                                        child: Text("20")
-                                    ),
-                                  ),
-                                  GestureDetector(
-                                    onTap: (){
-                                      Navigator.pop(context);
-                                      setState(() {
-                                        pn.perPage=50;
-                                      });
-                                      pn.init(true);
-                                    },
-                                    child: Container(
-                                      height: 25,
-                                        width: 80,
-                                        alignment: Alignment.center,
-                                        color: Colors.transparent,
-                                        child: Text("50")
-                                    ),
-                                  ),
-                                  GestureDetector(
-                                    onTap: (){
-                                      Navigator.pop(context);
-                                      setState(() {
-                                        pn.perPage=100;
-                                      });
-                                      pn.init(true);
-                                    },
-                                    child: Container(
-                                      height: 25,
-                                        width: 80,
-                                        alignment: Alignment.center,
-                                        color: Colors.transparent,
-                                        child: Text("100")
-                                    ),
-                                  ),
-
-                                  SizedBox(height: 10,),
-                                ],
-                              ),
-                              onPop: () => print('Popover was popped!'),
-                              direction: PopoverDirection.bottom,
-                              width: 80,
-                              height: 120,
-                              arrowHeight: 0,
-                              arrowWidth: 0,
-                              //  backgroundColor: Color(0xFFf6f6f6),
-                              backgroundColor: Colors.white,
-                              contentDyOffset: 5,
-                              //isAttachRight: false,
-                              shadow:[
-                                BoxShadow(
-                                    color: Colors.grey.withOpacity(0.3),
-                                    blurRadius: 20,
-                                    spreadRadius: 2,
-                                    offset: Offset(0,0)
-                                )
-                              ],
-                              margin: 0,
-                              isCustom: true,
-                              leftMargin: 0,
-                              constraints: BoxConstraints(
-                                  maxHeight: 350
-                              ),
-                            );
-                          },
-                          child: Container(
-                            height: 30,
-                            width: 80,
-                            decoration: BoxDecoration(
-                              color: grey3.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(5)
-                            ),
-                            alignment: Alignment.center,
-                            child: Text("Show - ${pn.perPage}"),
-                          ),
-                        ),
-                      ),
-                      Spacer(),
-                      Text("Current Page - ${pn.currentPage+1}",style: ts14(grey3),),
-                      Spacer(),
-                      IconButton(
-                          onPressed: (){
-                            pn.prev();
-                          },
-                          icon: Icon(Icons.keyboard_arrow_left,size: 30,)
-                      ),
-                      IconButton(
-                          onPressed: (){
-                            pn.next();
-                          },
-                          icon: Icon(Icons.keyboard_arrow_right,size: 30,)
-                      ),
-                    ],
-                  ),
-                ),
+                  perPage: pn.perPage,
+                  currentPage: pn.currentPage+1,
+                  prev: (){
+                    pn.prev();
+                  },
+                  next: (){
+                    pn.next();
+                  },
+                  ontap: (i){
+                    setState(() {
+                      pn.perPage=i;
+                    });
+                    pn.init(true);
+                  }
               ),
 
             ],

@@ -115,9 +115,9 @@ class _ProductAddNewState extends State<ProductAddNew> {
    addHighlights();
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     final node=FocusScope.of(context);
     width1=SizeConfig.screenWidth!-40;
     return Scaffold(

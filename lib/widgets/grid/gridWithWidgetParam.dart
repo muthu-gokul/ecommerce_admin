@@ -20,10 +20,12 @@ class GridWithWidgetParam extends StatefulWidget {
   Function(String) searchFunc;
   Function(int) filterOnTap;
   List<GridHeaderModel> gridHeaderList;
+  bool showAdd;
 
   GridWithWidgetParam({required this.headerHeight,required this.headerWidth,required this.headerWidget,
     required this.bodyHeight,required this.bodyWidth,required this.bodyWidget,this.showDeleteAll=false,
-    required this.addBtnTap,required this.searchFunc,required this.gridHeaderList,required this.filterOnTap});
+    required this.addBtnTap,required this.searchFunc,required this.gridHeaderList,required this.filterOnTap,
+   this.showAdd=false});
 
   @override
   _GridWithWidgetParamState createState() => _GridWithWidgetParamState();
@@ -106,7 +108,7 @@ class _GridWithWidgetParamState extends State<GridWithWidgetParam> {
                   ),
                   OverlayContainer(
                     show: showPopUp,
-                    position: OverlayContainerPosition(-100, 0,),
+                    position: OverlayContainerPosition(widget.showAdd?-100:-180, 0,),
                     child: Container(
                       height:  (widget.gridHeaderList.length*45.0)+5,
                       width: 200,
@@ -155,10 +157,10 @@ class _GridWithWidgetParamState extends State<GridWithWidgetParam> {
                   ),
                 ],
               ),
-              AddBtn(
+              widget.showAdd?AddBtn(
                 ontap: widget.addBtnTap,
                 color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
-              ),
+              ):Container(),
             ],
           ),
         ),
