@@ -12,9 +12,14 @@ import 'package:provider/provider.dart';
 import 'package:scutiwidgets/size.dart';
 
 import 'brand/brandGrid.dart';
+import 'emailSetting/emailSettingGrid.dart';
+import 'featuredBrand/featuredBrandGrid.dart';
+import 'frontCoverSlider/frontCoverGrid.dart';
 import 'ordersList/ordersListGrid.dart';
 import 'paymentSettings/paymentSettingsGrid.dart';
 import 'productShowCase/productShowCaseGrid.dart';
+import 'topOffers/topOfferGrid.dart';
+import 'underAmount/underAmountGrid.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -41,114 +46,171 @@ class _HomePageState extends State<HomePage> {
                 width: 100,
                 height: SizeConfig.screenHeight,
                 color: th.primaryColor2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 10,),
-                    Padding(
-                      padding:  EdgeInsets.only(left: 15),
-                      child: Image.asset("assets/login/logo.jpg",height: 80,),
-                    ),
-                    SizedBox(height: 20,),
-                    DrawerContent(
-                        img: "assets/homepage/dashboard.svg",
-                        isSelect: menuIndex==1?true:false,
-                        imgHeight: 50,
-                        ontap: (){
-                          setState(() {
-                            menuIndex=1;
-                          });
-                        }
-                    ),
-                    DrawerContent(
-                        img: "assets/homepage/salesReport.svg",
-                        isSelect: menuIndex==2?true:false,
-                        imgHeight: 50,
-                        ontap: (){
-                          setState(() {
-                            menuIndex=2;
-                          });
-                        }
-                    ),
-                    DrawerContent(
-                        img: "assets/homepage/user-profile.svg",
-                        isSelect: menuIndex==3?true:false,
-                        imgHeight: 25,
-                        rightPadd: 15,
-                        ontap: (){
-                          setState(() {
-                            menuIndex=3;
-                          });
-                        }
-                    ),
-                    DrawerContent(
-                        img: "assets/homepage/user-profile.svg",
-                        isSelect: menuIndex==4?true:false,
-                        imgHeight: 25,
-                        rightPadd: 15,
-                        ontap: (){
-                          setState(() {
-                            menuIndex=4;
-                          });
-                        }
-                    ),
-                    DrawerContent(
-                        img: "assets/homepage/user-profile.svg",
-                        isSelect: menuIndex==5?true:false,
-                        imgHeight: 25,
-                        rightPadd: 15,
-                        ontap: (){
-                          setState(() {
-                            menuIndex=5;
-                          });
-                        }
-                    ),
-                    DrawerContent(
-                        img: "assets/homepage/user-profile.svg",
-                        isSelect: menuIndex==6?true:false,
-                        imgHeight: 25,
-                        rightPadd: 15,
-                        ontap: (){
-                          setState(() {
-                            menuIndex=6;
-                          });
-                        }
-                    ),
-                    DrawerContent(
-                        img: "assets/homepage/user-profile.svg",
-                        isSelect: menuIndex==7?true:false,
-                        imgHeight: 25,
-                        rightPadd: 15,
-                        ontap: (){
-                          setState(() {
-                            menuIndex=7;
-                          });
-                        }
-                    ),
-                    DrawerContent(
-                        img: "assets/homepage/user-profile.svg",
-                        isSelect: menuIndex==8?true:false,
-                        imgHeight: 25,
-                        rightPadd: 15,
-                        ontap: (){
-                          setState(() {
-                            menuIndex=8;
-                          });
-                        }
-                    ),
-                    DrawerContent(
-                        img: "assets/homepage/user-profile.svg",
-                        isSelect: menuIndex==9?true:false,
-                        imgHeight: 25,
-                        rightPadd: 15,
-                        ontap: (){
-                          setState(() {
-                            menuIndex=9;
-                          });
-                        }
-                    ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 10,),
+                      Padding(
+                        padding:  EdgeInsets.only(left: 15),
+                        child: Image.asset("assets/login/logo.jpg",height: 80,),
+                      ),
+                      SizedBox(height: 20,),
+                      DrawerContent(
+                          img: "assets/homepage/dashboard.svg",
+                          isSelect: menuIndex==1?true:false,
+                          imgHeight: 50,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=1;
+                            });
+                          }
+                      ),
+                      DrawerContent(
+                          img: "assets/homepage/salesReport.svg",
+                          isSelect: menuIndex==2?true:false,
+                          imgHeight: 50,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=2;
+                            });
+                          }
+                      ),
+                      DrawerContent(
+                          img: "assets/homepage/user-profile.svg",
+                          isSelect: menuIndex==3?true:false,
+                          imgHeight: 25,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=3;
+                            });
+                          }
+                      ),
+                      DrawerContent(
+                          img: "assets/homepage/user-profile.svg",
+                          isSelect: menuIndex==4?true:false,
+                          imgHeight: 25,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=4;
+                            });
+                          }
+                      ),
+                      DrawerContent(
+                          img: "assets/homepage/user-profile.svg",
+                          isSelect: menuIndex==5?true:false,
+                          imgHeight: 25,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=5;
+                            });
+                          }
+                      ),
+                      DrawerContent(
+                          img: "assets/homepage/user-profile.svg",
+                          isSelect: menuIndex==6?true:false,
+                          imgHeight: 25,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=6;
+                            });
+                          }
+                      ),
+                      DrawerContent(
+                          img: "assets/homepage/user-profile.svg",
+                          isSelect: menuIndex==7?true:false,
+                          imgHeight: 25,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=7;
+                            });
+                          }
+                      ),
+                      DrawerContent(
+                          img: "assets/homepage/user-profile.svg",
+                          isSelect: menuIndex==8?true:false,
+                          imgHeight: 25,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=8;
+                            });
+                          }
+                      ),
+                      DrawerContent(
+                          img: "assets/homepage/user-profile.svg",
+                          isSelect: menuIndex==9?true:false,
+                          imgHeight: 25,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=9;
+                            });
+                          }
+                      ),
+                      DrawerContent(
+                          img: "assets/homepage/user-profile.svg",
+                          isSelect: menuIndex==10?true:false,
+                          imgHeight: 25,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=10;
+                            });
+                          }
+                      ),
+                      DrawerContent(
+                          img: "assets/homepage/user-profile.svg",
+                          isSelect: menuIndex==11?true:false,
+                          imgHeight: 25,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=11;
+                            });
+                          }
+                      ),
+                      DrawerContent(
+                          img: "assets/homepage/user-profile.svg",
+                          isSelect: menuIndex==12?true:false,
+                          imgHeight: 25,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=12;
+                            });
+                          }
+                      ),
+                      DrawerContent(
+                          img: "assets/homepage/user-profile.svg",
+                          isSelect: menuIndex==13?true:false,
+                          imgHeight: 25,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=13;
+                            });
+                          }
+                      ),
+                      DrawerContent(
+                          img: "assets/homepage/user-profile.svg",
+                          isSelect: menuIndex==14?true:false,
+                          imgHeight: 25,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=14;
+                            });
+                          }
+                      ),
 
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Container(
@@ -178,6 +240,11 @@ class _HomePageState extends State<HomePage> {
                             menuIndex==7?"ORDERS LIST":
                             menuIndex==8?"PRODUCT SHOWCASE":
                             menuIndex==9?"PAYMENT SETTINGS":
+                            menuIndex==10?"Front Cover":
+                            menuIndex==11?"Featured Brand":
+                            menuIndex==12?"Under Amount":
+                            menuIndex==13?"Top Offers":
+                            menuIndex==14?"Email Settings":
                           "",
                             style: TextStyle(fontSize: 18.5,color: grey1,fontFamily: 'RR',letterSpacing: 0.2),
                           ),
@@ -332,7 +399,12 @@ class _HomePageState extends State<HomePage> {
                     menuIndex==6?CustomersGrid():
                     menuIndex==7?OrdersListGrid():
                     menuIndex==8?ProductShowcaseGrid():
-                    menuIndex==9?PaymentSettingsGrid()
+                    menuIndex==9?PaymentSettingsGrid():
+                    menuIndex==10?FrontCoverSlidreGrid():
+                    menuIndex==11?FeaturedBrandGrid():
+                    menuIndex==12?UnderAmountGrid():
+                    menuIndex==13?TopOfferGrid():
+                    menuIndex==14?EmailSettingGrid()
                         :Container()
 
                   ],

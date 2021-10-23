@@ -2,10 +2,15 @@ import 'package:ecommerce_admin/model/brandModel.dart';
 import 'package:ecommerce_admin/model/categoryModel.dart';
 import 'package:ecommerce_admin/model/customer/customerModel.dart';
 import 'package:ecommerce_admin/model/customer/customerOrderModel.dart';
+import 'package:ecommerce_admin/model/emailSettingModel.dart';
+import 'package:ecommerce_admin/model/featuredBrandModel.dart';
+import 'package:ecommerce_admin/model/frontCoverModel.dart';
 import 'package:ecommerce_admin/model/ordersList/ordersListModel.dart';
 import 'package:ecommerce_admin/model/paymentSettingsModel.dart';
 import 'package:ecommerce_admin/model/productModel.dart';
 import 'package:ecommerce_admin/model/productShowCaseModel/productShowcaseModel.dart';
+import 'package:ecommerce_admin/model/topOfferModel.dart';
+import 'package:ecommerce_admin/model/underAmountModel.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../constants.dart';
@@ -224,5 +229,51 @@ class ProductNotifier extends ChangeNotifier{
     PaymentSettingsModel(key: "FDFGDGGGGDGDG", isActive: true, currency: "EURO", secret: "GDFDGDDGGGDG"),
     PaymentSettingsModel(key: "FDFGDGGGGDGDG", isActive: true, currency: "US DOLLAR", secret: "GDFDGDDGGGDG"),
   ];
-  
+
+
+
+
+
+  //FrontCover
+  List<FrontCoverModel> frontCover=[
+    FrontCoverModel(sliderTitle: "Festivel Offer ", url: "Mi/mobile/POCO M3 PRO 5G", sliderImage: "Image", sortOrders: 1, display: "Cus0001",),
+    FrontCoverModel(sliderTitle: "Back Offer", url: "Mi/mobile/POCO M3 PRO 5G", sliderImage: "Image", sortOrders: 2, display: "Cus0001",),
+    FrontCoverModel(sliderTitle: "Product Offer", url: "Mi/mobile/POCO M3 PRO 5G", sliderImage: "Image", sortOrders: 3, display: "Cus0001",),
+
+  ];
+
+  //FeaturedBrand
+  List<FeaturedBrandModel> featuredBrand=[
+    FeaturedBrandModel(brandname: "Mi ", url: "mobile/Mi/", sliderImage: "Image", sortOrders: 1, display: "Cus0001",),
+    FeaturedBrandModel(brandname: "Mi", url: "mobile/Mi/", sliderImage: "Image", sortOrders: 2, display: "Cus0001",),
+    FeaturedBrandModel(brandname: "Mi", url: "mobile/Mi/", sliderImage: "Image", sortOrders: 3, display: "Cus0001",),
+
+  ];
+
+  //UnderAmount
+  List<UnderAmountModel> underAmount=[
+    UnderAmountModel(enterAmount: "100", url: "Mi/mobile", image: "Image", sortOrders: 1, display: "Cus0001",),
+    UnderAmountModel(enterAmount: "200", url: "Mi/mobile", image: "Image", sortOrders: 2, display: "Cus0001",),
+    UnderAmountModel(enterAmount: "300", url: "Mi/mobile", image: "Image", sortOrders: 3, display: "Cus0001",),
+
+  ];
+
+  //TopOffers
+  List<TopOfferModel> topOffer=[
+    TopOfferModel(offerName: "Mi", url: "Mi/mobile", sliderImage: "Image", sortOrders: 1, display: "Cus0001",),
+    TopOfferModel(offerName: "Mi", url: "Mi/mobile",  sliderImage: "Image", sortOrders: 2, display: "Cus0001",),
+    TopOfferModel(offerName: "Mi", url: "Mi/mobile",  sliderImage: "Image", sortOrders: 3, display: "Cus0001",),
+
+  ];
+
+
+  //EmailSetting
+  List<EmailSettingModel> emailSetting=[
+    EmailSettingModel(smptHost: "smtp.zoho.in", smptPost: "465", smptUsername: "Balasubramaniyan@Scutisoft.com", smptPassword:"123456" , fullName: "saravanastore", fromEmail:"saravanastore@gmail.com",),
+    EmailSettingModel(smptHost: "smtp.zoho.in", smptPost: "168", smptUsername: "Muthu@scutisoft.com", smptPassword: "123456", fullName: "saravanastore", fromEmail:"saravanastore@gmail.com", ),
+    EmailSettingModel(smptHost: "smtp.zoho.in", smptPost: "990", smptUsername: "vivek@scutisoft.com", smptPassword: "123456", fullName: "saravanastore", fromEmail:"saravanastore@gmail.com",),
+
+  ];
+
+
 }
