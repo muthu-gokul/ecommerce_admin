@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 class SaveBtn extends StatelessWidget {
   VoidCallback ontap;
-  SaveBtn({required this.ontap});
+  String title;
+  SaveBtn({required this.ontap,this.title="Save"});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class SaveBtn extends StatelessWidget {
           borderRadius: BorderRadius.circular(50),
         ),
         alignment: Alignment.center,
-        child: Text("Save",style: TextStyle(fontFamily: 'RM',color: Colors.white,fontSize: 20),),
+        child: Text("$title",style: TextStyle(fontFamily: 'RM',color: Colors.white,fontSize: 20),),
       ),
     );
   }

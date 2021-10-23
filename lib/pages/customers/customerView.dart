@@ -25,18 +25,7 @@ class CustomerView extends StatefulWidget {
 class _CustomerViewState extends State<CustomerView> {
   late double width;
   double width1=370;
-  BoxDecoration decoration=BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(5),
-      boxShadow: [
-        BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            blurRadius: 10,
-            spreadRadius: 1,
-            offset: Offset(0,0)
-        )
-      ]
-  );
+
 
   List<GridHeaderModel> gridHeaderList=[
     GridHeaderModel(columnName: "Id",),
@@ -502,3 +491,16 @@ class _CustomerViewState extends State<CustomerView> {
   }
 
 }
+
+BoxDecoration decoration=BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(5),
+    boxShadow: [
+      BoxShadow(
+          color: Colors.grey.withOpacity(0.2),
+          blurRadius: 10,
+          spreadRadius: 1,
+          offset: Offset(0,0)
+      )
+    ]
+);

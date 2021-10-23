@@ -14,8 +14,9 @@ class CustomPopup extends StatelessWidget {
   double width;
   double leftMargin;
   EdgeInsets edgeInsets;
+  Color color;
   CustomPopup({this.data,this.onSelect,this.selectedValue,required this.hintText,
-    required this.width,this.leftMargin=20,this.edgeInsets=const EdgeInsets.only(left:20,)});
+    required this.width,this.leftMargin=20,this.edgeInsets=const EdgeInsets.only(left:20,),this.color=Colors.transparent});
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +94,7 @@ class CustomPopup extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(color: addNewTextFieldBorder),
-                color: Colors.transparent,
+                color:color,
               ),
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(left: 15),

@@ -3,6 +3,10 @@ import 'package:ecommerce_admin/notifiers/productNotifier.dart';
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
 import 'package:ecommerce_admin/pages/customers/customerOrderDetailView.dart';
 import 'package:ecommerce_admin/widgets/buttons/backBtn.dart';
+import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
+import 'package:ecommerce_admin/widgets/customOverLayPopUp.dart';
+import 'package:ecommerce_admin/widgets/customPopUp.dart';
+import 'package:ecommerce_admin/widgets/customTextField.dart';
 import 'package:ecommerce_admin/widgets/grid/gridContents.dart';
 import 'package:scutiwidgets/pageRoutes.dart' as pr;
 import 'package:ecommerce_admin/widgets/grid/gridWithWidgetParam.dart';
@@ -14,14 +18,14 @@ import 'package:scutiwidgets/size.dart';
 import '../../constants.dart';
 
 
-class CustomerOrderView extends StatefulWidget {
-  const CustomerOrderView({Key? key}) : super(key: key);
+class OrdersListView extends StatefulWidget {
+  const OrdersListView({Key? key}) : super(key: key);
 
   @override
-  _CustomerOrderViewState createState() => _CustomerOrderViewState();
+  _OrdersListViewState createState() => _OrdersListViewState();
 }
 
-class _CustomerOrderViewState extends State<CustomerOrderView> {
+class _OrdersListViewState extends State<OrdersListView> {
   late double width;
   double width1=370;
   BoxDecoration decoration=BoxDecoration(
@@ -36,6 +40,11 @@ class _CustomerOrderViewState extends State<CustomerOrderView> {
         )
       ]
   );
+
+  String selectedStatus="";
+  List<String> statusList=["Processing","Shipped","Out of Delivery","Delivered","Cancel"];
+  bool showStatusDropDown=false;
+  TextEditingController cancelReasonController=new TextEditingController();
 
   List<GridHeaderModel> gridHeaderList=[
     GridHeaderModel(columnName: "S.No",width: 50),
@@ -65,6 +74,7 @@ class _CustomerOrderViewState extends State<CustomerOrderView> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     width=SizeConfig.screenWidth!-140;
+    final node=FocusScope.of(context);
     return Scaffold(
       body: Consumer<ThemeNotifier>(
           builder: (context,th,child)=>Consumer<ProductNotifier>(
@@ -83,7 +93,7 @@ class _CustomerOrderViewState extends State<CustomerOrderView> {
                         BackBtn(ontap: (){
                           Navigator.pop(context);
                         }),
-                        Text("Order 545443",style: ts18(Colors.white,fontsize: 20,fontfamily: 'RM'),),
+                        Text("Order Details",style: ts18(Colors.white,fontsize: 20,fontfamily: 'RM'),),
                       ],
                     ),
                   ),
@@ -96,32 +106,10 @@ class _CustomerOrderViewState extends State<CustomerOrderView> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            detailView("Status", "Delivered"),
-                            detailView("Delivered On", "12-09-2989"),
                             Container(
-                              margin: EdgeInsets.only(left: 20,right: 20,top: 7,bottom: 7),
-                              //alignment: Alignment.centerLeft,
-
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width:((width1)-40)*0.5,
-                                    alignment: Alignment.centerLeft,
-                                    child: Text("Action",style: ts16(grey1),),
-                                  ),
-                                  GestureDetector(
-                                    onTap: (){
-                                      Navigator.push(context, pr.PageRoute().slideFromLeftToRight(CustomerOrderDetailView()));
-                                    },
-                                    child: Container(
-                                      width:((width1)-40)*0.5,
-                                      alignment: Alignment.centerLeft,
-                                      child: Text("View",style: ts15(grey3),),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                padding:  EdgeInsets.only(left: 0,bottom: 20),
+                                alignment: Alignment.centerLeft,
+                                child: Text("Item From Order #Order0002",style: ts18(grey1,fontsize: 20),)
                             ),
                             SizedBox(height: 20,),
                             GridWithWidgetParam(
@@ -135,7 +123,7 @@ class _CustomerOrderViewState extends State<CustomerOrderView> {
                                   });
                                 },
                                 searchFunc: (v){
-                                //  pn.searchCustomer(v);
+                                  //  pn.searchCustomer(v);
                                 },
                                 headerWidget: Row(
                                     children: [
@@ -217,7 +205,142 @@ class _CustomerOrderViewState extends State<CustomerOrderView> {
                             ),
                             SizedBox(height: 50,),
                             Text("  You will save Rs.1,089 on this order",style: ts18(Colors.green[800]!,fontsize: 22), ),
+                            SizedBox(height: 10,),
+                            Text("  10 points you will earn after on 24-10-2029",style: ts18(Colors.green[800]!,fontsize: 22), ),
                             SizedBox(height: 50,),
+                            Container(
+                                padding:  EdgeInsets.only(left: 0,bottom: 20),
+                                alignment: Alignment.centerLeft,
+                                child: Text("Order Status",style: ts18(grey1,fontsize: 26,fontfamily: 'RM'),)
+                            ),
+                            Container(
+                              child: Row(
+                                children: [
+                                  Container(
+                                      width: 150,
+                                      alignment: Alignment.centerLeft,
+                                      child: Text("Order Status",style: ts18(grey1,fontsize: 18,fontfamily: 'RR'),)
+                                  ),
+                                  CustomPopup(
+                                      hintText: "Select Status",
+                                      width: 400,
+                                      data: statusList,
+                                      selectedValue: selectedStatus,
+                                      onSelect: (v){
+                                        setState(() {
+                                          selectedStatus=v;
+                                        });
+                                      },
+                                      leftMargin: 190,
+                                      color: Colors.white,
+                                  )
+
+                                ],
+                              ),
+                            ),
+                            selectedStatus=="Cancel"?Container(
+                              margin: EdgeInsets.only(top: 20),
+                              child: Row(
+                                children: [
+                                  Container(
+                                      width: 150,
+                                      alignment: Alignment.centerLeft,
+                                      child: Text("Reason for Cancel",style: ts18(grey1,fontsize: 18,fontfamily: 'RR'),)
+                                  ),
+                                  AddNewLabelTextField(
+                                      margin: EdgeInsets.only(left: 20),
+                                      width: textFormWidth,
+                                      hintText: "Enter Reason",
+                                      scrollPadding: 600,
+                                      onEditComplete: (){
+                                        node.unfocus();
+                                      },
+                                  )
+
+                                ],
+                              ),
+                            ):Container(),
+                            SizedBox(height: 30,),
+                            Padding(
+                              padding: EdgeInsets.only(left: 200),
+                              child: SaveBtn(ontap: (){},
+                              title: "Update",
+                              ),
+                            ),
+
+                            //Customer Information
+                            Container(
+                                padding:  EdgeInsets.only(top: 30,bottom: 20),
+                                alignment: Alignment.centerLeft,
+                                child: Text("Customer Information",style: ts18(grey1,fontsize: 26,fontfamily: 'RM'),)
+                            ),
+                            Container(
+                           //     padding:  EdgeInsets.only(top: 30,bottom: 20),
+                                alignment: Alignment.centerLeft,
+                                child: Text("Delivery Address",style: ts18(grey1,fontsize: 22,fontfamily: 'RR'),)
+                            ),
+                            Container(
+                               padding:  EdgeInsets.only(top: 20,left: 50),
+                                alignment: Alignment.centerLeft,
+                                child: Text("Raghu",style: ts18(grey1,fontsize: 18,fontfamily: 'RR'),)
+                            ),
+                            Container(
+                               padding:  EdgeInsets.only(top: 10,left: 50),
+                                alignment: Alignment.centerLeft,
+                                width: 400,
+                                child: Text("No:4B/7, 1st Floor, MMDA 1st Main Road, Maduravoyal, Chennai-600095.",style: ts18(grey1,fontsize: 18,fontfamily: 'RR'),)
+                            ),
+                            Container(
+                                padding:  EdgeInsets.only(top: 10,left: 50),
+                                alignment: Alignment.centerLeft,
+                                child: Text("9976789986",style: ts18(grey1,fontsize: 18,fontfamily: 'RR'),)
+                            ),
+                            Container(
+                               padding:  EdgeInsets.only(top: 30),
+                                alignment: Alignment.centerLeft,
+                                child: Text("Billing Address",style: ts18(grey1,fontsize: 22,fontfamily: 'RR'),)
+                            ),
+                            Container(
+                               padding:  EdgeInsets.only(top: 20,left: 50),
+                                alignment: Alignment.centerLeft,
+                                child: Text("Raghu",style: ts18(grey1,fontsize: 18,fontfamily: 'RR'),)
+                            ),
+                            Container(
+                               padding:  EdgeInsets.only(top: 10,left: 50),
+                                alignment: Alignment.centerLeft,
+                                width: 400,
+                                child: Text("No:4B/7, 1st Floor, MMDA 1st Main Road, Maduravoyal, Chennai-600095.",style: ts18(grey1,fontsize: 18,fontfamily: 'RR'),)
+                            ),
+                            Container(
+                                padding:  EdgeInsets.only(top: 10,left: 50),
+                                alignment: Alignment.centerLeft,
+                                child: Text("9976789986",style: ts18(grey1,fontsize: 18,fontfamily: 'RR'),)
+                            ),
+
+
+                            //Order Summary
+                            Container(
+                                padding:  EdgeInsets.only(top: 30,bottom: 10),
+                                alignment: Alignment.centerLeft,
+                                child: Text("Order Summary",style: ts18(grey1,fontsize: 26,fontfamily: 'RM'),)
+                            ),
+                           orderSummary("Grand Total", 43434),
+                           orderSummary("Delivery Charge", 200),
+                           orderSummary("Payment Type", "COD, Internet Banking"),
+                           orderSummary("Payment Status", "Processing"),
+                           orderSummary("Payment ID", "DGDFDF54545"),
+
+
+                            //Invoice Details
+                            Container(
+                                padding:  EdgeInsets.only(top: 30,bottom: 10),
+                                alignment: Alignment.centerLeft,
+                                child: Text("Invoice Details",style: ts18(grey1,fontsize: 26,fontfamily: 'RM'),)
+                            ),
+                            orderSummary("Number", "#5454"),
+                            orderSummary("Seller GST", "FDFD54545"),
+                            orderSummary("Purchase GST", "545EFFDDF"),
+                            SizedBox(height: 100,)
                           ],
                         ),
                       ),
@@ -231,103 +354,32 @@ class _CustomerOrderViewState extends State<CustomerOrderView> {
     );
   }
 
-  detailView(String title,dynamic value){
-    return Container(
-      margin: EdgeInsets.only(left: 20,right: 20,top: 7,bottom: 7),
-      //alignment: Alignment.centerLeft,
-
+orderSummary(String title,dynamic value){
+    return  Container(
+      margin: EdgeInsets.only(top: 12),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width:((width1)-40)*0.5,
-            alignment: Alignment.centerLeft,
-            child: Text("$title",style: ts16(grey1),),
-          ),
-          Container(
-            width:((width1)-40)*0.5,
-            alignment: Alignment.centerLeft,
-            child: Text("$value",style: ts15(grey3),),
-          ),
-        ],
-      ),
-    );
-  }
-  profileView(Widget leading,dynamic value,{CrossAxisAlignment crossAxisAlignment= CrossAxisAlignment.center}){
-    return Container(
-      margin: EdgeInsets.only(left: 20,right: 20,top: 7,bottom: 7),
-      child: Row(
-        crossAxisAlignment:crossAxisAlignment,
-        children: [
-          Container(
+              width: 180,
               alignment: Alignment.centerLeft,
-              child: leading
+              child: Text("$title",style: ts18(grey1,fontsize: 19.5,fontfamily: 'RR'),)
           ),
-          Spacer(),
           Container(
-            width:((width1)-80),
-            alignment: Alignment.centerLeft,
-            child: Text("$value",style: ts15(grey3),),
+            //width: 150,
+              constraints: BoxConstraints(
+                  maxWidth: SizeConfig.screenWidth!-300
+              ),
+              alignment: Alignment.centerLeft,
+              child: Text("$value",style: ts18(grey3,fontsize: 18,fontfamily: 'RR'),)
+
           ),
+
+
         ],
       ),
     );
-  }
-  statusReport(String title,dynamic value,double percent,Color progressColor){
-    return Container(
-      margin: EdgeInsets.only(left: 20,right: 20,top: 0,bottom: 20),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("$value",style: ts18(grey2),),
-              Text("$title",style: ts14(grey3),),
-            ],
-          ),
-          SizedBox(height: 7,),
-          LinearPercentIndicator(
-            leading: Container(width: 0,),
-            padding: EdgeInsets.only(left: 0),
-            width: width1-40,
-            trailing: Container(),
-            backgroundColor: Colors.grey[200],
-            progressColor: progressColor,
-            percent: percent,
-            animationDuration: 1000,
-            animation: true,
-            lineHeight: 5,
-          ),
-        ],
-      ),
-    );
-  }
-  expenseCount(String title,String footer,Color color,double percent){
-    return Container(
-      width:  width1*0.25,
-      margin: EdgeInsets.only(right: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("$title",style: ts14(grey2),),
-          SizedBox(height: 10,),
-          LinearPercentIndicator(
-            leading: Container(width: 0,),
-            padding: EdgeInsets.only(left: 0),
-            width: width1*0.25,
-            trailing: Container(),
-            backgroundColor: Colors.grey[200],
-            progressColor: color,
-            percent: percent,
-            animationDuration: 1000,
-            animation: true,
-            lineHeight: 5,
-          ),
-          SizedBox(height: 10,),
-          Text("$footer",style: ts14(color),),
-        ],
-      ),
-    );
-  }
+}
+
 
 }

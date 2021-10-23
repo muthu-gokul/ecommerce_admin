@@ -12,6 +12,9 @@ import 'package:provider/provider.dart';
 import 'package:scutiwidgets/size.dart';
 
 import 'brand/brandGrid.dart';
+import 'ordersList/ordersListGrid.dart';
+import 'paymentSettings/paymentSettingsGrid.dart';
+import 'productShowCase/productShowCaseGrid.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -111,6 +114,39 @@ class _HomePageState extends State<HomePage> {
                           });
                         }
                     ),
+                    DrawerContent(
+                        img: "assets/homepage/user-profile.svg",
+                        isSelect: menuIndex==7?true:false,
+                        imgHeight: 25,
+                        rightPadd: 15,
+                        ontap: (){
+                          setState(() {
+                            menuIndex=7;
+                          });
+                        }
+                    ),
+                    DrawerContent(
+                        img: "assets/homepage/user-profile.svg",
+                        isSelect: menuIndex==8?true:false,
+                        imgHeight: 25,
+                        rightPadd: 15,
+                        ontap: (){
+                          setState(() {
+                            menuIndex=8;
+                          });
+                        }
+                    ),
+                    DrawerContent(
+                        img: "assets/homepage/user-profile.svg",
+                        isSelect: menuIndex==9?true:false,
+                        imgHeight: 25,
+                        rightPadd: 15,
+                        ontap: (){
+                          setState(() {
+                            menuIndex=9;
+                          });
+                        }
+                    ),
 
                   ],
                 ),
@@ -139,6 +175,9 @@ class _HomePageState extends State<HomePage> {
                             menuIndex==4?"BRAND":
                             menuIndex==5?"USERS":
                             menuIndex==6?"CUSTOMERS":
+                            menuIndex==7?"ORDERS LIST":
+                            menuIndex==8?"PRODUCT SHOWCASE":
+                            menuIndex==9?"PAYMENT SETTINGS":
                           "",
                             style: TextStyle(fontSize: 18.5,color: grey1,fontFamily: 'RR',letterSpacing: 0.2),
                           ),
@@ -290,7 +329,10 @@ class _HomePageState extends State<HomePage> {
                     menuIndex==3?Profile():
                     menuIndex==4?BrandGrid():
                     menuIndex==5?UsersGrid():
-                    menuIndex==6?CustomersGrid()
+                    menuIndex==6?CustomersGrid():
+                    menuIndex==7?OrdersListGrid():
+                    menuIndex==8?ProductShowcaseGrid():
+                    menuIndex==9?PaymentSettingsGrid()
                         :Container()
 
                   ],
