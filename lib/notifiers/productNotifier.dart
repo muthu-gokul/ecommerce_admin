@@ -1,6 +1,7 @@
 import 'package:ecommerce_admin/model/brandModel.dart';
 import 'package:ecommerce_admin/model/categoryModel.dart';
-import 'package:ecommerce_admin/model/customerModel.dart';
+import 'package:ecommerce_admin/model/customer/customerModel.dart';
+import 'package:ecommerce_admin/model/customer/customerOrderModel.dart';
 import 'package:ecommerce_admin/model/productModel.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -114,8 +115,6 @@ class ProductNotifier extends ChangeNotifier{
     });
   }
 
-
-
   int perPage = 10;
   int currentPage=0;
   int totalPage=0;
@@ -167,7 +166,25 @@ class ProductNotifier extends ChangeNotifier{
       }
       notifyListeners();
     }
-
   }
+
+  List<CustomerOrderModel> customerOrders=[
+    CustomerOrderModel(id: "#Order-113232", price: 5454, item: "Notes,Dar..", orderedDate: "March 16,2021", paymentInfo: "Bank Emi"),
+    CustomerOrderModel(id: "#Order-113232", price: 5454, item: "Notes,Dar..", orderedDate: "March 16,2021", paymentInfo: "Bank Emi"),
+    CustomerOrderModel(id: "#Order-113232", price: 5454, item: "Notes,Dar..", orderedDate: "March 16,2021", paymentInfo: "Bank Emi"),
+    CustomerOrderModel(id: "#Order-113232", price: 5454, item: "Notes,Dar..", orderedDate: "March 16,2021", paymentInfo: "Bank Emi"),
+    CustomerOrderModel(id: "#Order-113232", price: 5454, item: "Notes,Dar..", orderedDate: "March 16,2021", paymentInfo: "Bank Emi"),
+    CustomerOrderModel(id: "#Order-113232", price: 5454, item: "Notes,Dar..", orderedDate: "March 16,2021", paymentInfo: "Bank Emi"),
+    CustomerOrderModel(id: "#Order-113232", price: 5454, item: "Notes,Dar..", orderedDate: "March 16,2021", paymentInfo: "Bank Emi"),
+    CustomerOrderModel(id: "#Order-113232", price: 5454, item: "Notes,Dar..", orderedDate: "March 16,2021", paymentInfo: "Bank Emi"),
+    CustomerOrderModel(id: "#Order-113232", price: 5454, item: "Notes,Dar..", orderedDate: "March 16,2021", paymentInfo: "Bank Emi"),
+    CustomerOrderModel(id: "#Order-113232", price: 5454, item: "Notes,Dar..", orderedDate: "March 16,2021", paymentInfo: "Bank Emi"),
+    CustomerOrderModel(id: "#Order-113232", price: 5454, item: "Notes,Dar..", orderedDate: "March 16,2021", paymentInfo: "Bank Emi"),
+    CustomerOrderModel(id: "#Order-113232", price: 5454, item: "Notes,Dar..", orderedDate: "March 16,2021", paymentInfo: "Bank Emi"),
+    CustomerOrderModel(id: "#Order-113232", price: 5454, item: "Notes,Dar..", orderedDate: "March 16,2021", paymentInfo: "Bank Emi"),
+    CustomerOrderModel(id: "#Order-113232", price: 5454, item: "Notes,Dar..", orderedDate: "March 16,2021", paymentInfo: "Bank Emi"),
+    CustomerOrderModel(id: "#Order-113232", price: 5454, item: "Notes,Dar..", orderedDate: "March 16,2021", paymentInfo: "Bank Emi"),
+    CustomerOrderModel(id: "#Order-113232", price: 5454, item: "Notes,Dar..", orderedDate: "March 16,2021", paymentInfo: "Bank Emi"),
+  ];
 
 }

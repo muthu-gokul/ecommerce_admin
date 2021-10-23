@@ -21,11 +21,12 @@ class GridWithWidgetParam extends StatefulWidget {
   Function(int) filterOnTap;
   List<GridHeaderModel> gridHeaderList;
   bool showAdd;
+  Color searchBg;
 
   GridWithWidgetParam({required this.headerHeight,required this.headerWidth,required this.headerWidget,
     required this.bodyHeight,required this.bodyWidth,required this.bodyWidget,this.showDeleteAll=false,
     required this.addBtnTap,required this.searchFunc,required this.gridHeaderList,required this.filterOnTap,
-   this.showAdd=false});
+   this.showAdd=false,this.searchBg=Colors.white});
 
   @override
   _GridWithWidgetParamState createState() => _GridWithWidgetParamState();
@@ -69,7 +70,7 @@ class _GridWithWidgetParamState extends State<GridWithWidgetParam> {
                 width: 250,
                 margin: EdgeInsets.only(right: 20),
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: widget.searchBg,
                     borderRadius: BorderRadius.circular(5)
                 ),
                 alignment: Alignment.centerLeft,

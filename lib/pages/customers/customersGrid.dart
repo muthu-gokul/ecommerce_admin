@@ -74,13 +74,27 @@ class _CustomersGridState extends State<CustomersGrid> {
                     pn.searchCustomer(v);
                   },
                   headerWidget: Row(
-                    children: gridHeaderList.asMap().map((key, value) =>
-                                MapEntry(key, value.isActive? GridHeader(
-                                    width: value.width,
-                                    title: value.columnName,
-                            ):Container(),
-                        )
-                    ).values.toList()
+                    children: [
+                      Container(
+                        height: 30,
+                        width: 30,
+                        alignment: Alignment.center,
+                        child: Container(
+                          height: 10,
+                          width: 10,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.transparent
+                          ),
+                        ),
+                      ),
+                      for(int i=0;i<gridHeaderList.length;i++)
+                        gridHeaderList[i].isActive? GridHeader(
+                          width: gridHeaderList[i].width,
+                          title: gridHeaderList[i].columnName,
+                          alignment: gridHeaderList[i].alignment,
+                        ):Container(),
+                    ]
                   ),
                   bodyHeight: SizeConfig.screenHeight!-230,
                   bodyWidth: width,
@@ -94,6 +108,19 @@ class _CustomersGridState extends State<CustomersGrid> {
                           constraints: bodyConstraints,
                           child: Row(
                             children: [
+                              Container(
+                                height: 30,
+                                width: 30,
+                                alignment: Alignment.center,
+                                child: Container(
+                                  height: 10,
+                                  width: 10,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.green
+                                  ),
+                                ),
+                              ),
                               gridHeaderList[0].isActive?GridContent(
                                 width: 150,
                                 title: value.customerId,

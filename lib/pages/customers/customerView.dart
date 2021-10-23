@@ -1,11 +1,17 @@
+import 'package:ecommerce_admin/notifiers/productNotifier.dart';
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
+import 'package:ecommerce_admin/pages/customers/customerOrderView.dart';
+import 'package:ecommerce_admin/widgets/buttons/addBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/backBtn.dart';
 import 'package:ecommerce_admin/widgets/circleProgressBar.dart';
+import 'package:ecommerce_admin/widgets/grid/gridContents.dart';
+import 'package:ecommerce_admin/widgets/grid/gridFooter.dart';
+import 'package:ecommerce_admin/widgets/grid/gridWithWidgetParam.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scutiwidgets/linearProgressBar.dart';
 import 'package:scutiwidgets/size.dart';
-
+import 'package:scutiwidgets/pageRoutes.dart' as pr;
 import '../../constants.dart';
 
 
@@ -19,13 +25,36 @@ class CustomerView extends StatefulWidget {
 class _CustomerViewState extends State<CustomerView> {
   late double width;
   double width1=370;
+  BoxDecoration decoration=BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(5),
+      boxShadow: [
+        BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            blurRadius: 10,
+            spreadRadius: 1,
+            offset: Offset(0,0)
+        )
+      ]
+  );
+
+  List<GridHeaderModel> gridHeaderList=[
+    GridHeaderModel(columnName: "Id",),
+    GridHeaderModel(columnName: "Item",width: 200),
+    GridHeaderModel(columnName: "Payment Info",width: 200),
+    GridHeaderModel(columnName: "Order Date",),
+    GridHeaderModel(columnName: "Price",),
+    GridHeaderModel(columnName: "Actions",width: 100,alignment: Alignment.center),
+  ];
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     width=SizeConfig.screenWidth!-140;
     return Scaffold(
       body: Consumer<ThemeNotifier>(
-        builder: (context,th,child)=> Container(
+        builder: (context,th,child)=>Consumer<ProductNotifier>(
+      builder: (context,pn,child)=>  Container(
           height: SizeConfig.screenHeight!,
           width: SizeConfig.screenWidth,
           color: bgColor,
@@ -59,18 +88,7 @@ class _CustomerViewState extends State<CustomerView> {
                            Container(
                              width: width1,
                              //  height: SizeConfig.screenHeight!-70,
-                             decoration: BoxDecoration(
-                                 color: Colors.white,
-                                 borderRadius: BorderRadius.circular(5),
-                                 boxShadow: [
-                                   BoxShadow(
-                                       color: Colors.grey.withOpacity(0.2),
-                                       blurRadius: 10,
-                                       spreadRadius: 1,
-                                       offset: Offset(0,0)
-                                   )
-                                 ]
-                             ),
+                             decoration: decoration,
                              child: Column(
                                children: [
                                  SizedBox(height: 15,),
@@ -107,18 +125,7 @@ class _CustomerViewState extends State<CustomerView> {
                            Container(
                              width: width1,
                              //  height: SizeConfig.screenHeight!-70,
-                             decoration: BoxDecoration(
-                                 color: Colors.white,
-                                 borderRadius: BorderRadius.circular(5),
-                                 boxShadow: [
-                                   BoxShadow(
-                                       color: Colors.grey.withOpacity(0.2),
-                                       blurRadius: 10,
-                                       spreadRadius: 1,
-                                       offset: Offset(0,0)
-                                   )
-                                 ]
-                             ),
+                             decoration:decoration,
                              child: Column(
                                children: [
                                  SizedBox(height: 15,),
@@ -177,18 +184,7 @@ class _CustomerViewState extends State<CustomerView> {
                            Container(
                              width: width1,
                              //  height: SizeConfig.screenHeight!-70,
-                             decoration: BoxDecoration(
-                                 color: Colors.white,
-                                 borderRadius: BorderRadius.circular(5),
-                                 boxShadow: [
-                                   BoxShadow(
-                                       color: Colors.grey.withOpacity(0.2),
-                                       blurRadius: 10,
-                                       spreadRadius: 1,
-                                       offset: Offset(0,0)
-                                   )
-                                 ]
-                             ),
+                             decoration:decoration,
                              child: Column(
                                children: [
                                  SizedBox(height: 15,),
@@ -224,18 +220,7 @@ class _CustomerViewState extends State<CustomerView> {
                               Container(
                                 width: width1,
                                 height: 230,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(5),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey.withOpacity(0.2),
-                                          blurRadius: 10,
-                                          spreadRadius: 1,
-                                          offset: Offset(0,0)
-                                      )
-                                    ]
-                                ),
+                                decoration: decoration,
                                 child: Column(
                                   children: [
                                     SizedBox(height: 15,),
@@ -257,18 +242,7 @@ class _CustomerViewState extends State<CustomerView> {
                               Container(
                                 width: width1,
                                 height: 230,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(5),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey.withOpacity(0.2),
-                                          blurRadius: 10,
-                                          spreadRadius: 1,
-                                          offset: Offset(0,0)
-                                      )
-                                    ]
-                                ),
+                                decoration: decoration,
                                 child: Column(
                                   children: [
                                     SizedBox(height: 15,),
@@ -288,6 +262,131 @@ class _CustomerViewState extends State<CustomerView> {
                               ),
                             ],
                           ),
+                          SizedBox(height: 20,),
+                          Container(
+                            height:SizeConfig.screenHeight!-340,
+                            width: SizeConfig.screenWidth!-width1-60,
+                            decoration: decoration,
+                            child: Column(
+                              children: [
+                                Container(
+                                    padding:  EdgeInsets.only(left: 20,top: 15),
+                                    alignment: Alignment.centerLeft,
+                                    child: Text("Customer Order",style: ts18(grey1,fontfamily: 'RM'),)
+                                ),
+                                GridWithWidgetParam(
+                                    headerHeight: headerHeight,
+                                    headerWidth:  SizeConfig.screenWidth!-width1-70,
+                                    gridHeaderList: gridHeaderList,
+                                    searchBg: bgColor,
+
+                                    addBtnTap: (){},
+                                    filterOnTap: (i){
+                                      setState(() {
+                                        gridHeaderList[i].isActive=!gridHeaderList[i].isActive;
+                                      });
+                                    },
+                                    searchFunc: (v){
+                                      pn.searchCustomer(v);
+                                    },
+                                    headerWidget: Row(
+                                        children: [
+
+                                          for(int i=0;i<gridHeaderList.length;i++)
+                                            gridHeaderList[i].isActive? GridHeader(
+                                              width: gridHeaderList[i].width,
+                                              title: gridHeaderList[i].columnName,
+                                              alignment: gridHeaderList[i].alignment,
+                                            ):Container(),
+                                        ]
+                                    ),
+
+                                    bodyHeight: SizeConfig.screenHeight!-550,
+                                    bodyWidth:  SizeConfig.screenWidth!-width1-70,
+                                    bodyWidget: Padding(
+                                      padding: EdgeInsets.only(left: 5,right: 5),
+                                      child: Column(
+                                        children: pn.customerOrders.asMap().map((key, value) => MapEntry(key,
+                                            Container(
+                                              //width: width,
+                                              padding: EdgeInsets.only(top: 10,bottom: 10),
+                                              margin: EdgeInsets.only(bottom: 5,),
+                                              decoration: BoxDecoration(
+                                                color: bgColor,
+                                                borderRadius: BorderRadius.circular(7),
+                                              ),
+                                              constraints: bodyConstraints,
+                                              child: Row(
+                                                children: [
+                                                  gridHeaderList[0].isActive?GridContent(
+                                                    width: 150,
+                                                    title: value.id,
+                                                  ):Container(),
+                                                  gridHeaderList[1].isActive?GridContent(
+                                                    width: 200,
+                                                    title: value.item,
+                                                  ):Container(),
+                                                  gridHeaderList[2].isActive?GridContent(
+                                                    width: 200,
+                                                    title: value.paymentInfo,
+                                                  ):Container(),
+                                                  gridHeaderList[3].isActive?GridContent(
+                                                    width: 150,
+                                                    title:value.orderedDate,
+                                                  ):Container(),
+                                                  gridHeaderList[4].isActive?GridContent(
+                                                    width: 150,
+                                                    title: value.price,
+                                                  ):Container(),
+
+                                                  gridHeaderList[5].isActive?Container(
+                                                    width: 100,
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: [
+                                                        AddBtn(
+                                                          ontap: (){
+                                                            Navigator.push(context, pr.PageRoute().fade(CustomerOrderView()));
+                                                          },
+                                                          color: Colors.transparent,
+                                                          hei: 30,
+                                                          margin: EdgeInsets.only(left: 0),
+                                                          widget: Icon(Icons.visibility,color: Colors.grey,size: 30,),
+                                                        ),
+                                                        // ActionIcon(ontap: (){
+                                                        // }, imgColor: Colors.red, img: "assets/icons/delete.svg"),
+                                                      ],
+                                                    ),
+                                                  ):Container(),
+                                                ],
+                                              ),
+                                            )
+                                        )
+                                        ).values.toList(),
+                                      ),
+                                    )
+                                ),
+                                GridFooter(
+                                    width: SizeConfig.screenWidth!-width1-60-70,
+                                    perPage: pn.perPage,
+                                    currentPage: pn.currentPage+1,
+                                    prev: (){
+                                      pn.prev();
+                                    },
+                                    next: (){
+                                      pn.next();
+                                    },
+                                    ontap: (i){
+                                      setState(() {
+                                        pn.perPage=i;
+                                      });
+                                      pn.init(true);
+                                    }
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 20,),
                         ],
                       ),
                     )
@@ -298,6 +397,7 @@ class _CustomerViewState extends State<CustomerView> {
             ],
           ),
         ),
+       )
       ),
     );
   }
