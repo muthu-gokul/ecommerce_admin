@@ -1,6 +1,8 @@
 import 'package:ecommerce_admin/notifiers/productNotifier.dart';
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
 import 'package:ecommerce_admin/pages/frontCoverSlider/frontCoverAddNew.dart';
+import 'package:ecommerce_admin/pages/newVendorRequest/vendorRequestAddNew.dart';
+import 'package:ecommerce_admin/pages/vendor/vendorListAddNew.dart';
 import 'package:ecommerce_admin/widgets/buttons/actionBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/addBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/swtich.dart';
@@ -14,21 +16,21 @@ import 'package:scutiwidgets/pageRoutes.dart' as pr;
 
 import '../../constants.dart';
 
-class FrontCoverSlidreGrid extends StatefulWidget {
-  const FrontCoverSlidreGrid({Key? key}) : super(key: key);
+class VendorRequestGrid extends StatefulWidget {
+  const VendorRequestGrid({Key? key}) : super(key: key);
 
   @override
-  _FrontCoverSlidreGridState createState() => _FrontCoverSlidreGridState();
+  _VendorRequestGridState createState() => _VendorRequestGridState();
 }
 
-class _FrontCoverSlidreGridState extends State<FrontCoverSlidreGrid> {
+class _VendorRequestGridState extends State<VendorRequestGrid> {
   late double width;
   List<GridHeaderModel> gridHeaderList=[
-    GridHeaderModel(columnName: "Slider Title",),
-    GridHeaderModel(columnName: "URL",width: 200),
-    GridHeaderModel(columnName: "Slider Image",width: 200),
-    GridHeaderModel(columnName: "Display",),
-    GridHeaderModel(columnName: "Sort Order",),
+    GridHeaderModel(columnName: "Company Logo",),
+    GridHeaderModel(columnName: "Company Name",),
+    GridHeaderModel(columnName: "Name",),
+    GridHeaderModel(columnName: "Mobile no",),
+    GridHeaderModel(columnName: "Status",),
     GridHeaderModel(columnName: "Actions",width: 100),
   ];
   @override
@@ -60,7 +62,7 @@ class _FrontCoverSlidreGridState extends State<FrontCoverSlidreGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(FrontCoverSliderAdd()));
+                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(VendorRequestAdd()));
                   },
                   filterOnTap: (i){
                     setState(() {
@@ -82,7 +84,7 @@ class _FrontCoverSlidreGridState extends State<FrontCoverSlidreGrid> {
                   bodyHeight: SizeConfig.screenHeight!-230,
                   bodyWidth: width,
                   bodyWidget: Column(
-                    children: pn.frontCover.asMap().map((key, value) => MapEntry(key,
+                    children: pn.vendorRequest.asMap().map((key, value) => MapEntry(key,
                         Container(
                           //width: width,
                           padding: bodyPadd,
@@ -91,33 +93,33 @@ class _FrontCoverSlidreGridState extends State<FrontCoverSlidreGrid> {
                           constraints: bodyConstraints,
                           child: Row(
                             children: [
-                              gridHeaderList[0].isActive?GridContent(
+                              gridHeaderList[0].isActive?Container(
                                 width:  gridHeaderList[0].width,
-                                title: value.sliderTitle,
+                                height: 45,
+                                // alignment: gridHeaderList[2].alignment,
+                                child: Image.network("https://bc-storage.sfo2.digitaloceanspaces.com/girias/assets/girias-logo.png"),
                               ):Container(),
                               gridHeaderList[1].isActive?GridContent(
                                 width:  gridHeaderList[1].width,
-                                title: value.url,
+                                title: value.cmpyName,
                               ):Container(),
-                              gridHeaderList[2].isActive?Container(
+                              gridHeaderList[2].isActive?GridContent(
                                 width:  gridHeaderList[2].width,
-                                height: 45,
-                                alignment: gridHeaderList[2].alignment,
-                                child: Image.network("https://bc-storage.sfo2.digitaloceanspaces.com/girias/assets/girias-logo.png"),
+                                title: value.Name,
                               ):Container(),
-                              gridHeaderList[3].isActive?Container(
+                              gridHeaderList[3].isActive?GridContent(
                                 width:  gridHeaderList[3].width,
-                                alignment:  gridHeaderList[3].alignment,
+                                title: value.mbleNo,
+                              ):Container(),
+                              gridHeaderList[4].isActive?Container(
+                                width:  gridHeaderList[4].width,
+                                alignment:  gridHeaderList[4].alignment,
                                 child: CustomSwitch(
                                   value: true,
                                   onchange: (v){
 
                                   },
                                 ),
-                              ):Container(),
-                              gridHeaderList[4].isActive?GridContent(
-                                width:  gridHeaderList[4].width,
-                                title: value.sortOrders,
                               ):Container(),
                               gridHeaderList[5].isActive?Container(
                                 width:  gridHeaderList[5].width,
@@ -134,8 +136,7 @@ class _FrontCoverSlidreGridState extends State<FrontCoverSlidreGrid> {
                                       widget: Icon(Icons.visibility,color: Colors.grey,size: 30,),
                                     ),
                                     ActionIcon(ontap: (){
-                                    }, imgColor: Colors.red, img: "assets/icons/delete.svg"
-                                    ),
+                                    }, imgColor: Colors.red, img: "assets/icons/delete.svg"),
                                   ],
                                 ),
                               ):Container(),

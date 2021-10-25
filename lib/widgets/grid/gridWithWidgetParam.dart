@@ -21,12 +21,14 @@ class GridWithWidgetParam extends StatefulWidget {
   Function(int) filterOnTap;
   List<GridHeaderModel> gridHeaderList;
   bool showAdd;
+  bool showFilter;
+  bool showExport;
   Color searchBg;
 
   GridWithWidgetParam({required this.headerHeight,required this.headerWidth,required this.headerWidget,
     required this.bodyHeight,required this.bodyWidth,required this.bodyWidget,this.showDeleteAll=false,
     required this.addBtnTap,required this.searchFunc,required this.gridHeaderList,required this.filterOnTap,
-   this.showAdd=false,this.searchBg=Colors.white});
+   this.showAdd=false,this.searchBg=Colors.white,this.showExport=true,this.showFilter=true});
 
   @override
   _GridWithWidgetParamState createState() => _GridWithWidgetParamState();
@@ -89,15 +91,17 @@ class _GridWithWidgetParamState extends State<GridWithWidgetParam> {
                   },
                 ),
               ),
-              AddBtn(
+              widget.showExport?AddBtn(
                 ontap: widget.addBtnTap,
                 color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
                 widget: Icon(Icons.import_export,color: Colors.white,),
                 margin: EdgeInsets.only(right: 20),
+              ):Container(
+                width: 50,
               ),
               Column(
                 children: [
-                  AddBtn(
+                  widget.showFilter?AddBtn(
                     ontap: (){
                       setState(() {
                         showPopUp=!showPopUp;
@@ -106,7 +110,7 @@ class _GridWithWidgetParamState extends State<GridWithWidgetParam> {
                     color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
                     widget: Icon(Icons.filter_alt_outlined,size: 30,color: Colors.white,),
                     margin: EdgeInsets.only(right: 20),
-                  ),
+                  ):Container(),
                   OverlayContainer(
                     show: showPopUp,
                     position: OverlayContainerPosition(widget.showAdd?-100:-180, 0,),

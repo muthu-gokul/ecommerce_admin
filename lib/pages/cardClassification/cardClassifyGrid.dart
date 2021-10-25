@@ -1,6 +1,8 @@
 import 'package:ecommerce_admin/notifiers/productNotifier.dart';
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
+import 'package:ecommerce_admin/pages/cardClassification/cardClassifyAddNew.dart';
 import 'package:ecommerce_admin/pages/frontCoverSlider/frontCoverAddNew.dart';
+import 'package:ecommerce_admin/pages/underAmount/underAmountAddNew.dart';
 import 'package:ecommerce_admin/widgets/buttons/actionBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/addBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/swtich.dart';
@@ -14,21 +16,20 @@ import 'package:scutiwidgets/pageRoutes.dart' as pr;
 
 import '../../constants.dart';
 
-class FrontCoverSlidreGrid extends StatefulWidget {
-  const FrontCoverSlidreGrid({Key? key}) : super(key: key);
+class CardClassificationGrid extends StatefulWidget {
+  const CardClassificationGrid({Key? key}) : super(key: key);
 
   @override
-  _FrontCoverSlidreGridState createState() => _FrontCoverSlidreGridState();
+  _CardClassificationGridState createState() => _CardClassificationGridState();
 }
 
-class _FrontCoverSlidreGridState extends State<FrontCoverSlidreGrid> {
+class _CardClassificationGridState extends State<CardClassificationGrid> {
   late double width;
   List<GridHeaderModel> gridHeaderList=[
-    GridHeaderModel(columnName: "Slider Title",),
-    GridHeaderModel(columnName: "URL",width: 200),
-    GridHeaderModel(columnName: "Slider Image",width: 200),
-    GridHeaderModel(columnName: "Display",),
-    GridHeaderModel(columnName: "Sort Order",),
+    GridHeaderModel(columnName: "Card Name",),
+    GridHeaderModel(columnName: "Card Type",),
+    GridHeaderModel(columnName: "Bank Name",),
+    GridHeaderModel(columnName: "Card Logo",),
     GridHeaderModel(columnName: "Actions",width: 100),
   ];
   @override
@@ -60,7 +61,7 @@ class _FrontCoverSlidreGridState extends State<FrontCoverSlidreGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(FrontCoverSliderAdd()));
+                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(CardClassificationAdd()));
                   },
                   filterOnTap: (i){
                     setState(() {
@@ -82,7 +83,7 @@ class _FrontCoverSlidreGridState extends State<FrontCoverSlidreGrid> {
                   bodyHeight: SizeConfig.screenHeight!-230,
                   bodyWidth: width,
                   bodyWidget: Column(
-                    children: pn.frontCover.asMap().map((key, value) => MapEntry(key,
+                    children: pn.cardClassification.asMap().map((key, value) => MapEntry(key,
                         Container(
                           //width: width,
                           padding: bodyPadd,
@@ -93,34 +94,24 @@ class _FrontCoverSlidreGridState extends State<FrontCoverSlidreGrid> {
                             children: [
                               gridHeaderList[0].isActive?GridContent(
                                 width:  gridHeaderList[0].width,
-                                title: value.sliderTitle,
+                                title: value.cardName,
                               ):Container(),
                               gridHeaderList[1].isActive?GridContent(
                                 width:  gridHeaderList[1].width,
-                                title: value.url,
+                                title: value.cardType,
                               ):Container(),
-                              gridHeaderList[2].isActive?Container(
+                              gridHeaderList[2].isActive?GridContent(
                                 width:  gridHeaderList[2].width,
-                                height: 45,
-                                alignment: gridHeaderList[2].alignment,
-                                child: Image.network("https://bc-storage.sfo2.digitaloceanspaces.com/girias/assets/girias-logo.png"),
+                                title: value.bankName,
                               ):Container(),
                               gridHeaderList[3].isActive?Container(
                                 width:  gridHeaderList[3].width,
-                                alignment:  gridHeaderList[3].alignment,
-                                child: CustomSwitch(
-                                  value: true,
-                                  onchange: (v){
-
-                                  },
-                                ),
+                                height: 45,
+                                alignment: gridHeaderList[3].alignment,
+                                child: Image.network("https://bc-storage.sfo2.digitaloceanspaces.com/girias/assets/girias-logo.png"),
                               ):Container(),
-                              gridHeaderList[4].isActive?GridContent(
+                                gridHeaderList[4].isActive?Container(
                                 width:  gridHeaderList[4].width,
-                                title: value.sortOrders,
-                              ):Container(),
-                              gridHeaderList[5].isActive?Container(
-                                width:  gridHeaderList[5].width,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
@@ -134,8 +125,7 @@ class _FrontCoverSlidreGridState extends State<FrontCoverSlidreGrid> {
                                       widget: Icon(Icons.visibility,color: Colors.grey,size: 30,),
                                     ),
                                     ActionIcon(ontap: (){
-                                    }, imgColor: Colors.red, img: "assets/icons/delete.svg"
-                                    ),
+                                    }, imgColor: Colors.red, img: "assets/icons/delete.svg"),
                                   ],
                                 ),
                               ):Container(),

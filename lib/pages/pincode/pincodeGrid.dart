@@ -1,34 +1,42 @@
+import 'package:ecommerce_admin/model/brandModel.dart';
 import 'package:ecommerce_admin/notifiers/productNotifier.dart';
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
-import 'package:ecommerce_admin/pages/frontCoverSlider/frontCoverAddNew.dart';
+import 'package:ecommerce_admin/pages/brand/brandAddNew.dart';
+import 'package:ecommerce_admin/pages/customers/customerView.dart';
+import 'package:ecommerce_admin/pages/paymentSettings/paymentSettingsAddNew.dart';
+import 'package:ecommerce_admin/pages/pincode/pincodeAddNew.dart';
+import 'package:ecommerce_admin/pages/shippingCharges/shippingChargesAddNew.dart';
 import 'package:ecommerce_admin/widgets/buttons/actionBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/addBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/swtich.dart';
 import 'package:ecommerce_admin/widgets/grid/gridContents.dart';
 import 'package:ecommerce_admin/widgets/grid/gridFooter.dart';
 import 'package:ecommerce_admin/widgets/grid/gridWithWidgetParam.dart';
+import 'package:ecommerce_admin/widgets/popOver/src/popover.dart';
+import 'package:ecommerce_admin/widgets/popOver/src/popover_direction.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:scutiwidgets/size.dart';
 import 'package:scutiwidgets/pageRoutes.dart' as pr;
-
 import '../../constants.dart';
 
-class FrontCoverSlidreGrid extends StatefulWidget {
-  const FrontCoverSlidreGrid({Key? key}) : super(key: key);
+
+
+
+class PincodeGrid extends StatefulWidget {
+
 
   @override
-  _FrontCoverSlidreGridState createState() => _FrontCoverSlidreGridState();
+  _PincodeGridState createState() => _PincodeGridState();
 }
 
-class _FrontCoverSlidreGridState extends State<FrontCoverSlidreGrid> {
+class _PincodeGridState extends State<PincodeGrid> {
   late double width;
   List<GridHeaderModel> gridHeaderList=[
-    GridHeaderModel(columnName: "Slider Title",),
-    GridHeaderModel(columnName: "URL",width: 200),
-    GridHeaderModel(columnName: "Slider Image",width: 200),
-    GridHeaderModel(columnName: "Display",),
-    GridHeaderModel(columnName: "Sort Order",),
+    GridHeaderModel(columnName: "Pincode From",),
+    GridHeaderModel(columnName: "Pincode To"),
+    GridHeaderModel(columnName: "Delivery Days",width: 200),
     GridHeaderModel(columnName: "Actions",width: 100),
   ];
   @override
@@ -36,11 +44,7 @@ class _FrontCoverSlidreGridState extends State<FrontCoverSlidreGrid> {
     Provider.of<ProductNotifier>(context,listen: false).init(false);
     super.initState();
   }
-  // @override
-  // void didChangeDependencies() {
-  //   print("CUstomer did");
-  //   super.didChangeDependencies();
-  // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +64,7 @@ class _FrontCoverSlidreGridState extends State<FrontCoverSlidreGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(FrontCoverSliderAdd()));
+                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(PincodeAddNew()));
                   },
                   filterOnTap: (i){
                     setState(() {
@@ -71,18 +75,21 @@ class _FrontCoverSlidreGridState extends State<FrontCoverSlidreGrid> {
                     pn.searchCustomer(v);
                   },
                   headerWidget: Row(
-                      children: gridHeaderList.asMap().map((key, value) =>
-                          MapEntry(key, value.isActive? GridHeader(
-                            width: value.width,
-                            title: value.columnName,
+                      children: [
+
+                        for(int i=0;i<gridHeaderList.length;i++)
+                          gridHeaderList[i].isActive? GridHeader(
+                            width: gridHeaderList[i].width,
+                            title: gridHeaderList[i].columnName,
+                            alignment: gridHeaderList[i].alignment,
+                            textAlign: gridHeaderList[i].textAlign,
                           ):Container(),
-                          )
-                      ).values.toList()
+                      ]
                   ),
                   bodyHeight: SizeConfig.screenHeight!-230,
                   bodyWidth: width,
                   bodyWidget: Column(
-                    children: pn.frontCover.asMap().map((key, value) => MapEntry(key,
+                    children: pn.pincodeList.asMap().map((key, value) => MapEntry(key,
                         Container(
                           //width: width,
                           padding: bodyPadd,
@@ -91,51 +98,34 @@ class _FrontCoverSlidreGridState extends State<FrontCoverSlidreGrid> {
                           constraints: bodyConstraints,
                           child: Row(
                             children: [
+
                               gridHeaderList[0].isActive?GridContent(
-                                width:  gridHeaderList[0].width,
-                                title: value.sliderTitle,
+                                width:gridHeaderList[0].width ,
+                                alignment: gridHeaderList[0].alignment,
+                                title: value.from,
                               ):Container(),
                               gridHeaderList[1].isActive?GridContent(
-                                width:  gridHeaderList[1].width,
-                                title: value.url,
+                                width:gridHeaderList[1].width ,
+                                alignment: gridHeaderList[1].alignment,
+                                title: value.to,
                               ):Container(),
-                              gridHeaderList[2].isActive?Container(
-                                width:  gridHeaderList[2].width,
-                                height: 45,
+                              gridHeaderList[2].isActive?GridContent(
+                                width:gridHeaderList[2].width ,
                                 alignment: gridHeaderList[2].alignment,
-                                child: Image.network("https://bc-storage.sfo2.digitaloceanspaces.com/girias/assets/girias-logo.png"),
+                                title:"${value.days} days",
                               ):Container(),
-                              gridHeaderList[3].isActive?Container(
-                                width:  gridHeaderList[3].width,
-                                alignment:  gridHeaderList[3].alignment,
-                                child: CustomSwitch(
-                                  value: true,
-                                  onchange: (v){
 
-                                  },
-                                ),
-                              ):Container(),
-                              gridHeaderList[4].isActive?GridContent(
-                                width:  gridHeaderList[4].width,
-                                title: value.sortOrders,
-                              ):Container(),
-                              gridHeaderList[5].isActive?Container(
-                                width:  gridHeaderList[5].width,
+                              gridHeaderList[3].isActive?Container(
+                                width:gridHeaderList[3].width ,
+                                alignment: gridHeaderList[3].alignment,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
-                                    AddBtn(
-                                      ontap: (){
-                                        // Navigator.push(context, pr.PageRoute().slideFromLeftToRight(CustomerView()));
-                                      },
-                                      color: Colors.transparent,
-                                      hei: 30,
-                                      margin: EdgeInsets.only(left: 0),
-                                      widget: Icon(Icons.visibility,color: Colors.grey,size: 30,),
-                                    ),
+
                                     ActionIcon(ontap: (){
-                                    }, imgColor: Colors.red, img: "assets/icons/delete.svg"
-                                    ),
+                                    }, imgColor: grey1, img: "assets/icons/edit.svg"),
+                                    ActionIcon(ontap: (){
+                                    }, imgColor: Colors.red, img: "assets/icons/delete.svg"),
                                   ],
                                 ),
                               ):Container(),
@@ -171,5 +161,3 @@ class _FrontCoverSlidreGridState extends State<FrontCoverSlidreGrid> {
     );
   }
 }
-
-

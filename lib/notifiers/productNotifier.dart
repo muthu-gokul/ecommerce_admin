@@ -1,17 +1,31 @@
+import 'package:ecommerce_admin/model/UOMSettingsModel/conversionModel.dart';
+import 'package:ecommerce_admin/model/UOMSettingsModel/uomModel.dart';
 import 'package:ecommerce_admin/model/brandModel.dart';
+import 'package:ecommerce_admin/model/cardClassificationModel.dart';
 import 'package:ecommerce_admin/model/categoryModel.dart';
 import 'package:ecommerce_admin/model/customer/customerModel.dart';
 import 'package:ecommerce_admin/model/customer/customerOrderModel.dart';
 import 'package:ecommerce_admin/model/emailSettingModel.dart';
 import 'package:ecommerce_admin/model/featuredBrandModel.dart';
 import 'package:ecommerce_admin/model/frontCoverModel.dart';
+import 'package:ecommerce_admin/model/goodsReceivedModel/goodsReceivedAddModel.dart';
+import 'package:ecommerce_admin/model/goodsReceivedModel/goodsReceivedModel.dart';
 import 'package:ecommerce_admin/model/ordersList/ordersListModel.dart';
 import 'package:ecommerce_admin/model/paymentSettingsModel.dart';
+import 'package:ecommerce_admin/model/pincodeModel/pincodeModel.dart';
 import 'package:ecommerce_admin/model/productModel.dart';
 import 'package:ecommerce_admin/model/productShowCaseModel/productShowcaseModel.dart';
+import 'package:ecommerce_admin/model/purchaseModel/materialCategoryModel.dart';
+import 'package:ecommerce_admin/model/purchaseModel/purchaseGridModel.dart';
+import 'package:ecommerce_admin/model/purchaseModel/vendorHistoryModel.dart';
+import 'package:ecommerce_admin/model/returnProducts/returnProductsModel.dart';
+import 'package:ecommerce_admin/model/shippingCharge/shippingChargeModel.dart';
 import 'package:ecommerce_admin/model/topOfferModel.dart';
 import 'package:ecommerce_admin/model/underAmountModel.dart';
+import 'package:ecommerce_admin/model/vendor/vendorListModel.dart';
+import 'package:ecommerce_admin/model/vendor/vendorRequestModel.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../constants.dart';
 
@@ -275,5 +289,218 @@ class ProductNotifier extends ChangeNotifier{
 
   ];
 
+  //UOM Settings
+  List<UomModel> uomList=[
+    UomModel(description: "Bottle", mnemonic: "BT"),
+    UomModel(description: "Case", mnemonic: "CS"),
+    UomModel(description: "Bag", mnemonic: "BG"),
+    UomModel(description: "Cylinder", mnemonic: "CL"),
+    UomModel(description: "Kilogram", mnemonic: "KG"),
+    UomModel(description: "Liter", mnemonic: "LI"),
+  ];
+
+  List<ConversionModel> conversionList=[
+    ConversionModel(fromUnit: "CS", toUnit: 12, unitName: "Beer"),
+    ConversionModel(fromUnit: "CS", toUnit: 12, unitName: "Water"),
+    ConversionModel(fromUnit: "CS", toUnit: 12, unitName: "Beer"),
+    ConversionModel(fromUnit: "CS", toUnit: 12, unitName: "Water"),
+  ];
+
+
+  //Purchase
+List<PurchaseGridModel> purchaseList=[
+  PurchaseGridModel(expectedDate: "19-11-2021", pNo: "PC001", vendorCompany: "GRT", vendorType: "District"),
+  PurchaseGridModel(expectedDate: "19-11-2021", pNo: "PC001", vendorCompany: "GRT", vendorType: "District"),
+  PurchaseGridModel(expectedDate: "19-11-2021", pNo: "PC001", vendorCompany: "GRT", vendorType: "District"),
+  PurchaseGridModel(expectedDate: "19-11-2021", pNo: "PC001", vendorCompany: "GRT", vendorType: "District"),
+  PurchaseGridModel(expectedDate: "19-11-2021", pNo: "PC001", vendorCompany: "GRT", vendorType: "District"),
+  PurchaseGridModel(expectedDate: "19-11-2021", pNo: "PC001", vendorCompany: "GRT", vendorType: "District"),
+  PurchaseGridModel(expectedDate: "19-11-2021", pNo: "PC001", vendorCompany: "GRT", vendorType: "District"),
+  PurchaseGridModel(expectedDate: "19-11-2021", pNo: "PC001", vendorCompany: "GRT", vendorType: "District"),
+];
+
+var t=[{"VendorId":4,"MaterialId":1539,"MaterialName":"Guest Rice","MaterialCategoryId":2,"MaterialCategoryName":"Rice","MaterialBrandId":null,"MaterialBrandName":null,"BuyingUnit":1,"UnitShortCode":"KG","PricePerUnit":100.00,"FixedPrice":70.00,"IsTax":1,"TaxId":3,"TaxValue":5.00,"TaxAmount":0.00,"IsDiscount":0,"IsPercentage":0,"IsAmount":0,"DiscountValue":0.00,"DiscountAmount":0.00,"TotalAmount":0.00},{"VendorId":4,"MaterialId":1067,"MaterialName":"STAFF RICE","MaterialCategoryId":2,"MaterialCategoryName":"Rice","MaterialBrandId":null,"MaterialBrandName":null,"BuyingUnit":6,"UnitShortCode":"KGS","PricePerUnit":50.00,"FixedPrice":30.00,"IsTax":0,"TaxId":3,"TaxValue":0.00,"TaxAmount":0.00,"IsDiscount":0,"IsPercentage":0,"IsAmount":0,"DiscountValue":0.00,"DiscountAmount":0.00,"TotalAmount":30.00},{"VendorId":4,"MaterialId":1070,"MaterialName":"RAW RICE","MaterialCategoryId":2,"MaterialCategoryName":"Rice","MaterialBrandId":null,"MaterialBrandName":null,"BuyingUnit":6,"UnitShortCode":"KGS","PricePerUnit":60.00,"FixedPrice":25.00,"IsTax":0,"TaxId":3,"TaxValue":0.00,"TaxAmount":0.00,"IsDiscount":0,"IsPercentage":0,"IsAmount":0,"DiscountValue":0.00,"DiscountAmount":0.00,"TotalAmount":0.00},{"VendorId":4,"MaterialId":1096,"MaterialName":"IDLY RICE 1 KG","MaterialCategoryId":2,"MaterialCategoryName":"Rice","MaterialBrandId":null,"MaterialBrandName":null,"BuyingUnit":6,"UnitShortCode":"KGS","PricePerUnit":50.00,"FixedPrice":35.00,"IsTax":0,"TaxId":3,"TaxValue":0.00,"TaxAmount":0.00,"IsDiscount":0,"IsPercentage":0,"IsAmount":0,"DiscountValue":0.00,"DiscountAmount":0.00,"TotalAmount":0.00},{"VendorId":4,"MaterialId":1097,"MaterialName":"MELAS RICE 1 KG","MaterialCategoryId":2,"MaterialCategoryName":"Rice","MaterialBrandId":null,"MaterialBrandName":null,"BuyingUnit":6,"UnitShortCode":"KGS","PricePerUnit":80.00,"FixedPrice":66.00,"IsTax":0,"TaxId":3,"TaxValue":0.00,"TaxAmount":0.00,"IsDiscount":0,"IsPercentage":0,"IsAmount":0,"DiscountValue":0.00,"DiscountAmount":0.00,"TotalAmount":0.00},{"VendorId":4,"MaterialId":1166,"MaterialName":"BASUMATHI RICE","MaterialCategoryId":2,"MaterialCategoryName":"Rice","MaterialBrandId":null,"MaterialBrandName":null,"BuyingUnit":1,"UnitShortCode":"KG","PricePerUnit":70.00,"FixedPrice":55.00,"IsTax":0,"TaxId":3,"TaxValue":0.00,"TaxAmount":0.00,"IsDiscount":0,"IsPercentage":0,"IsAmount":0,"DiscountValue":0.00,"DiscountAmount":0.00,"TotalAmount":0.00},{"VendorId":4,"MaterialId":1186,"MaterialName":"INDIA FORM BRIYANI RICE","MaterialCategoryId":2,"MaterialCategoryName":"Rice","MaterialBrandId":null,"MaterialBrandName":null,"BuyingUnit":6,"UnitShortCode":"KGS","PricePerUnit":75.00,"FixedPrice":52.00,"IsTax":0,"TaxId":3,"TaxValue":0.00,"TaxAmount":0.00,"IsDiscount":0,"IsPercentage":0,"IsAmount":0,"DiscountValue":0.00,"DiscountAmount":0.00,"TotalAmount":0.00},{"VendorId":4,"MaterialId":1202,"MaterialName":"ROYAL TREEY CLASSIC (B.RICE)","MaterialCategoryId":2,"MaterialCategoryName":"Rice","MaterialBrandId":null,"MaterialBrandName":null,"BuyingUnit":6,"UnitShortCode":"KGS","PricePerUnit":82.00,"FixedPrice":51.00,"IsTax":0,"TaxId":3,"TaxValue":0.00,"TaxAmount":0.00,"IsDiscount":0,"IsPercentage":0,"IsAmount":0,"DiscountValue":0.00,"DiscountAmount":0.00,"TotalAmount":0.00},{"VendorId":4,"MaterialId":1211,"MaterialName":"JEERAGA SAMPA RICE","MaterialCategoryId":2,"MaterialCategoryName":"Rice","MaterialBrandId":null,"MaterialBrandName":null,"BuyingUnit":6,"UnitShortCode":"KGS","PricePerUnit":97.00,"FixedPrice":79.00,"IsTax":0,"TaxId":3,"TaxValue":0.00,"TaxAmount":0.00,"IsDiscount":0,"IsPercentage":0,"IsAmount":0,"DiscountValue":0.00,"DiscountAmount":0.00,"TotalAmount":0.00},{"VendorId":4,"MaterialId":1216,"MaterialName":"LOTUS RICES (FRIED RICE)","MaterialCategoryId":25,"MaterialCategoryName":"PROVISION","MaterialBrandId":null,"MaterialBrandName":null,"BuyingUnit":6,"UnitShortCode":"KGS","PricePerUnit":62.00,"FixedPrice":40.00,"IsTax":0,"TaxId":3,"TaxValue":0.00,"TaxAmount":0.00,"IsDiscount":0,"IsPercentage":0,"IsAmount":0,"DiscountValue":0.00,"DiscountAmount":0.00,"TotalAmount":0.00},{"VendorId":4,"MaterialId":1225,"MaterialName":"CHA CHA FRIED RICE","MaterialCategoryId":2,"MaterialCategoryName":"Rice","MaterialBrandId":null,"MaterialBrandName":null,"BuyingUnit":6,"UnitShortCode":"KGS","PricePerUnit":54.00,"FixedPrice":30.00,"IsTax":0,"TaxId":3,"TaxValue":0.00,"TaxAmount":0.00,"IsDiscount":0,"IsPercentage":0,"IsAmount":0,"DiscountValue":0.00,"DiscountAmount":0.00,"TotalAmount":0.00},{"VendorId":4,"MaterialId":1226,"MaterialName":"B.ENTRY RICE","MaterialCategoryId":2,"MaterialCategoryName":"Rice","MaterialBrandId":null,"MaterialBrandName":null,"BuyingUnit":6,"UnitShortCode":"KGS","PricePerUnit":96.00,"FixedPrice":69.00,"IsTax":0,"TaxId":3,"TaxValue":0.00,"TaxAmount":0.00,"IsDiscount":0,"IsPercentage":0,"IsAmount":0,"DiscountValue":0.00,"DiscountAmount":0.00,"TotalAmount":0.00},{"VendorId":4,"MaterialId":1231,"MaterialName":"MEALS RICE(75KG)","MaterialCategoryId":2,"MaterialCategoryName":"Rice","MaterialBrandId":null,"MaterialBrandName":null,"BuyingUnit":6,"UnitShortCode":"KGS","PricePerUnit":89.00,"FixedPrice":45.00,"IsTax":0,"TaxId":3,"TaxValue":0.00,"TaxAmount":0.00,"IsDiscount":0,"IsPercentage":0,"IsAmount":0,"DiscountValue":0.00,"DiscountAmount":0.00,"TotalAmount":0.00},{"VendorId":4,"MaterialId":1232,"MaterialName":"MEALS RICE(25KG)","MaterialCategoryId":2,"MaterialCategoryName":"Rice","MaterialBrandId":null,"MaterialBrandName":null,"BuyingUnit":6,"UnitShortCode":"KGS","PricePerUnit":63.00,"FixedPrice":42.00,"IsTax":0,"TaxId":3,"TaxValue":0.00,"TaxAmount":0.00,"IsDiscount":0,"IsPercentage":0,"IsAmount":0,"DiscountValue":0.00,"DiscountAmount":0.00,"TotalAmount":0.00},{"VendorId":4,"MaterialId":1233,"MaterialName":"RAW RICE(50KG)","MaterialCategoryId":2,"MaterialCategoryName":"Rice","MaterialBrandId":null,"MaterialBrandName":null,"BuyingUnit":6,"UnitShortCode":"KGS","PricePerUnit":60.00,"FixedPrice":40.00,"IsTax":0,"TaxId":3,"TaxValue":0.00,"TaxAmount":0.00,"IsDiscount":0,"IsPercentage":0,"IsAmount":0,"DiscountValue":0.00,"DiscountAmount":0.00,"TotalAmount":0.00},{"VendorId":4,"MaterialId":1253,"MaterialName":"INDIAN QUEEN RICE","MaterialCategoryId":2,"MaterialCategoryName":"Rice","MaterialBrandId":null,"MaterialBrandName":null,"BuyingUnit":6,"UnitShortCode":"KGS","PricePerUnit":82.00,"FixedPrice":41.00,"IsTax":0,"TaxId":3,"TaxValue":0.00,"TaxAmount":0.00,"IsDiscount":0,"IsPercentage":0,"IsAmount":0,"DiscountValue":0.00,"DiscountAmount":0.00,"TotalAmount":0.00},{"VendorId":4,"MaterialId":1255,"MaterialName":"G.T.M(FRIED) RICE","MaterialCategoryId":2,"MaterialCategoryName":"Rice","MaterialBrandId":null,"MaterialBrandName":null,"BuyingUnit":6,"UnitShortCode":"KGS","PricePerUnit":74.00,"FixedPrice":51.00,"IsTax":0,"TaxId":3,"TaxValue":0.00,"TaxAmount":0.00,"IsDiscount":0,"IsPercentage":0,"IsAmount":0,"DiscountValue":0.00,"DiscountAmount":0.00,"TotalAmount":0.00}];
+ var t1=[
+   {
+     "MaterialCategoryId": 1,
+     "MaterialCategoryName": "Spices"
+   }, {
+     "MaterialCategoryId": 2,
+     "MaterialCategoryName": "Rice"
+   }, {
+     "MaterialCategoryId": 3,
+     "MaterialCategoryName": "Oil"
+   }, {
+     "MaterialCategoryId": 4,
+     "MaterialCategoryName": "CREAM"
+   }, {
+     "MaterialCategoryId": 5,
+     "MaterialCategoryName": "WATER"
+   }, {
+     "MaterialCategoryId": 6,
+     "MaterialCategoryName": "STATIONARY"
+   }, {
+     "MaterialCategoryId": 7,
+     "MaterialCategoryName": "DHALL"
+   }, {
+     "MaterialCategoryId": 8,
+     "MaterialCategoryName": "VEGETABLE"
+   }, {
+     "MaterialCategoryId": 9,
+     "MaterialCategoryName": "POOJAI"
+   }, {
+     "MaterialCategoryId": 10,
+     "MaterialCategoryName": "PACKING MET"
+   }, {
+     "MaterialCategoryId": 11,
+     "MaterialCategoryName": "POOJA ITEM"
+   }, {
+     "MaterialCategoryId": 12,
+     "MaterialCategoryName": "HOUSE KEEPING ITEMS"
+   }, {
+     "MaterialCategoryId": 13,
+     "MaterialCategoryName": "OIL"
+   }, {
+     "MaterialCategoryId": 14,
+     "MaterialCategoryName": "STATIONERY "
+   }, {
+     "MaterialCategoryId": 15,
+     "MaterialCategoryName": "GAS"
+   }, {
+     "MaterialCategoryId": 16,
+     "MaterialCategoryName": "PARCEL COVER"
+   }, {
+     "MaterialCategoryId": 17,
+     "MaterialCategoryName": "PLASTIC CONT"
+   }, {
+     "MaterialCategoryId": 18,
+     "MaterialCategoryName": "PROVISON"
+   }, {
+     "MaterialCategoryId": 19,
+     "MaterialCategoryName": "COOKING"
+   }, {
+     "MaterialCategoryId": 20,
+     "MaterialCategoryName": "FOLLODA ITEMS"
+   }, {
+     "MaterialCategoryId": 21,
+     "MaterialCategoryName": "MEAT ITEM"
+   }, {
+     "MaterialCategoryId": 22,
+     "MaterialCategoryName": "Cooked Food"
+   }, {
+     "MaterialCategoryId": 23,
+     "MaterialCategoryName": "COOL DRINKS"
+   }, {
+     "MaterialCategoryId": 24,
+     "MaterialCategoryName": "RICE"
+   },
+
+ ];
+
+  List<VendorHistoryMaterialDetails> PO_vendorMaterials=[];
+  List<VendorHistoryMaterialDetails> PO_filtervendorMaterials=[];
+  List<MaterialCategory> materialCategoriesProcessed=[];
+  late TabController PO_materialsController;
+
+  void initPurchase(){
+    PO_vendorMaterials = t.map((e) => VendorHistoryMaterialDetails.fromJSONMaterials(e)).toList();
+    PO_filtervendorMaterials = t.map((e) => VendorHistoryMaterialDetails.fromJSONMaterials(e)).toList();
+    materialCategoriesProcessed=t1.map((e) => MaterialCategory.fromJson(e)).toList();
+    materialCategoriesProcessed.insert(0, MaterialCategory(
+        MaterialCategoryName: "All Items",
+    ),);
+    notifyListeners();
+  }
+
+  late int PO_tempMaterialcategorylId;
+  PO_initTickerProvider(TickerProviderStateMixin tickerProviderStateMixin){
+    PO_materialsController=TabController(length: materialCategoriesProcessed.length,vsync: tickerProviderStateMixin,);
+
+    PO_materialsController.addListener(() {
+      if(PO_materialsController.index==0){
+        PO_filtervendorMaterials=List.from(PO_vendorMaterials);
+      }
+      else{
+        print("TAb");
+        PO_tempMaterialcategorylId=materialCategoriesProcessed[PO_materialsController.index].MaterialCategoryId!;
+        PO_filtervendorMaterials=PO_vendorMaterials.where((element) => element.MaterialCategoryId==PO_tempMaterialcategorylId).toList();
+
+      }
+      notifyListeners();
+      //print(processedController.index);
+    });
+  }
+
+  //Goods Received
+  List<GoodsReceivedModel> goodsRecList=[
+    GoodsReceivedModel(vendorCompany: "Shanriya", vendorType: "District", date: "19-20-2020", orderNo: "ORDER 243", purNo: "PO0001"),
+    GoodsReceivedModel(vendorCompany: "Shanriya", vendorType: "District", date: "19-20-2020", orderNo: "ORDER 243", purNo: "PO0001"),
+    GoodsReceivedModel(vendorCompany: "Shanriya", vendorType: "District", date: "19-20-2020", orderNo: "ORDER 243", purNo: "PO0001"),
+    GoodsReceivedModel(vendorCompany: "Shanriya", vendorType: "District", date: "19-20-2020", orderNo: "ORDER 243", purNo: "PO0001"),
+    GoodsReceivedModel(vendorCompany: "Shanriya", vendorType: "District", date: "19-20-2020", orderNo: "ORDER 243", purNo: "PO0001"),
+    GoodsReceivedModel(vendorCompany: "Shanriya", vendorType: "District", date: "19-20-2020", orderNo: "ORDER 243", purNo: "PO0001"),
+    GoodsReceivedModel(vendorCompany: "Shanriya", vendorType: "District", date: "19-20-2020", orderNo: "ORDER 243", purNo: "PO0001"),
+    GoodsReceivedModel(vendorCompany: "Shanriya", vendorType: "District", date: "19-20-2020", orderNo: "ORDER 243", purNo: "PO0001"),
+  ];
+
+  List<GoodsReceivedAddNewModel> goodsAddNewList=[
+    GoodsReceivedAddNewModel(itemName: "Dress", amount: 2324, orderedQty: 12, receivedQty: 11),
+    GoodsReceivedAddNewModel(itemName: "Dress", amount: 2324, orderedQty: 12, receivedQty: 11),
+    GoodsReceivedAddNewModel(itemName: "Dress", amount: 2324, orderedQty: 12, receivedQty: 11),
+    GoodsReceivedAddNewModel(itemName: "Dress", amount: 2324, orderedQty: 12, receivedQty: 11),
+    GoodsReceivedAddNewModel(itemName: "Dress", amount: 2324, orderedQty: 12, receivedQty: 11),
+    GoodsReceivedAddNewModel(itemName: "Dress", amount: 2324, orderedQty: 12, receivedQty: 11),
+  ];
+
+  //Return Products
+  List<ReturnProductsModel> returnList=[
+    ReturnProductsModel(itemName: "Frock", date: "4-09-2302", price: 4343, id: "RE0001", customer: "Raghu"),
+    ReturnProductsModel(itemName: "Frock", date: "4-09-2302", price: 4343, id: "RE0001", customer: "Raghu"),
+    ReturnProductsModel(itemName: "Frock", date: "4-09-2302", price: 4343, id: "RE0001", customer: "Raghu"),
+    ReturnProductsModel(itemName: "Frock", date: "4-09-2302", price: 4343, id: "RE0001", customer: "Raghu"),
+    ReturnProductsModel(itemName: "Frock", date: "4-09-2302", price: 4343, id: "RE0001", customer: "Raghu"),
+    ReturnProductsModel(itemName: "Frock", date: "4-09-2302", price: 4343, id: "RE0001", customer: "Raghu"),
+  ];
+
+//Shipping Charges
+  List<ShippingChargeModel> shippingChargesList=[
+    ShippingChargeModel(date: "19-29-2021", charge: 45, priceFrom: 0, priceTo: 500),
+    ShippingChargeModel(date: "19-29-2021", charge: 45, priceFrom: 0, priceTo: 500),
+    ShippingChargeModel(date: "19-29-2021", charge: 45, priceFrom: 0, priceTo: 500),
+    ShippingChargeModel(date: "19-29-2021", charge: 45, priceFrom: 0, priceTo: 500),
+    ShippingChargeModel(date: "19-29-2021", charge: 45, priceFrom: 0, priceTo: 500),
+  ];
+
+
+
+  //VendorList
+  List<VendorListModel> vendorList=[
+    VendorListModel(id: "#SP-00002", cmpyName: "SaravanaStore", vendrName: "Balasubramaniyan", vendrType:"State" , registorDate: "19-10-2021", CmpyCatgery:"Cloth",mail:"balasubramaniyan@Scutisoft.com",mbleNo:"7556789099",address:"Chennai",gst:"GST1234567232323"),
+    VendorListModel(id: "#SP-00003", cmpyName: "SaravanaStore", vendrName: "MuthuGokul", vendrType:"State" , registorDate: "19-10-2021", CmpyCatgery:"Cloth",mail:"muthugokul@Scutisoft.com",mbleNo:"7544478909",address:"Chennai",gst:"GST1234567232323"),
+    VendorListModel(id: "#SP-00004", cmpyName: "SaravanaStore", vendrName: "RameshShankar", vendrType:"State" , registorDate: "19-10-2021", CmpyCatgery:"Cloth",mail:"mameshshankar@Scutisoft.com",mbleNo:"7333789099",address:"Chennai",gst:"GST1234567232323"),
+  ];
+
+  //VendorRequest
+  List<VendorRequestModel> vendorRequest=[
+    VendorRequestModel(cmpyName: "SaravanaStore", Name: "Balasubramaniyan",mbleNo:"7556789099",),
+    VendorRequestModel(cmpyName: "SaravanaStore", Name: "Muthu",mbleNo:"7556789099",),
+    VendorRequestModel(cmpyName: "SaravanaStore", Name: "Ramesh",mbleNo:"7556789099",),
+  ];
+
+  //Pincode
+  List<PincodeModel> pincodeList=[
+    PincodeModel(days: 2, from: "600001", to: "600200"),
+    PincodeModel(days: 2, from: "600001", to: "600200"),
+    PincodeModel(days: 2, from: "600001", to: "600200"),
+    PincodeModel(days: 2, from: "600001", to: "600200"),
+    PincodeModel(days: 2, from: "600001", to: "600200"),
+  ];
+
+  //cardclassification
+  List<CardClassificationModel> cardClassification=[
+    CardClassificationModel(cardName: "Visa Debit Card", cardType : "Visa",bankName:"HDFC",),
+    CardClassificationModel(cardName: "Visa Debit Card", cardType : "Visa",bankName:"HDFC",),
+    CardClassificationModel(cardName: "Visa Debit Card", cardType : "Visa",bankName:"HDFC",),
+  ];
 
 }

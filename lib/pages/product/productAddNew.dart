@@ -1017,7 +1017,7 @@ class ProductTextField extends StatelessWidget {
   String title;
   String regExp;
   bool validation;
-  TextEditingController textEditingController;
+  TextEditingController? textEditingController;
   VoidCallback onComplete;
   bool isTextField;
   Widget? widget;
@@ -1025,7 +1025,7 @@ class ProductTextField extends StatelessWidget {
   TextInputType textInputType;
   int? textLength;
   int? maxlines;
-  ProductTextField({required this.width,required this.title,required this.validation,required this.textEditingController,
+  ProductTextField({required this.width,required this.title,required this.validation, this.textEditingController,
   required this.onComplete,this.isTextField=true,this.widget,this.leftPadding=20,this.regExp='[A-Za-z0-9@., ]',this.textInputType=TextInputType.emailAddress,
   this.textLength=null,this.maxlines=1});
 

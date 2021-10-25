@@ -43,11 +43,7 @@ class _PaymentSettingsGridState extends State<PaymentSettingsGrid> {
     Provider.of<ProductNotifier>(context,listen: false).init(false);
     super.initState();
   }
-  // @override
-  // void didChangeDependencies() {
-  //   print("CUstomer did");
-  //   super.didChangeDependencies();
-  // }
+
 
   @override
   Widget build(BuildContext context) {
