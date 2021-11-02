@@ -11,6 +11,7 @@ import 'package:ecommerce_admin/pages/returnProducts/returnProductGrid.dart';
 import 'package:ecommerce_admin/pages/settings/uomSettings.dart';
 import 'package:ecommerce_admin/pages/shippingCharges/shippingChargesGrid.dart';
 import 'package:ecommerce_admin/pages/users/usersGrid.dart';
+import 'package:ecommerce_admin/pages/wishList/wishListGird.dart';
 import 'package:ecommerce_admin/widgets/popOver/src/popover.dart';
 import 'package:ecommerce_admin/widgets/popOver/src/popover_direction.dart';
 import 'package:flutter/material.dart';
@@ -18,16 +19,25 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:scutiwidgets/size.dart';
 
+import 'addColor/colorGrid.dart';
+import 'addSize/sizeGrid.dart';
+import 'attributes/attributeGrid.dart';
 import 'brand/brandGrid.dart';
+import 'bulkCouponGenerat/bulkCouponGenerate.dart';
+import 'contactDetails/contactDetails.dart';
 import 'emailSetting/emailSettingGrid.dart';
 import 'featuredBrand/featuredBrandGrid.dart';
 import 'footerPageSetings/footerPageSettings.dart';
 import 'frontCoverSlider/frontCoverGrid.dart';
+import 'giftCoupons/giftCouponsGrid.dart';
 import 'newVendorRequest/vendorRequestGrid.dart';
 import 'ordersList/ordersListGrid.dart';
 import 'paymentSettings/paymentSettingsGrid.dart';
 import 'productShowCase/productShowCaseGrid.dart';
+import 'productStock/productStockGrid.dart';
+import 'refund/RefundGrid.dart';
 import 'settings/companySettings.dart';
+import 'staffs/staffsGrid.dart';
 import 'topOffers/topOfferGrid.dart';
 import 'underAmount/underAmountGrid.dart';
 import 'vendor/vendorListGrid.dart';
@@ -358,6 +368,126 @@ class _HomePageState extends State<HomePage> {
                           },
                           widget: Icon(Icons.credit_card_outlined,color: Colors.white,),
                         ),
+                        DrawerContent(
+                          img: "assets/icons/return.svg",
+                          isSelect: menuIndex==26?true:false,
+                          imgHeight: 32,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=26;
+                            });
+                          },
+                          widget: Icon(Icons.card_giftcard_outlined,color: Colors.white,),
+                        ),
+                        DrawerContent(
+                          img: "assets/icons/return.svg",
+                          isSelect: menuIndex==27?true:false,
+                          imgHeight: 32,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=27;
+                            });
+                          },
+                          widget: Icon(Icons.casino_outlined,color: Colors.white,),
+                        ),
+                        DrawerContent(
+                          img: "assets/icons/return.svg",
+                          isSelect: menuIndex==28?true:false,
+                          imgHeight: 32,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=28;
+                            });
+                          },
+                          widget: Icon(Icons.favorite_border_outlined,color: Colors.white,),
+                        ),
+                        DrawerContent(
+                          img: "assets/icons/return.svg",
+                          isSelect: menuIndex==29?true:false,
+                          imgHeight: 32,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=29;
+                            });
+                          },
+                          widget: Icon(Icons.perm_identity_outlined,color: Colors.white,),
+                        ),
+                        DrawerContent(
+                          img: "assets/icons/return.svg",
+                          isSelect: menuIndex==30?true:false,
+                          imgHeight: 32,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=30;
+                            });
+                          },
+                          widget: Icon(Icons.assignment_return_outlined,color: Colors.white,),
+                        ),
+                        DrawerContent(
+                          img: "assets/icons/return.svg",
+                          isSelect: menuIndex==31?true:false,
+                          imgHeight: 32,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=31;
+                            });
+                          },
+                          widget: Icon(Icons.contact_page_outlined,color: Colors.white,),
+                        ),
+                        DrawerContent(
+                          img: "assets/icons/return.svg",
+                          isSelect: menuIndex==32?true:false,
+                          imgHeight: 32,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=32;
+                            });
+                          },
+                          widget: Icon(Icons.pest_control_rodent_outlined,color: Colors.white,),
+                        ),
+                        DrawerContent(
+                          img: "assets/icons/return.svg",
+                          isSelect: menuIndex==33?true:false,
+                          imgHeight: 32,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=33;
+                            });
+                          },
+                          widget: Icon(Icons.attractions_outlined,color: Colors.white,),
+                        ),
+                        DrawerContent(
+                          img: "assets/icons/return.svg",
+                          isSelect: menuIndex==34?true:false,
+                          imgHeight: 32,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=34;
+                            });
+                          },
+                          widget: Icon(Icons.color_lens_outlined,color: Colors.white,),
+                        ),
+                        DrawerContent(
+                          img: "assets/icons/return.svg",
+                          isSelect: menuIndex==35?true:false,
+                          imgHeight: 32,
+                          rightPadd: 15,
+                          ontap: (){
+                            setState(() {
+                              menuIndex=35;
+                            });
+                          },
+                          widget: Icon(Icons.format_size_outlined,color: Colors.white,),
+                        ),
                         SizedBox(height: 50,),
                       ],
                     ),
@@ -406,6 +536,16 @@ class _HomePageState extends State<HomePage> {
                               menuIndex==23?"Company Settings":
                               menuIndex==24?"Pincode":
                               menuIndex==25?"Card Classification":
+                              menuIndex==26?"Gift Coupons":
+                              menuIndex==27?"Bulk Coupon Generate":
+                              menuIndex==28?"Wish List":
+                              menuIndex==29?"Staffs":
+                              menuIndex==30?"Refunds":
+                              menuIndex==31?"Contact Details":
+                              menuIndex==32?"Product Stock":
+                              menuIndex==33?"Attributes":
+                              menuIndex==34?"Add Color":
+                              menuIndex==35?"Add Size":
                             "",
                               style: TextStyle(fontSize: 18.5,color: grey1,fontFamily: 'RR',letterSpacing: 0.2),
                             ),
@@ -576,7 +716,17 @@ class _HomePageState extends State<HomePage> {
                       menuIndex==22?VendorRequestGrid():
                       menuIndex==23?CompanySettings():
                       menuIndex==24?PincodeGrid():
-                      menuIndex==25?CardClassificationGrid()
+                      menuIndex==25?CardClassificationGrid():
+                      menuIndex==26?GiftCouponsGrid():
+                      menuIndex==27?BulkCouponGenerate():
+                      menuIndex==28?WishListGird():
+                      menuIndex==29?StaffsGird():
+                      menuIndex==30?RefundGird():
+                      menuIndex==31?ContactDetails():
+                      menuIndex==32?ProductStockGrid():
+                      menuIndex==33?AttributeGrid():
+                      menuIndex==34?ColorGrid():
+                      menuIndex==35?SizeGrid()
                           :Container()
 
                     ],

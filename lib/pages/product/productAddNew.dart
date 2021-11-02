@@ -1015,6 +1015,7 @@ class _ProductAddNewState extends State<ProductAddNew> {
 class ProductTextField extends StatelessWidget {
   double width;
   String title;
+  Color titleColor;
   String regExp;
   bool validation;
   TextEditingController? textEditingController;
@@ -1027,7 +1028,7 @@ class ProductTextField extends StatelessWidget {
   int? maxlines;
   ProductTextField({required this.width,required this.title,required this.validation, this.textEditingController,
   required this.onComplete,this.isTextField=true,this.widget,this.leftPadding=20,this.regExp='[A-Za-z0-9@., ]',this.textInputType=TextInputType.emailAddress,
-  this.textLength=null,this.maxlines=1});
+  this.textLength=null,this.maxlines=1,this.titleColor=const Color(0xFF505050)});
 
   @override
   Widget build(BuildContext context) {
@@ -1040,6 +1041,7 @@ class ProductTextField extends StatelessWidget {
           TextFieldHeader(
             title: title,
             padd: paddTextFieldHeader2,
+            textColor: titleColor,
           ),
           isTextField?AddNewLabelTextField(
             margin:maxlines==null ?EdgeInsets.only(right: 20,top: 10):maxlines!>1?EdgeInsets.only(right: 20,top: 10): marginAddNewTextField2,

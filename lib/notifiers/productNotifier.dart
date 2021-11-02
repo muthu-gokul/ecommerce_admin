@@ -1,13 +1,16 @@
 import 'package:ecommerce_admin/model/UOMSettingsModel/conversionModel.dart';
 import 'package:ecommerce_admin/model/UOMSettingsModel/uomModel.dart';
+import 'package:ecommerce_admin/model/attributeModel.dart';
 import 'package:ecommerce_admin/model/brandModel.dart';
 import 'package:ecommerce_admin/model/cardClassificationModel.dart';
 import 'package:ecommerce_admin/model/categoryModel.dart';
+import 'package:ecommerce_admin/model/colorModel.dart';
 import 'package:ecommerce_admin/model/customer/customerModel.dart';
 import 'package:ecommerce_admin/model/customer/customerOrderModel.dart';
 import 'package:ecommerce_admin/model/emailSettingModel.dart';
 import 'package:ecommerce_admin/model/featuredBrandModel.dart';
 import 'package:ecommerce_admin/model/frontCoverModel.dart';
+import 'package:ecommerce_admin/model/giftCouponsModel.dart';
 import 'package:ecommerce_admin/model/goodsReceivedModel/goodsReceivedAddModel.dart';
 import 'package:ecommerce_admin/model/goodsReceivedModel/goodsReceivedModel.dart';
 import 'package:ecommerce_admin/model/ordersList/ordersListModel.dart';
@@ -15,15 +18,20 @@ import 'package:ecommerce_admin/model/paymentSettingsModel.dart';
 import 'package:ecommerce_admin/model/pincodeModel/pincodeModel.dart';
 import 'package:ecommerce_admin/model/productModel.dart';
 import 'package:ecommerce_admin/model/productShowCaseModel/productShowcaseModel.dart';
+import 'package:ecommerce_admin/model/productStockModel.dart';
 import 'package:ecommerce_admin/model/purchaseModel/materialCategoryModel.dart';
 import 'package:ecommerce_admin/model/purchaseModel/purchaseGridModel.dart';
 import 'package:ecommerce_admin/model/purchaseModel/vendorHistoryModel.dart';
+import 'package:ecommerce_admin/model/refundModel.dart';
 import 'package:ecommerce_admin/model/returnProducts/returnProductsModel.dart';
 import 'package:ecommerce_admin/model/shippingCharge/shippingChargeModel.dart';
+import 'package:ecommerce_admin/model/sizeModel.dart';
+import 'package:ecommerce_admin/model/staffsModel.dart';
 import 'package:ecommerce_admin/model/topOfferModel.dart';
 import 'package:ecommerce_admin/model/underAmountModel.dart';
 import 'package:ecommerce_admin/model/vendor/vendorListModel.dart';
 import 'package:ecommerce_admin/model/vendor/vendorRequestModel.dart';
+import 'package:ecommerce_admin/model/wishListModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -503,4 +511,60 @@ var t=[{"VendorId":4,"MaterialId":1539,"MaterialName":"Guest Rice","MaterialCate
     CardClassificationModel(cardName: "Visa Debit Card", cardType : "Visa",bankName:"HDFC",),
   ];
 
+  List<GiftCouponsModel> giftCoupons=[
+    GiftCouponsModel(couponCode:"SZCRYNDSBN", couponValid : "All users",couponEffect:"Rupees",redeemAmount:"200",startDate:"22.10.21",endDate:"22.11.21",couponOffer:"buy 1000 above",minimumPurchase:"1000",),
+    GiftCouponsModel(couponCode:"SZCRYNDSBN", couponValid : "All users",couponEffect:"Rupees",redeemAmount:"200",startDate:"22.10.21",endDate:"22.11.21",couponOffer:"buy 1000 above",minimumPurchase:"1000",),
+    GiftCouponsModel(couponCode:"SZCRYNDSBN", couponValid : "All users",couponEffect:"Rupees",redeemAmount:"200",startDate:"22.10.21",endDate:"22.11.21",couponOffer:"buy 1000 above",minimumPurchase:"1000",),
+
+  ];
+
+//wishlist
+  List<WishListModel> wishList=[
+    WishListModel(productName : "T-shirt",cusMail:"Shan@gmail.com",cusNames:"Aishu ",creDate:"27/10/21",),
+    WishListModel(productName : "T-shirt",cusMail:"Shan@gmail.com",cusNames:"Aishu ",creDate:"27/10/21",),
+    WishListModel(productName : "T-shirt",cusMail:"Shan@gmail.com",cusNames:"Aishu ",creDate:"27/10/21",),
+    WishListModel(productName : "T-shirt",cusMail:"Shan@gmail.com",cusNames:"Aishu ",creDate:"27/10/21",),
+  ];
+
+  //staffs
+  List<StaffsModel> staffs=[
+    StaffsModel(name : "Aishu",idNo:"23456",email:"aishu@gmail.com ",phone:"7904130912",role:"Manager",addres: "Chennai",),
+    StaffsModel(name : "Bala",idNo:"23457",email:"bala@gmail.com ",phone:"7904130232",role:"Staff",addres: "Chennai",),
+    StaffsModel(name : "Muthu",idNo:"23458",email:"Muthu@gmail.com ",phone:"7904131111",role:"Admin",addres: "Chennai",),
+  ];
+
+  //refunds
+  List<RefundModel> refunds=[
+    RefundModel(orderId : "#1234",product:"T-shirt",cusname:"aishu",cusmail:"aishu@gmail.com",refundConfi:"No refund for this product. Bcz 3 days ago",),
+    RefundModel(orderId : "#1234",product:"T-shirt",cusname:"aishu",cusmail:"aishu@gmail.com",refundConfi:"No refund for this product. Bcz 3 days ago",),
+    RefundModel(orderId : "#1234",product:"T-shirt",cusname:"aishu",cusmail:"aishu@gmail.com",refundConfi:"No refund for this product. Bcz 3 days ago",),
+  ];
+
+  //ProductStockModel
+  List<ProductStockModel> productStocks=[
+    ProductStockModel(id : "#1234",productName:"T-shirt",category:"Dress",stock: "5650",sales:"4400",inStock:"1250",addedDate: "19-10-2021",status:"sell",),
+    ProductStockModel(id : "#1234",productName:"T-shirt",category:"Dress",stock: "5650",sales:"4400",inStock:"1250",addedDate: "19-10-2021",status:"offer process",),
+    ProductStockModel(id : "#1234",productName:"T-shirt",category:"Dress",stock: "5650",sales:"4400",inStock:"1250",addedDate: "19-10-2021",status:"out of stock",),
+  ];
+
+  //AttributesModel
+  List<AttributesModel> attributes=[
+    AttributesModel(name : "Color",slug:"Color",type:"color",description: "Color Description",sortOrder:"Custom ordering",),
+    AttributesModel(name : "Size",slug:"size",type:"button",description: "Size Description",sortOrder:"Name (Numeric)",),
+    AttributesModel(name : "Mobile Color",slug:"size",type:"image",description: "Size Description",sortOrder:"Custom ordering",),
+  ];
+
+  //ColorMode
+  List<ColorModel> addColor=[
+    ColorModel(name : "Black",slug:"black",description: "Color Description",count:"5",),
+    ColorModel(name : "Red",slug:"Red",description: "Size Description",count:"8",),
+  ];
+
+  //AddSizeModel
+  List<AddSizeModel> addSize=[
+    AddSizeModel(name : "S",slug:"S",description: "Color Description",count:"5",),
+    AddSizeModel(name : "M",slug:"M",description: "Size Description",count:"6",),
+    AddSizeModel(name : "L",slug:"XL",description: "Size Description",count:"7",),
+    AddSizeModel(name : "XL",slug:"XL",description: "Size Description",count:"7",),
+  ];
 }

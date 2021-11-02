@@ -255,14 +255,15 @@ class AddNewLabelTextFieldMinLines extends StatelessWidget {
 class TextFieldHeader extends StatelessWidget {
   String title;
   EdgeInsets? padd;
-  TextFieldHeader({required this.title,this.padd= null});
+  Color textColor;
+  TextFieldHeader({required this.title,this.padd= null,this.textColor=const Color(0xFF505050)});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding:  padd==null?paddTextFieldHeader:padd!,
       child: Text("$title",
-          style: TextStyle(fontFamily: 'RR',fontSize: 20,color: Color(0xFF505050))
+          style: TextStyle(fontFamily: 'RR',fontSize: 20,color: textColor)
       ),
     );
   }

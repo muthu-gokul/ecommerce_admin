@@ -92,7 +92,7 @@ class _GridWithWidgetParamState extends State<GridWithWidgetParam> {
                 ),
               ),
               widget.showExport?AddBtn(
-                ontap: widget.addBtnTap,
+                ontap: (){},
                 color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
                 widget: Icon(Icons.import_export,color: Colors.white,),
                 margin: EdgeInsets.only(right: 20),
