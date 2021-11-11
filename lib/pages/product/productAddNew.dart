@@ -1026,9 +1026,10 @@ class ProductTextField extends StatelessWidget {
   TextInputType textInputType;
   int? textLength;
   int? maxlines;
+  Widget? suffixIcon;
   ProductTextField({required this.width,required this.title,required this.validation, this.textEditingController,
   required this.onComplete,this.isTextField=true,this.widget,this.leftPadding=20,this.regExp='[A-Za-z0-9@., ]',this.textInputType=TextInputType.emailAddress,
-  this.textLength=null,this.maxlines=1,this.titleColor=const Color(0xFF505050)});
+  this.textLength=null,this.maxlines=1,this.titleColor=const Color(0xFF505050),this.suffixIcon});
 
   @override
   Widget build(BuildContext context) {
@@ -1052,6 +1053,7 @@ class ProductTextField extends StatelessWidget {
             textInputType: textInputType,
             textLength: textLength,
             maxlines: maxlines,
+            suffixIcon: suffixIcon,
             ontap: (){
 
             },

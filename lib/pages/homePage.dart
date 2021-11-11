@@ -1,4 +1,5 @@
 import 'package:ecommerce_admin/constants.dart';
+import 'package:ecommerce_admin/model/drawerContentModel.dart';
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
 import 'package:ecommerce_admin/pages/cardClassification/cardClassifyGrid.dart';
 import 'package:ecommerce_admin/pages/customers/customersGrid.dart';
@@ -17,6 +18,7 @@ import 'package:ecommerce_admin/widgets/popOver/src/popover_direction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:scutiwidgets/fittedText.dart';
 import 'package:scutiwidgets/size.dart';
 
 import 'addColor/colorGrid.dart';
@@ -25,6 +27,7 @@ import 'attributes/attributeGrid.dart';
 import 'brand/brandGrid.dart';
 import 'bulkCouponGenerat/bulkCouponGenerate.dart';
 import 'contactDetails/contactDetails.dart';
+import 'deliveryBoyDetails/deliveryBoysGrid.dart';
 import 'emailSetting/emailSettingGrid.dart';
 import 'featuredBrand/featuredBrandGrid.dart';
 import 'footerPageSetings/footerPageSettings.dart';
@@ -50,6 +53,45 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
  int menuIndex=1;
+ bool drawerOpen=false;
+ List<DrawerContentModel> drawerContentList=[
+   DrawerContentModel(img: "assets/homepage/dashboard.svg", title: "Dashboard",imgHeight: 50,),
+   DrawerContentModel(img: "assets/homepage/salesReport.svg", title: "Product",imgHeight: 50,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Profile",widget: Icon(Icons.person_pin_circle_outlined,color: Colors.white,size: 28,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Brand",widget: Icon(Icons.branding_watermark,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Users",rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Customers",widget: Icon(Icons.person_pin_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Orders List",widget: Icon(Icons.star_border_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Product Showcase",widget: Icon(Icons.production_quantity_limits,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Payment Settings",widget: Icon(Icons.payments,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Front Cover",widget: Icon(Icons.local_convenience_store_rounded,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Feature Brand",widget: Icon(Icons.branding_watermark_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Under Amount",rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Top Offers",widget: Icon(Icons.local_offer_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Email Settings",widget: Icon(Icons.mail_outline,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Footer Page Settings",widget: Icon(Icons.square_foot,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/uom.svg", title: "UOM Settings",rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/purchase.svg", title: "Purchase",rightPadd: 5,imgHeight: 45,),
+   DrawerContentModel(img: "assets/homepage/goodsReceived.svg", title: "Goods Received",rightPadd: 5,imgHeight: 45,),
+   DrawerContentModel(img: "assets/icons/return.svg", title: "Return Products",rightPadd: 15,imgHeight: 32,),
+   DrawerContentModel(img: "assets/icons/return.svg", title: "Shipping Charges",  widget: Icon(Icons.attach_money,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/icons/return.svg", title: "Vendor List",  widget: Icon(Icons.person_pin,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/icons/return.svg", title: "New Vendor Request",  widget: Icon(Icons.person_add,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/icons/return.svg", title: "Company Settings",  widget: Icon(Icons.settings,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/icons/return.svg", title: "Pincode",  widget: Icon(Icons.pin_drop_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/icons/return.svg", title: "Card Classification",  widget: Icon(Icons.credit_card_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/icons/return.svg", title: "Gift Coupons",  widget: Icon(Icons.card_giftcard_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/icons/return.svg", title: "Bulk Coupon Generate",  widget: Icon(Icons.casino_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/icons/return.svg", title: "Wish List",  widget: Icon(Icons.favorite_border_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/icons/return.svg", title: "Staffs",  widget: Icon(Icons.perm_identity_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/icons/return.svg", title: "Refunds",  widget: Icon(Icons.assignment_return_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/icons/return.svg", title: "Contact Details",  widget: Icon(Icons.contact_page_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/icons/return.svg", title: "Product Stock",  widget: Icon(Icons.pest_control_rodent_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/icons/return.svg", title: "Attributes",  widget: Icon(Icons.attractions_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/icons/return.svg", title: "Add Color",  widget: Icon(Icons.color_lens_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/icons/return.svg", title: "Add Size",  widget: Icon(Icons.format_size_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/icons/return.svg", title: "Delivery Boys",  widget: Icon(Icons.delivery_dining_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+ ];
 
 
   @override
@@ -64,8 +106,10 @@ class _HomePageState extends State<HomePage> {
             color: th.primaryColor2,
             child: Row(
               children: [
-                Container(
-                  width: 100,
+                AnimatedContainer(
+                  duration: animeDuration,
+                  curve: animeCurve,
+                  width: drawerOpen?250:100,
                   height: SizeConfig.screenHeight,
                   color: th.primaryColor2,
                   child: SingleChildScrollView(
@@ -75,426 +119,42 @@ class _HomePageState extends State<HomePage> {
                         SizedBox(height: 10,),
                         Padding(
                           padding:  EdgeInsets.only(left: 15),
-                          child: Image.asset("assets/login/logo.jpg",height: 80,),
+                          child: GestureDetector(
+                              onTap: (){
+                                setState(() {
+                                  drawerOpen=!drawerOpen;
+                                });
+                              },
+                              child: Image.asset("assets/login/logo.jpg",height: 80,)
+                          ),
                         ),
                         SizedBox(height: 20,),
+                        for(int i=0;i<drawerContentList.length;i++)
                         DrawerContent(
-                            img: "assets/homepage/dashboard.svg",
-                            isSelect: menuIndex==1?true:false,
-                            imgHeight: 50,
+                            img:drawerContentList[i].img,
+                            isSelect: menuIndex==(i+1)?true:false,
+                            imgHeight: drawerContentList[i].imgHeight,
+                            rightPadd: drawerContentList[i].rightPadd,
                             ontap: (){
                               setState(() {
-                                menuIndex=1;
-                              });
-                            }
-                        ),
-                        DrawerContent(
-                            img: "assets/homepage/salesReport.svg",
-                            isSelect: menuIndex==2?true:false,
-                            imgHeight: 50,
-                            ontap: (){
-                              setState(() {
-                                menuIndex=2;
-                              });
-                            }
-                        ),
-                        DrawerContent(
-                            img: "assets/homepage/user-profile.svg",
-                            isSelect: menuIndex==3?true:false,
-                            imgHeight: 25,
-                            rightPadd: 15,
-                            ontap: (){
-                              setState(() {
-                                menuIndex=3;
+                                menuIndex=i+1;
                               });
                             },
-                            widget: Icon(Icons.person_pin_circle_outlined,color: Colors.white,size: 28,),
+                            widget: drawerContentList[i].widget,
+                            drawerOpen: drawerOpen,
+                            title: drawerContentList[i].title,
                         ),
-                        DrawerContent(
-                            img: "assets/homepage/user-profile.svg",
-                            isSelect: menuIndex==4?true:false,
-                            imgHeight: 25,
-                            rightPadd: 15,
-                            ontap: (){
-                              setState(() {
-                                menuIndex=4;
-                              });
-                            },
-                            widget: Icon(Icons.branding_watermark,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                            img: "assets/homepage/user-profile.svg",
-                            isSelect: menuIndex==5?true:false,
-                            imgHeight: 25,
-                            rightPadd: 15,
-                            ontap: (){
-                              setState(() {
-                                menuIndex=5;
-                              });
-                            }
-                        ),
-                        DrawerContent(
-                            img: "assets/homepage/user-profile.svg",
-                            isSelect: menuIndex==6?true:false,
-                            imgHeight: 25,
-                            rightPadd: 15,
-                            ontap: (){
-                              setState(() {
-                                menuIndex=6;
-                              });
-                            },
-                            widget: Icon(Icons.person_pin_outlined,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                            img: "assets/homepage/user-profile.svg",
-                            isSelect: menuIndex==7?true:false,
-                            imgHeight: 25,
-                            rightPadd: 15,
-                            ontap: (){
-                              setState(() {
-                                menuIndex=7;
-                              });
-                            },
-                            widget: Icon(Icons.star_border_outlined,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                            img: "assets/homepage/user-profile.svg",
-                            isSelect: menuIndex==8?true:false,
-                            imgHeight: 25,
-                            rightPadd: 15,
-                            ontap: (){
-                              setState(() {
-                                menuIndex=8;
-                              });
-                            },
-                            widget: Icon(Icons.production_quantity_limits,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                            img: "assets/homepage/user-profile.svg",
-                            isSelect: menuIndex==9?true:false,
-                            imgHeight: 25,
-                            rightPadd: 15,
-                            ontap: (){
-                              setState(() {
-                                menuIndex=9;
-                              });
-                            },
-                           widget: Icon(Icons.payments,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                            img: "assets/homepage/user-profile.svg",
-                            isSelect: menuIndex==10?true:false,
-                            imgHeight: 25,
-                            rightPadd: 15,
-                            ontap: (){
-                              setState(() {
-                                menuIndex=10;
-                              });
-                            },
-                            widget: Icon(Icons.local_convenience_store_rounded,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                            img: "assets/homepage/user-profile.svg",
-                            isSelect: menuIndex==11?true:false,
-                            imgHeight: 25,
-                            rightPadd: 15,
-                            ontap: (){
-                              setState(() {
-                                menuIndex=11;
-                              });
-                            },
-                            widget: Icon(Icons.branding_watermark_outlined,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                            img: "assets/homepage/user-profile.svg",
-                            isSelect: menuIndex==12?true:false,
-                            imgHeight: 25,
-                            rightPadd: 15,
-                            ontap: (){
-                              setState(() {
-                                menuIndex=12;
-                              });
-                            }
-                        ),
-                        DrawerContent(
-                            img: "assets/homepage/user-profile.svg",
-                            isSelect: menuIndex==13?true:false,
-                            imgHeight: 25,
-                            rightPadd: 15,
-                            ontap: (){
-                              setState(() {
-                                menuIndex=13;
-                              });
-                            },
-                            widget: Icon(Icons.local_offer_outlined,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                            img: "assets/homepage/user-profile.svg",
-                            isSelect: menuIndex==14?true:false,
-                            imgHeight: 25,
-                            rightPadd: 15,
-                            ontap: (){
-                              setState(() {
-                                menuIndex=14;
-                              });
-                            },
-                            widget: Icon(Icons.mail_outline,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                            img: "assets/homepage/user-profile.svg",
-                            isSelect: menuIndex==15?true:false,
-                            imgHeight: 25,
-                            rightPadd: 15,
-                            ontap: (){
-                              setState(() {
-                                menuIndex=15;
-                              });
-                            },
-                            widget: Icon(Icons.square_foot,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                            img: "assets/homepage/uom.svg",
-                            isSelect: menuIndex==16?true:false,
-                            imgHeight: 25,
-                            rightPadd: 15,
-                            ontap: (){
-                              setState(() {
-                                menuIndex=16;
-                              });
-                            }
-                        ),
-                        DrawerContent(
-                            img: "assets/homepage/purchase.svg",
-                            isSelect: menuIndex==17?true:false,
-                            imgHeight: 45,
-                            rightPadd: 6,
-                            ontap: (){
-                              setState(() {
-                                menuIndex=17;
-                              });
-                            }
-                        ),
-                        DrawerContent(
-                            img: "assets/homepage/goodsReceived.svg",
-                            isSelect: menuIndex==18?true:false,
-                            imgHeight: 45,
-                            rightPadd: 6,
-                            ontap: (){
-                              setState(() {
-                                menuIndex=18;
-                              });
-                            }
-                        ),
-                        DrawerContent(
-                            img: "assets/icons/return.svg",
-                            isSelect: menuIndex==19?true:false,
-                            imgHeight: 32,
-                            rightPadd: 15,
-                            ontap: (){
-                              setState(() {
-                                menuIndex=19;
-                              });
-                            }
-                        ),
-                        DrawerContent(
-                            img: "assets/icons/return.svg",
-                            isSelect: menuIndex==20?true:false,
-                            imgHeight: 32,
-                            rightPadd: 15,
-                            ontap: (){
-                              setState(() {
-                                menuIndex=20;
-                              });
-                            },
-                           widget: Icon(Icons.attach_money,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                          img: "assets/icons/return.svg",
-                          isSelect: menuIndex==21?true:false,
-                          imgHeight: 32,
-                          rightPadd: 15,
-                          ontap: (){
-                            setState(() {
-                              menuIndex=21;
-                            });
-                          },
-                          widget: Icon(Icons.person_pin,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                          img: "assets/icons/return.svg",
-                          isSelect: menuIndex==22?true:false,
-                          imgHeight: 32,
-                          rightPadd: 15,
-                          ontap: (){
-                            setState(() {
-                              menuIndex=22;
-                            });
-                          },
-                          widget: Icon(Icons.person_add,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                          img: "assets/icons/return.svg",
-                          isSelect: menuIndex==23?true:false,
-                          imgHeight: 32,
-                          rightPadd: 15,
-                          ontap: (){
-                            setState(() {
-                              menuIndex=23;
-                            });
-                          },
-                          widget: Icon(Icons.settings,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                          img: "assets/icons/return.svg",
-                          isSelect: menuIndex==24?true:false,
-                          imgHeight: 32,
-                          rightPadd: 15,
-                          ontap: (){
-                            setState(() {
-                              menuIndex=24;
-                            });
-                          },
-                          widget: Icon(Icons.pin_drop_outlined,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                          img: "assets/icons/return.svg",
-                          isSelect: menuIndex==25?true:false,
-                          imgHeight: 32,
-                          rightPadd: 15,
-                          ontap: (){
-                            setState(() {
-                              menuIndex=25;
-                            });
-                          },
-                          widget: Icon(Icons.credit_card_outlined,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                          img: "assets/icons/return.svg",
-                          isSelect: menuIndex==26?true:false,
-                          imgHeight: 32,
-                          rightPadd: 15,
-                          ontap: (){
-                            setState(() {
-                              menuIndex=26;
-                            });
-                          },
-                          widget: Icon(Icons.card_giftcard_outlined,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                          img: "assets/icons/return.svg",
-                          isSelect: menuIndex==27?true:false,
-                          imgHeight: 32,
-                          rightPadd: 15,
-                          ontap: (){
-                            setState(() {
-                              menuIndex=27;
-                            });
-                          },
-                          widget: Icon(Icons.casino_outlined,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                          img: "assets/icons/return.svg",
-                          isSelect: menuIndex==28?true:false,
-                          imgHeight: 32,
-                          rightPadd: 15,
-                          ontap: (){
-                            setState(() {
-                              menuIndex=28;
-                            });
-                          },
-                          widget: Icon(Icons.favorite_border_outlined,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                          img: "assets/icons/return.svg",
-                          isSelect: menuIndex==29?true:false,
-                          imgHeight: 32,
-                          rightPadd: 15,
-                          ontap: (){
-                            setState(() {
-                              menuIndex=29;
-                            });
-                          },
-                          widget: Icon(Icons.perm_identity_outlined,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                          img: "assets/icons/return.svg",
-                          isSelect: menuIndex==30?true:false,
-                          imgHeight: 32,
-                          rightPadd: 15,
-                          ontap: (){
-                            setState(() {
-                              menuIndex=30;
-                            });
-                          },
-                          widget: Icon(Icons.assignment_return_outlined,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                          img: "assets/icons/return.svg",
-                          isSelect: menuIndex==31?true:false,
-                          imgHeight: 32,
-                          rightPadd: 15,
-                          ontap: (){
-                            setState(() {
-                              menuIndex=31;
-                            });
-                          },
-                          widget: Icon(Icons.contact_page_outlined,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                          img: "assets/icons/return.svg",
-                          isSelect: menuIndex==32?true:false,
-                          imgHeight: 32,
-                          rightPadd: 15,
-                          ontap: (){
-                            setState(() {
-                              menuIndex=32;
-                            });
-                          },
-                          widget: Icon(Icons.pest_control_rodent_outlined,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                          img: "assets/icons/return.svg",
-                          isSelect: menuIndex==33?true:false,
-                          imgHeight: 32,
-                          rightPadd: 15,
-                          ontap: (){
-                            setState(() {
-                              menuIndex=33;
-                            });
-                          },
-                          widget: Icon(Icons.attractions_outlined,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                          img: "assets/icons/return.svg",
-                          isSelect: menuIndex==34?true:false,
-                          imgHeight: 32,
-                          rightPadd: 15,
-                          ontap: (){
-                            setState(() {
-                              menuIndex=34;
-                            });
-                          },
-                          widget: Icon(Icons.color_lens_outlined,color: Colors.white,),
-                        ),
-                        DrawerContent(
-                          img: "assets/icons/return.svg",
-                          isSelect: menuIndex==35?true:false,
-                          imgHeight: 32,
-                          rightPadd: 15,
-                          ontap: (){
-                            setState(() {
-                              menuIndex=35;
-                            });
-                          },
-                          widget: Icon(Icons.format_size_outlined,color: Colors.white,),
-                        ),
+
                         SizedBox(height: 50,),
                       ],
                     ),
                   ),
                 ),
-                Container(
-                  width: SizeConfig.screenWidth!-100,
+
+                AnimatedContainer(
+                  duration: animeDuration,
+                  curve: animeCurve,
+                  width: SizeConfig.screenWidth!-(drawerOpen?250:100),
                   height: SizeConfig.screenHeight,
                   decoration: BoxDecoration(
                     color: bgColor,
@@ -511,42 +171,7 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           children: [
                             SizedBox(width: 20,),
-                            Text(menuIndex==1?"DASHBOARD":
-                            menuIndex==2?"PRODUCT":
-                              menuIndex==3?"PROFILE":
-                              menuIndex==4?"BRAND":
-                              menuIndex==5?"USERS":
-                              menuIndex==6?"CUSTOMERS":
-                              menuIndex==7?"ORDERS LIST":
-                              menuIndex==8?"PRODUCT SHOWCASE":
-                              menuIndex==9?"PAYMENT SETTINGS":
-                              menuIndex==10?"Front Cover":
-                              menuIndex==11?"Featured Brand":
-                              menuIndex==12?"Under Amount":
-                              menuIndex==13?"Top Offers":
-                              menuIndex==14?"Email Settings":
-                              menuIndex==15?"Footer Page Settings":
-                              menuIndex==16?"UOM Settings":
-                              menuIndex==17?"Purchase":
-                              menuIndex==18?"Goods Received":
-                              menuIndex==19?"Return Products":
-                              menuIndex==20?"Shipping Charges":
-                              menuIndex==21?"Vendor List":
-                              menuIndex==22?"New Vendor Request":
-                              menuIndex==23?"Company Settings":
-                              menuIndex==24?"Pincode":
-                              menuIndex==25?"Card Classification":
-                              menuIndex==26?"Gift Coupons":
-                              menuIndex==27?"Bulk Coupon Generate":
-                              menuIndex==28?"Wish List":
-                              menuIndex==29?"Staffs":
-                              menuIndex==30?"Refunds":
-                              menuIndex==31?"Contact Details":
-                              menuIndex==32?"Product Stock":
-                              menuIndex==33?"Attributes":
-                              menuIndex==34?"Add Color":
-                              menuIndex==35?"Add Size":
-                            "",
+                            Text("${drawerContentList[menuIndex-1].title}",
                               style: TextStyle(fontSize: 18.5,color: grey1,fontFamily: 'RR',letterSpacing: 0.2),
                             ),
                             Spacer(),
@@ -726,7 +351,8 @@ class _HomePageState extends State<HomePage> {
                       menuIndex==32?ProductStockGrid():
                       menuIndex==33?AttributeGrid():
                       menuIndex==34?ColorGrid():
-                      menuIndex==35?SizeGrid()
+                      menuIndex==35?SizeGrid():
+                      menuIndex==36?DeliveryBoysGrid()
                           :Container()
 
                     ],
@@ -781,8 +407,10 @@ class DrawerContent extends StatelessWidget {
   double rightPadd;
   Color imgColor;
   Widget? widget;
+  bool drawerOpen;
+  String title;
   DrawerContent({required this.img,required this.isSelect,required this.ontap,required this.imgHeight,this.rightPadd=5,
-  this.imgColor=Colors.white,this.widget});
+  this.imgColor=Colors.white,this.widget,required this.drawerOpen,required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -792,7 +420,7 @@ class DrawerContent extends StatelessWidget {
         duration: animeDuration,
         curve: animeCurve,
         height: 50,
-        width: 80,
+        width: drawerOpen?235:80,
         decoration: BoxDecoration(
             color:isSelect? Provider.of<ThemeNotifier>(context,listen:false).primaryColor4:Colors.transparent,
             borderRadius: BorderRadius.only(
@@ -802,7 +430,35 @@ class DrawerContent extends StatelessWidget {
         ),
         alignment: Alignment.centerRight,
         padding: EdgeInsets.only(right: rightPadd),
-        child: widget==null?SvgPicture.asset(img,color: imgColor,height: imgHeight,):widget,
+        child: Row(
+          children: [
+            AnimatedOpacity(
+              duration: animeDuration,
+              opacity: drawerOpen?1:0,
+              child: AnimatedContainer(
+                duration: animeDuration,
+                curve: animeCurve,
+                width: drawerOpen?169:0,
+                child: FittedText(
+                  height: 19,
+                  width: 165,
+                  text: "   $title",
+                  alignment: Alignment.centerLeft,
+                  textStyle: ts18(Colors.white,),
+                ),
+              ),
+            ),
+           // SizedBox(width: drawerOpen?0:15,),
+            Spacer(),
+            Container(
+            //  width: 50,
+              alignment: Alignment.center,
+
+              child: widget==null?SvgPicture.asset(img,color: imgColor,height: imgHeight,):widget!,
+            ),
+
+          ],
+        ),
       ),
     );
   }

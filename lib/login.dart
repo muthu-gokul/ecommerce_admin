@@ -481,7 +481,14 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin{
               child: Container(
                 height: SizeConfig.screenHeight!,
                 width: SizeConfig.screenWidth,
-                color: th.primaryColor1,
+
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("assets/images/login-bg.jpg"),
+                      fit: BoxFit.fill
+                  ),
+                  //color: th.primaryColor1,
+                ),
                 child: Stack(
                   children: [
                     Positioned(
@@ -489,12 +496,12 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin{
                       child: Container(
                         height: SizeConfig.screenHeight,
                         width: SizeConfig.screenWidth!*0.5,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage("assets/images/login-bg.jpg"),
-                              fit: BoxFit.fill
-                          ),
-                        ),
+                        // decoration: BoxDecoration(
+                        //   image: DecorationImage(
+                        //       image: AssetImage("assets/images/login-bg.jpg"),
+                        //       fit: BoxFit.fill
+                        //   ),
+                        // ),
                       ),
                     ),
 

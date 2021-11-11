@@ -7,6 +7,7 @@ import 'package:ecommerce_admin/model/categoryModel.dart';
 import 'package:ecommerce_admin/model/colorModel.dart';
 import 'package:ecommerce_admin/model/customer/customerModel.dart';
 import 'package:ecommerce_admin/model/customer/customerOrderModel.dart';
+import 'package:ecommerce_admin/model/deliveryBoysModel.dart';
 import 'package:ecommerce_admin/model/emailSettingModel.dart';
 import 'package:ecommerce_admin/model/featuredBrandModel.dart';
 import 'package:ecommerce_admin/model/frontCoverModel.dart';
@@ -566,5 +567,13 @@ var t=[{"VendorId":4,"MaterialId":1539,"MaterialName":"Guest Rice","MaterialCate
     AddSizeModel(name : "M",slug:"M",description: "Size Description",count:"6",),
     AddSizeModel(name : "L",slug:"XL",description: "Size Description",count:"7",),
     AddSizeModel(name : "XL",slug:"XL",description: "Size Description",count:"7",),
+  ];
+
+
+  //DeliverBoysModel
+  List<DeliverBoysModel> deliveryBoys=[
+    DeliverBoysModel(name : "Aathrava",onlineOffline:"Online ",mobileNo: "658458875",collection:"456000",ordersDelivered: "4500",ratings: "4.6 ",paymentConfig: "15,000",),
+    DeliverBoysModel(name : "Bala",onlineOffline:"Online ",mobileNo: "658458876",collection:"450000",ordersDelivered: "3500",ratings: "4.0 ",paymentConfig: "12,000",),
+    DeliverBoysModel(name : "Muthu",onlineOffline:"Online ",mobileNo: "658458877",collection:"4000",ordersDelivered: "400",ratings: "4.1 ",paymentConfig: "12,000",),
   ];
 }
