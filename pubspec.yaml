@@ -42,6 +42,8 @@ dependencies:
   flutter_svg:
   cached_network_image:
   flutter_colorpicker:
+  html_editor_enhanced:
+  file_picker:
   scutiwidgets:
     git:
       url: https://github.com/muthu-gokul/scutiwidgets.git

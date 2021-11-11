@@ -1,10 +1,13 @@
 import 'package:ecommerce_admin/notifiers/productNotifier.dart';
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
+import 'package:ecommerce_admin/pages/homePage.dart';
 import 'package:ecommerce_admin/pages/settings/companySettings.dart';
 import 'package:ecommerce_admin/widgets/customTextField.dart';
 import 'package:ecommerce_admin/widgets/pickImage.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:scutiwidgets/pageRoutes.dart'as pr;
@@ -30,17 +33,18 @@ class _FooterPageSettingsState extends State<FooterPageSettings> with TickerProv
   TextEditingController content=new TextEditingController();
 
   XFile? image=null;
-
+  final HtmlEditorController controller = HtmlEditorController();
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 4,  vsync: this);
-    _tabControllers = TabController(length: 5,  vsync: this);
+    _tabControllers = TabController(length: 3,  vsync: this);
   }
 
   Widget build(BuildContext context) {
     width=SizeConfig.screenWidth!-100;
+    width2=(SizeConfig.screenWidth!*0.85)+(drawerOpen?0:100);
 
     return Consumer<ThemeNotifier>(
       builder: (context,th,child)=>Consumer<ProductNotifier>(
@@ -80,6 +84,7 @@ class _FooterPageSettingsState extends State<FooterPageSettings> with TickerProv
                 child: TabBarView(
                   controller: _tabController,
                   children: [
+                    //Block1
                     Align(
                       alignment:Alignment.topCenter,
                       child: Container(
@@ -117,14 +122,14 @@ class _FooterPageSettingsState extends State<FooterPageSettings> with TickerProv
                                           color: Colors.transparent,
                                           child: Text("Edit",style: TextStyle(fontSize: 14,fontFamily: 'RR',color: Colors.white),),
                                          ),
-                                       )
+                                         )
                                      ],
                                    ),
                                  ),
                                ),
                                SizedBox(width: 20,),
                                Container(
-                                 width:SizeConfig.screenWidth!*0.70,
+                                 width:(SizeConfig.screenWidth!*0.70)-(drawerOpen?141:0),
                                  height: 250,
                                  padding: EdgeInsets.only(left: 50,right: 50,top: 50),
                                  decoration: BoxDecoration(
@@ -134,7 +139,7 @@ class _FooterPageSettingsState extends State<FooterPageSettings> with TickerProv
                                  child: Column(
                                    crossAxisAlignment: CrossAxisAlignment.start,
                                    children: [
-                                    Text("About Us",style: TextStyle(fontSize: 18,fontFamily: 'RB',color: Color(0XFF5F5F5F)),),
+                                    Text("About Us $drawerOpen",style: TextStyle(fontSize: 18,fontFamily: 'RB',color: Color(0XFF5F5F5F)),),
                                      SizedBox(height: 30,),
                                      Text("Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentiumoptio, eaque rerum!",style: TextStyle(fontSize: 14,fontFamily: 'RR',color: Color(0XFFA4A0A1)),),
                                      SizedBox(height: 20,),
@@ -229,15 +234,17 @@ class _FooterPageSettingsState extends State<FooterPageSettings> with TickerProv
                         ) ,
                       ),
                     ),
+                    //Block2
                     Align(
                       alignment:Alignment.topCenter,
                       child: Container(
                         width: SizeConfig.screenWidth!*1,
+                        padding: EdgeInsets.only(left: 25,right: 25),
                         child:Column(
                           children: [
                             SizedBox(height: 30,),
                             Container(
-                              width:SizeConfig.screenWidth!*0.85,
+                              width:width2,
                               height: 60,
                               padding: EdgeInsets.only(left: 50,right: 50,),
                               decoration: BoxDecoration(
@@ -250,14 +257,15 @@ class _FooterPageSettingsState extends State<FooterPageSettings> with TickerProv
                             ),
                             SizedBox(height: 30,),
                             Container(
-                              width:SizeConfig.screenWidth!*0.85,
+                              width:width2,
                               height: 350,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.0,),
                                 color: Color(0xff873CFB),
                               ),
                               child: Container(
-                                  padding: EdgeInsets.only(left: 30,right: 30,top: 20),
+                                  //padding: EdgeInsets.only(left: 30,right: 30,top: 20),
+                                  padding: EdgeInsets.only(left: 0,right: 0,top: 20),
                                 child: Row(
                                   crossAxisAlignment:CrossAxisAlignment.center ,
                                   children: [
@@ -289,7 +297,7 @@ class _FooterPageSettingsState extends State<FooterPageSettings> with TickerProv
                                     ),
 
                                     Container(
-                                      width:SizeConfig.screenWidth!*0.45,
+                                      width:width2-550,
                                       child: Column(
                                         children: [
                                           Container(
@@ -305,7 +313,7 @@ class _FooterPageSettingsState extends State<FooterPageSettings> with TickerProv
                                           ),
                                           SizedBox(height: 10,),
                                           Container(
-                                            width: 1000,
+                                            width:width2-550,
                                              child:TabBar(
                                                      controller: _tabControllers,
                                                      // give the indicator a decoration (color and border radius)
@@ -321,19 +329,41 @@ class _FooterPageSettingsState extends State<FooterPageSettings> with TickerProv
                                                      unselectedLabelStyle: TextStyle(fontSize: 14,fontFamily: 'RR'),
                                                      labelStyle: TextStyle(fontSize: 14,fontFamily: 'RR'),
                                                      tabs: [
-                                                       Tab(text:"Standard"),
-                                                       Container(height: 10,width: 1,color: Colors.white,),
-                                                       Tab(text:"Custom"),
-                                                       Container(height: 10,width: 1,color: Colors.white,),
-                                                       Tab(text:"Upload"),
+                                                       //Tab(text:"Standard"),
+                                                       Container(
+                                                         width:(width2-550)*0.3,
+                                                         decoration:BoxDecoration(
+                                                           border: Border(right: BorderSide(color: Colors.white))
+                                                         ),
+                                                         child: Text("Standard"),
+                                                       ),
+                                                       Container(
+                                                         width:(width2-550)*0.3,
+                                                         decoration:BoxDecoration(
+                                                             border: Border(right: BorderSide(color: Colors.white))
+                                                         ),
+                                                         child: Text("Custom"),
+                                                       ),
+                                                       Container(
+                                                         width:(width2-550)*0.3,
+                                                         decoration:BoxDecoration(
+                                                           //  border: Border(right: BorderSide(color: Colors.white))
+                                                         ),
+                                                         child: Text("Upload"),
+                                                       ),
+                                                    //   Container(height: 10,width: 1,color: Colors.white,),
+
+                                                      /// Container(height: 10,width: 1,color: Colors.white,),
+
 
                                                      ]
                                                  ),
 
                                           ),
                                           Container(
-                                            height: 250,
-                                            width: SizeConfig.screenWidth!*0.45,
+                                            height: 280,
+                                            width:width2-550,
+
                                             child: TabBarView(
                                             controller: _tabControllers,
                                             children: [
@@ -364,12 +394,143 @@ class _FooterPageSettingsState extends State<FooterPageSettings> with TickerProv
                                                   ],
                                                 ) ,
                                              ),
-                                              Container(),
+                                              //Container(),
                                               Align(
                                                 alignment:Alignment.topCenter,
-                                                child: Text('dsdcsghg'),
+                                                child: Padding(
+                                                  padding:  EdgeInsets.only(top: 20),
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius: BorderRadius.circular(5)
+                                                    ),
+                                                    child: HtmlEditor(
+                                                      controller: controller,
+                                                      htmlEditorOptions: HtmlEditorOptions(
+                                                        hint: 'Your text here...',
+                                                        shouldEnsureVisible: true,
+                                                        adjustHeightForKeyboard: false,
+                                                        autoAdjustHeight: false,
+
+                                                        //initialText: "<p>text content initial, if any</p>",
+                                                      ),
+                                                      htmlToolbarOptions: HtmlToolbarOptions(
+                                                        toolbarPosition: ToolbarPosition.aboveEditor, //by default
+                                                        toolbarType: ToolbarType.nativeScrollable, //by default
+                                                        defaultToolbarButtons: [
+                                                          StyleButtons(),
+                                                          FontSettingButtons(fontSizeUnit: false),
+                                                          FontButtons(clearAll: false),
+                                                          ColorButtons(),
+                                                          ListButtons(listStyles: false),
+                                                          ParagraphButtons(
+                                                              textDirection: false, lineHeight: false, caseConverter: false),
+
+                                                        ],
+                                                        onButtonPressed: (ButtonType type, bool? status,
+                                                            Function()? updateStatus) {
+                                                          return true;
+                                                        },
+                                                        onDropdownChanged: (DropdownType type, dynamic changed,
+                                                            Function(dynamic)? updateSelectedItem) {
+                                                          return true;
+                                                        },
+                                                        mediaLinkInsertInterceptor:
+                                                            (String url, InsertFileType type) {
+                                                          print(url);
+                                                          return true;
+                                                        },
+                                                        mediaUploadInterceptor:
+                                                            (PlatformFile file, InsertFileType type) async {
+                                                          print(file.name); //filename
+                                                          print(file.size); //size in bytes
+                                                          print(file.extension); //file extension (eg jpeg or mp4)
+                                                          return true;
+                                                        },
+                                                      ),
+                                                      otherOptions: OtherOptions(
+                                                          height: 230,
+                                                          decoration: BoxDecoration(
+                                                            color: Colors.white,
+                                                            borderRadius: BorderRadius.circular(5)
+                                                          )
+                                                      ),
+                                                      callbacks: Callbacks(onBeforeCommand: (String? currentHtml) {
+                                                        print('html before change is $currentHtml');
+                                                      }, onChangeContent: (String? changed) {
+                                                        print('content changed to $changed');
+                                                      }, onChangeCodeview: (String? changed) {
+                                                        print('code changed to $changed');
+                                                      }, onChangeSelection: (EditorSettings settings) {
+                                                        print('parent element is ${settings.parentElement}');
+                                                        print('font name is ${settings.fontName}');
+                                                      }, onDialogShown: () {
+                                                        print('dialog shown');
+                                                      }, onEnter: () {
+                                                        print('enter/return pressed');
+                                                      }, onFocus: () {
+                                                        print('editor focused');
+                                                      }, onBlur: () {
+                                                        print('editor unfocused');
+                                                      }, onBlurCodeview: () {
+                                                        print('codeview either focused or unfocused');
+                                                      }, onInit: () {
+                                                        print('init');
+                                                      },
+                                                          //this is commented because it overrides the default Summernote handlers
+                                                          /*onImageLinkInsert: (String? url) {
+                    print(url ?? "unknown url");
+                  },
+                  onImageUpload: (FileUpload file) async {
+                    print(file.name);
+                    print(file.size);
+                    print(file.type);
+                    print(file.base64);
+                  },*/
+                                                          onImageUploadError: (FileUpload? file, String? base64Str,
+                                                              UploadError error) {
+                                                            print(base64Str ?? '');
+                                                            if (file != null) {
+                                                              print(file.name);
+                                                              print(file.size);
+                                                              print(file.type);
+                                                            }
+                                                          }, onKeyDown: (int? keyCode) {
+                                                            print('$keyCode key downed');
+                                                            print(
+                                                                'current character count: ${controller.characterCount}');
+                                                          }, onKeyUp: (int? keyCode) {
+                                                            print('$keyCode key released');
+                                                          }, onMouseDown: () {
+                                                            print('mouse downed');
+                                                          }, onMouseUp: () {
+                                                            print('mouse released');
+                                                          }, onNavigationRequestMobile: (String url) {
+                                                            print(url);
+                                                            return NavigationActionPolicy.ALLOW;
+                                                          }, onPaste: () {
+                                                            print('pasted into editor');
+                                                          }, onScroll: () {
+                                                            print('editor scrolled');
+                                                          }),
+                                                      plugins: [
+                                                        SummernoteAtMention(
+                                                            getSuggestionsMobile: (String value) {
+                                                              var mentions = <String>['test1', 'test2', 'test3'];
+                                                              return mentions
+                                                                  .where((element) => element.contains(value))
+                                                                  .toList();
+                                                            },
+                                                            mentionsWeb: ['test1', 'test2', 'test3'],
+                                                            onSelect: (String value) {
+                                                              print(value);
+                                                            }),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
-                                              Container(),
+                                             // Container(),
                                               Align(
                                                 alignment:Alignment.topCenter,
                                                 child:Column(
@@ -408,6 +569,7 @@ class _FooterPageSettingsState extends State<FooterPageSettings> with TickerProv
                         ) ,
                       ),
                     ),
+                    //Block 3
                     Align(
                       alignment:Alignment.topCenter,
                       child: Container(
@@ -452,6 +614,7 @@ class _FooterPageSettingsState extends State<FooterPageSettings> with TickerProv
                         ) ,
                       ),
                     ),
+                    //Block 4
                     Align(
                       alignment:Alignment.topCenter,
                       child: Container(
