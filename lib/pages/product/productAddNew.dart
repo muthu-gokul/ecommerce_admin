@@ -4,6 +4,7 @@ import 'package:ecommerce_admin/model/categoryModel.dart';
 import 'package:ecommerce_admin/notifiers/productNotifier.dart';
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
 import 'package:ecommerce_admin/pages/brand/brandGrid.dart';
+import 'package:ecommerce_admin/widgets/addMoreTextFieldAnimation.dart';
 import 'package:ecommerce_admin/widgets/buttons/addBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/backBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
@@ -568,50 +569,16 @@ class _ProductAddNewState extends State<ProductAddNew> {
                               node.unfocus();
                             },
                             isTextField: false,
-                            widget: Container(
-                              child: Column(
-                                children: [
-                                  for(int i=0;i<highLightsList.length;i++)
-                                  Container(
-                                    margin: EdgeInsets.only(top: 10),
-                                    height:50,
-                                    // decoration: BoxDecoration(
-                                    //     borderRadius: BorderRadius.circular(5),
-                                    //     border: Border.all(color: addNewTextFieldBorder),
-                                    //     color: Colors.white
-                                    // ),
-                                    child: Row(
-                                      children: [
-                                        AddNewLabelTextField(
-                                          margin: EdgeInsets.only(left: 0),
-                                          width: SizeConfig.screenWidth!*0.5,
-                                          hintText: "Enter Highlights",
-                                          textEditingController: highLightsList[i],
-                                        ),
-                                        Spacer(),
-                                        i==0?Container():AddBtn(ontap: (){
-                                          setState(() {
-                                            highLightsList.removeAt(i);
-                                          });
-
-                                        },
-                                          color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
-                                          margin: EdgeInsets.only(right: 10,top: 0),
-                                          widget: Icon(Icons.clear,color: Colors.white,),
-                                        ),
-                                        Spacer(),
-                                        AddBtn(ontap: (){
-                                         addHighlights();
-                                        },
-                                          color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
-                                          margin: EdgeInsets.only(right: 10,top: 0),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            widget: AddMoreTextFieldAnimation(
+                                data: highLightsList,
+                                hintText: "Highlights",
+                                addCB: addHighlights,
+                                deleteCB: (i){
+                                  setState(() {
+                                    highLightsList.removeAt(i);
+                                  });
+                                }
+                            )
                         ),
 
                         //Add values

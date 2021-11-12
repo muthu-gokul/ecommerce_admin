@@ -15,6 +15,7 @@ import 'package:ecommerce_admin/model/frontCoverModel.dart';
 import 'package:ecommerce_admin/model/giftCouponsModel.dart';
 import 'package:ecommerce_admin/model/goodsReceivedModel/goodsReceivedAddModel.dart';
 import 'package:ecommerce_admin/model/goodsReceivedModel/goodsReceivedModel.dart';
+import 'package:ecommerce_admin/model/installationModel.dart';
 import 'package:ecommerce_admin/model/ordersList/ordersListModel.dart';
 import 'package:ecommerce_admin/model/paymentSettingsModel.dart';
 import 'package:ecommerce_admin/model/pincodeModel/pincodeModel.dart';
@@ -24,6 +25,7 @@ import 'package:ecommerce_admin/model/productStockModel.dart';
 import 'package:ecommerce_admin/model/purchaseModel/materialCategoryModel.dart';
 import 'package:ecommerce_admin/model/purchaseModel/purchaseGridModel.dart';
 import 'package:ecommerce_admin/model/purchaseModel/vendorHistoryModel.dart';
+import 'package:ecommerce_admin/model/ratingsModel.dart';
 import 'package:ecommerce_admin/model/refundModel.dart';
 import 'package:ecommerce_admin/model/returnProducts/returnProductsModel.dart';
 import 'package:ecommerce_admin/model/shippingCharge/shippingChargeModel.dart';
@@ -583,4 +585,61 @@ var t=[{"VendorId":4,"MaterialId":1539,"MaterialName":"Guest Rice","MaterialCate
     DeliveryChargeModel(amount: 50, to: 200, from: 0, createdAt: "02/11/21"),
     DeliveryChargeModel(amount: 45, to: 400, from: 200, createdAt: "03/11/21"),
   ];
+
+  //InstallationModel
+  List<InstallationModel> installationList=[
+    InstallationModel(Product: "AC", days: 2, amount: 43444, covered: "Lorem Ipasun", notCovered: "Enter into house"),
+    InstallationModel(Product: "AC", days: 2, amount: 43444, covered: "Lorem Ipasun", notCovered: "Enter into house"),
+    InstallationModel(Product: "AC", days: 2, amount: 43444, covered: "Lorem Ipasun", notCovered: "Enter into house"),
+    InstallationModel(Product: "AC", days: 2, amount: 43444, covered: "Lorem Ipasun", notCovered: "Enter into house"),
+    InstallationModel(Product: "AC", days: 2, amount: 43444, covered: "Lorem Ipasun", notCovered: "Enter into house"),
+    InstallationModel(Product: "AC", days: 2, amount: 43444, covered: "Lorem Ipasun", notCovered: "Enter into house"),
+    InstallationModel(Product: "AC", days: 2, amount: 43444, covered: "Lorem Ipasun", notCovered: "Enter into house"),
+  ];
+
+  //RatingsModel
+List<RatingsModel> ratings=[
+  RatingsModel(productName: "T shirt", rating: 4.7, noOfRatings: 14, noOfReviews: 5),
+  RatingsModel(productName: "T shirt", rating: 4.7, noOfRatings: 14, noOfReviews: 5),
+  RatingsModel(productName: "T shirt", rating: 4.7, noOfRatings: 14, noOfReviews: 5),
+  RatingsModel(productName: "T shirt", rating: 4.7, noOfRatings: 14, noOfReviews: 5),
+  RatingsModel(productName: "T shirt", rating: 4.7, noOfRatings: 14, noOfReviews: 5),
+  RatingsModel(productName: "T shirt", rating: 4.7, noOfRatings: 14, noOfReviews: 5),
+];
+
+
+
+  List<UserAccessModel> data=[];
+  List<dynamic> v=[
+    {"ModuleId":1,"ModuleName":"ManageUser","AccessUrl":"api","ModuleAction":"View","1":0,"2":1,"3":0,"4":0},
+    {"ModuleId":2,"ModuleName":"ManageUser","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":0,"3":0,"4":0},
+    {"ModuleId":3,"ModuleName":"UserAccess","AccessUrl":"api","ModuleAction":"View","1":1,"2":1,"3":0,"4":0},
+    {"ModuleId":4,"ModuleName":"UserAccess","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":0,"3":0,"4":0},
+    {"ModuleId":5,"ModuleName":"DashBoard","AccessUrl":"api","ModuleAction":"View","1":1,"2":0,"3":0,"4":0},
+    {"ModuleId":6,"ModuleName":"Sale","AccessUrl":"api","ModuleAction":"View","1":1,"2":0,"3":1,"4":1},
+    {"ModuleId":7,"ModuleName":"Sale","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":0,"3":1,"4":1},
+    {"ModuleId":8,"ModuleName":"Purchase","AccessUrl":"api","ModuleAction":"View","1":0,"2":1,"3":1,"4":1},
+    {"ModuleId":9,"ModuleName":"Purchase","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":0,"3":1,"4":0},{"ModuleId":10,"ModuleName":"GoodsReceived","AccessUrl":"api","ModuleAction":"View","1":0,"2":1,"3":1,"4":1},{"ModuleId":11,"ModuleName":"GoodsReceived","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":1,"3":1,"4":0},{"ModuleId":12,"ModuleName":"Production","AccessUrl":"api","ModuleAction":"View","1":0,"2":1,"3":1,"4":1},{"ModuleId":13,"ModuleName":"Production","AccessUrl":"api","ModuleAction":"Manage","1":0,"2":1,"3":1,"4":1},{"ModuleId":14,"ModuleName":"EmployeeMaster","AccessUrl":"api","ModuleAction":"View","1":0,"2":1,"3":1,"4":1},{"ModuleId":15,"ModuleName":"EmployeeMaster","AccessUrl":"api","ModuleAction":"Manage","1":0,"2":1,"3":1,"4":1},{"ModuleId":16,"ModuleName":"EmployeeAttendance","AccessUrl":"api","ModuleAction":"View","1":0,"2":1,"3":1,"4":1},{"ModuleId":17,"ModuleName":"EmployeeAttendance","AccessUrl":"api","ModuleAction":"Manage","1":0,"2":1,"3":1,"4":1},{"ModuleId":18,"ModuleName":"EmployeeAdvance","AccessUrl":"api","ModuleAction":"View","1":0,"2":1,"3":1,"4":1},{"ModuleId":19,"ModuleName":"EmployeeAdvance","AccessUrl":"api","ModuleAction":"Manage","1":0,"2":1,"3":1,"4":1},{"ModuleId":20,"ModuleName":"EmployeeSalary","AccessUrl":"api","ModuleAction":"View","1":0,"2":1,"3":1,"4":1},{"ModuleId":21,"ModuleName":"EmployeeSalary","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":1,"3":1,"4":1},{"ModuleId":22,"ModuleName":"MachineManagement","AccessUrl":"api","ModuleAction":"View","1":1,"2":1,"3":1,"4":1},{"ModuleId":23,"ModuleName":"MachineManagement","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":1,"3":1,"4":1},{"ModuleId":24,"ModuleName":"Invoice","AccessUrl":"api","ModuleAction":"View","1":1,"2":1,"3":1,"4":1},{"ModuleId":25,"ModuleName":"Invoice","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":1,"3":1,"4":1},{"ModuleId":26,"ModuleName":"Payment","AccessUrl":"api","ModuleAction":"View","1":1,"2":1,"3":1,"4":1},{"ModuleId":27,"ModuleName":"Payment","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":1,"3":1,"4":1},{"ModuleId":28,"ModuleName":"Report","AccessUrl":"api","ModuleAction":"View","1":1,"2":1,"3":1,"4":1},{"ModuleId":29,"ModuleName":"Report","AccessUrl":"api","ModuleAction":"Export","1":1,"2":1,"3":1,"4":1},{"ModuleId":30,"ModuleName":"Settings","AccessUrl":"api","ModuleAction":"View","1":1,"2":1,"3":1,"4":1},{"ModuleId":31,"ModuleName":"Settings","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":1,"3":1,"4":1}];
+
+  addData(){
+    data.clear();
+    v.forEach((element) {
+      int index=data.indexWhere((ele) => ele.parent['ModuleName']==element['ModuleName']).toInt();
+      if(index==-1){
+        data.add(UserAccessModel(parent: element, children: [],isOpen: false));
+      }
+      else{
+        data[index].children.add(element);
+      }
+    });
+    notifyListeners();
+  }
+
+}
+
+class UserAccessModel{
+  Map parent;
+  List<dynamic> children;
+  bool isOpen;
+  UserAccessModel({required this.parent,required this.children,required this.isOpen});
 }

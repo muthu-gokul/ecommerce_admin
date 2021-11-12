@@ -4,15 +4,17 @@ import 'package:provider/provider.dart';
 class SaveBtn extends StatelessWidget {
   VoidCallback ontap;
   String title;
-  SaveBtn({required this.ontap,this.title="Save"});
+  double hei;
+  double wid;
+  SaveBtn({required this.ontap,this.title="Save",this.hei=50,this.wid=150});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: ontap,
       child: Container(
-        height: 50,
-        width: 150,
+        height: hei,
+        width: wid,
         decoration: BoxDecoration(
           color:  Provider.of<ThemeNotifier>(context,listen: false).loginBtn,
           borderRadius: BorderRadius.circular(50),

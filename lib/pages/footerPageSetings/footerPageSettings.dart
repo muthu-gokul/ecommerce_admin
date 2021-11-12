@@ -351,11 +351,8 @@ class _FooterPageSettingsState extends State<FooterPageSettings> with TickerProv
                                                          ),
                                                          child: Text("Upload"),
                                                        ),
-                                                    //   Container(height: 10,width: 1,color: Colors.white,),
-
+                                                       // Container(height: 10,width: 1,color: Colors.white,),
                                                       /// Container(height: 10,width: 1,color: Colors.white,),
-
-
                                                      ]
                                                  ),
 
@@ -390,7 +387,9 @@ class _FooterPageSettingsState extends State<FooterPageSettings> with TickerProv
                                                         width:SizeConfig.screenWidth!*0.45,
                                                         alignment: Alignment.centerRight,
                                                         padding: EdgeInsets.only(right: 90),
-                                                        child: Text("Add",style: TextStyle(fontSize: 18,fontFamily: 'RR',color:Color(0xffffffff)),)),
+                                                        child: Text("Add",style: TextStyle(fontSize: 18,fontFamily: 'RR',color:Color(0xffffffff)),
+                                                        )
+                                                    ),
                                                   ],
                                                 ) ,
                                              ),

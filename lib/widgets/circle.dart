@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 class Circle extends StatelessWidget {
   double hei;
   Color color;
-  Circle({required this.hei,required this.color});
+  Widget? widget;
+  List<BoxShadow> bs;
+  Circle({required this.hei,required this.color,this.widget,this.bs=const []});
 
   @override
   Widget build(BuildContext context) {
@@ -11,8 +13,10 @@ class Circle extends StatelessWidget {
       width: hei,
       decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: color
+          color: color,
+          boxShadow: bs
       ),
+      child: widget??Container(),
     );
   }
 }

@@ -9,6 +9,7 @@ import 'package:ecommerce_admin/pages/pincode/pincodeGrid.dart';
 import 'package:ecommerce_admin/pages/product/productHome.dart';
 import 'package:ecommerce_admin/pages/profile.dart';
 import 'package:ecommerce_admin/pages/purchase/purchaseGrid.dart';
+import 'package:ecommerce_admin/pages/ratingsReviews/ratingsReviewsGrid.dart';
 import 'package:ecommerce_admin/pages/returnProducts/returnProductGrid.dart';
 import 'package:ecommerce_admin/pages/settings/uomSettings.dart';
 import 'package:ecommerce_admin/pages/shippingCharges/shippingChargesGrid.dart';
@@ -34,6 +35,8 @@ import 'featuredBrand/featuredBrandGrid.dart';
 import 'footerPageSetings/footerPageSettings.dart';
 import 'frontCoverSlider/frontCoverGrid.dart';
 import 'giftCoupons/giftCouponsGrid.dart';
+import 'installationCharges/installationChargeGrid.dart';
+import 'manageUsers/manageUsersGrid.dart';
 import 'newVendorRequest/vendorRequestGrid.dart';
 import 'ordersList/ordersListGrid.dart';
 import 'paymentSettings/paymentSettingsGrid.dart';
@@ -44,6 +47,7 @@ import 'settings/companySettings.dart';
 import 'staffs/staffsGrid.dart';
 import 'topOffers/topOfferGrid.dart';
 import 'underAmount/underAmountGrid.dart';
+import 'userAccess/userAccess.dart';
 import 'vendor/vendorListGrid.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -93,6 +97,10 @@ class _HomePageState extends State<HomePage> {
    DrawerContentModel(img: "assets/icons/return.svg", title: "Add Size",  widget: Icon(Icons.format_size_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
    DrawerContentModel(img: "assets/icons/return.svg", title: "Delivery Boys",  widget: Icon(Icons.delivery_dining_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
    DrawerContentModel(img: "assets/icons/return.svg", title: "Delivery Charge",  widget: Icon(Icons.delivery_dining_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/icons/return.svg", title: "Installation Charge",  widget: Icon(Icons.attach_money,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/icons/return.svg", title: "Ratings & Reviews",  widget: Icon(Icons.rate_review,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Manage Users",rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "User Access",rightPadd: 15,imgHeight: 25,),
  ];
 
 
@@ -355,7 +363,11 @@ class _HomePageState extends State<HomePage> {
                       menuIndex==34?ColorGrid():
                       menuIndex==35?SizeGrid():
                       menuIndex==36?DeliveryBoysGrid():
-                      menuIndex==37?DeliveryChargeGrid()
+                      menuIndex==37?DeliveryChargeGrid():
+                      menuIndex==38?InstallationChargesGird():
+                      menuIndex==39?RatingsReviewsGrid():
+                      menuIndex==40?ManageUsersGird():
+                      menuIndex==41?UserAcessGrid()
                           :Container()
 
                     ],
