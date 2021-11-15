@@ -13,8 +13,11 @@ class OverLayPopUp extends StatefulWidget {
  bool isToJson;
  String propertyName;
  String hinttext;
+ CrossAxisAlignment crossAxisAlignment;
+ bool isEnable;
  OverLayPopUp({required this.ontap,required this.width,required this.selectedValue,required this.showPopUp,
- required this.data,required this.onitemTap,required this.isToJson,this.propertyName="",required this.hinttext});
+ required this.data,required this.onitemTap,required this.isToJson,this.propertyName="",required this.hinttext,
+ this.crossAxisAlignment=CrossAxisAlignment.center,this.isEnable=true});
 
   @override
   State<OverLayPopUp> createState() => _OverLayPopUpState();
@@ -24,18 +27,22 @@ class _OverLayPopUpState extends State<OverLayPopUp> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: widget.crossAxisAlignment,
       children: [
         SizedBox(height: 10,),
         GestureDetector(
           onTap:widget.ontap,
-          child: Container(
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 200),
+            curve: Curves.easeIn,
             height: 50,
             width: widget.width-20,
             // margin: paddTextFieldHeader,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-              border: Border.all(color: addNewTextFieldBorder),
-              color: Colors.white,
+              //border: Border.all(color: widget.isEnable?addNewTextFieldBorder:Color(0xffC5C5C5),),
+              border: Border.all(color:addNewTextFieldBorder),
+              color: widget.isEnable?Colors.white:disableColor,
             ),
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.only(left: 15),

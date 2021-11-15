@@ -67,6 +67,9 @@ class AddNewLabelTextField extends StatelessWidget {
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color:addNewTextFieldFocusBorder)
           ),
+          disabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color:addNewTextFieldFocusBorder)
+          ),
           labelText: labelText,
            hintText: hintText,
 
@@ -127,6 +130,9 @@ class AddNewLabelTextField extends StatelessWidget {
                 borderSide: BorderSide(color: addNewTextFieldBorder)
             ),
             focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color:addNewTextFieldFocusBorder)
+            ),
+            disabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color:addNewTextFieldFocusBorder)
             ),
             labelText: labelText,

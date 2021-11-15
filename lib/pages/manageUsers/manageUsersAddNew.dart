@@ -5,10 +5,12 @@ import 'package:ecommerce_admin/notifiers/productNotifier.dart';
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
 import 'package:ecommerce_admin/pages/brand/brandGrid.dart';
 import 'package:ecommerce_admin/pages/product/productAddNew.dart';
+import 'package:ecommerce_admin/pages/profile.dart';
 import 'package:ecommerce_admin/widgets/buttons/addBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/backBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/swtich.dart';
+import 'package:ecommerce_admin/widgets/circleProfile.dart';
 import 'package:ecommerce_admin/widgets/customOverLayPopUp.dart';
 import 'package:ecommerce_admin/widgets/customPopUp.dart';
 import 'package:ecommerce_admin/widgets/customTextField.dart';
@@ -74,47 +76,7 @@ class _ManageUsersAddNewState extends State<ManageUsersAddNew> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 20,),
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Stack(
-                          children: [
-                            Container(
-                              height: 150,
-                              width: 150,
-                              margin: EdgeInsets.only(left: 150),
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                  border: Border.all(color: th.primaryColor3,width: 3.5),
-                                  //  color: AppTheme.yellowColor,
-                                  boxShadow: [
-                                    // BoxShadow(
-                                    //   color: AppTheme.yellowColor.withOpacity(0.4),
-                                    //   spreadRadius: 1,
-                                    //   blurRadius: 5,
-                                    //   offset: Offset(1, 8), // changes position of shadow
-                                    // ),
-                                  ]
-                              ),
-                              child:Image.asset("assets/images/avatar.png",fit: BoxFit.cover,),
-                            ),
-                            Positioned(
-                                bottom: 0,
-                                right:15,
-                                child: Container(
-                                    height: 35,
-                                    width: 35,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.cyanAccent
-                                    ),
-                                    child: Icon(Icons.edit_outlined,color: Colors.black,size: 20,)
-                                )
-                            )
-                          ],
-                        ),
-                      ),
+                      ProfilePic(),
                       SizedBox(height: 20,),
 
 

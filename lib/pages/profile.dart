@@ -1,9 +1,13 @@
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
+import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
+import 'package:ecommerce_admin/widgets/circleProfile.dart';
+import 'package:ecommerce_admin/widgets/customOverLayPopUp.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scutiwidgets/size.dart';
 
 import '../constants.dart';
+import 'product/productAddNew.dart';
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
 
@@ -13,9 +17,19 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   late double width;
+  bool showProductDropDown=false;
+  String selectedProduct="";
+
+  bool showRegionDropDown=false;
+  String selectedRegion="";
+  List<String> region=["Chennai","Bangalore","AAvadi"];
+
+  bool isEdit=false;
+  List<bool> validationList= List<bool>.generate(3, (i) => false);
   @override
   Widget build(BuildContext context) {
     width=SizeConfig.screenWidth!-140;
+    final node=FocusScope.of(context);
     return Consumer<ThemeNotifier>(
       builder: (context,th,child)=> Container(
         height: SizeConfig.screenHeight!-50,
@@ -24,8 +38,9 @@ class _ProfileState extends State<Profile> {
         padding: EdgeInsets.only(left: 20,right: 20),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
+            /*Container(
               width: width*0.32,
               height: SizeConfig.screenHeight!-70,
               decoration: BoxDecoration(
@@ -114,6 +129,187 @@ class _ProfileState extends State<Profile> {
                     ],
                   )
                 ],
+              ),
+            ),*/
+            Container(
+              width: 500,
+              height: SizeConfig.screenHeight!-70,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(5),
+                boxShadow: [
+                  BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                      blurRadius: 10,
+                      spreadRadius: 1,
+                      offset: Offset(0,0)
+                  )
+                ]
+              ),
+              child: Theme(
+                data: glowTransparent(context),
+                child: ListView(
+                  children: [
+                    SizedBox(height: 20,),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: GestureDetector(
+                        onTap: (){
+                          setState(() {
+                            isEdit=!isEdit;
+                          });
+                        },
+                        child: Container(
+                            height: 50,
+                            width: 50,
+                            margin: EdgeInsets.only(right: 20),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: th.primaryColor2
+                            ),
+                            child: Icon(
+                              isEdit?Icons.clear:Icons.edit_outlined,
+                              color: Colors.white,size: 25,
+                            )
+                        ),
+                      ),
+                    ),
+
+                    ProfilePic(
+                      margin: EdgeInsets.only(left: 0),
+                      alignment: Alignment.topCenter,
+                    ),
+
+                    ProductTextField(
+                      width: textFormWidth,
+                      title: "First Name",
+                      validation: validationList[1],
+                      isEnable: isEdit,
+                      onComplete: (){
+                        node.unfocus();
+                      },
+
+                    ),
+                    SizedBox(height: 20,),
+                    ProductTextField(
+                      width: textFormWidth,
+                      title: "Last Name",
+                      isEnable: isEdit,
+                      validation: validationList[1],
+                      onComplete: (){
+                        node.unfocus();
+                      },
+
+                    ),
+                    SizedBox(height: 20,),
+                    ProductTextField(
+                      width: textFormWidth,
+                      title: "Contact Number",
+                      validation: validationList[1],
+                      isEnable: isEdit,
+                      onComplete: (){
+                        node.unfocus();
+                      },
+                    ),
+                    SizedBox(height: 20,),
+                    ProductTextField(
+                      width: textFormWidth,
+                      title: "Email",
+                      isEnable: isEdit,
+                      validation: validationList[1],
+                      onComplete: (){
+                        node.unfocus();
+                      },
+                    ),
+                    SizedBox(height: 20,),
+                    ProductTextField(
+                      width: textFormWidth,
+                      title: "User Group",
+                      validation: validationList[1],
+                      // textEditingController: role,
+                      onComplete: (){},
+                      isTextField: false,
+                      widget: OverLayPopUp(
+                        ontap: (){
+                          if(isEdit){
+                            setState(() {
+                              showProductDropDown=!showProductDropDown;
+                            });
+                          }
+
+                        },
+                        isEnable: isEdit,
+                        width: textFormWidth+20,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        hinttext: "Select User Group",
+                        selectedValue: selectedProduct,
+                        showPopUp: showProductDropDown,
+                        data: ["Super Admin","Admin","General User"],
+                        onitemTap: (i){
+                          setState(() {
+                            showProductDropDown=false;
+                            if(i==0){
+                              selectedProduct="Super Admin";
+                            }
+                            else if(i==1){
+                              selectedProduct="Admin";
+                            }
+                            else{
+                              selectedProduct="General User";
+                            }
+                          });
+                        },
+                        isToJson: false,
+                      ),
+                    ),
+                    SizedBox(height: 20,),
+                    ProductTextField(
+                      width: textFormWidth,
+                      title: "Region",
+                      validation: validationList[1],
+                      // textEditingController: role,
+                      onComplete: (){},
+                      isTextField: false,
+                      widget: OverLayPopUp(
+                        ontap: (){
+                          if(isEdit){
+                            setState(() {
+                              showRegionDropDown=!showRegionDropDown;
+                            });
+                          }
+
+                        },
+                        width: textFormWidth+20,
+                        isEnable: isEdit,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        hinttext: "Select Region",
+                        selectedValue: selectedRegion,
+                        showPopUp: showRegionDropDown,
+                        data: region,
+                        onitemTap: (i){
+                          setState(() {
+                            showRegionDropDown=false;
+                            selectedRegion=region[i];
+                          });
+                        },
+                        isToJson: false,
+                      ),
+                    ),
+
+
+                    SizedBox(height: 50,),
+                    isEdit?Container(
+                      width:(textFormWidth+(40)),
+                      alignment: Alignment.center,
+                      child: SaveBtn(ontap: (){
+                        setState(() {
+                          isEdit=false;
+                        });
+                      }),
+                    ):Container(),
+                    SizedBox(height: 50,),
+                  ],
+                ),
               ),
             ),
           ],

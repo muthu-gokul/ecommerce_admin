@@ -619,14 +619,37 @@ List<RatingsModel> ratings=[
     {"ModuleId":6,"ModuleName":"Sale","AccessUrl":"api","ModuleAction":"View","1":1,"2":0,"3":1,"4":1},
     {"ModuleId":7,"ModuleName":"Sale","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":0,"3":1,"4":1},
     {"ModuleId":8,"ModuleName":"Purchase","AccessUrl":"api","ModuleAction":"View","1":0,"2":1,"3":1,"4":1},
-    {"ModuleId":9,"ModuleName":"Purchase","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":0,"3":1,"4":0},{"ModuleId":10,"ModuleName":"GoodsReceived","AccessUrl":"api","ModuleAction":"View","1":0,"2":1,"3":1,"4":1},{"ModuleId":11,"ModuleName":"GoodsReceived","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":1,"3":1,"4":0},{"ModuleId":12,"ModuleName":"Production","AccessUrl":"api","ModuleAction":"View","1":0,"2":1,"3":1,"4":1},{"ModuleId":13,"ModuleName":"Production","AccessUrl":"api","ModuleAction":"Manage","1":0,"2":1,"3":1,"4":1},{"ModuleId":14,"ModuleName":"EmployeeMaster","AccessUrl":"api","ModuleAction":"View","1":0,"2":1,"3":1,"4":1},{"ModuleId":15,"ModuleName":"EmployeeMaster","AccessUrl":"api","ModuleAction":"Manage","1":0,"2":1,"3":1,"4":1},{"ModuleId":16,"ModuleName":"EmployeeAttendance","AccessUrl":"api","ModuleAction":"View","1":0,"2":1,"3":1,"4":1},{"ModuleId":17,"ModuleName":"EmployeeAttendance","AccessUrl":"api","ModuleAction":"Manage","1":0,"2":1,"3":1,"4":1},{"ModuleId":18,"ModuleName":"EmployeeAdvance","AccessUrl":"api","ModuleAction":"View","1":0,"2":1,"3":1,"4":1},{"ModuleId":19,"ModuleName":"EmployeeAdvance","AccessUrl":"api","ModuleAction":"Manage","1":0,"2":1,"3":1,"4":1},{"ModuleId":20,"ModuleName":"EmployeeSalary","AccessUrl":"api","ModuleAction":"View","1":0,"2":1,"3":1,"4":1},{"ModuleId":21,"ModuleName":"EmployeeSalary","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":1,"3":1,"4":1},{"ModuleId":22,"ModuleName":"MachineManagement","AccessUrl":"api","ModuleAction":"View","1":1,"2":1,"3":1,"4":1},{"ModuleId":23,"ModuleName":"MachineManagement","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":1,"3":1,"4":1},{"ModuleId":24,"ModuleName":"Invoice","AccessUrl":"api","ModuleAction":"View","1":1,"2":1,"3":1,"4":1},{"ModuleId":25,"ModuleName":"Invoice","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":1,"3":1,"4":1},{"ModuleId":26,"ModuleName":"Payment","AccessUrl":"api","ModuleAction":"View","1":1,"2":1,"3":1,"4":1},{"ModuleId":27,"ModuleName":"Payment","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":1,"3":1,"4":1},{"ModuleId":28,"ModuleName":"Report","AccessUrl":"api","ModuleAction":"View","1":1,"2":1,"3":1,"4":1},{"ModuleId":29,"ModuleName":"Report","AccessUrl":"api","ModuleAction":"Export","1":1,"2":1,"3":1,"4":1},{"ModuleId":30,"ModuleName":"Settings","AccessUrl":"api","ModuleAction":"View","1":1,"2":1,"3":1,"4":1},{"ModuleId":31,"ModuleName":"Settings","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":1,"3":1,"4":1}];
+    {"ModuleId":9,"ModuleName":"Purchase","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":0,"3":1,"4":0},
+    {"ModuleId":10,"ModuleName":"GoodsReceived","AccessUrl":"api","ModuleAction":"View","1":0,"2":1,"3":1,"4":1},
+    {"ModuleId":11,"ModuleName":"GoodsReceived","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":1,"3":1,"4":0},
+    {"ModuleId":12,"ModuleName":"Production","AccessUrl":"api","ModuleAction":"View","1":0,"2":1,"3":1,"4":1},
+    {"ModuleId":13,"ModuleName":"Production","AccessUrl":"api","ModuleAction":"Manage","1":0,"2":1,"3":1,"4":1},
+    {"ModuleId":14,"ModuleName":"EmployeeMaster","AccessUrl":"api","ModuleAction":"View","1":0,"2":1,"3":1,"4":1},
+    {"ModuleId":15,"ModuleName":"EmployeeMaster","AccessUrl":"api","ModuleAction":"Manage","1":0,"2":1,"3":1,"4":1},
+    {"ModuleId":16,"ModuleName":"EmployeeAttendance","AccessUrl":"api","ModuleAction":"View","1":0,"2":1,"3":1,"4":1},
+    {"ModuleId":17,"ModuleName":"EmployeeAttendance","AccessUrl":"api","ModuleAction":"Manage","1":0,"2":1,"3":1,"4":1},
+    {"ModuleId":18,"ModuleName":"EmployeeAdvance","AccessUrl":"api","ModuleAction":"View","1":0,"2":1,"3":1,"4":1},
+    {"ModuleId":19,"ModuleName":"EmployeeAdvance","AccessUrl":"api","ModuleAction":"Manage","1":0,"2":1,"3":1,"4":1},
+    {"ModuleId":20,"ModuleName":"EmployeeSalary","AccessUrl":"api","ModuleAction":"View","1":0,"2":1,"3":1,"4":1},
+    {"ModuleId":21,"ModuleName":"EmployeeSalary","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":1,"3":1,"4":1},
+    {"ModuleId":22,"ModuleName":"MachineManagement","AccessUrl":"api","ModuleAction":"View","1":1,"2":1,"3":1,"4":1},
+    {"ModuleId":23,"ModuleName":"MachineManagement","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":1,"3":1,"4":1},
+    {"ModuleId":24,"ModuleName":"Invoice","AccessUrl":"api","ModuleAction":"View","1":1,"2":1,"3":1,"4":1},
+    {"ModuleId":25,"ModuleName":"Invoice","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":1,"3":1,"4":1},
+    {"ModuleId":26,"ModuleName":"Payment","AccessUrl":"api","ModuleAction":"View","1":1,"2":1,"3":1,"4":1},
+    {"ModuleId":27,"ModuleName":"Payment","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":1,"3":1,"4":1},
+    {"ModuleId":28,"ModuleName":"Report","AccessUrl":"api","ModuleAction":"View","1":1,"2":1,"3":1,"4":1},
+    {"ModuleId":29,"ModuleName":"Report","AccessUrl":"api","ModuleAction":"Export","1":1,"2":1,"3":1,"4":1},
+    {"ModuleId":30,"ModuleName":"Settings","AccessUrl":"api","ModuleAction":"View","1":1,"2":1,"3":1,"4":1},
+    {"ModuleId":31,"ModuleName":"Settings","AccessUrl":"api","ModuleAction":"Manage","1":1,"2":1,"3":1,"4":1}
+    ];
 
   addData(){
     data.clear();
     v.forEach((element) {
       int index=data.indexWhere((ele) => ele.parent['ModuleName']==element['ModuleName']).toInt();
       if(index==-1){
-        data.add(UserAccessModel(parent: element, children: [],isOpen: false));
+        data.add(UserAccessModel(parent: element, children: [],isOpen: true));
       }
       else{
         data[index].children.add(element);
