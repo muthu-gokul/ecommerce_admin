@@ -60,9 +60,9 @@ class _CardClassificationAddState extends State<CardClassificationAdd> {
             width: SizeConfig.screenWidth,
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: cA1,
                 children: [
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Card Name",
@@ -72,34 +72,7 @@ class _CardClassificationAddState extends State<CardClassificationAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
-                  // ProductTextField(
-                  //   width: textFormWidth,
-                  //   title: "Category Type:",
-                  //   validation: validationList[1],
-                  //   onComplete: (){},
-                  //   isTextField: false,
-                  //   widget: OverLayPopUp(
-                  //     ontap: (){
-                  //       setState(() {
-                  //         showSubCategoryDropDown=!showSubCategoryDropDown;
-                  //       });
-                  //     },
-                  //     width: textFormWidth,
-                  //     hinttext: "Select Category Type",
-                  //     selectedValue: selectedSubCategory,
-                  //     showPopUp: showSubCategoryDropDown,
-                  //     data: pn.categoryDropDownList,
-                  //     onitemTap: (i){
-                  //       setState(() {
-                  //         showSubCategoryDropDown=false;
-                  //         selectedSubCategory=pn.categoryDropDownList[i];
-                  //       });
-                  //     },
-                  //     isToJson: false,
-                  //   ),
-                  // ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Bank Name",
@@ -109,12 +82,24 @@ class _CardClassificationAddState extends State<CardClassificationAdd> {
                         node.unfocus();
                       }
                   ),
-
-                  PickImage(image: image, title: "Select Slider",cb: (v){
-                    setState(() {
-                      image=v;
-                    });
-                  },),
+                  SizedBox(height: inBetweenHeight+10,),
+                  ProductTextField(
+                    width: textFormWidth,
+                    title: "Select Logo",
+                    validation: validationList[2],
+                    isTextField: false,
+                    onComplete: (){
+                      node.unfocus();
+                    },
+                    crossAxisAlignment: imageUploadCA,
+                    showValidation: true,
+                    widget:PickImage(image: image, title: "Select Logo",cb: (v){
+                      setState(() {
+                        image=v;
+                      });
+                    },),
+                  ),
+                  SizedBox(height: 50,),
                   Container(
                     alignment:Alignment.center,
                     child: SaveBtn(

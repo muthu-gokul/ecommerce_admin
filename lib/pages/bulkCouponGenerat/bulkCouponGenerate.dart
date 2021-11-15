@@ -164,7 +164,7 @@ class _BulkCouponGenerateState extends State<BulkCouponGenerate> {
                   SizedBox(height: 15,),
                   SizedBox(height: 10,),
                   ProductTextField(
-                      width: textFormWidth+20,
+                      width: textFormWidth,
                       title: "Coupon Description:",
                       validation: validationList[1],
                       onComplete: (){
@@ -221,8 +221,11 @@ class _BulkCouponGenerateState extends State<BulkCouponGenerate> {
                                     ),
                                   ),
                                   SizedBox(width: 10,),
-                                  Text("Check this box if the coupons is valid. Free shipping is must be enabled on the shipping cart.  ",
-                                    style: TextStyle(color: Color(0xFF2E2E2E),fontSize: 18,fontFamily: 'RR'),
+                                  Container(
+                                    width: textFormWidth,
+                                    child: Text("Check this box if the coupons is valid. Free shipping is must be enabled on the shipping cart.  ",
+                                      style: TextStyle(color: Color(0xFF2E2E2E),fontSize: 18,fontFamily: 'RR'),
+                                    ),
                                   )
                                 ],
                               ),
@@ -246,8 +249,9 @@ class _BulkCouponGenerateState extends State<BulkCouponGenerate> {
                           showCategoryDropDown=!showCategoryDropDown;
                         });
                       },
-                      width: textFormWidth,
+                      width: textFormWidth+20,
                       hinttext: "Select Coupon Type",
+                      crossAxisAlignment: cA2,
                       selectedValue: selectedCategory,
                       showPopUp: showCategoryDropDown,
                       data: pn.categoryDropDownList,
@@ -274,8 +278,9 @@ class _BulkCouponGenerateState extends State<BulkCouponGenerate> {
                           showSubCategoryDropDown=!showSubCategoryDropDown;
                         });
                       },
-                      width: textFormWidth,
+                      width: textFormWidth+20,
                       hinttext: "Select  Coupon Valid to",
+                      crossAxisAlignment: cA2,
                       selectedValue: selectedSubCategory,
                       showPopUp: showSubCategoryDropDown,
                       data: pn.categoryDropDownList,
@@ -299,7 +304,7 @@ class _BulkCouponGenerateState extends State<BulkCouponGenerate> {
                   ),
                   SizedBox(height: 10,),
                   ProductTextField(
-                      width: textFormWidth+20,
+                      width: textFormWidth,
                       title: "Office Address",
                       validation: validationList[1],
                       textEditingController: address,
@@ -309,7 +314,7 @@ class _BulkCouponGenerateState extends State<BulkCouponGenerate> {
                   ),
                   SizedBox(height: 10,),
                   ProductTextField(
-                    width: textFormWidth+20,
+                    width: textFormWidth,
                     title: "Coupon End From",
                     validation: validationList[1],
                     textEditingController: district,
@@ -324,44 +329,40 @@ class _BulkCouponGenerateState extends State<BulkCouponGenerate> {
                       child: Text("Coupon Code Format:",style: ts18(grey1,fontsize: 30),)
                   ),
                   SizedBox(height: 10,),
-                  Row(
-                    children: [
-                      ProductTextField(
-                          width: textFormWidth-20,
-                          title: "Prefix ",
-                          validation: validationList[1],
+                  ProductTextField(
+                      width: textFormWidth-20,
+                      title: "Prefix ",
+                      validation: validationList[1],
 
-                          onComplete: (){
-                            node.unfocus();
-                          }
-                      ),
-                      ProductTextField(
-                          width: textFormWidth-20,
-                          title: "Coupon_ Code",
-                          validation: validationList[1],
-                          onComplete: (){
-                            node.unfocus();
-                          }
-                      ),
-                      SizedBox(height: 10,),
-                      ProductTextField(
-                          width: textFormWidth-20,
-                          title: "Suffix ",
-                          validation: validationList[1],
-                          onComplete: (){
-                            node.unfocus();
-                          }
-                      ),
-                    ],
+                      onComplete: (){
+                        node.unfocus();
+                      }
                   ),
-                  SizedBox(height: 20,),
+                  ProductTextField(
+                      width: textFormWidth-20,
+                      title: "Coupon_ Code",
+                      validation: validationList[1],
+                      onComplete: (){
+                        node.unfocus();
+                      }
+                  ),
+                  ProductTextField(
+                      width: textFormWidth-20,
+                      title: "Suffix ",
+                      validation: validationList[1],
+                      onComplete: (){
+                        node.unfocus();
+                      }
+                  ),
+
+                  SizedBox(height: 50,),
                   Container(
                     alignment:Alignment.center,
                     child: SaveBtn(
                       ontap: (){},
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 50,),
                 ],
               ),
             ),

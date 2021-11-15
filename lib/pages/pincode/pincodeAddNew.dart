@@ -66,9 +66,9 @@ class _PincodeAddNewState extends State<PincodeAddNew> {
                 width: SizeConfig.screenWidth,
                 child: SingleChildScrollView(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: cA1,
                     children: [
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
 
 
                       ProductTextField(
@@ -82,7 +82,7 @@ class _PincodeAddNewState extends State<PincodeAddNew> {
                         regExp: digitRegEx,
                         textInputType: TextInputType.number,
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
                       ProductTextField(
                         width: textFormWidth,
                         title: "Pincode To",
@@ -94,7 +94,7 @@ class _PincodeAddNewState extends State<PincodeAddNew> {
                         regExp: digitRegEx,
                         textInputType: TextInputType.number,
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
                       ProductTextField(
                         width: textFormWidth,
                         title: "No of Delivery Days",
@@ -105,7 +105,7 @@ class _PincodeAddNewState extends State<PincodeAddNew> {
                         regExp: digitRegEx,
                         textInputType: TextInputType.number,
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
 
 
 

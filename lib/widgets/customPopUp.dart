@@ -22,20 +22,21 @@ class CustomPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (BuildContext ctx1) =>
+    return
+      // Builder(
+      // builder: (BuildContext ctx1) =>
           GestureDetector(
             onTap: (){
               showPopover(
                 barrierColor: Colors.transparent,
-                context: ctx1,
+                context: context,
                 transitionDuration: const Duration(milliseconds: 150),
-                bodyBuilder: (context) => ListView.builder(
+                bodyBuilder: (c) => ListView.builder(
                   itemCount: data!.length,
                   itemBuilder: (ctx,index){
                     return   InkWell(
                       onTap: () {
-                        Navigator.pop(ctx1);
+                        Navigator.pop(ctx);
                         onSelect!(data![index]);
 
                         //  onSelect!(data![index]);
@@ -111,7 +112,7 @@ class CustomPopup extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-    );
+          );
+    //);
   }
 }

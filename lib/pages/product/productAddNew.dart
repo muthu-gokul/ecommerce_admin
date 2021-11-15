@@ -1055,10 +1055,11 @@ class ProductTextField extends StatelessWidget {
   Widget? suffixIcon;
   bool isEnable;
   CrossAxisAlignment crossAxisAlignment;
+  bool showValidation;
   ProductTextField({required this.width,this.titleWidth=250,required this.title,required this.validation, this.textEditingController,
   required this.onComplete,this.isTextField=true,this.widget,this.leftPadding=20,this.regExp='[A-Za-z0-9@., ]',this.textInputType=TextInputType.emailAddress,
   this.textLength=null,this.maxlines=1,this.titleColor=const Color(0xFF505050),this.suffixIcon,this.isEnable=true,
-  this.crossAxisAlignment=CrossAxisAlignment.center});
+  this.crossAxisAlignment=CrossAxisAlignment.center,this.showValidation=true});
 
   @override
   Widget build(BuildContext context) {
@@ -1075,7 +1076,31 @@ class ProductTextField extends StatelessWidget {
             textColor: titleColor,
             width: titleWidth,
           ),
-          isTextField?AddNewLabelTextField(
+          showValidation?Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              isTextField?AddNewLabelTextField(
+                margin:maxlines==null ?EdgeInsets.only(right: 20,top: 10):maxlines!>1?EdgeInsets.only(right: 0,top: 10): marginAddNewTextField2,
+                width: width,
+                textEditingController: textEditingController,
+                hintText: title,
+                regExp: regExp,
+                textInputType: textInputType,
+                textLength: textLength,
+                maxlines: maxlines,
+                suffixIcon: suffixIcon,
+                isEnabled: isEnable,
+                ontap: (){
+
+                },
+                onChange: (v){
+
+                },
+                onEditComplete:onComplete,
+              ):widget!,
+              validation?ValidationErrorText(title: validationText,padd: paddTextFieldHeader2,):Container(),
+            ],
+          ):isTextField?AddNewLabelTextField(
             margin:maxlines==null ?EdgeInsets.only(right: 20,top: 10):maxlines!>1?EdgeInsets.only(right: 20,top: 10): marginAddNewTextField2,
             width: width,
             textEditingController: textEditingController,
@@ -1094,7 +1119,7 @@ class ProductTextField extends StatelessWidget {
             },
             onEditComplete:onComplete,
           ):widget!,
-          validation?ValidationErrorText(title: validationText,padd: paddTextFieldHeader2,):Container(),
+
         ],
       ),
     );

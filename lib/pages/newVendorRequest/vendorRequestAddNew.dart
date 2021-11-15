@@ -5,6 +5,7 @@ import 'package:ecommerce_admin/widgets/buttons/backBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/swtich.dart';
 import 'package:ecommerce_admin/widgets/customOverLayPopUp.dart';
+import 'package:ecommerce_admin/widgets/customPopUp.dart';
 import 'package:ecommerce_admin/widgets/customTextField.dart';
 import 'package:ecommerce_admin/widgets/pickImage.dart';
 import 'package:flutter/material.dart';
@@ -98,21 +99,32 @@ class _VendorRequestAddState extends State<VendorRequestAdd> {
             width: SizeConfig.screenWidth,
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: cA1,
                 children: [
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   Container(
                       padding:  EdgeInsets.only(left: 10,bottom: 10),
-                      alignment: Alignment.centerLeft,
+                   //   alignment: Alignment.centerLeft,
                       child: Text("Basic Information",style: ts18(grey1,fontsize: 30),)
                   ),
-                  SizedBox(height: 10,),
-                  PickImage(image: image, title: "Select Slider",cb: (v){
-                    setState(() {
-                      image=v;
-                    });
-                  },),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
+                  ProductTextField(
+                    width: textFormWidth,
+                    title: "Select Image",
+                    validation: validationList[2],
+                    isTextField: false,
+                    onComplete: (){
+                      node.unfocus();
+                    },
+                    crossAxisAlignment: imageUploadCA,
+                    showValidation: true,
+                    widget:PickImage(image: image, title: "Select Image",cb: (v){
+                      setState(() {
+                        image=v;
+                      });
+                    },),
+                  ),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Vendor Name  ",
@@ -122,7 +134,7 @@ class _VendorRequestAddState extends State<VendorRequestAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "Vendor Type",
@@ -130,27 +142,21 @@ class _VendorRequestAddState extends State<VendorRequestAdd> {
                     textEditingController: vendorType,
                     onComplete: (){},
                     isTextField: false,
-                    widget: OverLayPopUp(
-                      ontap: (){
-                        setState(() {
-                          showCategoryDropDown=!showCategoryDropDown;
-                        });
-                      },
-                      width: textFormWidth,
-                      hinttext: "Select Vendor Type",
-                      selectedValue: selectedCategory,
-                      showPopUp: showCategoryDropDown,
+                    widget:  CustomPopup(
+                      hintText: "Select Vendor Type",
                       data: pn.categoryDropDownList,
-                      onitemTap: (i){
+                      selectedValue: selectedCategory,
+                      width:textFormWidth ,
+                      leftMargin: 0,
+                      edgeInsets: EdgeInsets.only(left: 0),
+                      onSelect: (v){
                         setState(() {
-                          showCategoryDropDown=false;
-                          selectedCategory=pn.categoryDropDownList[i];
+                          selectedCategory=v;
                         });
                       },
-                      isToJson: false,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Company Name ",
@@ -160,7 +166,7 @@ class _VendorRequestAddState extends State<VendorRequestAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "GST No",
@@ -170,7 +176,7 @@ class _VendorRequestAddState extends State<VendorRequestAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Email Id",
@@ -180,7 +186,7 @@ class _VendorRequestAddState extends State<VendorRequestAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Mobile Number",
@@ -190,13 +196,13 @@ class _VendorRequestAddState extends State<VendorRequestAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   Container(
                       padding:  EdgeInsets.only(left: 10,bottom: 10,top: 10),
-                      alignment: Alignment.centerLeft,
+                     // alignment: Alignment.centerLeft,
                       child: Text("Company Address",style: ts18(grey1,fontsize: 30),)
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Address",
@@ -206,7 +212,7 @@ class _VendorRequestAddState extends State<VendorRequestAdd> {
                         node.unfocus();
                       },maxlines: 3,
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "District",
@@ -216,7 +222,7 @@ class _VendorRequestAddState extends State<VendorRequestAdd> {
                       node.unfocus();
                     },
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "City",
@@ -226,7 +232,7 @@ class _VendorRequestAddState extends State<VendorRequestAdd> {
                       node.unfocus();
                     },
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "State",
@@ -236,7 +242,7 @@ class _VendorRequestAddState extends State<VendorRequestAdd> {
                       node.unfocus();
                     },
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "Pincode",
@@ -246,7 +252,7 @@ class _VendorRequestAddState extends State<VendorRequestAdd> {
                       node.unfocus();
                     },
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "Post Office",
@@ -256,13 +262,13 @@ class _VendorRequestAddState extends State<VendorRequestAdd> {
                       node.unfocus();
                     }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   Container(
                       padding:  EdgeInsets.only(left: 10,bottom: 10,top: 10),
-                      alignment: Alignment.centerLeft,
+                    //  alignment: Alignment.centerLeft,
                       child: Text("Company Settings",style: ts18(grey1,fontsize: 30),)
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "Company Category:",
@@ -270,27 +276,21 @@ class _VendorRequestAddState extends State<VendorRequestAdd> {
                     textEditingController: SCatg,
                     onComplete: (){},
                     isTextField: false,
-                    widget: OverLayPopUp(
-                      ontap: (){
-                        setState(() {
-                          showSubCategoryDropDown=!showSubCategoryDropDown;
-                        });
-                      },
-                      width: textFormWidth,
-                      hinttext: "Select Company Category",
-                      selectedValue: selectedSubCategory,
-                      showPopUp: showSubCategoryDropDown,
+                    widget:  CustomPopup(
+                      hintText: "Select Company Category",
                       data: pn.categoryDropDownList,
-                      onitemTap: (i){
+                      selectedValue: selectedCategory,
+                      width:textFormWidth ,
+                      leftMargin: 0,
+                      edgeInsets: EdgeInsets.only(left: 0),
+                      onSelect: (v){
                         setState(() {
-                          showSubCategoryDropDown=false;
-                          selectedSubCategory=pn.categoryDropDownList[i];
+                          selectedCategory=v;
                         });
                       },
-                      isToJson: false,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "Items",
@@ -298,27 +298,21 @@ class _VendorRequestAddState extends State<VendorRequestAdd> {
                     textEditingController:items,
                     onComplete: (){},
                     isTextField: false,
-                    widget: OverLayPopUp(
-                      ontap: (){
-                        setState(() {
-                          showBrandDropDown=!showBrandDropDown;
-                        });
-                      },
-                      width: textFormWidth,
-                      hinttext: "Select Items",
-                      selectedValue: selectedBrand,
-                      showPopUp: showBrandDropDown,
+                    widget: CustomPopup(
+                      hintText: "Select Items",
                       data: pn.categoryDropDownList,
-                      onitemTap: (i){
+                      selectedValue: selectedCategory,
+                      width:textFormWidth ,
+                      leftMargin: 0,
+                      edgeInsets: EdgeInsets.only(left: 0),
+                      onSelect: (v){
                         setState(() {
-                          showBrandDropDown=false;
-                          selectedBrand=pn.categoryDropDownList[i];
+                          selectedCategory=v;
                         });
                       },
-                      isToJson: false,
                     ),
                   ),
-                 SizedBox(height: 10,),
+                 SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Working Hours",
@@ -328,7 +322,7 @@ class _VendorRequestAddState extends State<VendorRequestAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Delivery slot",
@@ -338,7 +332,7 @@ class _VendorRequestAddState extends State<VendorRequestAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Spot Delivery slot",
@@ -348,7 +342,7 @@ class _VendorRequestAddState extends State<VendorRequestAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Preparing Days",
@@ -358,7 +352,7 @@ class _VendorRequestAddState extends State<VendorRequestAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Packing Charge",
@@ -368,89 +362,68 @@ class _VendorRequestAddState extends State<VendorRequestAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   Container(
                       padding:  EdgeInsets.only(left: 10,bottom: 10,top: 10),
-                      alignment: Alignment.centerLeft,
+                   //   alignment: Alignment.centerLeft,
                       child: Text("Delivery Options",style: ts18(grey1,fontsize: 30),)
                   ),
-                  SizedBox(height: 10,),
-                  Container(
-                    width: textFormWidth,
+                  SizedBox(height: inBetweenHeight,),
+                  ProductTextField(
+                      width: textFormWidth,
+                      title: "Delivery Method",
+                      validation: validationList[1],
+                      isTextField: false,
+                      onComplete: (){
+                        node.unfocus();
+                      },
+                      widget: CustomSwitch(value: true, onchange: (v){
 
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(width: 20,),
-                        TextFieldHeader(
-                          title: "Delivery Method",
-                          padd: paddTextFieldHeader2,
-                        ),
-                        Spacer(),
-                        CustomSwitch(value: true, onchange: (v){
-
-                        })
-                      ],
-                    ),
+                      }),
                   ),
-                  SizedBox(height: 10,),
-                  Container(
+
+                  SizedBox(height: inBetweenHeight,),
+                  ProductTextField(
                     width: textFormWidth,
+                    title: "Delivery Charge",
+                    validation: validationList[1],
+                    isTextField: false,
+                    onComplete: (){
+                      node.unfocus();
+                    },
+                    widget: CustomSwitch(value: true, onchange: (v){
 
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(width: 20,),
-                        TextFieldHeader(
-                          title: "Delivery Charge",
-                          padd: paddTextFieldHeader2,
-                        ),
-                        Spacer(),
-                        CustomSwitch(value: true, onchange: (v){
-
-                        })
-                      ],
-                    ),
+                    }),
                   ),
-                  SizedBox(height: 10,),
-                  Container(
+
+                  SizedBox(height: inBetweenHeight,),
+                  ProductTextField(
                     width: textFormWidth,
+                    title: "Pickup Method",
+                    validation: validationList[1],
+                    isTextField: false,
+                    onComplete: (){
+                      node.unfocus();
+                    },
+                    widget: CustomSwitch(value: true, onchange: (v){
 
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(width: 20,),
-                        TextFieldHeader(
-                          title: "Pickup Method",
-                          padd: paddTextFieldHeader2,
-                        ),
-                        Spacer(),
-                        CustomSwitch(value: true, onchange: (v){
-
-                        })
-                      ],
-                    ),
+                    }),
                   ),
-                  SizedBox(height: 10,),
-                  Container(
+                  SizedBox(height: inBetweenHeight,),
+                  ProductTextField(
                     width: textFormWidth,
+                    title: "Pickup Offer",
+                    validation: validationList[1],
+                    isTextField: false,
+                    onComplete: (){
+                      node.unfocus();
+                    },
+                    widget: CustomSwitch(value: true, onchange: (v){
 
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(width: 20,),
-                        TextFieldHeader(
-                          title: "Pickup  Offer",
-                          padd: paddTextFieldHeader2,
-                        ),
-                        Spacer(),
-                        CustomSwitch(value: true, onchange: (v){
-
-                        })
-                      ],
-                    ),
+                    }),
                   ),
-                  SizedBox(height: 10,),
+
+                  SizedBox(height: 50,),
 
 
                   Container(
@@ -459,7 +432,7 @@ class _VendorRequestAddState extends State<VendorRequestAdd> {
                       ontap: (){},
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 50,),
                 ],
               ),
             ),

@@ -72,9 +72,9 @@ class _ProductShowCaseAddNewState extends State<ProductShowCaseAddNew> {
                 width: SizeConfig.screenWidth,
                 child: SingleChildScrollView(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: cA1,
                     children: [
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
                       ProductTextField(
                           width: textFormWidth,
                           title: "Heading",
@@ -84,7 +84,7 @@ class _ProductShowCaseAddNewState extends State<ProductShowCaseAddNew> {
                             node.unfocus();
                           }
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
                       ProductTextField(
                         width: textFormWidth,
                         title: "Select Category",
@@ -99,6 +99,7 @@ class _ProductShowCaseAddNewState extends State<ProductShowCaseAddNew> {
                             });
                           },
                           width: textFormWidth,
+                          crossAxisAlignment: cA2,
                           hinttext: "Select Category",
                           selectedValue: selectedCategory,
                           showPopUp: showCategoryDropDown,
@@ -112,7 +113,7 @@ class _ProductShowCaseAddNewState extends State<ProductShowCaseAddNew> {
                           isToJson: false,
                         ),
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
 
                       ProductTextField(
                         width: textFormWidth,
@@ -129,6 +130,7 @@ class _ProductShowCaseAddNewState extends State<ProductShowCaseAddNew> {
                           },
                           width: textFormWidth,
                           hinttext: "Select Sub Category",
+                          crossAxisAlignment: cA2,
                           selectedValue: selectedSubCategory,
                           showPopUp: showSubCategoryDropDown,
                           data: pn.categoryDropDownList,
@@ -141,7 +143,7 @@ class _ProductShowCaseAddNewState extends State<ProductShowCaseAddNew> {
                           isToJson: false,
                         ),
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
 
                       ProductTextField(
                         width: textFormWidth,
@@ -158,6 +160,7 @@ class _ProductShowCaseAddNewState extends State<ProductShowCaseAddNew> {
                           },
                           width: textFormWidth,
                           hinttext: "Select Brand",
+                          crossAxisAlignment: cA2,
                           selectedValue: selectedBrand,
                           showPopUp: showBrandDropDown,
                           data: pn.brandList,
@@ -171,7 +174,7 @@ class _ProductShowCaseAddNewState extends State<ProductShowCaseAddNew> {
                           propertyName: "title",
                         ),
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
 
                       ProductTextField(
                         width: textFormWidth,
@@ -188,6 +191,7 @@ class _ProductShowCaseAddNewState extends State<ProductShowCaseAddNew> {
                           },
                           width: textFormWidth,
                           hinttext: "Select Display Products",
+                          crossAxisAlignment: cA2,
                           selectedValue: selectedBrand,
                           showPopUp: showBrandDropDown,
                           data: pn.brandList,
@@ -201,26 +205,20 @@ class _ProductShowCaseAddNewState extends State<ProductShowCaseAddNew> {
                           propertyName: "title",
                         ),
                       ),
-                      SizedBox(height: 20,),
-                      Container(
+                      SizedBox(height: inBetweenHeight,),
+                      ProductTextField(
                         width: textFormWidth,
+                        title: "Display",
+                        validation: validationList[2],
+                        textEditingController: dummyTextController,
+                        onComplete: (){},
+                        isTextField: false,
+                        widget: CustomSwitch(value: true, onchange: (v){
 
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(width: 20,),
-                            TextFieldHeader(
-                              title: "Display",
-                              padd: paddTextFieldHeader2,
-                            ),
-                            Spacer(),
-                            CustomSwitch(value: true, onchange: (v){
-
-                            })
-                          ],
-                        ),
+                        }),
                       ),
-                      SizedBox(height: 20,),
+
+                      SizedBox(height: inBetweenHeight,),
 
                       ProductTextField(
                           width: textFormWidth,

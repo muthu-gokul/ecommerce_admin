@@ -73,10 +73,12 @@ class _ManageUsersAddNewState extends State<ManageUsersAddNew> {
                 width: SizeConfig.screenWidth,
                 child: SingleChildScrollView(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: cA1,
                     children: [
                       SizedBox(height: 20,),
-                      ProfilePic(),
+                      ProfilePic(
+                        alignment: Alignment.center,
+                      ),
                       SizedBox(height: 20,),
                       ProductTextField(
                         width: textFormWidth,
@@ -124,33 +126,20 @@ class _ManageUsersAddNewState extends State<ManageUsersAddNew> {
                        // textEditingController: role,
                         onComplete: (){},
                         isTextField: false,
-                        widget: OverLayPopUp(
-                          ontap: (){
-                            setState(() {
-                              showProductDropDown=!showProductDropDown;
-                            });
-                          },
-                          width: textFormWidth,
-                          hinttext: "Select User Group",
+                        widget:CustomPopup(
+                          hintText: "Select User Group",
+                          data:["Super Admin","Admin","General User"],
                           selectedValue: selectedProduct,
-                          showPopUp: showProductDropDown,
-                          data: ["Super Admin","Admin","General User"],
-                          onitemTap: (i){
+                          width:textFormWidth ,
+                          leftMargin: 0,
+                          edgeInsets: EdgeInsets.only(left: 0),
+                          onSelect: (v){
                             setState(() {
-                              showProductDropDown=false;
-                              if(i==0){
-                                selectedProduct="Super Admin";
-                              }
-                              else if(i==1){
-                                selectedProduct="Admin";
-                              }
-                              else{
-                                selectedProduct="General User";
-                              }
+                              selectedProduct=v;
                             });
                           },
-                          isToJson: false,
                         ),
+
                       ),
                       SizedBox(height: 20,),
                       ProductTextField(
@@ -160,24 +149,18 @@ class _ManageUsersAddNewState extends State<ManageUsersAddNew> {
                        // textEditingController: role,
                         onComplete: (){},
                         isTextField: false,
-                        widget: OverLayPopUp(
-                          ontap: (){
-                            setState(() {
-                              showRegionDropDown=!showRegionDropDown;
-                            });
-                          },
-                          width: textFormWidth,
-                          hinttext: "Select Region",
+                        widget:CustomPopup(
+                          hintText: "Select Region",
+                          data:region,
                           selectedValue: selectedRegion,
-                          showPopUp: showRegionDropDown,
-                          data: region,
-                          onitemTap: (i){
+                          width:textFormWidth ,
+                          leftMargin: 0,
+                          edgeInsets: EdgeInsets.only(left: 0),
+                          onSelect: (v){
                             setState(() {
-                              showRegionDropDown=false;
-                              selectedRegion=region[i];
+                              selectedRegion=v;
                             });
                           },
-                          isToJson: false,
                         ),
                       ),
                       SizedBox(height: 50,),

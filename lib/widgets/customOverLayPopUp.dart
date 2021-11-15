@@ -1,4 +1,6 @@
+import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../constants.dart';
 import 'overlayContainer.dart';
@@ -52,7 +54,8 @@ class _OverLayPopUpState extends State<OverLayPopUp> {
                   style: TextStyle(color: Color(0xFF2E2E2E),fontSize: 16,fontFamily: widget.selectedValue.isEmpty?'RL':'RR'),
                 ),
                 Spacer(),
-                Icon(Icons.arrow_drop_down,size: 25,)
+                Icon(Icons.keyboard_arrow_down,size: 30,color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor3,),
+                SizedBox(width: 15,)
               ],
             ),
           ),
@@ -62,7 +65,7 @@ class _OverLayPopUpState extends State<OverLayPopUp> {
           position: OverlayContainerPosition(0, 0,),
           child: Container(
             height:  widget.data.length*50.0,
-            width: textFormWidth-20,
+            width: widget.width-20,
             margin: const EdgeInsets.only(top: 5),
             clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(

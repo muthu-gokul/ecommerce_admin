@@ -5,6 +5,7 @@ import 'package:ecommerce_admin/widgets/buttons/backBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/swtich.dart';
 import 'package:ecommerce_admin/widgets/customOverLayPopUp.dart';
+import 'package:ecommerce_admin/widgets/customPopUp.dart';
 import 'package:ecommerce_admin/widgets/pickImage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -65,9 +66,9 @@ class _StaffsAddState extends State<StaffsAdd> {
             width: SizeConfig.screenWidth,
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: cA1,
                 children: [
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Name",
@@ -77,7 +78,7 @@ class _StaffsAddState extends State<StaffsAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Id Number",
@@ -87,7 +88,7 @@ class _StaffsAddState extends State<StaffsAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Email",
@@ -97,7 +98,7 @@ class _StaffsAddState extends State<StaffsAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Phone Number",
@@ -107,9 +108,9 @@ class _StaffsAddState extends State<StaffsAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
-                      width: textFormWidth+20,
+                      width: textFormWidth,
                       title: "Address",
                       validation: validationList[1],
                       textEditingController: phno,
@@ -117,7 +118,7 @@ class _StaffsAddState extends State<StaffsAdd> {
                         node.unfocus();
                       },maxlines: 3,
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "Role",
@@ -125,34 +126,28 @@ class _StaffsAddState extends State<StaffsAdd> {
                     textEditingController: role,
                     onComplete: (){},
                     isTextField: false,
-                    widget: OverLayPopUp(
-                      ontap: (){
-                        setState(() {
-                          showProductDropDown=!showProductDropDown;
-                        });
-                      },
-                      width: textFormWidth,
-                      hinttext: "Select Role",
-                      selectedValue: selectedProduct,
-                      showPopUp: showProductDropDown,
+                    widget:CustomPopup(
+                      hintText: "Select Role",
                       data: pn.categoryDropDownList,
-                      onitemTap: (i){
+                      selectedValue: selectedProduct,
+                      width:textFormWidth ,
+                      leftMargin: 0,
+                      edgeInsets: EdgeInsets.only(left: 0),
+                      onSelect: (v){
                         setState(() {
-                          showProductDropDown=false;
-                          selectedProduct=pn.categoryDropDownList[i];
+                          selectedProduct=v;
                         });
                       },
-                      isToJson: false,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 50,),
                   Container(
                     alignment:Alignment.center,
                     child: SaveBtn(
                       ontap: (){},
                     ),
                   ),
-                  SizedBox(height: 10,),
+
                 ],
               ),
             ),

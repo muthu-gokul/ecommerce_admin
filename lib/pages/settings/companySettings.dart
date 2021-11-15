@@ -81,7 +81,7 @@ class _CompanySettingsState extends State<CompanySettings> {
             width: SizeConfig.screenWidth!-100,
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: cA1,
                 children: [
                   SizedBox(height: 10,),
                   ProductTextField(
@@ -127,8 +127,9 @@ class _CompanySettingsState extends State<CompanySettings> {
                           showCategoryDropDown=!showCategoryDropDown;
                         });
                       },
-                      width: textFormWidth,
+                      width: textFormWidth+20,
                       hinttext: "Select Advertise Type",
+                      crossAxisAlignment: cA2,
                       selectedValue: selectedCategory,
                       showPopUp: showCategoryDropDown,
                       data: pn.categoryDropDownList,
@@ -155,8 +156,9 @@ class _CompanySettingsState extends State<CompanySettings> {
                           showSubCategoryDropDown=!showSubCategoryDropDown;
                         });
                       },
-                      width: textFormWidth,
+                      width: textFormWidth+20,
                       hinttext: "Select Category Type",
+                      crossAxisAlignment: cA2,
                       selectedValue: selectedSubCategory,
                       showPopUp: showSubCategoryDropDown,
                       data: pn.categoryDropDownList,
@@ -169,12 +171,22 @@ class _CompanySettingsState extends State<CompanySettings> {
                       isToJson: false,
                     ),
                   ),
-                  SizedBox(height: 10,),
-                  PickImage(image: image, title: "Brand Logo",cb: (v){
-                    setState(() {
-                      image=v;
-                    });
-                  },),
+                  SizedBox(height: 10+10,),
+                  ProductTextField(
+                    width: textFormWidth,
+                    title: "Select Image:",
+                    validation: validationList[1],
+                    crossAxisAlignment: imageUploadCA,
+                    textEditingController: SCatg,
+                    onComplete: (){},
+                    isTextField: false,
+                    widget: PickImage(image: image, title: "Brand Logo",cb: (v){
+                      setState(() {
+                        image=v;
+                      });
+                    },),
+                  ),
+
                   SizedBox(height: 10,),
                   ProductTextField(
                       width: textFormWidth,
@@ -187,7 +199,7 @@ class _CompanySettingsState extends State<CompanySettings> {
                   ),
                   SizedBox(height: 10,),
                   ProductTextField(
-                      width: textFormWidth+20,
+                      width: textFormWidth,
                       title: "Office Address",
                       validation: validationList[1],
                       textEditingController: address,
@@ -197,7 +209,7 @@ class _CompanySettingsState extends State<CompanySettings> {
                   ),
                   SizedBox(height: 10,),
                   ProductTextField(
-                    width: textFormWidth+20,
+                    width: textFormWidth,
                     title: "Shipping Address",
                     validation: validationList[1],
                     textEditingController: district,
@@ -218,8 +230,9 @@ class _CompanySettingsState extends State<CompanySettings> {
                           showSubCategoryDropDown=!showSubCategoryDropDown;
                         });
                       },
-                      width: textFormWidth,
+                      width: textFormWidth+20,
                       hinttext: "Select Country",
+                      crossAxisAlignment: cA2,
                       selectedValue: selectedSubCategory,
                       showPopUp: showSubCategoryDropDown,
                       data: pn.categoryDropDownList,
@@ -246,8 +259,9 @@ class _CompanySettingsState extends State<CompanySettings> {
                           showSubCategoryDropDown=!showSubCategoryDropDown;
                         });
                       },
-                      width: textFormWidth,
+                      width: textFormWidth+20,
                       hinttext: "Select Country Code",
+                      crossAxisAlignment: cA2,
                       selectedValue: selectedSubCategory,
                       showPopUp: showSubCategoryDropDown,
                       data: pn.categoryDropDownList,
@@ -274,7 +288,8 @@ class _CompanySettingsState extends State<CompanySettings> {
                           showSubCategoryDropDown=!showSubCategoryDropDown;
                         });
                       },
-                      width: textFormWidth,
+                      width: textFormWidth+20,
+                      crossAxisAlignment: cA2,
                       hinttext: "Select Country Timing",
                       selectedValue: selectedSubCategory,
                       showPopUp: showSubCategoryDropDown,
@@ -302,7 +317,8 @@ class _CompanySettingsState extends State<CompanySettings> {
                           showSubCategoryDropDown=!showSubCategoryDropDown;
                         });
                       },
-                      width: textFormWidth,
+                      width: textFormWidth+20,
+                      crossAxisAlignment: cA2,
                       hinttext: "Select Country Currency",
                       selectedValue: selectedSubCategory,
                       showPopUp: showSubCategoryDropDown,
@@ -348,7 +364,7 @@ class _CompanySettingsState extends State<CompanySettings> {
                   ),
                   SizedBox(height: 10,),
                   ProductTextField(
-                      width: textFormWidth+20,
+                      width: textFormWidth,
                       title: "Description",
                       validation: validationList[1],
 
@@ -370,7 +386,7 @@ class _CompanySettingsState extends State<CompanySettings> {
                   SizedBox(height: 10,),
                   Container(
                       padding:  EdgeInsets.only(left: 10,bottom: 10,top: 10),
-                      alignment: Alignment.centerLeft,
+                      //alignment: Alignment.centerLeft,
                       child: Text("Bank Information",style: ts18(grey1,fontsize: 30),)
                   ),
                   SizedBox(height: 10,),
@@ -433,7 +449,7 @@ class _CompanySettingsState extends State<CompanySettings> {
                   SizedBox(height: 10,),
                   Container(
                       padding:  EdgeInsets.only(left: 10,bottom: 10,top: 10),
-                      alignment: Alignment.centerLeft,
+                   //   alignment: Alignment.centerLeft,
                       child: Text("Social Information",style: ts18(grey1,fontsize: 30),)
                   ),
                   SizedBox(height: 10,),
@@ -456,12 +472,21 @@ class _CompanySettingsState extends State<CompanySettings> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
-                  PickImage(image: image, title: "Social Logo",cb: (v){
-                    setState(() {
-                      image=v;
-                    });
-                  },),
+                  SizedBox(height: 10+10,),
+                  ProductTextField(
+                    width: textFormWidth,
+                    title: "Select Social Logo:",
+                    crossAxisAlignment: imageUploadCA,
+                    validation: validationList[1],
+                    textEditingController: SCatg,
+                    onComplete: (){},
+                    isTextField: false,
+                    widget: PickImage(image: image, title: "Brand Logo",cb: (v){
+                      setState(() {
+                        image=v;
+                      });
+                    },),
+                  ),
                   SizedBox(height: 10,),
                   ProductTextField(
                       width: textFormWidth,
@@ -472,7 +497,7 @@ class _CompanySettingsState extends State<CompanySettings> {
                         node.unfocus();
                       },maxlines: 3,
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 50,),
 
 
                   Container(
@@ -481,7 +506,7 @@ class _CompanySettingsState extends State<CompanySettings> {
                       ontap: (){},
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 50,),
                 ],
               ),
             ),

@@ -89,9 +89,9 @@ class _PurchaseAddNewState extends State<PurchaseAddNew> with TickerProviderStat
                 width: SizeConfig.screenWidth,
                 child: SingleChildScrollView(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: cA1,
                     children: [
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
                       ProductTextField(
                           width: textFormWidth,
                           title: "Purchase Number",
@@ -101,7 +101,7 @@ class _PurchaseAddNewState extends State<PurchaseAddNew> with TickerProviderStat
                             node.unfocus();
                           }
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
 
                       ProductTextField(
                         width: textFormWidth,
@@ -116,8 +116,9 @@ class _PurchaseAddNewState extends State<PurchaseAddNew> with TickerProviderStat
                               showVendorCompanyDropDown=!showVendorCompanyDropDown;
                             });
                           },
-                          width: textFormWidth,
+                          width: textFormWidth+20,
                           hinttext: "Select Vendor Company",
+                          crossAxisAlignment: cA2,
                           selectedValue: selectedVendorCompany,
                           showPopUp: showVendorCompanyDropDown,
                           data: VendorCompanyList,
@@ -130,7 +131,7 @@ class _PurchaseAddNewState extends State<PurchaseAddNew> with TickerProviderStat
                           isToJson: false,
                         ),
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
 
                       ProductTextField(
                         width: textFormWidth,
@@ -145,8 +146,9 @@ class _PurchaseAddNewState extends State<PurchaseAddNew> with TickerProviderStat
                               showVendorTypeDropDown=!showVendorTypeDropDown;
                             });
                           },
-                          width: textFormWidth,
+                          width: textFormWidth+20,
                           hinttext: "Select Vendor Type",
+                          crossAxisAlignment: cA2,
                           selectedValue: selectedVendorType,
                           showPopUp: showVendorTypeDropDown,
                           data: VendorTypeList,
@@ -159,7 +161,7 @@ class _PurchaseAddNewState extends State<PurchaseAddNew> with TickerProviderStat
                           isToJson: false,
                         ),
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
 
 
                       ProductTextField(
@@ -212,11 +214,12 @@ class _PurchaseAddNewState extends State<PurchaseAddNew> with TickerProviderStat
                             ),
                           ),
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
 
 
                       ProductTextField(
                           width: textFormWidth,
+
                           title: "Address",
                           validation: validationList[1],
                           maxlines: 3,
@@ -225,7 +228,7 @@ class _PurchaseAddNewState extends State<PurchaseAddNew> with TickerProviderStat
                             node.unfocus();
                           }
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
                       ProductTextField(
                           width: textFormWidth,
                           title: "Vendor Address",
@@ -236,7 +239,7 @@ class _PurchaseAddNewState extends State<PurchaseAddNew> with TickerProviderStat
                             node.unfocus();
                           }
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
                       Container(
                         height: 800,
                         alignment: Alignment.center,
@@ -599,7 +602,7 @@ class _PurchaseAddNewState extends State<PurchaseAddNew> with TickerProviderStat
                           },
                         ),
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
                       ProductTextField(
                         width: textFormWidth,
                         title: "Select Status",
@@ -615,6 +618,7 @@ class _PurchaseAddNewState extends State<PurchaseAddNew> with TickerProviderStat
                           },
                           width: textFormWidth,
                           hinttext: "Select Status",
+                          crossAxisAlignment: cA2,
                           selectedValue: selectedStatus,
                           showPopUp: showStatusDropDown,
                           data: statusList,
@@ -627,7 +631,7 @@ class _PurchaseAddNewState extends State<PurchaseAddNew> with TickerProviderStat
                           isToJson: false,
                         ),
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
 
                       SizedBox(height: 50,),
                       Container(

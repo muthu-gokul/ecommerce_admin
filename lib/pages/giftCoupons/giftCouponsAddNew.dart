@@ -5,6 +5,7 @@ import 'package:ecommerce_admin/widgets/buttons/backBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/swtich.dart';
 import 'package:ecommerce_admin/widgets/customOverLayPopUp.dart';
+import 'package:ecommerce_admin/widgets/customPopUp.dart';
 import 'package:ecommerce_admin/widgets/pickImage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -75,9 +76,9 @@ class _GiftCouponsAddState extends State<GiftCouponsAdd> {
             width: SizeConfig.screenWidth,
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: cA1,
                 children: [
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "Coupon Valid to",
@@ -85,27 +86,21 @@ class _GiftCouponsAddState extends State<GiftCouponsAdd> {
                     textEditingController: Stitle,
                     onComplete: (){},
                     isTextField: false,
-                    widget: OverLayPopUp(
-                      ontap: (){
-                        setState(() {
-                          showCategoryDropDown=!showCategoryDropDown;
-                        });
-                      },
-                      width: textFormWidth,
-                      hinttext: "Select Coupon Valid to",
-                      selectedValue: selectedCategory,
-                      showPopUp: showCategoryDropDown,
+                    widget:CustomPopup(
+                      hintText: "Select Coupon Valid to",
                       data: pn.categoryDropDownList,
-                      onitemTap: (i){
+                      selectedValue: selectedCategory,
+                      width:textFormWidth ,
+                      leftMargin: 0,
+                      edgeInsets: EdgeInsets.only(left: 0),
+                      onSelect: (v){
                         setState(() {
-                          showCategoryDropDown=false;
-                          selectedCategory=pn.categoryDropDownList[i];
+                          selectedCategory=v;
                         });
                       },
-                      isToJson: false,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "Coupon Effect",
@@ -113,27 +108,21 @@ class _GiftCouponsAddState extends State<GiftCouponsAdd> {
                     textEditingController: Ctype,
                     onComplete: (){},
                     isTextField: false,
-                    widget: OverLayPopUp(
-                      ontap: (){
-                        setState(() {
-                          showCategoryTypeDropDown=!showCategoryTypeDropDown;
-                        });
-                      },
-                      width: textFormWidth,
-                      hinttext: "Select Coupon Effect",
-                      selectedValue: selectedCategoryType,
-                      showPopUp: showCategoryTypeDropDown,
+                    widget:CustomPopup(
+                      hintText: "Select Coupon Effect",
                       data: pn.categoryDropDownList,
-                      onitemTap: (i){
+                      selectedValue: selectedCategory,
+                      width:textFormWidth ,
+                      leftMargin: 0,
+                      edgeInsets: EdgeInsets.only(left: 0),
+                      onSelect: (v){
                         setState(() {
-                          showCategoryTypeDropDown=false;
-                          selectedCategoryType=pn.categoryDropDownList[i];
+                          selectedCategory=v;
                         });
                       },
-                      isToJson: false,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Coupon offer",
@@ -143,7 +132,7 @@ class _GiftCouponsAddState extends State<GiftCouponsAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Coupon Name",
@@ -153,7 +142,7 @@ class _GiftCouponsAddState extends State<GiftCouponsAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "Coupon Type:",
@@ -161,27 +150,21 @@ class _GiftCouponsAddState extends State<GiftCouponsAdd> {
                     textEditingController: SCatg,
                     onComplete: (){},
                     isTextField: false,
-                    widget: OverLayPopUp(
-                      ontap: (){
-                        setState(() {
-                          showSubCategoryDropDown=!showSubCategoryDropDown;
-                        });
-                      },
-                      width: textFormWidth,
-                      hinttext: "Select Coupon Type",
-                      selectedValue: selectedSubCategory,
-                      showPopUp: showSubCategoryDropDown,
+                    widget:CustomPopup(
+                      hintText: "Select Coupon Type",
                       data: pn.categoryDropDownList,
-                      onitemTap: (i){
+                      selectedValue: selectedCategory,
+                      width:textFormWidth ,
+                      leftMargin: 0,
+                      edgeInsets: EdgeInsets.only(left: 0),
+                      onSelect: (v){
                         setState(() {
-                          showSubCategoryDropDown=false;
-                          selectedSubCategory=pn.categoryDropDownList[i];
+                          selectedCategory=v;
                         });
                       },
-                      isToJson: false,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Coupon Code",
@@ -191,7 +174,7 @@ class _GiftCouponsAddState extends State<GiftCouponsAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Redeem Amount Value",
@@ -201,7 +184,7 @@ class _GiftCouponsAddState extends State<GiftCouponsAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Start Date",
@@ -211,7 +194,7 @@ class _GiftCouponsAddState extends State<GiftCouponsAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "End Date",
@@ -221,7 +204,7 @@ class _GiftCouponsAddState extends State<GiftCouponsAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Minimum Purchase  Amount",
@@ -231,7 +214,7 @@ class _GiftCouponsAddState extends State<GiftCouponsAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Maximum Purchase  Amount",
@@ -241,7 +224,7 @@ class _GiftCouponsAddState extends State<GiftCouponsAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Minimum Quantity",
@@ -251,7 +234,7 @@ class _GiftCouponsAddState extends State<GiftCouponsAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Maximum Quantity",
@@ -261,7 +244,7 @@ class _GiftCouponsAddState extends State<GiftCouponsAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Terms & Conditions",
@@ -271,7 +254,7 @@ class _GiftCouponsAddState extends State<GiftCouponsAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Coupon Apply",
@@ -281,7 +264,7 @@ class _GiftCouponsAddState extends State<GiftCouponsAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Login Level",
@@ -291,7 +274,7 @@ class _GiftCouponsAddState extends State<GiftCouponsAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Custom Coupon Message",
@@ -301,19 +284,32 @@ class _GiftCouponsAddState extends State<GiftCouponsAdd> {
                         node.unfocus();
                       }
                   ),
+                  SizedBox(height: inBetweenHeight+10,),
+                  ProductTextField(
+                    width: textFormWidth,
+                    title: "Upload Coupon",
+                    validation: validationList[2],
+                    isTextField: false,
+                    onComplete: (){
+                      node.unfocus();
+                    },
+                    crossAxisAlignment: imageUploadCA,
+                    showValidation: true,
+                    widget:PickImage(image: image, title: "Upload Coupon",cb: (v){
+                      setState(() {
+                        image=v;
+                      });
+                    },),
+                  ),
 
-                  PickImage(image: image, title: "Upload Coupon",cb: (v){
-                    setState(() {
-                      image=v;
-                    });
-                  },),
+                  SizedBox(height: 50,),
                   Container(
                     alignment:Alignment.center,
                     child: SaveBtn(
                       ontap: (){},
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 50,),
                 ],
               ),
             ),

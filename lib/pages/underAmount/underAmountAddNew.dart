@@ -60,9 +60,9 @@ class _UnderAmountAddState extends State<UnderAmountAdd> {
             width: SizeConfig.screenWidth,
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: cA1,
                 children: [
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Enter Amount",
@@ -72,7 +72,7 @@ class _UnderAmountAddState extends State<UnderAmountAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Sort Order",
@@ -82,19 +82,31 @@ class _UnderAmountAddState extends State<UnderAmountAdd> {
                         node.unfocus();
                       }
                   ),
+                  SizedBox(height: inBetweenHeight+10,),
+                  ProductTextField(
+                      width: textFormWidth,
+                      title: "Select Slider",
+                      validation: validationList[1],
+                      isTextField: false,
+                      onComplete: (){
+                        node.unfocus();
+                      },
+                      crossAxisAlignment: imageUploadCA,
+                      widget: PickImage(image: image, title: "Select Slider",cb: (v){
+                        setState(() {
+                          image=v;
+                        });
+                      },),
+                  ),
 
-                  PickImage(image: image, title: "Select Slider",cb: (v){
-                    setState(() {
-                      image=v;
-                    });
-                  },),
+                  SizedBox(height: 50,),
                   Container(
                     alignment:Alignment.center,
                     child: SaveBtn(
                       ontap: (){},
                     ),
                   ),
-                  SizedBox(height: 10,),
+
                 ],
               ),
             ),

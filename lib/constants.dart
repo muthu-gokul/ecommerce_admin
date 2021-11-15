@@ -39,6 +39,12 @@ TextStyle whiteRM20=TextStyle(fontFamily: 'RM',color: Colors.white,fontSize: 20)
 
 
 double textFormWidth=400;
+double inBetweenHeight=20;
+
+CrossAxisAlignment cA1=CrossAxisAlignment.center;
+CrossAxisAlignment cA2=CrossAxisAlignment.start;
+CrossAxisAlignment imageUploadCA=CrossAxisAlignment.start;
+
 
 
 glowFun(BuildContext context){

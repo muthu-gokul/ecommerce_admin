@@ -5,6 +5,7 @@ import 'package:ecommerce_admin/widgets/buttons/backBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/swtich.dart';
 import 'package:ecommerce_admin/widgets/customOverLayPopUp.dart';
+import 'package:ecommerce_admin/widgets/customPopUp.dart';
 import 'package:ecommerce_admin/widgets/customTextField.dart';
 import 'package:ecommerce_admin/widgets/pickImage.dart';
 import 'package:flutter/material.dart';
@@ -81,9 +82,9 @@ class _VendorListAddState extends State<VendorListAdd> {
             width: SizeConfig.screenWidth,
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: cA1,
                 children: [
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Vendor Name  ",
@@ -93,7 +94,7 @@ class _VendorListAddState extends State<VendorListAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "Vendor Type",
@@ -101,27 +102,22 @@ class _VendorListAddState extends State<VendorListAdd> {
                     textEditingController: vendorType,
                     onComplete: (){},
                     isTextField: false,
-                    widget: OverLayPopUp(
-                      ontap: (){
-                        setState(() {
-                          showCategoryDropDown=!showCategoryDropDown;
-                        });
-                      },
-                      width: textFormWidth,
-                      hinttext: "Select Vendor Type",
-                      selectedValue: selectedCategory,
-                      showPopUp: showCategoryDropDown,
+                    widget:CustomPopup(
+                      hintText: "Select Vendor Type",
                       data: pn.categoryDropDownList,
-                      onitemTap: (i){
+                      selectedValue: selectedCategory,
+                      width:textFormWidth ,
+                      leftMargin: 0,
+                      edgeInsets: EdgeInsets.only(left: 0),
+                      onSelect: (v){
                         setState(() {
-                          showCategoryDropDown=false;
-                          selectedCategory=pn.categoryDropDownList[i];
+                          selectedCategory=v;
                         });
                       },
-                      isToJson: false,
                     ),
+
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Company Name ",
@@ -131,7 +127,7 @@ class _VendorListAddState extends State<VendorListAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
 
                   ProductTextField(
                     width: textFormWidth,
@@ -140,27 +136,21 @@ class _VendorListAddState extends State<VendorListAdd> {
                     textEditingController: SCatg,
                     onComplete: (){},
                     isTextField: false,
-                    widget: OverLayPopUp(
-                      ontap: (){
-                        setState(() {
-                          showSubCategoryDropDown=!showSubCategoryDropDown;
-                        });
-                      },
-                      width: textFormWidth,
-                      hinttext: "Select Category",
-                      selectedValue: selectedSubCategory,
-                      showPopUp: showSubCategoryDropDown,
+                    widget: CustomPopup(
+                      hintText: "Select Category",
                       data: pn.categoryDropDownList,
-                      onitemTap: (i){
+                      selectedValue: selectedCategory,
+                      width:textFormWidth ,
+                      leftMargin: 0,
+                      edgeInsets: EdgeInsets.only(left: 0),
+                      onSelect: (v){
                         setState(() {
-                          showSubCategoryDropDown=false;
-                          selectedSubCategory=pn.categoryDropDownList[i];
+                          selectedCategory=v;
                         });
                       },
-                      isToJson: false,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "Items",
@@ -168,46 +158,33 @@ class _VendorListAddState extends State<VendorListAdd> {
                     textEditingController:items,
                     onComplete: (){},
                     isTextField: false,
-                    widget: OverLayPopUp(
-                      ontap: (){
-                        setState(() {
-                          showBrandDropDown=!showBrandDropDown;
-                        });
-                      },
-                      width: textFormWidth,
-                      hinttext: "Select Items",
-                      selectedValue: selectedBrand,
-                      showPopUp: showBrandDropDown,
+                    widget:  CustomPopup(
+                      hintText: "Select Items",
                       data: pn.categoryDropDownList,
-                      onitemTap: (i){
+                      selectedValue: selectedCategory,
+                      width:textFormWidth ,
+                      leftMargin: 0,
+                      edgeInsets: EdgeInsets.only(left: 0),
+                      onSelect: (v){
                         setState(() {
-                          showBrandDropDown=false;
-                          selectedBrand=pn.categoryDropDownList[i];
+                          selectedCategory=v;
                         });
                       },
-                      isToJson: false,
                     ),
                   ),
-                  SizedBox(height: 20,),
-                  Container(
+                  SizedBox(height: inBetweenHeight,),
+                  ProductTextField(
                     width: textFormWidth,
+                    title: "Service Status",
+                    validation: validationList[1],
+                    textEditingController:items,
+                    onComplete: (){},
+                    isTextField: false,
+                    widget:CustomSwitch(value: true, onchange: (v){
 
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(width: 20,),
-                        TextFieldHeader(
-                          title: "Service Status",
-                          padd: paddTextFieldHeader2,
-                        ),
-                        Spacer(),
-                        CustomSwitch(value: true, onchange: (v){
-
-                        })
-                      ],
-                    ),
+                    })
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "GST No",
@@ -217,7 +194,7 @@ class _VendorListAddState extends State<VendorListAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Email Id",
@@ -227,7 +204,7 @@ class _VendorListAddState extends State<VendorListAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Mobile Number",
@@ -237,7 +214,7 @@ class _VendorListAddState extends State<VendorListAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Address",
@@ -247,7 +224,7 @@ class _VendorListAddState extends State<VendorListAdd> {
                         node.unfocus();
                       },maxlines: 3,
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Registered Date",
@@ -257,18 +234,32 @@ class _VendorListAddState extends State<VendorListAdd> {
                         node.unfocus();
                       }
                   ),
-                  PickImage(image: image, title: "Select Slider",cb: (v){
-                    setState(() {
-                      image=v;
-                    });
-                  },),
+                  SizedBox(height: inBetweenHeight+10,),
+                  ProductTextField(
+                    width: textFormWidth,
+                    title: "Select Logo",
+                    validation: validationList[2],
+                    isTextField: false,
+                    onComplete: (){
+                      node.unfocus();
+                    },
+                    crossAxisAlignment: imageUploadCA,
+                    showValidation: true,
+                    widget:PickImage(image: image, title: "Select Logo",cb: (v){
+                      setState(() {
+                        image=v;
+                      });
+                    },),
+                  ),
+
+                  SizedBox(height: 50,),
                   Container(
                     alignment:Alignment.center,
                     child: SaveBtn(
                       ontap: (){},
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 50,),
                 ],
               ),
             ),

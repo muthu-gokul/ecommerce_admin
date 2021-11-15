@@ -37,15 +37,22 @@ class _PickImageState extends State<PickImage> {
         pickImg();
       },
       child: Container(
-        height: 150,
-        width: 400,
+        height: 170,
+        width: 170,
         margin: marginAddNewTextField,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(color: addNewTextFieldBorder),
+          shape: BoxShape.circle,
+        //  borderRadius: BorderRadius.circular(5)1
+          border: Border.all(color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor4),
           color: Colors.transparent,
         ),
-        child: Row(
+        alignment: Alignment.center,
+        clipBehavior: Clip.antiAlias,
+        child: widget.image==null?Container(
+          child: Image.asset("assets/images/addnew-brand.jpg"),
+        ):kIsWeb?Image.network( widget.image!.path)
+            :Image.file(File(widget.image!.path),fit: BoxFit.cover,),
+        /*child: Row(
           children: [
             Container(
               width: 250,
@@ -64,7 +71,7 @@ class _PickImageState extends State<PickImage> {
               style: TextStyle(color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor3,fontFamily: 'RR',fontSize: 18),
             )
           ],
-        ),
+        ),*/
       ),
     );
   }

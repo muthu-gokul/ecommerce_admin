@@ -46,11 +46,11 @@ class _ContactDetailsState extends State<ContactDetails> {
             width: SizeConfig.screenWidth!-100,
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: cA1,
                 children: [
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
-                      width: textFormWidth+20,
+                      width: textFormWidth,
                       title: "Company Address",
                       validation: validationList[1],
                       textEditingController: cmpyAdrs,
@@ -58,9 +58,9 @@ class _ContactDetailsState extends State<ContactDetails> {
                         node.unfocus();
                       },maxlines: 3,
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
-                    width: textFormWidth+20,
+                    width: textFormWidth,
                     title: "Offical Address",
                     validation: validationList[1],
                     textEditingController: officalAdrs,
@@ -68,13 +68,13 @@ class _ContactDetailsState extends State<ContactDetails> {
                       node.unfocus();
                     },maxlines: 3,
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   Container(
                       padding:  EdgeInsets.only(left: 10,bottom: 10,top: 10),
-                      alignment: Alignment.centerLeft,
+                     // alignment: Alignment.centerLeft,
                       child: Text("Leave Message:",style: ts18(grey1,fontsize: 30),)
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Name",
@@ -84,7 +84,7 @@ class _ContactDetailsState extends State<ContactDetails> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Email Id",
@@ -94,7 +94,7 @@ class _ContactDetailsState extends State<ContactDetails> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Mobile Number",
@@ -104,9 +104,9 @@ class _ContactDetailsState extends State<ContactDetails> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
-                      width: textFormWidth+20,
+                      width: textFormWidth,
                       title: "Queries",
                       validation: validationList[1],
                       textEditingController: queris,
@@ -114,14 +114,14 @@ class _ContactDetailsState extends State<ContactDetails> {
                         node.unfocus();
                       },maxlines: 3,
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 50,),
                   Container(
                     alignment:Alignment.center,
                     child: SaveBtn(title:'Send',
                       ontap: (){},
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 50,),
                 ],
               ),
             ),

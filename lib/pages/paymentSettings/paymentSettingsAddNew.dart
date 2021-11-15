@@ -72,9 +72,9 @@ class _PaymentSettingsAddNewState extends State<PaymentSettingsAddNew> {
                 width: SizeConfig.screenWidth,
                 child: SingleChildScrollView(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: cA1,
                     children: [
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
 
                       ProductTextField(
                         width: textFormWidth,
@@ -91,6 +91,7 @@ class _PaymentSettingsAddNewState extends State<PaymentSettingsAddNew> {
                           },
                           width: textFormWidth,
                           hinttext: "Select Preferred Currency",
+                          crossAxisAlignment: cA2,
                           selectedValue: selectedCurrency,
                           showPopUp: showCurrencyDropDown,
                           data: currencyList,
@@ -103,7 +104,7 @@ class _PaymentSettingsAddNewState extends State<PaymentSettingsAddNew> {
                           isToJson: false,
                         ),
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
 
                       ProductTextField(
                           width: textFormWidth,
@@ -114,7 +115,7 @@ class _PaymentSettingsAddNewState extends State<PaymentSettingsAddNew> {
                             node.unfocus();
                           }
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
                       ProductTextField(
                           width: textFormWidth,
                           title: "Secret",
@@ -124,7 +125,7 @@ class _PaymentSettingsAddNewState extends State<PaymentSettingsAddNew> {
                             node.unfocus();
                           }
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
 
 
 

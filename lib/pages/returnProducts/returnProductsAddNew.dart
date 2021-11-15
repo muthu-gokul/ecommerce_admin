@@ -68,9 +68,9 @@ class _ReturnProductsAddNewState extends State<ReturnProductsAddNew> {
                 width: SizeConfig.screenWidth,
                 child: SingleChildScrollView(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: cA1,
                     children: [
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
 
 
                       ProductTextField(
@@ -82,7 +82,7 @@ class _ReturnProductsAddNewState extends State<ReturnProductsAddNew> {
                             node.unfocus();
                           }
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
                       ProductTextField(
                           width: textFormWidth,
                           title: "Customer Name",
@@ -92,7 +92,7 @@ class _ReturnProductsAddNewState extends State<ReturnProductsAddNew> {
                             node.unfocus();
                           }
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
                       ProductTextField(
                         width: textFormWidth,
                         title: "Expected Date",
@@ -143,7 +143,7 @@ class _ReturnProductsAddNewState extends State<ReturnProductsAddNew> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
                       ProductTextField(
                           width: textFormWidth,
                           title: "Price",
@@ -155,7 +155,7 @@ class _ReturnProductsAddNewState extends State<ReturnProductsAddNew> {
                           regExp: decimalReg,
                           textInputType: TextInputType.number,
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
 
 
                       SizedBox(height: 50,),

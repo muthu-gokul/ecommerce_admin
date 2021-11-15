@@ -75,9 +75,9 @@ class _CategoryAddNewState extends State<CategoryAddNew> {
             width: SizeConfig.screenWidth,
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: cA1,
                 children: [
-                  SizedBox(height: 20,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Category Name",
@@ -87,12 +87,12 @@ class _CategoryAddNewState extends State<CategoryAddNew> {
                         node.unfocus();
                       }
                   ),
-                  validationList[0]?ValidationErrorText(title: validationText,):Container(),
-                  SizedBox(height: 20,),
+                //  validationList[0]?ValidationErrorText(title: validationText,):Container(),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Select Category",
-                      validation: validationList[0],
+                      validation: validationList[1],
                       isTextField: false,
                       onComplete: (){
                         node.unfocus();
@@ -110,10 +110,9 @@ class _CategoryAddNewState extends State<CategoryAddNew> {
                             selectedCategory=v;
                           });
                         },
-
                       ),
                   ),
-                  validationList[1]?ValidationErrorText(title: validationText,):Container(),
+                  //validationList[1]?ValidationErrorText(title: validationText,):Container(),
                   SizedBox(height: 30,),
                   ProductTextField(
                     width: textFormWidth,
@@ -123,7 +122,8 @@ class _CategoryAddNewState extends State<CategoryAddNew> {
                     onComplete: (){
                       node.unfocus();
                     },
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: cA2,
+                    showValidation: false,
                     widget:Expanded(
                       child: Column(
                         children: [
@@ -195,15 +195,24 @@ class _CategoryAddNewState extends State<CategoryAddNew> {
                     )
                   ),
 
-                  SizedBox(height: 20,),
-
-                  SizedBox(height: 20,),
-                  PickImage(image: image, title: "Select Logo",cb: (v){
-                    setState(() {
-                      image=v;
-                    });
-                  },),
-                  validationList[2]?ValidationErrorText(title: validationText,):Container(),
+                  SizedBox(height: inBetweenHeight,),
+                  ProductTextField(
+                      width: textFormWidth,
+                      title: "Brand Logo",
+                      validation: validationList[2],
+                      isTextField: false,
+                      onComplete: (){
+                        node.unfocus();
+                      },
+                      crossAxisAlignment: imageUploadCA,
+                      showValidation: true,
+                      widget:PickImage(image: image, title: "Select Logo",cb: (v){
+                        setState(() {
+                          image=v;
+                        });
+                      },),
+                  ),
+                  SizedBox(height: inBetweenHeight,),
                   SizedBox(height: 50,),
                   Container(
                     width: textFormWidth+(40),
@@ -227,7 +236,8 @@ class _CategoryAddNewState extends State<CategoryAddNew> {
 
 
                     }),
-                  )
+                  ),
+                  SizedBox(height: 50,),
                 ],
               ),
             ),

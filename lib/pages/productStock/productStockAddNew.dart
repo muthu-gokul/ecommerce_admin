@@ -5,6 +5,7 @@ import 'package:ecommerce_admin/widgets/buttons/backBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/swtich.dart';
 import 'package:ecommerce_admin/widgets/customOverLayPopUp.dart';
+import 'package:ecommerce_admin/widgets/customPopUp.dart';
 import 'package:ecommerce_admin/widgets/pickImage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -66,9 +67,9 @@ class _ProductStockAddState extends State<ProductStockAdd> {
             width: SizeConfig.screenWidth,
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: cA1,
                 children: [
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Product Name",
@@ -78,13 +79,24 @@ class _ProductStockAddState extends State<ProductStockAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
-                  PickImage(image: image, title: "Image",cb: (v){
-                    setState(() {
-                      image=v;
-                    });
-                  },),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
+                  ProductTextField(
+                    width: textFormWidth,
+                    title: "Brand Logo",
+                    validation: validationList[2],
+                    isTextField: false,
+                    onComplete: (){
+                      node.unfocus();
+                    },
+                    crossAxisAlignment: imageUploadCA,
+                    showValidation: true,
+                    widget:PickImage(image: image, title: "Select Logo",cb: (v){
+                      setState(() {
+                        image=v;
+                      });
+                    },),
+                  ),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Category",
@@ -94,7 +106,7 @@ class _ProductStockAddState extends State<ProductStockAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Stock",
@@ -104,7 +116,7 @@ class _ProductStockAddState extends State<ProductStockAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "Status",
@@ -112,34 +124,28 @@ class _ProductStockAddState extends State<ProductStockAdd> {
                     textEditingController: status,
                     onComplete: (){},
                     isTextField: false,
-                    widget: OverLayPopUp(
-                      ontap: (){
-                        setState(() {
-                          showCategoryDropDown=!showCategoryDropDown;
-                        });
-                      },
-                      width: textFormWidth,
-                      hinttext: "Select Status",
-                      selectedValue: selectedCategory,
-                      showPopUp: showCategoryDropDown,
+                    widget:  CustomPopup(
+                      hintText: "Select Status",
                       data: pn.categoryDropDownList,
-                      onitemTap: (i){
+                      selectedValue: selectedCategory,
+                      width:textFormWidth ,
+                      leftMargin: 0,
+                      edgeInsets: EdgeInsets.only(left: 0),
+                      onSelect: (v){
                         setState(() {
-                          showCategoryDropDown=false;
-                          selectedCategory=pn.categoryDropDownList[i];
+                          selectedCategory=v;
                         });
                       },
-                      isToJson: false,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 50,),
                   Container(
                     alignment:Alignment.center,
                     child: SaveBtn(
                       ontap: (){},
                     ),
                   ),
-                  SizedBox(height: 10,),
+
                 ],
               ),
             ),

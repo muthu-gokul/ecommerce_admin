@@ -66,9 +66,9 @@ class _DeliveryChargeAddNewState extends State<DeliveryChargeAddNew> {
                 width: SizeConfig.screenWidth,
                 child: SingleChildScrollView(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: cA1,
                     children: [
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
 
 
                       ProductTextField(
@@ -82,7 +82,7 @@ class _DeliveryChargeAddNewState extends State<DeliveryChargeAddNew> {
                         regExp: decimalReg,
                         textInputType: TextInputType.number,
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
                       ProductTextField(
                         width: textFormWidth,
                         title: "Price To",
@@ -94,7 +94,7 @@ class _DeliveryChargeAddNewState extends State<DeliveryChargeAddNew> {
                         regExp: decimalReg,
                         textInputType: TextInputType.number,
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
                       ProductTextField(
                         width: textFormWidth,
                         title: "Amount",
@@ -105,7 +105,7 @@ class _DeliveryChargeAddNewState extends State<DeliveryChargeAddNew> {
                         regExp: decimalReg,
                         textInputType: TextInputType.number,
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: inBetweenHeight,),
 
 
 
@@ -120,7 +120,6 @@ class _DeliveryChargeAddNewState extends State<DeliveryChargeAddNew> {
                         }),
                       ),
 
-                      SizedBox(height: 100,),
                     ],
                   ),
                 ),

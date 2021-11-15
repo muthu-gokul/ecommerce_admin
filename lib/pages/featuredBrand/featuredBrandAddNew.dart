@@ -75,9 +75,9 @@ class _FeaturedBrandAddState extends State<FeaturedBrandAdd> {
             width: SizeConfig.screenWidth,
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: cA1,
                 children: [
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "Brand Name",
@@ -93,6 +93,7 @@ class _FeaturedBrandAddState extends State<FeaturedBrandAdd> {
                       },
                       width: textFormWidth,
                       hinttext: "Brand Name",
+                      crossAxisAlignment: cA2,
                       selectedValue: selectedCategory,
                       showPopUp: showCategoryDropDown,
                       data: pn.categoryDropDownList,
@@ -105,7 +106,7 @@ class _FeaturedBrandAddState extends State<FeaturedBrandAdd> {
                       isToJson: false,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "Category Type",
@@ -121,6 +122,7 @@ class _FeaturedBrandAddState extends State<FeaturedBrandAdd> {
                       },
                       width: textFormWidth,
                       hinttext: "Select Category Type",
+                      crossAxisAlignment: cA2,
                       selectedValue: selectedCategoryType,
                       showPopUp: showCategoryTypeDropDown,
                       data: pn.categoryDropDownList,
@@ -133,7 +135,7 @@ class _FeaturedBrandAddState extends State<FeaturedBrandAdd> {
                       isToJson: false,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "Sub Category Name:",
@@ -149,6 +151,7 @@ class _FeaturedBrandAddState extends State<FeaturedBrandAdd> {
                       },
                       width: textFormWidth,
                       hinttext: "Select Sub Category",
+                      crossAxisAlignment: cA2,
                       selectedValue: selectedSubCategory,
                       showPopUp: showSubCategoryDropDown,
                       data: pn.categoryDropDownList,
@@ -161,7 +164,7 @@ class _FeaturedBrandAddState extends State<FeaturedBrandAdd> {
                       isToJson: false,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "Brand",
@@ -177,6 +180,7 @@ class _FeaturedBrandAddState extends State<FeaturedBrandAdd> {
                       },
                       width: textFormWidth,
                       hinttext: "Select Brand",
+                      crossAxisAlignment: cA2,
                       selectedValue: selectedBrand,
                       showPopUp: showBrandDropDown,
                       data: pn.categoryDropDownList,
@@ -189,7 +193,7 @@ class _FeaturedBrandAddState extends State<FeaturedBrandAdd> {
                       isToJson: false,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "Product",
@@ -205,6 +209,7 @@ class _FeaturedBrandAddState extends State<FeaturedBrandAdd> {
                       },
                       width: textFormWidth,
                       hinttext: "Select Product",
+                      crossAxisAlignment: cA2,
                       selectedValue: selectedProduct,
                       showPopUp: showProductDropDown,
                       data: pn.categoryDropDownList,
@@ -217,7 +222,7 @@ class _FeaturedBrandAddState extends State<FeaturedBrandAdd> {
                       isToJson: false,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "Display",
@@ -232,7 +237,7 @@ class _FeaturedBrandAddState extends State<FeaturedBrandAdd> {
                       },
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Sort Order",
@@ -242,19 +247,31 @@ class _FeaturedBrandAddState extends State<FeaturedBrandAdd> {
                         node.unfocus();
                       }
                   ),
+                  SizedBox(height: inBetweenHeight+10,),
+                  ProductTextField(
+                      width: textFormWidth,
+                      title: "Select Slider",
+                      validation: validationList[1],
+                      isTextField: false,
+                      onComplete: (){
+                        node.unfocus();
+                      },
+                      crossAxisAlignment: imageUploadCA,
+                      widget: PickImage(image: image, title: "Select Slider",cb: (v){
+                        setState(() {
+                          image=v;
+                        });
+                      },),
+                  ),
 
-                  PickImage(image: image, title: "Select Slider",cb: (v){
-                    setState(() {
-                      image=v;
-                    });
-                  },),
+                  SizedBox(height: 50,),
                   Container(
                     alignment:Alignment.center,
                     child: SaveBtn(
                       ontap: (){},
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 50,),
                 ],
               ),
             ),

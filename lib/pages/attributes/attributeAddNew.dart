@@ -5,6 +5,7 @@ import 'package:ecommerce_admin/widgets/buttons/backBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/swtich.dart';
 import 'package:ecommerce_admin/widgets/customOverLayPopUp.dart';
+import 'package:ecommerce_admin/widgets/customPopUp.dart';
 import 'package:ecommerce_admin/widgets/customTextField.dart';
 import 'package:ecommerce_admin/widgets/pickImage.dart';
 import 'package:flutter/material.dart';
@@ -73,9 +74,9 @@ class _AttributeAddState extends State<AttributeAdd> {
             width: SizeConfig.screenWidth,
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment:cA1,
                 children: [
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Name",
@@ -85,7 +86,7 @@ class _AttributeAddState extends State<AttributeAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Slug",
@@ -95,7 +96,7 @@ class _AttributeAddState extends State<AttributeAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "Type",
@@ -103,27 +104,21 @@ class _AttributeAddState extends State<AttributeAdd> {
                     textEditingController: type,
                     onComplete: (){},
                     isTextField: false,
-                    widget: OverLayPopUp(
-                      ontap: (){
-                        setState(() {
-                          showCategoryDropDown=!showCategoryDropDown;
-                        });
-                      },
-                      width: textFormWidth,
-                      hinttext: "Select Type",
-                      selectedValue: selectedCategory,
-                      showPopUp: showCategoryDropDown,
+                    widget:  CustomPopup(
+                      hintText: "Select Type",
                       data: pn.categoryDropDownList,
-                      onitemTap: (i){
+                      selectedValue: selectedCategory,
+                      width:textFormWidth ,
+                      leftMargin: 0,
+                      edgeInsets: EdgeInsets.only(left: 0),
+                      onSelect: (v){
                         setState(() {
-                          showCategoryDropDown=false;
-                          selectedCategory=pn.categoryDropDownList[i];
+                          selectedCategory=v;
                         });
                       },
-                      isToJson: false,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Description",
@@ -133,50 +128,39 @@ class _AttributeAddState extends State<AttributeAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
-                  Container(
-                    width: textFormWidth,
+                  SizedBox(height: inBetweenHeight,),
+                  ProductTextField(
+                      width: textFormWidth,
+                      title: "Active",
+                      validation: validationList[1],
+                      isTextField: false,
+                      onComplete: (){
+                        node.unfocus();
+                      },
+                      widget: CustomSwitch(value: true, onchange: (v){
 
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(width: 20,),
-                        TextFieldHeader(
-                          title: "Active",
-                          padd: paddTextFieldHeader2,
-                        ),
-                        Spacer(),
-                        CustomSwitch(value: true, onchange: (v){
-
-                        })
-                      ],
-                    ),
+                      }),
                   ),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
-                    title: "Default Sort Order",
+                    title: "Select Default Sort Order",
                     validation: validationList[1],
                     textEditingController: sortorders,
                     onComplete: (){},
                     isTextField: false,
-                    widget: OverLayPopUp(
-                      ontap: (){
-                        setState(() {
-                          showSortOrderDropDown=!showSortOrderDropDown;
-                        });
-                      },
-                      width: textFormWidth,
-                      hinttext: "Select Default Sort Order",
-                      selectedValue: selectedSortOrder,
-                      showPopUp: showSortOrderDropDown,
+                    widget:  CustomPopup(
+                      hintText: "Select Default Sort Order",
                       data: pn.categoryDropDownList,
-                      onitemTap: (i){
+                      selectedValue: selectedCategory,
+                      width:textFormWidth ,
+                      leftMargin: 0,
+                      edgeInsets: EdgeInsets.only(left: 0),
+                      onSelect: (v){
                         setState(() {
-                          showSortOrderDropDown=false;
-                          selectedSortOrder=pn.categoryDropDownList[i];
+                          selectedCategory=v;
                         });
                       },
-                      isToJson: false,
                     ),
                   ),
                   SizedBox(height: 50,),

@@ -3,6 +3,7 @@ import 'package:ecommerce_admin/model/brandModel.dart';
 import 'package:ecommerce_admin/notifiers/productNotifier.dart';
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
 import 'package:ecommerce_admin/pages/brand/brandGrid.dart';
+import 'package:ecommerce_admin/pages/product/productAddNew.dart';
 import 'package:ecommerce_admin/widgets/buttons/backBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
 import 'package:ecommerce_admin/widgets/customTextField.dart';
@@ -49,58 +50,44 @@ class _BrandAddNewState extends State<BrandAddNew> {
             height: SizeConfig.screenHeight,
             width: SizeConfig.screenWidth,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: 20,),
-                TextFieldHeader(
-                  title: "Brand Name",
+                SizedBox(height: inBetweenHeight,),
+                ProductTextField(
+                    width: textFormWidth,
+                    title: "Brand Name",
+                    validation: validationList[0],
+                    textEditingController: title,
+                    onComplete: (){
+                      node.unfocus();
+                    }
                 ),
-                AddNewLabelTextField(
-                  margin: marginAddNewTextField,
-                  width: textFormWidth,
-                  textEditingController: title,
-                  hintText: "Brand Title",
-                  ontap: (){
-
-                  },
-                  onChange: (v){
-
-                  },
-                  onEditComplete: (){
-                    node.unfocus();
-                    setState(() {
-                      slug.text=title.text.replaceAll(" ", "-").replaceAll(",", "");
-                    });
-                  },
+                SizedBox(height: inBetweenHeight,),
+                ProductTextField(
+                    width: textFormWidth,
+                    title: "URL Slug",
+                    validation: validationList[1],
+                    textEditingController: slug,
+                    onComplete: (){
+                      node.unfocus();
+                    }
                 ),
-                validationList[0]?ValidationErrorText(title: validationText,):Container(),
-                SizedBox(height: 20,),
-                TextFieldHeader(
-                  title: "URL Slug",
+                SizedBox(height: inBetweenHeight,),
+                ProductTextField(
+                    width: textFormWidth,
+                    title: "Select Logo",
+                    validation: validationList[2],
+                    isTextField: false,
+                    onComplete: (){
+                      node.unfocus();
+                    },
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                    widget:  PickImage(image: image, title: "Select Logo",cb: (v){
+                      setState(() {
+                        image=v;
+                      });
+                    },),
                 ),
-                AddNewLabelTextField(
-                  width: textFormWidth,
-                  margin: marginAddNewTextField,
-                  textEditingController: slug,
-                  hintText: "URL Slug",
-                  ontap: (){
-
-                  },
-                  onChange: (v){
-
-                  },
-                  onEditComplete: (){
-                    node.unfocus();
-                  },
-                ),
-                validationList[1]?ValidationErrorText(title: validationText,):Container(),
-                SizedBox(height: 20,),
-                PickImage(image: image, title: "Select Logo",cb: (v){
-                  setState(() {
-                    image=v;
-                  });
-                },),
-                validationList[2]?ValidationErrorText(title: validationText,):Container(),
                 SizedBox(height: 50,),
                 Container(
                   width: textFormWidth+(SizeConfig.width40!),

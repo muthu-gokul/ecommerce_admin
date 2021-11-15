@@ -64,9 +64,9 @@ class _EmailSettingAddState extends State<EmailSettingAdd> {
             width: SizeConfig.screenWidth,
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: cA1,
                 children: [
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "SMTP Host",
@@ -76,7 +76,7 @@ class _EmailSettingAddState extends State<EmailSettingAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "SMTP Post",
@@ -86,7 +86,7 @@ class _EmailSettingAddState extends State<EmailSettingAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "SMTP Username",
@@ -96,7 +96,7 @@ class _EmailSettingAddState extends State<EmailSettingAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "SMTP Password",
@@ -106,7 +106,7 @@ class _EmailSettingAddState extends State<EmailSettingAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Full Name",
@@ -116,7 +116,7 @@ class _EmailSettingAddState extends State<EmailSettingAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "From Email",
@@ -126,7 +126,7 @@ class _EmailSettingAddState extends State<EmailSettingAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "Active",
@@ -141,13 +141,14 @@ class _EmailSettingAddState extends State<EmailSettingAdd> {
                       },
                     ),
                   ),
+                  SizedBox(height: 50,),
                   Container(
                     alignment:Alignment.center,
                     child: SaveBtn(
                       ontap: (){},
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 50,),
                 ],
               ),
             ),

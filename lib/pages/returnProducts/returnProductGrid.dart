@@ -1,5 +1,5 @@
 import 'package:ecommerce_admin/model/brandModel.dart';
-import 'package:ecommerce_admin/model/returnProducts/returnProductsAddNew.dart';
+import 'package:ecommerce_admin/pages/returnProducts/returnProductsAddNew.dart';
 import 'package:ecommerce_admin/notifiers/productNotifier.dart';
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
 import 'package:ecommerce_admin/pages/brand/brandAddNew.dart';

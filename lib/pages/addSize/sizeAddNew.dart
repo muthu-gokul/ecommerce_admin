@@ -5,6 +5,7 @@ import 'package:ecommerce_admin/widgets/buttons/backBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/swtich.dart';
 import 'package:ecommerce_admin/widgets/customOverLayPopUp.dart';
+import 'package:ecommerce_admin/widgets/customPopUp.dart';
 import 'package:ecommerce_admin/widgets/customTextField.dart';
 import 'package:ecommerce_admin/widgets/pickImage.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +62,7 @@ class _SizeAddState extends State<SizeAdd> {
           //  color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor3,
           child: Row(
             children: [
-              Text("Add NeW Size / Add New",style: ts18(Colors.white,fontsize: 20,fontfamily: 'RM'),),
+              Text("Size / Add New",style: ts18(Colors.white,fontsize: 20,fontfamily: 'RM'),),
             ],
           ),
         ),
@@ -73,9 +74,9 @@ class _SizeAddState extends State<SizeAdd> {
             width: SizeConfig.screenWidth,
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: cA1,
                 children: [
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Name",
@@ -85,7 +86,7 @@ class _SizeAddState extends State<SizeAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Slug",
@@ -95,7 +96,7 @@ class _SizeAddState extends State<SizeAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Description",
@@ -105,7 +106,7 @@ class _SizeAddState extends State<SizeAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                     width: textFormWidth,
                     title: "Button Shape Design",
@@ -113,44 +114,34 @@ class _SizeAddState extends State<SizeAdd> {
                     textEditingController: sortorders,
                     onComplete: (){},
                     isTextField: false,
-                    widget: OverLayPopUp(
-                      ontap: (){
-                        setState(() {
-                          showSortOrderDropDown=!showSortOrderDropDown;
-                        });
-                      },
-                      width: textFormWidth,
-                      hinttext: "Select Button Shape Design",
-                      selectedValue: selectedSortOrder,
-                      showPopUp: showSortOrderDropDown,
+                    widget: CustomPopup(
+                      hintText: "Select Button Shape Design",
                       data: pn.categoryDropDownList,
-                      onitemTap: (i){
+                      selectedValue: selectedCategory,
+                      width:textFormWidth ,
+                      leftMargin: 0,
+                      edgeInsets: EdgeInsets.only(left: 0),
+                      onSelect: (v){
                         setState(() {
-                          showSortOrderDropDown=false;
-                          selectedSortOrder=pn.categoryDropDownList[i];
+                          selectedCategory=v;
                         });
                       },
-                      isToJson: false,
                     ),
-                  ),
-                  SizedBox(height: 10,),
-                  Container(
-                    width: textFormWidth,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(width: 20,),
-                        TextFieldHeader(
-                          title: "Active",
-                          padd: paddTextFieldHeader2,
-                        ),
-                        Spacer(),
-                        CustomSwitch(value: true, onchange: (v){
-                      })
-                      ],
-                    ),
-                  ),
 
+                  ),
+                  SizedBox(height: inBetweenHeight,),
+                  ProductTextField(
+                    width: textFormWidth,
+                    title: "Active",
+                    validation: validationList[1],
+                    isTextField: false,
+                    onComplete: (){
+                      node.unfocus();
+                    },
+                    widget: CustomSwitch(value: true, onchange: (v){
+
+                    }),
+                  ),
                   SizedBox(height: 50,),
                   Container(
                     alignment:Alignment.center,
@@ -158,7 +149,7 @@ class _SizeAddState extends State<SizeAdd> {
                       ontap: (){},
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                 ],
               ),
             ),

@@ -6,6 +6,7 @@ import 'package:ecommerce_admin/widgets/buttons/backBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/swtich.dart';
 import 'package:ecommerce_admin/widgets/customOverLayPopUp.dart';
+import 'package:ecommerce_admin/widgets/customPopUp.dart';
 import 'package:ecommerce_admin/widgets/customTextField.dart';
 import 'package:ecommerce_admin/widgets/pickImage.dart';
 import 'package:flutter/material.dart';
@@ -108,12 +109,12 @@ class _DeliveryBoysAddState extends State<DeliveryBoysAdd> with TickerProviderSt
             width: SizeConfig.screenWidth,
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: cA1,
                 children: [
                   SizedBox(height: 10,),
                   Container(
                       padding:  EdgeInsets.only(left: 10,bottom: 10,top: 10),
-                      alignment: Alignment.centerLeft,
+                    //  alignment: Alignment.centerLeft,
                       child: Text("Delivery Boy Information",style: ts18(grey1,fontsize: 20),)
                   ),
                   Column(
@@ -121,7 +122,7 @@ class _DeliveryBoysAddState extends State<DeliveryBoysAdd> with TickerProviderSt
                     children: [
                       SizedBox(height: 10,),
                       ProductTextField(
-                          width: textFormWidth+20,
+                          width: textFormWidth,
                           title: "Name  ",
                           validation: validationList[1],
                           onComplete: (){
@@ -130,7 +131,7 @@ class _DeliveryBoysAddState extends State<DeliveryBoysAdd> with TickerProviderSt
                       ),
                       SizedBox(height: 10,),
                       ProductTextField(
-                          width: textFormWidth+20,
+                          width: textFormWidth,
                           title: "Email Id",
                           validation: validationList[1],
                           onComplete: (){
@@ -139,7 +140,7 @@ class _DeliveryBoysAddState extends State<DeliveryBoysAdd> with TickerProviderSt
                       ),
                       SizedBox(height: 10,),
                       ProductTextField(
-                          width: textFormWidth+20,
+                          width: textFormWidth,
                           title: "Mobile Number",
                           validation: validationList[1],
                           onComplete: (){
@@ -148,30 +149,24 @@ class _DeliveryBoysAddState extends State<DeliveryBoysAdd> with TickerProviderSt
                       ),
                       SizedBox(height: 10,),
                       ProductTextField(
-                        width: textFormWidth+20,
+                        width: textFormWidth,
                         textEditingController: cmpyName,
                         title: "Country:",
                         validation: validationList[1],
                         onComplete: (){},
                         isTextField: false,
-                        widget: OverLayPopUp(
-                          ontap: (){
-                            setState(() {
-                              showSubCategoryDropDown=!showSubCategoryDropDown;
-                            });
-                          },
-                          width: textFormWidth+20,
-                          hinttext: "Select Country",
-                          selectedValue: selectedSubCategory,
-                          showPopUp: showSubCategoryDropDown,
+                        widget: CustomPopup(
+                          hintText: "Select Country",
                           data: pn.categoryDropDownList,
-                          onitemTap: (i){
+                          selectedValue: selectedCategory,
+                          width:textFormWidth ,
+                          leftMargin: 0,
+                          edgeInsets: EdgeInsets.only(left: 0),
+                          onSelect: (v){
                             setState(() {
-                              showSubCategoryDropDown=false;
-                              selectedSubCategory=pn.categoryDropDownList[i];
+                              selectedCategory=v;
                             });
                           },
-                          isToJson: false,
                         ),
                       ),
                       SizedBox(height: 10,),
@@ -182,35 +177,40 @@ class _DeliveryBoysAddState extends State<DeliveryBoysAdd> with TickerProviderSt
                         validation: validationList[1],
                         onComplete: (){},
                         isTextField: false,
-                        widget: OverLayPopUp(
-                          ontap: (){
-                            setState(() {
-                              showSubCategoryDropDown=!showSubCategoryDropDown;
-                            });
-                          },
-                          width: textFormWidth+20,
-                          hinttext: "Select City",
-                          selectedValue: selectedSubCategory,
-                          showPopUp: showSubCategoryDropDown,
+                        widget: CustomPopup(
+                          hintText: "Select City",
                           data: pn.categoryDropDownList,
-                          onitemTap: (i){
+                          selectedValue: selectedCategory,
+                          width:textFormWidth ,
+                          leftMargin: 0,
+                          edgeInsets: EdgeInsets.only(left: 0),
+                          onSelect: (v){
                             setState(() {
-                              showSubCategoryDropDown=false;
-                              selectedSubCategory=pn.categoryDropDownList[i];
+                              selectedCategory=v;
                             });
                           },
-                          isToJson: false,
                         ),
                       ),
-                      SizedBox(height: 10,),
-                      PickImage(image: image, title: "Choose File",cb: (v){
-                        setState(() {
-                          image=v;
-                        });
-                      },),
+                      SizedBox(height: 10+10,),
+                      ProductTextField(
+                        width: textFormWidth,
+                        title: "Choose File",
+                        validation: validationList[2],
+                        isTextField: false,
+                        onComplete: (){
+                          node.unfocus();
+                        },
+                        crossAxisAlignment: imageUploadCA,
+                        showValidation: true,
+                        widget:PickImage(image: image, title: "Select Logo",cb: (v){
+                          setState(() {
+                            image=v;
+                          });
+                        },),
+                      ),
                       SizedBox(height: 10,),
                       ProductTextField(
-                        width: textFormWidth+40,
+                        width: textFormWidth,
                         title: "Address",
                         validation: validationList[1],
                         onComplete: (){
@@ -219,7 +219,7 @@ class _DeliveryBoysAddState extends State<DeliveryBoysAdd> with TickerProviderSt
                       ),
                       SizedBox(height: 10,),
                       ProductTextField(
-                          width: textFormWidth+20,
+                          width: textFormWidth,
                           title: "Vehicle No",
                           validation: validationList[1],
                           onComplete: (){
@@ -228,53 +228,85 @@ class _DeliveryBoysAddState extends State<DeliveryBoysAdd> with TickerProviderSt
                       ),
                       SizedBox(height: 10,),
                       ProductTextField(
-                        width: textFormWidth+20,
+                        width: textFormWidth,
                         title: "Licence No",
                         validation: validationList[1],
                         onComplete: (){
                           node.unfocus();
                         },
                       ),
-                      SizedBox(height: 10,),
-                      PickImage(image: image, title: "Licence",cb: (v){
-                        setState(() {
-                          image=v;
-                        });
-                      },),
+                      SizedBox(height: 10+10,),
+                      ProductTextField(
+                        width: textFormWidth,
+                        title: "Choose File",
+                        validation: validationList[2],
+                        isTextField: false,
+                        onComplete: (){
+                          node.unfocus();
+                        },
+                        crossAxisAlignment: imageUploadCA,
+                        showValidation: true,
+                        widget:PickImage(image: image, title: "Select File",cb: (v){
+                          setState(() {
+                            image=v;
+                          });
+                        },),
+                      ),
                       SizedBox(height: 10,),
                       ProductTextField(
-                        width: textFormWidth+20,
+                        width: textFormWidth,
                         title: "RC No",
                         validation: validationList[1],
                         onComplete: (){
                           node.unfocus();
                         },
                       ),
-                      SizedBox(height: 10,),
-                      PickImage(image: image, title: "Rc Image",cb: (v){
-                        setState(() {
-                          image=v;
-                        });
-                      },),
-                      SizedBox(height: 10,),
+                      SizedBox(height: 10+10,),
+                      ProductTextField(
+                        width: textFormWidth,
+                        title: "Choose File",
+                        validation: validationList[2],
+                        isTextField: false,
+                        onComplete: (){
+                          node.unfocus();
+                        },
+                        crossAxisAlignment: imageUploadCA,
+                        showValidation: true,
+                        widget:PickImage(image: image, title: "Select File",cb: (v){
+                          setState(() {
+                            image=v;
+                          });
+                        },),
+                      ),
                       SizedBox(height: 10,),
                       ProductTextField(
-                        width: textFormWidth+20,
+                        width: textFormWidth,
                         title: "Insurance No",
                         validation: validationList[1],
                         onComplete: (){
                           node.unfocus();
                         },
                       ),
-                      SizedBox(height: 10,),
-                      PickImage(image: image, title: "Insurance",cb: (v){
-                        setState(() {
-                          image=v;
-                        });
-                      },),
+                      SizedBox(height: 10+10,),
+                      ProductTextField(
+                        width: textFormWidth,
+                        title: "Choose File",
+                        validation: validationList[2],
+                        isTextField: false,
+                        onComplete: (){
+                          node.unfocus();
+                        },
+                        crossAxisAlignment: imageUploadCA,
+                        showValidation: true,
+                        widget:PickImage(image: image, title: "Select File",cb: (v){
+                          setState(() {
+                            image=v;
+                          });
+                        },),
+                      ),
                       SizedBox(height: 10,),
                       ProductTextField(
-                          width: textFormWidth+20,
+                          width: textFormWidth,
                           title: "Qualification",
                           validation: validationList[1],
 
@@ -312,55 +344,58 @@ class _DeliveryBoysAddState extends State<DeliveryBoysAdd> with TickerProviderSt
 
                   CustomExpansionTile(
                     expand: deliveryBankInfoOpen,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ProductTextField(
-                            width: textFormWidth+20,
-                            title: "Bank Name",
-                            validation: validationList[1],
+                    child: Container(
+                      width: SizeConfig.screenWidth,
+                      child: Column(
+                        crossAxisAlignment: cA1,
+                        children: [
+                          ProductTextField(
+                              width: textFormWidth,
+                              title: "Bank Name",
+                              validation: validationList[1],
 
-                            onComplete: (){
-                              node.unfocus();
-                            }
-                        ),
-                        SizedBox(height: 10,),
-                        ProductTextField(
-                            width: textFormWidth+20,
-                            title: "Account Name",
-                            validation: validationList[1],
-                            onComplete: (){
-                              node.unfocus();
-                            }
-                        ),
-                        SizedBox(height: 10,),
-                        ProductTextField(
-                            width: textFormWidth+20,
-                            title: "Bank Account No",
-                            validation: validationList[1],
-                            onComplete: (){
-                              node.unfocus();
-                            }
-                        ),
-                        SizedBox(height: 10,),
-                        ProductTextField(
-                            width: textFormWidth+20,
-                            title: "IFSC Code",
-                            validation: validationList[1],
-                            onComplete: (){
-                              node.unfocus();
-                            }
-                        ),
-                        SizedBox(height: 10,),
-                        ProductTextField(
-                            width: textFormWidth+20,
-                            title: "Bank Branch",
-                            validation: validationList[1],
-                            onComplete: (){
-                              node.unfocus();
-                            }
-                        ),
-                      ],
+                              onComplete: (){
+                                node.unfocus();
+                              }
+                          ),
+                          SizedBox(height: 10,),
+                          ProductTextField(
+                              width: textFormWidth,
+                              title: "Account Name",
+                              validation: validationList[1],
+                              onComplete: (){
+                                node.unfocus();
+                              }
+                          ),
+                          SizedBox(height: 10,),
+                          ProductTextField(
+                              width: textFormWidth,
+                              title: "Bank Account No",
+                              validation: validationList[1],
+                              onComplete: (){
+                                node.unfocus();
+                              }
+                          ),
+                          SizedBox(height: 10,),
+                          ProductTextField(
+                              width: textFormWidth,
+                              title: "IFSC Code",
+                              validation: validationList[1],
+                              onComplete: (){
+                                node.unfocus();
+                              }
+                          ),
+                          SizedBox(height: 10,),
+                          ProductTextField(
+                              width: textFormWidth,
+                              title: "Bank Branch",
+                              validation: validationList[1],
+                              onComplete: (){
+                                node.unfocus();
+                              }
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(height: 10,),
@@ -389,86 +424,84 @@ class _DeliveryBoysAddState extends State<DeliveryBoysAdd> with TickerProviderSt
                   SizedBox(height: 10,),
                   CustomExpansionTile(
                     expand: deliveryCongigInfoOpen,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: textFormWidth+20,
-                          alignment: Alignment.centerLeft,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(width: 20,),
-                              TextFieldHeader(
-                                title: "Monthly Salary",
-                                padd: paddTextFieldHeader2,
-                              ),
-                              Spacer(),
-                              CustomSwitch(value: monthlySalaryInfoOpen, onchange: (v){
-                                setState(() {
-                                  monthlySalaryInfoOpen=!monthlySalaryInfoOpen;
-                                  perOrderCommissionInfoOpen=false;
-                                });
-                              })
-                            ],
+                    child: Container(
+                      width: SizeConfig.screenWidth,
+                      child: Column(
+                        crossAxisAlignment: cA1,
+                        children: [
+                          ProductTextField(
+                            width: textFormWidth,
+                            title: "Monthly Salary",
+                            validation: validationList[1],
+                            isTextField: false,
+                            onComplete: (){
+                              node.unfocus();
+                            },
+                            widget: CustomSwitch(value: monthlySalaryInfoOpen, onchange: (v){
+                              setState(() {
+                                monthlySalaryInfoOpen=!monthlySalaryInfoOpen;
+                                perOrderCommissionInfoOpen=false;
+                              });
+                            }),
                           ),
-                        ),
-                        SizedBox(height: 10,),
-                       CustomExpansionTile(
-                         expand: monthlySalaryInfoOpen,
-                         child: ProductTextField(
-                             width: textFormWidth+20,
-                             title: "Salary Amount",
-                             validation: validationList[1],
+                          SizedBox(height: 10,),
+                         CustomExpansionTile(
+                           expand: monthlySalaryInfoOpen,
+                           child: Align(
+                             alignment: Alignment.center,
+                             child: ProductTextField(
+                                 width: textFormWidth,
+                                 title: "Salary Amount",
+                                 validation: validationList[1],
 
-                             onComplete: (){
-                               node.unfocus();
-                             },
-                           suffixIcon: Padding(
-                             padding:  EdgeInsets.only(top: 12.0),
-                             child: Text('₹',style: ts18(grey1,fontsize: 20),),
+                                 onComplete: (){
+                                   node.unfocus();
+                                 },
+                               suffixIcon: Padding(
+                                 padding:  EdgeInsets.only(top: 12.0),
+                                 child: Text('₹',style: ts18(grey1,fontsize: 20),),
+                               ),
+                             ),
                            ),
                          ),
-                       ),
-                        SizedBox(height: 10,),
-                        Container(
-                          width: textFormWidth+20,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(width: 20,),
-                              TextFieldHeader(
-                                title: "Per Order Commission",
-                                padd: paddTextFieldHeader2,
-                              ),
-                              Spacer(),
-                              CustomSwitch(value: perOrderCommissionInfoOpen, onchange: (v){
-                                setState(() {
-                                  perOrderCommissionInfoOpen=!perOrderCommissionInfoOpen;
-                                  monthlySalaryInfoOpen=false;
-                                });
-                              })
-                            ],
+                          SizedBox(height: 10,),
+                          ProductTextField(
+                            width: textFormWidth,
+                            title: "Per Order Commission",
+                            validation: validationList[1],
+                            isTextField: false,
+                            onComplete: (){
+                              node.unfocus();
+                            },
+                            widget: CustomSwitch(value: perOrderCommissionInfoOpen, onchange: (v){
+                              setState(() {
+                                perOrderCommissionInfoOpen=!perOrderCommissionInfoOpen;
+                                monthlySalaryInfoOpen=false;
+                              });
+                            }),
                           ),
-                        ),
-                        SizedBox(height: 10,),
-                        CustomExpansionTile(
-                          expand: perOrderCommissionInfoOpen,
-                          child: ProductTextField(
-                              width: textFormWidth+20,
-                              title: "Commission Rate",
-                              validation: validationList[1],
+                          SizedBox(height: 10,),
+                          CustomExpansionTile(
+                            expand: perOrderCommissionInfoOpen,
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: ProductTextField(
+                                  width: textFormWidth,
+                                  title: "Commission Rate",
+                                  validation: validationList[1],
 
-                              onComplete: (){
-                                node.unfocus();
-                              },
-                              suffixIcon: Padding(
-                                padding:  EdgeInsets.only(top: 12.0),
-                                   child: Text('₹  %',style: ts18(grey1,fontsize: 20),),
+                                  onComplete: (){
+                                    node.unfocus();
+                                  },
+                                  suffixIcon: Padding(
+                                    padding:  EdgeInsets.only(top: 12.0),
+                                       child: Text('₹  %',style: ts18(grey1,fontsize: 20),),
+                                  ),
                               ),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   GestureDetector(
@@ -496,54 +529,49 @@ class _DeliveryBoysAddState extends State<DeliveryBoysAdd> with TickerProviderSt
                   SizedBox(height: 10,),
                   CustomExpansionTile(
                     expand: deliveryNotiInfoOpen,
-                    child: Column(
-                      children: [
-                        Container(
-                          width: textFormWidth+20,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(width: 20,),
-                              TextFieldHeader(
-                                title: "Send Mail",
-                                padd: paddTextFieldHeader2,
-                              ),
-                              Spacer(),
-                              CustomSwitch(value: true, onchange: (v){
+                    child: Container(
+                      width: SizeConfig.screenWidth,
+                      child: Column(
+                        crossAxisAlignment: cA1,
+                        children: [
+                          ProductTextField(
+                            width: textFormWidth,
+                            title: "Send Mail",
+                            validation: validationList[1],
+                            isTextField: false,
+                            onComplete: (){
+                              node.unfocus();
+                            },
+                            widget: CustomSwitch(value: true, onchange: (v){
 
-                              })
-                            ],
+                            }),
                           ),
-                        ),
-                        SizedBox(height: 10,),
-                        Container(
-                          width: textFormWidth+20,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(width: 20,),
-                              TextFieldHeader(
-                                title: "Send OTP",
-                                padd: paddTextFieldHeader2,
-                              ),
-                              Spacer(),
-                              CustomSwitch(value: true, onchange: (v){
+                          SizedBox(height: 10,),
+                          ProductTextField(
+                            width: textFormWidth,
+                            title: "Send OTP",
+                            validation: validationList[1],
+                            isTextField: false,
+                            onComplete: (){
+                              node.unfocus();
+                            },
+                            widget: CustomSwitch(value: true, onchange: (v){
 
-                              })
-                            ],
+                            }),
                           ),
-                        ),
-                      ],
+
+                        ],
+                      ),
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 50,),
                   Container(
                     alignment:Alignment.center,
                     child: SaveBtn(
                       ontap: (){},
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 50,),
                 ],
               ),
             ),

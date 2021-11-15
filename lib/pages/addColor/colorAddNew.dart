@@ -81,9 +81,9 @@ class _ColorNewAddState extends State<ColorNewAdd> {
             width: SizeConfig.screenWidth,
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: cA1,
                 children: [
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Name",
@@ -93,7 +93,7 @@ class _ColorNewAddState extends State<ColorNewAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Slug",
@@ -103,7 +103,7 @@ class _ColorNewAddState extends State<ColorNewAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Description",
@@ -113,26 +113,20 @@ class _ColorNewAddState extends State<ColorNewAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
-                  Container(
+                  SizedBox(height: inBetweenHeight,),
+                  ProductTextField(
                     width: textFormWidth,
+                    title: "Active",
+                    validation: validationList[1],
+                    isTextField: false,
+                    onComplete: (){
+                      node.unfocus();
+                    },
+                    widget: CustomSwitch(value: true, onchange: (v){
 
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(width: 20,),
-                        TextFieldHeader(
-                          title: "Active",
-                          padd: paddTextFieldHeader2,
-                        ),
-                        Spacer(),
-                        CustomSwitch(value: true, onchange: (v){
-
-                        })
-                      ],
-                    ),
+                    }),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   ProductTextField(
                       width: textFormWidth,
                       title: "Count",
@@ -142,9 +136,9 @@ class _ColorNewAddState extends State<ColorNewAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: inBetweenHeight,),
                   Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
+                    padding: const EdgeInsets.only(left: 20.0,bottom: 20),
                     child: Text("Color Picker",style: ts18(Color(0XFF5D5D5D)),),
                   ),
                   SizedBox(height: 5,),
@@ -153,18 +147,19 @@ class _ColorNewAddState extends State<ColorNewAdd> {
                     child: ColorPicker(
                       pickerColor: pickerColor,
                       onColorChanged: changeColor,
-                      showLabel: true,
+                      showLabel: false,
                       pickerAreaHeightPercent: 0.8,
+
                     ),
                   ),
-                 SizedBox(height: 30,),
+                 SizedBox(height: 50,),
                   Container(
                     alignment:Alignment.center,
                     child: SaveBtn(
                       ontap: (){},
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 50,),
                 ],
               ),
             ),
