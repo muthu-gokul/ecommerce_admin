@@ -78,8 +78,6 @@ class _ManageUsersAddNewState extends State<ManageUsersAddNew> {
                       SizedBox(height: 20,),
                       ProfilePic(),
                       SizedBox(height: 20,),
-
-
                       ProductTextField(
                         width: textFormWidth,
                         title: "First Name",
@@ -182,8 +180,6 @@ class _ManageUsersAddNewState extends State<ManageUsersAddNew> {
                           isToJson: false,
                         ),
                       ),
-
-
                       SizedBox(height: 50,),
                       Container(
                         width: textFormWidth+(40),
