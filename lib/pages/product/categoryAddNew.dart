@@ -16,6 +16,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:scutiwidgets/size.dart';
+
+import 'productAddNew.dart';
 class CategoryAddNew extends StatefulWidget {
   @override
   State<CategoryAddNew> createState() => _CategoryAddNewState();
@@ -29,6 +31,20 @@ class _CategoryAddNewState extends State<CategoryAddNew> {
   List<bool> validationList= List<bool>.generate(3, (i) => false);
 
   List<FilterModel> filters=[];
+
+  addFilter(){
+    setState(() {
+      filters.add(
+          FilterModel(title: TextEditingController(), data: [])
+      );
+    });
+  }
+
+  @override
+  void initState() {
+    addFilter();
+    super.initState();
+  }
 
 
   @override
@@ -59,113 +75,128 @@ class _CategoryAddNewState extends State<CategoryAddNew> {
             width: SizeConfig.screenWidth,
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(height: 20,),
-                  TextFieldHeader(
-                    title: "Category Name",
-
-                  ),
-                  AddNewLabelTextField(
-                    width: textFormWidth,
-                    margin: marginAddNewTextField,
-                    textEditingController: title,
-                    hintText: "Category Title",
-                    ontap: (){
-
-                    },
-                    onChange: (v){
-
-                    },
-                    onEditComplete: (){
-                      node.unfocus();
-                      setState(() {
-                        slug.text=title.text.replaceAll(" ", "-").replaceAll(",", "");
-                      });
-                    },
+                  ProductTextField(
+                      width: textFormWidth,
+                      title: "Category Name",
+                      validation: validationList[0],
+                      textEditingController: title,
+                      onComplete: (){
+                        node.unfocus();
+                      }
                   ),
                   validationList[0]?ValidationErrorText(title: validationText,):Container(),
                   SizedBox(height: 20,),
-                  TextFieldHeader(
-                    title: "Category",
-                  ),
-                  SizedBox(height: 10,),
-                  CustomPopup(
-                      hintText: "Select Category",
-                      data: pn.categoryDropDownList,
-                      selectedValue: selectedCategory,
-                      width:textFormWidth ,
-                      onSelect: (v){
-                        setState(() {
-                          selectedCategory=v;
-                        });
+                  ProductTextField(
+                      width: textFormWidth,
+                      title: "Select Category",
+                      validation: validationList[0],
+                      isTextField: false,
+                      onComplete: (){
+                        node.unfocus();
                       },
+
+                      widget:CustomPopup(
+                        hintText: "Select Category",
+                        data: pn.categoryDropDownList,
+                        selectedValue: selectedCategory,
+                        width:textFormWidth ,
+                        leftMargin: 0,
+                        edgeInsets: EdgeInsets.only(left: 0),
+                        onSelect: (v){
+                          setState(() {
+                            selectedCategory=v;
+                          });
+                        },
+
+                      ),
                   ),
                   validationList[1]?ValidationErrorText(title: validationText,):Container(),
-                  SizedBox(height: 20,),
-                  GestureDetector(
-                    onTap: (){
-                      setState(() {
-                        filters.add(
-                          FilterModel(title: TextEditingController(), data: [])
-                        );
-                      });
+                  SizedBox(height: 30,),
+                  ProductTextField(
+                    width: textFormWidth,
+                    title: "Add Filter",
+                    validation: validationList[0],
+                    isTextField: false,
+                    onComplete: (){
+                      node.unfocus();
                     },
-                    child: Container(
-                      height: 50,
-                      width: 150,
-                      margin: EdgeInsets.only(left: 20),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(color: addNewTextFieldBorder),
-                          color: Colors.white
-                      ),
-                      alignment: Alignment.center,
-                      child: Text("Add Values",style: textFormTs1,),
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  for(int i=0;i<filters.length;i++)
-                  Container(
-                    margin: EdgeInsets.only(left: 20,right: 20,bottom: 20),
-                    padding: EdgeInsets.only(top: 10,bottom: 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(color: addNewTextFieldBorder),
-                      color: Colors.white
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        AddNewLabelTextField(
-                            margin: EdgeInsets.only(left: 20,top: 10),
-                            width: 200,
-                            hintText: "Enter Title",
-                            textEditingController: filters[i].title,
-                            onChange: (v){},
-                            onEditComplete: (){
-                              node.unfocus();
-                            },
-                        ),
-                        Spacer(),
-                        MultiTags(
-                            data: filters[i].data,
-                          hintText: "Enter value",
-                          width: SizeConfig.screenWidth!-350,
-                        ),
-                        AddBtn(ontap: (){
-                          setState(() {
-                            filters.removeAt(i);
-                          });
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    widget:Expanded(
+                      child: Column(
+                        children: [
+                          for(int i=0;i<filters.length;i++)
+                            Column(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(left: 0,right: 0,bottom: 0),
+                                  width: textFormWidth,
+                                 // padding: EdgeInsets.only(top: 10,bottom: 10),
+                                  padding: EdgeInsets.all(20),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                     // border: Border.all(color: addNewTextFieldBorder),
+                                      color: addNewValuesBg
+                                  ),
+                                //  height: 200,
+                                  child: Column(
+                                 //   crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      AddNewLabelTextField(
+                                        margin: EdgeInsets.only(left: 0,top: 0),
+                                        width: textFormWidth,
+                                        labelText: "Enter Title",
+                                        textEditingController: filters[i].title,
+                                        onChange: (v){},
+                                        onEditComplete: (){
+                                          node.unfocus();
+                                        },
+                                      ),
 
-                        },
-                          color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
-                          margin: EdgeInsets.only(right: 10,top: 10),
-                          widget: Icon(Icons.clear,color: Colors.white,),
-                        ),
-                      ],
-                    ),
+                                      MultiTags(
+                                        data: filters[i].data,
+                                        hintText: "Enter Filter",
+                                        width: textFormWidth,
+                                      ),
+
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  height: 50,
+                                  width: textFormWidth,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: (){
+                                          addFilter();
+                                        },
+                                        child: Text("Add more filter",style:  ts18(Provider.of<ThemeNotifier>(context,listen: false).primaryColor3,fontfamily: 'RR'),),
+                                      ),
+                                      i==0?Container():Text("    or    ",style: ts16(Colors.grey),),
+                                      i==0?Container():GestureDetector(
+                                          onTap: (){
+                                            setState(() {
+                                              filters.removeAt(i);
+                                            });
+                                          },
+                                          child: Text("Delete",style: ts18(Colors.red),)
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                        ],
+                      ),
+                    )
                   ),
+
+                  SizedBox(height: 20,),
+
                   SizedBox(height: 20,),
                   PickImage(image: image, title: "Select Logo",cb: (v){
                     setState(() {

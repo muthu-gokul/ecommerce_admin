@@ -1,7 +1,9 @@
+import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
 import 'package:ecommerce_admin/widgets/customTextField.dart';
 import 'package:ecommerce_admin/widgets/popOver/src/popover.dart';
 import 'package:ecommerce_admin/widgets/popOver/src/popover_direction.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:scutiwidgets/size.dart';
 
 import '../constants.dart';
@@ -16,7 +18,7 @@ class CustomPopup extends StatelessWidget {
   EdgeInsets edgeInsets;
   Color color;
   CustomPopup({this.data,this.onSelect,this.selectedValue,required this.hintText,
-    required this.width,this.leftMargin=20,this.edgeInsets=const EdgeInsets.only(left:20,),this.color=Colors.transparent});
+    required this.width,this.leftMargin=20,this.edgeInsets=const EdgeInsets.only(left:20,),this.color=Colors.white});
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +106,8 @@ class CustomPopup extends StatelessWidget {
                     style: TextStyle(color: Color(0xFF2E2E2E),fontSize: 16,fontFamily: selectedValue.isEmpty?'RL':'RR'),
                   ),
                   Spacer(),
-                  Icon(Icons.arrow_drop_down,size: 25,)
+                  Icon(Icons.keyboard_arrow_down,size: 30,color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor3,),
+                  SizedBox(width: 15,)
                 ],
               ),
             ),

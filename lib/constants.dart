@@ -25,6 +25,7 @@ Color disableColor=Color(0xFFe8e8e8);
 Color addNewTextFieldText=Color(0xFF787878);
 Color addNewTextFieldBorder=Color(0xFFE5E5E5);
 Color addNewTextFieldFocusBorder=Color(0xFFE5E5E5);
+Color addNewValuesBg=Color(0xFFF6F5F9);
 Color bgColor=Color(0xFFF3F4F9);
 Color grey1=Color(0xFF595959);//nav bar title
 Color grey2=Color(0xFF565859);//grid header

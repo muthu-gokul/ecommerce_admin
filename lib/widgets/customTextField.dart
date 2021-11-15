@@ -262,14 +262,18 @@ class TextFieldHeader extends StatelessWidget {
   String title;
   EdgeInsets? padd;
   Color textColor;
-  TextFieldHeader({required this.title,this.padd= null,this.textColor=const Color(0xFF505050)});
+  double width;
+  TextFieldHeader({required this.title,this.padd= null,this.textColor=const Color(0xFF505050),this.width=250});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding:  padd==null?paddTextFieldHeader:padd!,
-      child: Text("$title",
-          style: TextStyle(fontFamily: 'RR',fontSize: 20,color: textColor)
+      child: Container(
+        width: width,
+        child: Text("$title",
+            style: TextStyle(fontFamily: 'RR',fontSize: 20,color: textColor)
+        ),
       ),
     );
   }
