@@ -30,6 +30,7 @@ class GridHeader extends StatelessWidget {
       width: width,
       alignment: alignment,
       padding: padd,
+
       child: Text("$title",style: TextStyle(fontSize: 17,color: grey2,fontFamily: 'RR'),textAlign:textAlign,),
     );
   }

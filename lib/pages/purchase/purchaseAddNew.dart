@@ -188,9 +188,7 @@ class _PurchaseAddNewState extends State<PurchaseAddNew> with TickerProviderStat
                                           onPrimary: Colors.white, // header text color
                                           onSurface: grey1, // body text color
                                         ),
-
                                       ),
-
                                       child: child!,
                                     );
                                   });

@@ -31,37 +31,47 @@ class CustomPopup extends StatelessWidget {
                 barrierColor: Colors.transparent,
                 context: context,
                 transitionDuration: const Duration(milliseconds: 150),
-                bodyBuilder: (c) => ListView.builder(
-                  itemCount: data!.length,
-                  itemBuilder: (ctx,index){
-                    return   InkWell(
-                      onTap: () {
-                        Navigator.pop(ctx);
-                        onSelect!(data![index]);
+                bodyBuilder: (c) => Column(
+                  children: [
+                   /* AddNewLabelTextField(
+                        margin: EdgeInsets.only(left: 0),
+                        scrollPadding: 500,
+                    ),*/
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: data!.length,
+                        itemBuilder: (ctx,index){
+                          return   InkWell(
+                            onTap: () {
+                              Navigator.pop(ctx);
+                              onSelect!(data![index]);
 
-                        //  onSelect!(data![index]);
+                              //  onSelect!(data![index]);
 
 
-                      },
-                      child: Container(
-                        height: 50,
-                        width:width,
-                        padding: EdgeInsets.only(left: 20,),
-                        //  margin: EdgeInsets.only(bottom: 3),
-                        alignment: Alignment.centerLeft,
-                        // color:selectedValue==data![index]?AppTheme.red: Color(0xFFf6f6f6),
-                        decoration: BoxDecoration(
-                          //borderRadius: BorderRadius.circular(8),
-                          color: Colors.white,
-                        ),
-                        child:  Text("${data![index]}",
-                          style: TextStyle(fontFamily: 'RR',fontSize: 16,color: Color(0xFF505050)
-                            // color:selectedValue==data![index]?Colors.white: Color(0xFF555555),letterSpacing: 0.1
-                          ),
-                        ),
+                            },
+                            child: Container(
+                              height: 50,
+                              width:width,
+                              padding: EdgeInsets.only(left: 20,),
+                              //  margin: EdgeInsets.only(bottom: 3),
+                              alignment: Alignment.centerLeft,
+                              // color:selectedValue==data![index]?AppTheme.red: Color(0xFFf6f6f6),
+                              decoration: BoxDecoration(
+                                //borderRadius: BorderRadius.circular(8),
+                                color: Colors.white,
+                              ),
+                              child:  Text("${data![index]}",
+                                style: TextStyle(fontFamily: 'RR',fontSize: 16,color: Color(0xFF505050)
+                                  // color:selectedValue==data![index]?Colors.white: Color(0xFF555555),letterSpacing: 0.1
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
+                    ),
+                  ],
                 ),
                 onPop: () => print('Popover was popped!'),
                 direction: PopoverDirection.bottom,

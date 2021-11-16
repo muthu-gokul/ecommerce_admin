@@ -5,6 +5,7 @@ import 'package:ecommerce_admin/pages/cardClassification/cardClassifyGrid.dart';
 import 'package:ecommerce_admin/pages/customers/customersGrid.dart';
 import 'package:ecommerce_admin/pages/deliveryCharge/deliveryChargeGrid.dart';
 import 'package:ecommerce_admin/pages/goodsReceived/goodsReceivedGrid.dart';
+import 'package:ecommerce_admin/pages/invoice/invoiceGrid.dart';
 import 'package:ecommerce_admin/pages/pincode/pincodeGrid.dart';
 import 'package:ecommerce_admin/pages/product/productHome.dart';
 import 'package:ecommerce_admin/pages/profile.dart';
@@ -40,6 +41,7 @@ import 'installationCharges/installationChargeGrid.dart';
 import 'manageUsers/manageUsersGrid.dart';
 import 'newVendorRequest/vendorRequestGrid.dart';
 import 'ordersList/ordersListGrid.dart';
+import 'payment/paymentGrid.dart';
 import 'paymentSettings/paymentSettingsGrid.dart';
 import 'productShowCase/productShowCaseGrid.dart';
 import 'productStock/productStockGrid.dart';
@@ -111,6 +113,8 @@ class _HomePageState extends State<HomePage> {
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "User Access",rightPadd: 15,imgHeight: 25,),
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Taxes", widget: Icon(Icons.local_grocery_store_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "App", widget: Icon(Icons.app_blocking_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Invoice", widget: Icon(Icons.attach_money,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Payment", widget: Icon(Icons.attach_money,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
  ];
 
 
@@ -385,6 +389,8 @@ class _HomePageState extends State<HomePage> {
                       menuIndex==41?UserAcessGrid():
                       menuIndex==42?TaxesGroups():
                       menuIndex==43?AppGrid():
+                      menuIndex==44?InvoiceGrid():
+                      menuIndex==45?PaymentGrid():
                           Container()
 
                     ],

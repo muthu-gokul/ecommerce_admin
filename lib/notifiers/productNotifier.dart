@@ -17,7 +17,9 @@ import 'package:ecommerce_admin/model/giftCouponsModel.dart';
 import 'package:ecommerce_admin/model/goodsReceivedModel/goodsReceivedAddModel.dart';
 import 'package:ecommerce_admin/model/goodsReceivedModel/goodsReceivedModel.dart';
 import 'package:ecommerce_admin/model/installationModel.dart';
+import 'package:ecommerce_admin/model/invoiceModel.dart';
 import 'package:ecommerce_admin/model/ordersList/ordersListModel.dart';
+import 'package:ecommerce_admin/model/paymentModel.dart';
 import 'package:ecommerce_admin/model/paymentSettingsModel.dart';
 import 'package:ecommerce_admin/model/pincodeModel/pincodeModel.dart';
 import 'package:ecommerce_admin/model/productModel.dart';
@@ -637,6 +639,59 @@ List<RatingsModel> ratings=[
     AppModel(downldType: "Play Store", downldLink: "URL Link"),
     AppModel(downldType: "Play Store", downldLink: "URL Link"),
     AppModel(downldType: "Play Store", downldLink: "URL Link"),
+  ];
+
+  //invoice
+  List<InvoiceModel> recInv=[
+    InvoiceModel(invNo: "INV00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Lartum ", grossAmount: 34545),
+    InvoiceModel(invNo: "INV00001", date: "19-10-2021", paymentStatus: "Partially Paid", customerName: "Lartum ", grossAmount: 34545),
+    InvoiceModel(invNo: "INV00001", date: "19-10-2021", paymentStatus: "UnPaid", customerName: "Lartum ", grossAmount: 34545),
+    InvoiceModel(invNo: "INV00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Lartum ", grossAmount: 34545),
+    InvoiceModel(invNo: "INV00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Lartum ", grossAmount: 34545),
+    InvoiceModel(invNo: "INV00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Lartum ", grossAmount: 34545),
+    InvoiceModel(invNo: "INV00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Lartum ", grossAmount: 34545),
+  ];
+
+  List<InvoiceModel> payInv=[
+    InvoiceModel(invNo: "INV00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Raksap ", grossAmount: 34545),
+    InvoiceModel(invNo: "INV00001", date: "19-10-2021", paymentStatus: "Partially Paid", customerName: "Raksap ", grossAmount: 34545),
+    InvoiceModel(invNo: "INV00001", date: "19-10-2021", paymentStatus: "UnPaid", customerName: "Raksap ", grossAmount: 34545),
+    InvoiceModel(invNo: "INV00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Raksap ", grossAmount: 34545),
+    InvoiceModel(invNo: "INV00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Raksap ", grossAmount: 34545),
+    InvoiceModel(invNo: "INV00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Raksap ", grossAmount: 34545),
+    InvoiceModel(invNo: "INV00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Raksap ", grossAmount: 34545),
+  ];
+
+  //PaymentModel
+  List<PaymentModel> revPayMent=[
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Loke", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Partially Paid", customerName: "Loke", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "UnPaid", customerName: "Loke", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Loke", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Loke", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Loke", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Loke", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Loke", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Loke", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Loke", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Loke", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Loke", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+  ];
+
+
+  List<PaymentModel> payPayMent=[
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Hemsworth", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Partially Paid", customerName: "Hemsworth", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "UnPaid", customerName: "Hemsworth", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Hemsworth", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Hemsworth", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Hemsworth", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Hemsworth", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Hemsworth", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Hemsworth", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Hemsworth", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Hemsworth", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
+    PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Hemsworth", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
   ];
 
 
