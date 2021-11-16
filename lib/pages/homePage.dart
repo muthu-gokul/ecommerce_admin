@@ -25,6 +25,7 @@ import 'package:scutiwidgets/size.dart';
 
 import 'addColor/colorGrid.dart';
 import 'addSize/sizeGrid.dart';
+import 'appMaster/appGrid.dart';
 import 'attributes/attributeGrid.dart';
 import 'brand/brandGrid.dart';
 import 'bulkCouponGenerat/bulkCouponGenerate.dart';
@@ -45,6 +46,7 @@ import 'productStock/productStockGrid.dart';
 import 'refund/RefundGrid.dart';
 import 'settings/companySettings.dart';
 import 'staffs/staffsGrid.dart';
+import 'taxes/taxesAddGroupsAdd.dart';
 import 'topOffers/topOfferGrid.dart';
 import 'underAmount/underAmountGrid.dart';
 import 'userAccess/userAccess.dart';
@@ -107,6 +109,8 @@ class _HomePageState extends State<HomePage> {
    DrawerContentModel(img: "assets/icons/return.svg", title: "Ratings & Reviews",  widget: Icon(Icons.rate_review,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Manage Users",rightPadd: 15,imgHeight: 25,),
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "User Access",rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Taxes", widget: Icon(Icons.local_grocery_store_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "App", widget: Icon(Icons.app_blocking_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
  ];
 
 
@@ -378,8 +382,10 @@ class _HomePageState extends State<HomePage> {
                       menuIndex==38?InstallationChargesGird():
                       menuIndex==39?RatingsReviewsGrid():
                       menuIndex==40?ManageUsersGird():
-                      menuIndex==41?UserAcessGrid()
-                          :Container()
+                      menuIndex==41?UserAcessGrid():
+                      menuIndex==42?TaxesGroups():
+                      menuIndex==43?AppGrid():
+                          Container()
 
                     ],
                   ),

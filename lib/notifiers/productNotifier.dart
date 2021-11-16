@@ -1,5 +1,6 @@
 import 'package:ecommerce_admin/model/UOMSettingsModel/conversionModel.dart';
 import 'package:ecommerce_admin/model/UOMSettingsModel/uomModel.dart';
+import 'package:ecommerce_admin/model/appModel.dart';
 import 'package:ecommerce_admin/model/attributeModel.dart';
 import 'package:ecommerce_admin/model/brandModel.dart';
 import 'package:ecommerce_admin/model/cardClassificationModel.dart';
@@ -31,6 +32,8 @@ import 'package:ecommerce_admin/model/returnProducts/returnProductsModel.dart';
 import 'package:ecommerce_admin/model/shippingCharge/shippingChargeModel.dart';
 import 'package:ecommerce_admin/model/sizeModel.dart';
 import 'package:ecommerce_admin/model/staffsModel.dart';
+import 'package:ecommerce_admin/model/taxesModel/groupModel.dart';
+import 'package:ecommerce_admin/model/taxesModel/taxesModel.dart';
 import 'package:ecommerce_admin/model/topOfferModel.dart';
 import 'package:ecommerce_admin/model/underAmountModel.dart';
 import 'package:ecommerce_admin/model/vendor/vendorListModel.dart';
@@ -606,6 +609,40 @@ List<RatingsModel> ratings=[
   RatingsModel(productName: "T shirt", rating: 4.7, noOfRatings: 14, noOfReviews: 5),
   RatingsModel(productName: "T shirt", rating: 4.7, noOfRatings: 14, noOfReviews: 5),
 ];
+
+
+
+
+  //taxes
+  List<TaxesModel> taxes=[
+    TaxesModel(sNo: "1", name: "CGST", percent: "2.5%"),
+    TaxesModel(sNo: "2", name: "GST", percent: "2.5%"),
+    TaxesModel(sNo: "3", name: "CGST", percent: "2.5%"),
+    TaxesModel(sNo: "4", name: "GST", percent: "2.5%"),
+    TaxesModel(sNo: "5", name: "CGST", percent: "2.5%"),
+    TaxesModel(sNo: "6", name: "GST", percent: "2.5%"),
+  ];
+
+  List<GroupModel> groupTaxes=[
+    GroupModel(sNo: "1", name: "CGST", percent: "2.5%"),
+    GroupModel(sNo: "2", name: "CGST", percent: "2.5%"),
+    GroupModel(sNo: "3", name: "CGST", percent: "2.5%"),
+    GroupModel(sNo: "4", name: "CGST", percent: "2.5%"),
+  ];
+
+
+  //appList
+  List<AppModel> appList=[
+    AppModel(downldType: "Play Store", downldLink: "URL Link"),
+    AppModel(downldType: "Play Store", downldLink: "URL Link"),
+    AppModel(downldType: "Play Store", downldLink: "URL Link"),
+    AppModel(downldType: "Play Store", downldLink: "URL Link"),
+  ];
+
+
+
+
+
 
 
 

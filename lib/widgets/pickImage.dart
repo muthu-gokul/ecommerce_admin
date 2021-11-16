@@ -14,7 +14,11 @@ class PickImage extends StatefulWidget {
   XFile? image;
   String title;
   Function(XFile?) cb;
-  PickImage({required this.image,required this.title,required this.cb});
+  bool isPick;
+  String nullImage;
+  double nullImageHei;
+  PickImage({required this.image,required this.title,required this.cb,this.isPick=true,this.nullImage="assets/images/addnew-brand.jpg",
+  this.nullImageHei=50});
   @override
   _PickImageState createState() => _PickImageState();
 }
@@ -33,9 +37,9 @@ class _PickImageState extends State<PickImage> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        pickImg();
-      },
+      onTap: widget.isPick?(){
+          pickImg();
+      }:null,
       child: Container(
         height: 170,
         width: 170,
@@ -49,7 +53,7 @@ class _PickImageState extends State<PickImage> {
         alignment: Alignment.center,
         clipBehavior: Clip.antiAlias,
         child: widget.image==null?Container(
-          child: Image.asset("assets/images/addnew-brand.jpg"),
+          child: Image.asset(widget.nullImage,height: widget.nullImageHei,),
         ):kIsWeb?Image.network( widget.image!.path)
             :Image.file(File(widget.image!.path),fit: BoxFit.cover,),
         /*child: Row(
