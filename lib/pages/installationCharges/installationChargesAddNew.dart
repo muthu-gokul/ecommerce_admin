@@ -9,6 +9,7 @@ import 'package:ecommerce_admin/widgets/buttons/backBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/swtich.dart';
 import 'package:ecommerce_admin/widgets/customOverLayPopUp.dart';
+import 'package:ecommerce_admin/widgets/customPopUp.dart';
 import 'package:ecommerce_admin/widgets/customTextField.dart';
 import 'package:ecommerce_admin/widgets/pickImage.dart';
 import 'package:flutter/material.dart';
@@ -75,6 +76,7 @@ class _InstallationChargesAddState extends State<InstallationChargesAdd> {
   @override
   Widget build(BuildContext context) {
     final node=FocusScope.of(context);
+    SizeConfig().init(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Provider.of<ThemeNotifier>(context,listen: false).primaryColor3,
@@ -100,7 +102,7 @@ class _InstallationChargesAddState extends State<InstallationChargesAdd> {
             width: SizeConfig.screenWidth,
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: cA1,
                 children: [
                   SizedBox(height: 10,),
                   ProductTextField(
@@ -110,24 +112,18 @@ class _InstallationChargesAddState extends State<InstallationChargesAdd> {
                     textEditingController: role,
                     onComplete: (){},
                     isTextField: false,
-                    widget: OverLayPopUp(
-                      ontap: (){
-                        setState(() {
-                          showProductDropDown=!showProductDropDown;
-                        });
-                      },
-                      width: textFormWidth,
-                      hinttext: "Select Product",
-                      selectedValue: selectedProduct,
-                      showPopUp: showProductDropDown,
+                    widget:CustomPopup(
+                      hintText: "Select Product",
                       data: pn.categoryDropDownList,
-                      onitemTap: (i){
+                      selectedValue: selectedProduct,
+                      width:textFormWidth ,
+                      leftMargin: 0,
+                      edgeInsets: EdgeInsets.only(left: 0),
+                      onSelect: (v){
                         setState(() {
-                          showProductDropDown=false;
-                          selectedProduct=pn.categoryDropDownList[i];
+                          selectedProduct=v;
                         });
                       },
-                      isToJson: false,
                     ),
                   ),
                   SizedBox(height: 10,),
@@ -164,11 +160,14 @@ class _InstallationChargesAddState extends State<InstallationChargesAdd> {
                         node.unfocus();
                       }
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 10+10,),
                   ProductTextField(
-                      width: SizeConfig.screenWidth!*0.5+170,
+                      width: textFormWidth+140,
                       title: "Covered Under Installation",
+                      leftPadding: 155,
                       validation: validationList[0],
+                      paddTextFieldHeader2: EdgeInsets.only(top: 10),
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       //textEditingController: dummyTextController,
                       onComplete: (){
                         node.unfocus();
@@ -176,6 +175,7 @@ class _InstallationChargesAddState extends State<InstallationChargesAdd> {
                       isTextField: false,
                       widget: AddMoreTextFieldAnimation(
                           data: covered,
+                          wid: 530,
                           hintText: "Covered Under Installation",
                           addCB: addCovered,
                           deleteCB: (i){
@@ -185,18 +185,22 @@ class _InstallationChargesAddState extends State<InstallationChargesAdd> {
                           }
                       )
                   ),
+
                   SizedBox(height: 10,),
                   ProductTextField(
-                    width: SizeConfig.screenWidth!*0.5+170,
+                    width: textFormWidth+140,
                     title: "Not Covered Under Installation",
-                    validation: validationList[0],
-                    //textEditingController: dummyTextController,
+                      leftPadding: 155,
+                      validation: validationList[0],
+                      paddTextFieldHeader2: EdgeInsets.only(top: 10),
+                      crossAxisAlignment: CrossAxisAlignment.start,
                     onComplete: (){
                       node.unfocus();
                     },
                     isTextField: false,
                     widget: AddMoreTextFieldAnimation(
                         data: notCovered,
+                        wid: 530,
                         hintText: "Not Covered Under Installation",
                         addCB: addNotCovered,
                         deleteCB: (i){
@@ -205,7 +209,6 @@ class _InstallationChargesAddState extends State<InstallationChargesAdd> {
                     )
                   ),
                   SizedBox(height: 50,),
-
                   Container(
                     alignment:Alignment.center,
                     child: SaveBtn(

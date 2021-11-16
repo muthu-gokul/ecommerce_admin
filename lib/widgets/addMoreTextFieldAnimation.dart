@@ -13,7 +13,8 @@ class AddMoreTextFieldAnimation extends StatefulWidget {
   Function(int) deleteCB;
   VoidCallback addCB;
   String hintText;
-  AddMoreTextFieldAnimation({required this.data,required this.hintText,required this.addCB,required this.deleteCB});
+  double wid;
+  AddMoreTextFieldAnimation({required this.data,required this.hintText,required this.addCB,required this.deleteCB,this.wid=300});
   @override
   _AddMoreTextFieldAnimationState createState() => _AddMoreTextFieldAnimationState();
 }
@@ -34,6 +35,7 @@ class _AddMoreTextFieldAnimationState extends State<AddMoreTextFieldAnimation> {
   Widget build(BuildContext context) {
     return Container(
       height: widget.data.length*60,
+      width: widget.wid,
       child: AnimatedList(
         key: key,
         initialItemCount: widget.data.length,
@@ -63,12 +65,13 @@ class _AddMoreTextFieldAnimationState extends State<AddMoreTextFieldAnimation> {
           child: Row(
             children: [
               AddNewLabelTextField(
-                margin: EdgeInsets.only(left: 0),
-                width: SizeConfig.screenWidth!*0.5,
+                margin: EdgeInsets.only(right: 20),
+                width: 400,
                 hintText: widget.hintText,
                 textEditingController: widget.data[i],
               ),
-              Spacer(),
+             // Spacer(),
+
               i==0?Container():AddBtn(ontap: (){
                 setState(() {
                   key.currentState!.removeItem(
@@ -90,7 +93,7 @@ class _AddMoreTextFieldAnimationState extends State<AddMoreTextFieldAnimation> {
                 margin: EdgeInsets.only(right: 10,top: 0),
                 widget: Icon(Icons.clear,color: Colors.white,),
               ),
-              Spacer(),
+            //  Spacer(),
               AddBtn(ontap: (){
                 setState(() {
                   key.currentState!.insertItem(widget.data.length, duration: const Duration(milliseconds: 300));
@@ -98,7 +101,7 @@ class _AddMoreTextFieldAnimationState extends State<AddMoreTextFieldAnimation> {
                 widget.addCB();
               },
                 color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
-                margin: EdgeInsets.only(right: 10,top: 0),
+                margin: EdgeInsets.only(right: 0,top: 0),
               ),
             ],
           ),

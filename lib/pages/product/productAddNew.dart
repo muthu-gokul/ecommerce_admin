@@ -1056,17 +1056,18 @@ class ProductTextField extends StatelessWidget {
   bool isEnable;
   CrossAxisAlignment crossAxisAlignment;
   bool showValidation;
+  EdgeInsets paddTextFieldHeader2;
   ProductTextField({required this.width,this.titleWidth=250,required this.title,required this.validation, this.textEditingController,
   required this.onComplete,this.isTextField=true,this.widget,this.leftPadding=20,this.regExp='[A-Za-z0-9@., ]',this.textInputType=TextInputType.emailAddress,
   this.textLength=null,this.maxlines=1,this.titleColor=const Color(0xFF505050),this.suffixIcon,this.isEnable=true,
-  this.crossAxisAlignment=CrossAxisAlignment.center,this.showValidation=true});
+  this.crossAxisAlignment=CrossAxisAlignment.center,this.showValidation=true,this.paddTextFieldHeader2=const EdgeInsets.only(left: 0)});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: titleWidth+width+leftPadding,
       padding: EdgeInsets.only(left: leftPadding),
-
+      //color: Colors.red,
       child: Row(
         crossAxisAlignment: crossAxisAlignment,
         children: [
