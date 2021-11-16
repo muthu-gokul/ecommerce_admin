@@ -3,6 +3,7 @@ import 'package:ecommerce_admin/notifiers/productNotifier.dart';
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
 import 'package:ecommerce_admin/pages/brand/brandAddNew.dart';
 import 'package:ecommerce_admin/pages/customers/customerView.dart';
+import 'package:ecommerce_admin/pages/homePage.dart';
 import 'package:ecommerce_admin/pages/paymentSettings/paymentSettingsAddNew.dart';
 import 'package:ecommerce_admin/widgets/buttons/actionBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/addBtn.dart';
@@ -51,10 +52,10 @@ class _PaymentSettingsGridState extends State<PaymentSettingsGrid> {
     return Consumer<ThemeNotifier>(
       builder: (context,th,child)=>Consumer<ProductNotifier>(
         builder: (context,pn,child)=>  Container(
-          height: SizeConfig.screenHeight!-50,
+          height: SizeConfig.screenHeight!-appBarHei,
           width: width,
           color: bgColor,
-          padding: EdgeInsets.only(left: 20,right: 20),
+          padding: bodyPadding,
           child: Column(
             children: [
               GridWithWidgetParam(
@@ -85,7 +86,7 @@ class _PaymentSettingsGridState extends State<PaymentSettingsGrid> {
                           ):Container(),
                       ]
                   ),
-                  bodyHeight: SizeConfig.screenHeight!-230,
+                  bodyHeight: SizeConfig.screenHeight!-270,
                   bodyWidth: width,
                   bodyWidget: Column(
                     children: pn.paymentSettingsList.asMap().map((key, value) => MapEntry(key,

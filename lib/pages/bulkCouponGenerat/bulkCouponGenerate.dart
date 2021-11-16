@@ -1,5 +1,6 @@
 import 'package:ecommerce_admin/notifiers/productNotifier.dart';
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
+import 'package:ecommerce_admin/pages/homePage.dart';
 import 'package:ecommerce_admin/pages/product/productAddNew.dart';
 import 'package:ecommerce_admin/widgets/buttons/backBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
@@ -86,7 +87,7 @@ class _BulkCouponGenerateState extends State<BulkCouponGenerate> {
     return Consumer<ThemeNotifier>(
         builder: (context,th,child)=>  Consumer<ProductNotifier>(
           builder: (context,pn,child)=> Container(
-            height: SizeConfig.screenHeight!-50,
+            height: SizeConfig.screenHeight!-appBarHei,
             width: SizeConfig.screenWidth!-100,
             child: SingleChildScrollView(
               child: Column(

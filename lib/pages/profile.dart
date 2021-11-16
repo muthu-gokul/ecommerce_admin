@@ -1,4 +1,5 @@
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
+import 'package:ecommerce_admin/pages/homePage.dart';
 import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
 import 'package:ecommerce_admin/widgets/circleProfile.dart';
 import 'package:ecommerce_admin/widgets/customOverLayPopUp.dart';
@@ -33,10 +34,10 @@ class _ProfileState extends State<Profile> {
     final node=FocusScope.of(context);
     return Consumer<ThemeNotifier>(
       builder: (context,th,child)=> Container(
-        height: SizeConfig.screenHeight!-50,
+        height: SizeConfig.screenHeight!-appBarHei,
         width: SizeConfig.screenWidth!-100,
         color: bgColor,
-        padding: EdgeInsets.only(left: 20,right: 20),
+        padding: EdgeInsets.only(left: 20,right: 20,top: 20),
         child: Stack(
           children: [
             Row(

@@ -3,6 +3,7 @@ import 'package:ecommerce_admin/notifiers/productNotifier.dart';
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
 import 'package:ecommerce_admin/pages/brand/brandAddNew.dart';
 import 'package:ecommerce_admin/pages/customers/customerView.dart';
+import 'package:ecommerce_admin/pages/homePage.dart';
 import 'package:ecommerce_admin/pages/paymentSettings/paymentSettingsAddNew.dart';
 import 'package:ecommerce_admin/pages/pincode/pincodeAddNew.dart';
 import 'package:ecommerce_admin/pages/shippingCharges/shippingChargesAddNew.dart';
@@ -54,10 +55,10 @@ class _DeliveryChargeGridState extends State<DeliveryChargeGrid> {
     return Consumer<ThemeNotifier>(
       builder: (context,th,child)=>Consumer<ProductNotifier>(
         builder: (context,pn,child)=>  Container(
-          height: SizeConfig.screenHeight!-50,
+          height: SizeConfig.screenHeight!-appBarHei,
           width: width,
           color: bgColor,
-          padding: EdgeInsets.only(left: 20,right: 20),
+          padding: bodyPadding,
           child: Column(
             children: [
               GridWithWidgetParam(
@@ -88,7 +89,7 @@ class _DeliveryChargeGridState extends State<DeliveryChargeGrid> {
                           ):Container(),
                       ]
                   ),
-                  bodyHeight: SizeConfig.screenHeight!-230,
+                  bodyHeight: SizeConfig.screenHeight!-gridReduceHei,
                   bodyWidth: width,
                   bodyWidget: Column(
                     children: pn.deliveryCharges.asMap().map((key, value) => MapEntry(key,

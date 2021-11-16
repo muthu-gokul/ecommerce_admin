@@ -49,13 +49,19 @@ import 'topOffers/topOfferGrid.dart';
 import 'underAmount/underAmountGrid.dart';
 import 'userAccess/userAccess.dart';
 import 'vendor/vendorListGrid.dart';
+
+bool drawerOpen=false;
+double appBarHei=60;
+double gridReduceHei=270;
+EdgeInsets bodyPadding=EdgeInsets.only(left: 20,right: 20,top: 20);
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
-bool drawerOpen=false;
+
 class _HomePageState extends State<HomePage> {
  int menuIndex=1;
 
@@ -178,6 +184,11 @@ class _HomePageState extends State<HomePage> {
                       //APPBAR
                       Container(
                         height: 50,
+                        margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(7),
+                          color: Colors.white
+                        ),
                         child: Row(
                           children: [
                             SizedBox(width: 20,),
@@ -185,7 +196,7 @@ class _HomePageState extends State<HomePage> {
                               style: TextStyle(fontSize: 18.5,color: grey1,fontFamily: 'RR',letterSpacing: 0.2),
                             ),
                             Spacer(),
-                            Container(
+                            /*Container(
                               height: 35,
                                 width: 35,
                                 decoration: BoxDecoration(
@@ -195,7 +206,7 @@ class _HomePageState extends State<HomePage> {
                                 alignment: Alignment.center,
                                 child: Icon(Icons.search,color: th.primaryColor4,size: 18,)
                             ),
-                            SizedBox(width: 10,),
+                            SizedBox(width: 10,),*/
                             Container(
                                 height: 35,
                                 width: 35,
@@ -204,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                                   //  color: th.primaryColor1.withOpacity(0.2)
                                 ),
                                 alignment: Alignment.center,
-                                child: Icon(Icons.notifications_none_outlined,color: th.primaryColor4,size: 22,)
+                                child: Icon(Icons.notifications_none_outlined,color: th.primaryColor4,size: 28,)
                             ),
                             SizedBox(width: 10,),
                             Builder(

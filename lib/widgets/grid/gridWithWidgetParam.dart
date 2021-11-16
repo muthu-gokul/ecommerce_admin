@@ -93,8 +93,8 @@ class _GridWithWidgetParamState extends State<GridWithWidgetParam> {
               ),
               widget.showExport?AddBtn(
                 ontap: (){},
-                color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
-                widget: Icon(Icons.import_export,color: Colors.white,),
+                color: Colors.transparent,
+                widget: Image.asset("assets/icons/export.jpg",fit: BoxFit.cover,height: 40,),
                 margin: EdgeInsets.only(right: 20),
               ):Container(
                 width: 50,
@@ -107,8 +107,8 @@ class _GridWithWidgetParamState extends State<GridWithWidgetParam> {
                         showPopUp=!showPopUp;
                       });
                     },
-                    color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
-                    widget: Icon(Icons.filter_alt_outlined,size: 30,color: Colors.white,),
+                    color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor1.withOpacity(0.2),
+                    widget: SvgPicture.asset("assets/icons/filter.svg",height: 30,color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor3,),
                     margin: EdgeInsets.only(right: 20),
                   ):Container(),
                   OverlayContainer(

@@ -3,6 +3,7 @@ import 'package:ecommerce_admin/model/userModel.dart';
 import 'package:ecommerce_admin/notifiers/productNotifier.dart';
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
 import 'package:ecommerce_admin/pages/brand/brandAddNew.dart';
+import 'package:ecommerce_admin/pages/homePage.dart';
 import 'package:ecommerce_admin/widgets/buttons/actionBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/addBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/swtich.dart';
@@ -35,10 +36,10 @@ class _UsersGridState extends State<UsersGrid> {
     return Consumer<ThemeNotifier>(
       builder: (context,th,child)=>Consumer<ProductNotifier>(
         builder: (context,pn,child)=>  Container(
-          height: SizeConfig.screenHeight!-50,
+          height: SizeConfig.screenHeight!-appBarHei,
           width: width,
           color: bgColor,
-          padding: EdgeInsets.only(left: 20,right: 20),
+          padding: bodyPadding,
           child: Column(
             children: [
               GridWithWidgetParam(
@@ -89,7 +90,7 @@ class _UsersGridState extends State<UsersGrid> {
                       ),
                     ],
                   ),
-                  bodyHeight: SizeConfig.screenHeight!-150,
+                  bodyHeight: SizeConfig.screenHeight!-180,
                   bodyWidth: width,
                   bodyWidget: Column(
                     children: users.asMap().map((key, value) => MapEntry(key,

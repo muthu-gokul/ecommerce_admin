@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_admin/constants.dart';
 import 'package:ecommerce_admin/notifiers/productNotifier.dart';
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
+import 'package:ecommerce_admin/pages/homePage.dart';
 import 'package:ecommerce_admin/pages/product/productAddNew.dart';
 import 'package:ecommerce_admin/widgets/buttons/actionBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/addBtn.dart';
@@ -47,7 +48,7 @@ class _ProductHomeState extends State<ProductHome> {
     return Consumer<ThemeNotifier>(
       builder: (context,th,child)=> Consumer<ProductNotifier>(
         builder: (context,pn,child)=> Container(
-          height: SizeConfig.screenHeight!-50,
+          height: SizeConfig.screenHeight!-appBarHei,
           width: width,
           color: bgColor,
           padding: EdgeInsets.only(left: 20,right: 20),
@@ -199,7 +200,7 @@ class _ProductHomeState extends State<ProductHome> {
                       ),
                     ],
                   ),
-                  bodyHeight: SizeConfig.screenHeight!-240,
+                  bodyHeight: SizeConfig.screenHeight!-270,
                   bodyWidth: width,
                   bodyWidget: Column(
                     children: pn.categoryList.asMap().map((key, value) => MapEntry(key,
@@ -327,7 +328,7 @@ class _ProductHomeState extends State<ProductHome> {
                       ),
                     ],
                   ),
-                  bodyHeight: SizeConfig.screenHeight!-240,
+                  bodyHeight: SizeConfig.screenHeight!-270,
                   bodyWidth: width,
                   bodyWidget: Column(
                     children: pn.products.asMap().map((key, value) => MapEntry(key,
