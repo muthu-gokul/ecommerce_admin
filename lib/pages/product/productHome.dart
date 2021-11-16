@@ -32,6 +32,13 @@ class _ProductHomeState extends State<ProductHome> {
   //   leftPos=width*
   //   super.initState();
   // }
+  List<GridHeaderModel> gridHeaderList=[
+    GridHeaderModel(columnName: "Category Name",),
+    GridHeaderModel(columnName: "Logo",),
+    GridHeaderModel(columnName: "Created At"),
+    GridHeaderModel(columnName: "Updated At",),
+    GridHeaderModel(columnName: "Actions",width: 100),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -169,8 +176,12 @@ class _ProductHomeState extends State<ProductHome> {
               selectedTab==1?GridWithWidgetParam(
                   headerHeight: headerHeight,
                   headerWidth: width,
-                  gridHeaderList: [],
-                  filterOnTap: (i){},
+                  gridHeaderList: gridHeaderList,
+                  filterOnTap: (i){
+                    setState(() {
+                      gridHeaderList[i].isActive=!gridHeaderList[i].isActive;
+                    });
+                  },
                   addBtnTap: (){
                     Navigator.push(context, pr.PageRoute().slideFromLeftToRight(CategoryAddNew()));
                   },
@@ -178,26 +189,32 @@ class _ProductHomeState extends State<ProductHome> {
                   showAdd: true,
                   headerWidget: Row(
                     children: [
-                      GridHeader(
-                        width: 200,
-                        title: "Category Name",
-                      ),
-                      GridHeader(
-                        width: 100,
-                        title: "Logo",
-                      ),
-                      GridHeader(
-                        width: 150,
-                        title: "Created At",
-                      ),
-                      GridHeader(
-                        width: 150,
-                        title: "Updated At",
-                      ),
-                      GridHeader(
-                        width: 100,
-                        title: "Actions",
-                      ),
+                      for(int i=0;i<gridHeaderList.length;i++)
+                        gridHeaderList[i].isActive? GridHeader(
+                          width: gridHeaderList[i].width,
+                          title: gridHeaderList[i].columnName,
+                          alignment: gridHeaderList[i].alignment,
+                        ):Container(),
+                      // GridHeader(
+                      //   width: 200,
+                      //   title: "Category Name",
+                      // ),
+                      // GridHeader(
+                      //   width: 100,
+                      //   title: "Logo",
+                      // ),
+                      // GridHeader(
+                      //   width: 150,
+                      //   title: "Created At",
+                      // ),
+                      // GridHeader(
+                      //   width: 150,
+                      //   title: "Updated At",
+                      // ),
+                      // GridHeader(
+                      //   width: 100,
+                      //   title: "Actions",
+                      // ),
                     ],
                   ),
                   bodyHeight: SizeConfig.screenHeight!-270,
@@ -212,25 +229,26 @@ class _ProductHomeState extends State<ProductHome> {
                           constraints: bodyConstraints,
                           child: Row(
                             children: [
-                              GridContent(
-                                width: 200,
+                              gridHeaderList[0].isActive?GridContent(
+                                width: gridHeaderList[0].width,
                                 title: value.categoryName,
-                              ),
-                              Container(
-                                width: 100,
+                              ):Container(),
+                              gridHeaderList[1].isActive?Container(
+                                width: gridHeaderList[1].width,
+                                alignment: gridHeaderList[1].alignment,
                                 height: 45,
                                 child: Image.network("https://bc-storage.sfo2.digitaloceanspaces.com/girias/assets/girias-logo.png"),
-                              ),
-                              GridContent(
-                                width: 150,
+                              ):Container(),
+                              gridHeaderList[2].isActive?GridContent(
+                                width: gridHeaderList[2].width,
                                 title:value.createdAt,
-                              ),
-                              GridContent(
-                                width: 150,
+                              ):Container(),
+                              gridHeaderList[3].isActive?GridContent(
+                                width: gridHeaderList[3].width,
                                 title: value.updatedAt,
-                              ),
-                              Container(
-                                width: 100,
+                              ):Container(),
+                              gridHeaderList[4].isActive?Container(
+                                width: gridHeaderList[4].width,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
@@ -241,7 +259,7 @@ class _ProductHomeState extends State<ProductHome> {
                                     }, imgColor: Colors.red, img: "assets/icons/delete.svg"),
                                   ],
                                 ),
-                              ),
+                              ):Container(),
                             ],
                           ),
                         )

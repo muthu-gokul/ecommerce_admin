@@ -1,3 +1,4 @@
+import 'package:ecommerce_admin/model/ContactMsgModel.dart';
 import 'package:ecommerce_admin/model/UOMSettingsModel/conversionModel.dart';
 import 'package:ecommerce_admin/model/UOMSettingsModel/uomModel.dart';
 import 'package:ecommerce_admin/model/appModel.dart';
@@ -49,7 +50,11 @@ import '../constants.dart';
 class ProductNotifier extends ChangeNotifier{
 
   //BRAND
-  List<BrandModel> brandList=[];
+  List<BrandModel> brandList=[
+    BrandModel(title: "Nike", slug: "Nike", logo: "", createdAt: "19-10-2021", updatedAt: "19-10-2021"),
+    BrandModel(title: "Puma", slug: "Nike", logo: "", createdAt: "19-10-2021", updatedAt: "19-10-2021"),
+    BrandModel(title: "Raybon", slug: "Nike", logo: "", createdAt: "19-10-2021", updatedAt: "19-10-2021"),
+  ];
 
   void addBrand(String brand,String slug){
     brandList.add(
@@ -65,8 +70,14 @@ class ProductNotifier extends ChangeNotifier{
   }
 
   //CATEGORY
-  List<String> categoryDropDownList=["Top Category"];
-  List<CategoryModel> categoryList=[];
+  List<String> categoryDropDownList=["Top Category","Category 1","Category 2","Category 3","Category 4","Category 5"];
+  List<CategoryModel> categoryList=[
+    CategoryModel(categoryName: "Category 1", parentCategory: "Top Category", logo: "", createdAt: "19-10-2021", updatedAt: "19-10-2021"),
+    CategoryModel(categoryName: "Category 2", parentCategory: "Top Category", logo: "", createdAt: "19-10-2021", updatedAt: "19-10-2021"),
+    CategoryModel(categoryName: "Category 3", parentCategory: "Top Category", logo: "", createdAt: "19-10-2021", updatedAt: "19-10-2021"),
+    CategoryModel(categoryName: "Category 4", parentCategory: "Top Category", logo: "", createdAt: "19-10-2021", updatedAt: "19-10-2021"),
+    CategoryModel(categoryName: "Category 5", parentCategory: "Top Category", logo: "", createdAt: "19-10-2021", updatedAt: "19-10-2021"),
+  ];
 
   addCategory(String category,String parent){
    categoryList.add(
@@ -195,6 +206,20 @@ class ProductNotifier extends ChangeNotifier{
   void prev(){
     if(currentPage>0){
       currentPage--;
+      if(((currentPage*perPage) + perPage)>customers.length){
+        filterCustomers.clear();
+        filterCustomers.addAll(customers.getRange(currentPage*perPage, customers.length));
+      }
+      else{
+        filterCustomers.clear();
+        filterCustomers.addAll(customers.getRange(currentPage*perPage, (currentPage*perPage) + perPage));
+      }
+      notifyListeners();
+    }
+  }
+  void currenTap(int i){
+    if(i>=0){
+      currentPage=i;
       if(((currentPage*perPage) + perPage)>customers.length){
         filterCustomers.clear();
         filterCustomers.addAll(customers.getRange(currentPage*perPage, customers.length));
@@ -694,6 +719,14 @@ List<RatingsModel> ratings=[
     PaymentModel(payNo: "PAY00001", date: "19-10-2021", paymentStatus: "Paid", customerName: "Hemsworth", grossAmount: 23232,balanceAmount: 1111,receivedOrPaidAmount: 21000),
   ];
 
+
+  //ContactMessageModel
+  List<ContactMessageModel> contactMsg=[
+    ContactMessageModel(name: "Aishu ", sub: "New launch ",message: "Discussion of new launch",mail: "aishu@gmail.com",phoneNo: "7852555351",dateTime: "27/06/2021 10.50 AM",),
+    ContactMessageModel(name: "Bala ", sub: "New launch ",message: "Discussion of new launch",mail: "aishu@gmail.com",phoneNo: "7852555351",dateTime: "27/06/2021 10.50 AM",),
+    ContactMessageModel(name: "Muthu ", sub: "New launch ",message: "Discussion of new launch",mail: "aishu@gmail.com",phoneNo: "7852555351",dateTime: "27/06/2021 10.50 AM",),
+    ContactMessageModel(name: "Naveen ", sub: "New launch ",message: "Discussion of new launch",mail: "aishu@gmail.com",phoneNo: "7852555351",dateTime: "27/06/2021 10.50 AM",),
+  ];
 
 
 

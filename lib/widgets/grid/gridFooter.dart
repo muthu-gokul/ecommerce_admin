@@ -1,17 +1,21 @@
+import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
 import 'package:ecommerce_admin/widgets/popOver/src/popover.dart';
 import 'package:ecommerce_admin/widgets/popOver/src/popover_direction.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants.dart';
 class GridFooter extends StatelessWidget {
   double width;
   int perPage;
   int currentPage;
+  int totalPage;
   VoidCallback prev;
   VoidCallback next;
   Function(int) ontap;
+  Function(int)? ontap2;
   GridFooter({required this.width,required this.perPage,required this.currentPage,
-  required this.prev,required this.next,required this.ontap});
+  required this.prev,required this.next,required this.ontap,this.totalPage=1,this.ontap2});
 
   List<int> pages=[10,20,50,100];
   @override
@@ -109,6 +113,35 @@ class GridFooter extends StatelessWidget {
             IconButton(
                 onPressed:prev,
                 icon: Icon(Icons.keyboard_arrow_left,size: 30,)
+            ),
+            Flexible(
+              child: Container(
+                child: ListView.builder(
+                  itemCount: totalPage,
+                  itemExtent: 30,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (ctx,i){
+                    return GestureDetector(
+                      onTap: (){
+                        ontap2!(i);
+                      },
+                      child: Container(
+                          height: 30,
+                          margin: EdgeInsets.only(top: 9,bottom: 9),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: i+1==currentPage?Provider.of<ThemeNotifier>(context,listen: false).primaryColor4:Colors.transparent
+                          ),
+                          child: Text("${i+1}",
+                            style: ts16(i+1==currentPage?Colors.white:grey1),
+                          )
+                      ),
+                    );
+                  }
+                ),
+              ),
             ),
             IconButton(
                 onPressed:next,

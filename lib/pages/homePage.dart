@@ -31,6 +31,7 @@ import 'attributes/attributeGrid.dart';
 import 'brand/brandGrid.dart';
 import 'bulkCouponGenerat/bulkCouponGenerate.dart';
 import 'contactDetails/contactDetails.dart';
+import 'contactMessage/contactMsgGrid.dart';
 import 'deliveryBoyDetails/deliveryBoysGrid.dart';
 import 'emailSetting/emailSettingGrid.dart';
 import 'featuredBrand/featuredBrandGrid.dart';
@@ -39,6 +40,8 @@ import 'frontCoverSlider/frontCoverGrid.dart';
 import 'giftCoupons/giftCouponsGrid.dart';
 import 'installationCharges/installationChargeGrid.dart';
 import 'manageUsers/manageUsersGrid.dart';
+import 'message/bulkmessage.dart';
+import 'message/newsletter.dart';
 import 'newVendorRequest/vendorRequestGrid.dart';
 import 'ordersList/ordersListGrid.dart';
 import 'payment/paymentGrid.dart';
@@ -67,7 +70,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
- int menuIndex=1;
+ int menuIndex=2;
 
  List<DrawerContentModel> drawerContentList=[
    DrawerContentModel(img: "assets/homepage/dashboard.svg", title: "Dashboard",imgHeight: 50,),
@@ -115,6 +118,9 @@ class _HomePageState extends State<HomePage> {
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "App", widget: Icon(Icons.app_blocking_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Invoice", widget: Icon(Icons.attach_money,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Payment", widget: Icon(Icons.attach_money,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Contact Message", widget: Icon(Icons.message_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "News Letter", widget: Icon(Icons.legend_toggle_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Bulk SMS Message", widget: Icon(Icons.sms_failed_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
  ];
 
 
@@ -391,6 +397,9 @@ class _HomePageState extends State<HomePage> {
                       menuIndex==43?AppGrid():
                       menuIndex==44?InvoiceGrid():
                       menuIndex==45?PaymentGrid():
+                      menuIndex==46?ContactMsgGrid():
+                      menuIndex==47?NewsLette():
+                      menuIndex==48?BulkSMS():
                           Container()
 
                     ],

@@ -1,11 +1,17 @@
 import 'package:ecommerce_admin/model/brandModel.dart';
 import 'package:ecommerce_admin/notifiers/productNotifier.dart';
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
+import 'package:ecommerce_admin/pages/appMaster/appAddNew.dart';
 import 'package:ecommerce_admin/pages/brand/brandAddNew.dart';
+import 'package:ecommerce_admin/pages/contactMessage/contactMsgAddNew.dart';
 import 'package:ecommerce_admin/pages/customers/customerView.dart';
 import 'package:ecommerce_admin/pages/homePage.dart';
+import 'package:ecommerce_admin/pages/paymentSettings/paymentSettingsAddNew.dart';
+import 'package:ecommerce_admin/pages/pincode/pincodeAddNew.dart';
+import 'package:ecommerce_admin/pages/shippingCharges/shippingChargesAddNew.dart';
 import 'package:ecommerce_admin/widgets/buttons/actionBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/addBtn.dart';
+import 'package:ecommerce_admin/widgets/buttons/swtich.dart';
 import 'package:ecommerce_admin/widgets/grid/gridContents.dart';
 import 'package:ecommerce_admin/widgets/grid/gridFooter.dart';
 import 'package:ecommerce_admin/widgets/grid/gridWithWidgetParam.dart';
@@ -20,37 +26,35 @@ import '../../constants.dart';
 
 
 
-class CustomersGrid extends StatefulWidget {
-  const CustomersGrid({Key? key}) : super(key: key);
+
+class ContactMsgGrid extends StatefulWidget {
+
 
   @override
-  _CustomersGridState createState() => _CustomersGridState();
+  _ContactMsgGridState createState() => _ContactMsgGridState();
 }
 
-class _CustomersGridState extends State<CustomersGrid> {
+class _ContactMsgGridState extends State<ContactMsgGrid> {
   late double width;
-  List<GridHeaderModel> gridHeaderList=[
-    GridHeaderModel(columnName: "Customer Id",),
-    GridHeaderModel(columnName: "Name",width: 200),
-    GridHeaderModel(columnName: "Email",width: 200),
-    GridHeaderModel(columnName: "Phone No",),
-    GridHeaderModel(columnName: "Total Orders",),
-    GridHeaderModel(columnName: "Total Amount",),
-    GridHeaderModel(columnName: "Actions",width: 100),
-  ];
+
   @override
   void initState() {
     Provider.of<ProductNotifier>(context,listen: false).init(false);
     super.initState();
   }
-  // @override
-  // void didChangeDependencies() {
-  //   print("CUstomer did");
-  //   super.didChangeDependencies();
-  // }
+
 
   @override
   Widget build(BuildContext context) {
+    List<GridHeaderModel> gridHeaderList=[
+      GridHeaderModel(columnName: "Name",),
+      GridHeaderModel(columnName: "Subject"),
+      GridHeaderModel(columnName: "Message ",width: 180),
+      GridHeaderModel(columnName: "Mail ",width: 200),
+      GridHeaderModel(columnName: "Phone no ",),
+      GridHeaderModel(columnName: "Date & Time",width: 200),
+      GridHeaderModel(columnName: "Actions",width: 100),
+    ];
     width=SizeConfig.screenWidth!-100;
     return Consumer<ThemeNotifier>(
       builder: (context,th,child)=>Consumer<ProductNotifier>(
@@ -65,7 +69,10 @@ class _CustomersGridState extends State<CustomersGrid> {
                   headerHeight: headerHeight,
                   headerWidth: width,
                   gridHeaderList: gridHeaderList,
-                  addBtnTap: (){},
+                  showAdd: true,
+                  addBtnTap: (){
+                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(ContactMsgAddNew()));
+                  },
                   filterOnTap: (i){
                     setState(() {
                       gridHeaderList[i].isActive=!gridHeaderList[i].isActive;
@@ -75,32 +82,21 @@ class _CustomersGridState extends State<CustomersGrid> {
                     pn.searchCustomer(v);
                   },
                   headerWidget: Row(
-                    children: [
-                      Container(
-                        height: 30,
-                        width: 30,
-                        alignment: Alignment.center,
-                        child: Container(
-                          height: 10,
-                          width: 10,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.transparent
-                          ),
-                        ),
-                      ),
-                      for(int i=0;i<gridHeaderList.length;i++)
-                        gridHeaderList[i].isActive? GridHeader(
-                          width: gridHeaderList[i].width,
-                          title: gridHeaderList[i].columnName,
-                          alignment: gridHeaderList[i].alignment,
-                        ):Container(),
-                    ]
+                      children: [
+
+                        for(int i=0;i<gridHeaderList.length;i++)
+                          gridHeaderList[i].isActive? GridHeader(
+                            width: gridHeaderList[i].width,
+                            title: gridHeaderList[i].columnName,
+                            alignment: gridHeaderList[i].alignment,
+                            textAlign: gridHeaderList[i].textAlign,
+                          ):Container(),
+                      ]
                   ),
-                  bodyHeight: SizeConfig.screenHeight!-270,
+                  bodyHeight: SizeConfig.screenHeight!-gridReduceHei,
                   bodyWidth: width,
                   bodyWidget: Column(
-                    children: pn.filterCustomers.asMap().map((key, value) => MapEntry(key,
+                    children: pn.contactMsg.asMap().map((key, value) => MapEntry(key,
                         Container(
                           //width: width,
                           padding: bodyPadd,
@@ -109,57 +105,49 @@ class _CustomersGridState extends State<CustomersGrid> {
                           constraints: bodyConstraints,
                           child: Row(
                             children: [
-                              Container(
-                                height: 30,
-                                width: 30,
-                                alignment: Alignment.center,
-                                child: Container(
-                                  height: 10,
-                                  width: 10,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.green
-                                  ),
-                                ),
-                              ),
+
                               gridHeaderList[0].isActive?GridContent(
-                                width: 150,
-                                title: value.customerId,
-                              ):Container(),
-                              gridHeaderList[1].isActive?GridContent(
-                                width: 200,
+                                width:  gridHeaderList[0].width,
+                                alignment: gridHeaderList[0].alignment,
                                 title: value.name,
                               ):Container(),
-                              gridHeaderList[2].isActive?GridContent(
-                                width: 200,
-                                title: value.email,
+                              gridHeaderList[1].isActive?GridContent(
+                                width:gridHeaderList[1].width ,
+                                alignment: gridHeaderList[1].alignment,
+                                title: value.sub,
                               ):Container(),
+                              gridHeaderList[2].isActive?Container(
+                                // height: 50,
+                                width:gridHeaderList[2].width ,
+                                alignment: gridHeaderList[2].alignment,
+                                padding:  EdgeInsets.only(left: 10),
+                                child: Text("${value.message}",style: TextStyle(fontSize: 17,color: grey3,fontFamily: 'RR'),overflow: TextOverflow.ellipsis,),
+                              ):Container(),
+
                               gridHeaderList[3].isActive?GridContent(
-                                width: 150,
-                                title:value.phoneNumber,
+                                width:gridHeaderList[3].width ,
+                                alignment: gridHeaderList[3].alignment,
+                                title:value.mail,
                               ):Container(),
                               gridHeaderList[4].isActive?GridContent(
-                                width: 150,
-                                title: value.totalOrders,
+                                width:gridHeaderList[4].width ,
+                                alignment: gridHeaderList[4].alignment,
+                                title:value.phoneNo,
                               ):Container(),
                               gridHeaderList[5].isActive?GridContent(
-                                width: 150,
-                                title: value.totalAmount,
+                                width:gridHeaderList[5].width ,
+                                alignment: gridHeaderList[5].alignment,
+                                title:value.dateTime,
                               ):Container(),
                               gridHeaderList[6].isActive?Container(
-                                width: 100,
+                                width:gridHeaderList[6].width ,
+                                alignment: gridHeaderList[6].alignment,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
-                                    AddBtn(
-                                      ontap: (){
-                                        Navigator.push(context, pr.PageRoute().slideFromLeftToRight(CustomerView()));
-                                      },
-                                      color: Colors.transparent,
-                                      hei: 30,
-                                      margin: EdgeInsets.only(left: 0),
-                                      widget: Icon(Icons.visibility,color: Colors.grey,size: 30,),
-                                    ),
+
+                                    ActionIcon(ontap: (){
+                                    }, imgColor: grey1, img: "assets/icons/edit.svg"),
                                     ActionIcon(ontap: (){
                                     }, imgColor: Colors.red, img: "assets/icons/delete.svg"),
                                   ],
@@ -176,10 +164,6 @@ class _CustomersGridState extends State<CustomersGrid> {
                   width: width-70,
                   perPage: pn.perPage,
                   currentPage: pn.currentPage+1,
-                  totalPage: pn.totalPage,
-                  ontap2: (i){
-                    pn.currenTap(i);
-                  },
                   prev: (){
                     pn.prev();
                   },
