@@ -14,6 +14,7 @@ import 'package:ecommerce_admin/pages/ratingsReviews/ratingsReviewsGrid.dart';
 import 'package:ecommerce_admin/pages/returnProducts/returnProductGrid.dart';
 import 'package:ecommerce_admin/pages/settings/uomSettings.dart';
 import 'package:ecommerce_admin/pages/shippingCharges/shippingChargesGrid.dart';
+import 'package:ecommerce_admin/pages/subscriptionNEWAPP/adminSubscriptionPlan/adminSubsPlanGrid.dart';
 import 'package:ecommerce_admin/pages/users/usersGrid.dart';
 import 'package:ecommerce_admin/pages/wishList/wishListGird.dart';
 import 'package:ecommerce_admin/widgets/popOver/src/popover.dart';
@@ -50,6 +51,7 @@ import 'productShowCase/productShowCaseGrid.dart';
 import 'productStock/productStockGrid.dart';
 import 'refund/RefundGrid.dart';
 import 'settings/companySettings.dart';
+import 'settings/settings.dart';
 import 'staffs/staffsGrid.dart';
 import 'taxes/taxesAddGroupsAdd.dart';
 import 'topOffers/topOfferGrid.dart';
@@ -121,6 +123,8 @@ class _HomePageState extends State<HomePage> {
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Contact Message", widget: Icon(Icons.message_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "News Letter", widget: Icon(Icons.legend_toggle_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Bulk SMS Message", widget: Icon(Icons.sms_failed_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Settings", widget: Icon(Icons.settings_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Admin Subscription Plan", widget: Icon(Icons.add_task_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
  ];
 
 
@@ -400,6 +404,8 @@ class _HomePageState extends State<HomePage> {
                       menuIndex==46?ContactMsgGrid():
                       menuIndex==47?NewsLette():
                       menuIndex==48?BulkSMS():
+                      menuIndex==49?Settings():
+                      menuIndex==50?AdminSubsPlanGrid():
                           Container()
 
                     ],

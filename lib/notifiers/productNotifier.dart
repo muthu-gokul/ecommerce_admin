@@ -35,6 +35,7 @@ import 'package:ecommerce_admin/model/returnProducts/returnProductsModel.dart';
 import 'package:ecommerce_admin/model/shippingCharge/shippingChargeModel.dart';
 import 'package:ecommerce_admin/model/sizeModel.dart';
 import 'package:ecommerce_admin/model/staffsModel.dart';
+import 'package:ecommerce_admin/model/subscriptionNEWAPPModel/adminSubsPlanModel.dart';
 import 'package:ecommerce_admin/model/taxesModel/groupModel.dart';
 import 'package:ecommerce_admin/model/taxesModel/taxesModel.dart';
 import 'package:ecommerce_admin/model/topOfferModel.dart';
@@ -728,7 +729,10 @@ List<RatingsModel> ratings=[
     ContactMessageModel(name: "Naveen ", sub: "New launch ",message: "Discussion of new launch",mail: "aishu@gmail.com",phoneNo: "7852555351",dateTime: "27/06/2021 10.50 AM",),
   ];
 
-
+  //AdminSubscriptionPlan
+  List<AdminSubsPlanModel> adminSubsplan=[
+    AdminSubsPlanModel(id: "1 ", code: "Plan 1 ",name: "Executive",planType: "Trial",monthlyAmount: "₹ 3000",yearlyAmount: "₹ 30000",),
+  ];
 
 
 
