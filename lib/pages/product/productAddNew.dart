@@ -5,11 +5,13 @@ import 'package:ecommerce_admin/notifiers/productNotifier.dart';
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
 import 'package:ecommerce_admin/pages/brand/brandGrid.dart';
 import 'package:ecommerce_admin/widgets/addMoreTextFieldAnimation.dart';
+import 'package:ecommerce_admin/widgets/arrowAnimation.dart';
 import 'package:ecommerce_admin/widgets/buttons/addBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/backBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/swtich.dart';
 import 'package:ecommerce_admin/widgets/customAppBar.dart';
+import 'package:ecommerce_admin/widgets/customCheckBox.dart';
 import 'package:ecommerce_admin/widgets/customOverLayPopUp.dart';
 import 'package:ecommerce_admin/widgets/customPopUp.dart';
 import 'package:ecommerce_admin/widgets/customTextField.dart';
@@ -23,6 +25,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:scutiwidgets/expandedSection.dart';
 
 import 'package:scutiwidgets/size.dart';
 class ProductAddNew extends StatefulWidget {
@@ -40,6 +43,7 @@ class _ProductAddNewState extends State<ProductAddNew> {
   String selectedBrand="";
   String selectedCategory="";
   String selectedSubCategory="";
+  String selectedProductType="";
 
   TextEditingController pStock=new TextEditingController();
   TextEditingController pAlertStock=new TextEditingController();
@@ -75,6 +79,8 @@ class _ProductAddNewState extends State<ProductAddNew> {
 
   String selectedImage="";
   XFile? image=null;
+  List<XFile>? productImages=[];
+
   List<bool> validationList= List<bool>.generate(3, (i) => false);
 
 
@@ -82,6 +88,12 @@ class _ProductAddNewState extends State<ProductAddNew> {
   bool showCategoryDropDown=false;
   bool showSubCategoryDropDown=false;
   bool showUnitDropDown=false;
+
+  bool showAlert=false;
+  bool showQtyRest=false;
+  bool showPriceDetails=false;
+  bool showShippingPrice=false;
+  bool showReturnable=false;
 
   void addTempSubValues(int i){
       setState(() {
@@ -128,49 +140,128 @@ class _ProductAddNewState extends State<ProductAddNew> {
         builder: (context,th,child)=>  Consumer<ProductNotifier>(
           builder: (context,pn,child)=> Stack(
             children: [
-              Container(
-                height: SizeConfig.screenHeight,
-                width: SizeConfig.screenWidth,
-                color: th.addNewBodyColor,
-                padding: EdgeInsets.only(top: 0,left: 0,bottom: 10),
-                child: Column(
-                  children: [
-                    CustomAppBarAddNew(
-                      title: "Add New Product",
-                    ),
-                    Theme(
-                      data: glowTransparent(context),
-                      child: Container(
-                        height: SizeConfig.screenHeight!-80,
-                        width: SizeConfig.screenWidth,
-                        child: SingleChildScrollView(
-                          child: Wrap(
-                            runSpacing: 20,
-                            spacing: 0,
-                            children: [
-                             // SizedBox(height: 20,),
-                              ProductTextField(
+              SingleChildScrollView(
+                child: Container(
+                  height: SizeConfig.screenHeight,
+                  width: SizeConfig.screenWidth,
+                  color: th.addNewBodyColor,
+                  padding: EdgeInsets.only(top: 0,left: 0,bottom: 10),
+                  child: Column(
+                    children: [
+                      CustomAppBarAddNew(
+                        title: "Add New Product",
+                      ),
+                      Theme(
+                        data: glowTransparent(context),
+                        child: Container(
+                          height: SizeConfig.screenHeight!-80,
+                          width: SizeConfig.screenWidth,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: cA1,
+                              // runSpacing: 20,
+                              // spacing: 0,
+                              children: [
+                                SizedBox(height: inBetweenHeight,),
+                                ProductTextField(
                                   width: textFormWidth,
-                                  title: "Product Name",
-                                  validation: validationList[0],
-                                  textEditingController: pName,
+                                  title: "Product Type",
+                                  validation: validationList[1],
+                                  isTextField: false,
                                   onComplete: (){
                                     node.unfocus();
-                                    setState(() {
-                                      pslug.text=pName.text.replaceAll(" ", "-").replaceAll(",", "");
-                                    });
-                                  }
-                              ),
-                              ProductTextField(
-                                  width: textFormWidth,
-                                  title: "URL Slug",
+                                  },
+
+                                  widget:CustomPopup(
+                                    hintText: "Select Product Type",
+                                    data: ["Simple Product","Variable Product"],
+                                    selectedValue: selectedProductType,
+                                    width:textFormWidth ,
+                                    leftMargin: 0,
+                                    edgeInsets: EdgeInsets.only(left: 0),
+                                    onSelect: (v){
+                                      setState(() {
+                                        selectedProductType=v;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(height: inBetweenHeight,),
+                                ProductTextField(
+                                    width: textFormWidth,
+                                    title: "Product Id & Name",
+                                    validation: validationList[0],
+                                    isTextField: false,
+                                    onComplete: (){},
+                                    widget: Container(
+                                      width: textFormWidth,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          AddNewLabelTextField(
+                                              width: (textFormWidth/2)-10,
+                                              margin: paddTextFieldHeader2,
+                                              hintText: "Enter Product Id",
+
+                                          ),
+                                          AddNewLabelTextField(
+                                              width: (textFormWidth/2)-10,
+                                              margin: paddTextFieldHeader2,
+                                              hintText: "Enter Product Name",
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                ),
+                                SizedBox(height: inBetweenHeight,),
+                                ProductTextField(
+                                    width: textFormWidth,
+                                    title: "URL Slug",
+                                    validation: validationList[1],
+                                    textEditingController: pslug,
+                                    onComplete: (){
+                                      node.unfocus();
+                                    },
+
+                                ),
+                                SizedBox(height: inBetweenHeight,),
+                                ProductTextField(
+                                  width: textFormWidth+20,
+                                  leftPadding: 40,
+                                  title: "Upload Product Image",
                                   validation: validationList[1],
                                   textEditingController: pslug,
                                   onComplete: (){
                                     node.unfocus();
-                                  }
-                              ),
-                              ProductTextField(
+                                  },
+                                  isTextField: false,
+                                  widget: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text("You can upload multiple images",style: ts18(grey1,fontfamily: 'RL'),),
+                                      SizedBox(height: 10,),
+                                      PickMultiImage(
+                                          images: productImages??[],
+                                          title: "Upload Product",
+                                          cb: (c){
+                                            setState(() {
+                                              productImages=c;
+                                            });
+                                          },
+                                          deleteCb: (i){
+                                            if(productImages!=null){
+                                              setState(() {
+                                                productImages!.removeAt(i);
+                                              });
+                                            }
+                                          },
+                                          wid: textFormWidth+20
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(height: inBetweenHeight,),
+                                ProductTextField(
                                   width: textFormWidth,
                                   title: "Select Brand",
                                   validation: validationList[2],
@@ -178,29 +269,30 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                   onComplete: (){},
                                   isTextField: false,
                                   widget: OverLayPopUp(
-                                      ontap: (){
-                                        setState(() {
-                                          showBrandDropDown=!showBrandDropDown;
-                                        });
-                                      },
-                                      width: textFormWidth,
-                                      hinttext: "Select Brand",
-                                      selectedValue: selectedBrand,
-                                      showPopUp: showBrandDropDown,
-                                      data: pn.brandList,
-                                      onitemTap: (i){
-                                        setState(() {
-                                          showBrandDropDown=false;
-                                          selectedBrand=pn.brandList[i].title;
-                                        });
-                                      },
-                                      isToJson: true,
-                                      propertyName: "title",
+                                    ontap: (){
+                                      setState(() {
+                                        showBrandDropDown=!showBrandDropDown;
+                                      });
+                                    },
+                                    width: textFormWidth,
+                                    hinttext: "Select Brand",
+                                    selectedValue: selectedBrand,
+                                    showPopUp: showBrandDropDown,
+                                    data: pn.brandList,
+                                    onitemTap: (i){
+                                      setState(() {
+                                        showBrandDropDown=false;
+                                        selectedBrand=pn.brandList[i].title;
+                                      });
+                                    },
+                                    isToJson: true,
+                                    propertyName: "title",
                                   ),
-                              ),
-                              ProductTextField(
+                                ),
+                                SizedBox(height: inBetweenHeight,),
+                                ProductTextField(
                                   width: textFormWidth,
-                                  title: "Select Category",
+                                  title: "Category",
                                   validation: validationList[2],
                                   textEditingController: dummyTextController,
                                   onComplete: (){},
@@ -224,8 +316,9 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                     },
                                     isToJson: false,
                                   ),
-                              ),
-                              ProductTextField(
+                                ),
+                                SizedBox(height: inBetweenHeight,),
+                                ProductTextField(
                                   width: textFormWidth,
                                   title: "Select Sub Category",
                                   validation: validationList[2],
@@ -251,247 +344,425 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                     },
                                     isToJson: false,
                                   ),
-                              ),
-
-                              ProductTextField(
-                                  width: textFormWidth,
-                                  title: "Product Stock",
-                                  validation: validationList[0],
-                                  textEditingController: pStock,
-                                  textInputType: TextInputType.number,
-                                  onComplete: (){
-                                    node.unfocus();
-                                  }
-                              ),
-                              ProductTextField(
-                                  width: textFormWidth,
-                                  title: "Alert Stock",
-                                  validation: validationList[0],
-                                  textEditingController: pAlertStock,
-                                  textInputType: TextInputType.number,
-                                  onComplete: (){
-                                    node.unfocus();
-                                  }
-                              ),
-                              ProductTextField(
-                                  width: textFormWidth,
-                                  title: "Actual Price",
-                                  validation: validationList[0],
-                                  textEditingController: pActualPrice,
-                                  textInputType: TextInputType.number,
-                                  onComplete: (){
-                                    node.unfocus();
-                                  }
-                              ),
-                              ProductTextField(
-                                  width: textFormWidth,
-                                  title: "Offer Price",
-                                  validation: validationList[0],
-                                  textEditingController: pOfferPrice,
-                                  textInputType: TextInputType.number,
-                                  onComplete: (){
-                                    node.unfocus();
-                                  }
-                              ),
-                              ProductTextField(
-                                  width: textFormWidth,
-                                  title: "Shipping Price",
-                                  validation: validationList[0],
-                                  textEditingController: pShippingPrice,
-                                  textInputType: TextInputType.number,
-                                  onComplete: (){
-                                    node.unfocus();
-                                  }
-                              ),
-                              ProductTextField(
-                                  width: textFormWidth,
-                                  title: "Pincode",
-                                  validation: validationList[0],
-                                  textEditingController: pPincode,
-                                  textInputType: TextInputType.number,
-                                  regExp: digitRegEx,
-                                  textLength: zipcodeLength,
-                                  onComplete: (){
-                                    node.unfocus();
-                                  }
-                              ),
-                              ProductTextField(
-                                  width: textFormWidth,
-                                  title: "CashBack",
-                                  validation: validationList[0],
-                                  textEditingController: pCashBack,
-                                  textInputType: TextInputType.number,
-                                  onComplete: (){
-                                    node.unfocus();
-                                  }
-                              ),
-
-                              ProductTextField(
-                                width: textFormWidth,
-                                title: "Select Unit",
-                                validation: validationList[2],
-                                textEditingController: dummyTextController,
-                                onComplete: (){},
-                                isTextField: false,
-                                widget: OverLayPopUp(
-                                  ontap: (){
-                                    setState(() {
-                                      showUnitDropDown=!showUnitDropDown;
-                                    });
-                                  },
-                                  width: textFormWidth,
-                                  hinttext: "Select Unit",
-                                  selectedValue: selectedUnit,
-                                  showPopUp: showUnitDropDown,
-                                  data: pn.units,
-                                  onitemTap: (i){
-                                    setState(() {
-                                      showUnitDropDown=false;
-                                      selectedUnit=pn.units[i];
-                                    });
-                                  },
-                                  isToJson: false,
                                 ),
-                              ),
-                              ProductTextField(
-                                  width: textFormWidth,
-                                  title: "Website URL",
-                                  validation: validationList[0],
-                                  textEditingController: pWebsiteUrl,
-                                  onComplete: (){
-                                    node.unfocus();
-                                  }
-                              ),
-                              ProductTextField(
-                                  width: textFormWidth,
-                                  title: "Embedded You tube URL",
-                                  validation: validationList[0],
-                                  textEditingController: pYouTubeUrl,
-                                  onComplete: (){
-                                    node.unfocus();
-                                  }
-                              ),
-
-                              Container(
-                                margin: EdgeInsets.only(left: 20,top: 20),
-                                width: textFormWidth-20,
-                                height: 50,
-                                child: Row(
-                                  children: [
-                                    Text("Product Availability in Stock",
-                                      style: TextStyle(fontFamily: 'RR',fontSize: 20,color: Color(0xFF505050)),
-                                    ),
-                                    Spacer(),
-                                    CustomSwitch(
-                                        value: isProductAvailable,
-                                        onchange: (v){
-                                          setState(() {
-                                            isProductAvailable=v;
-                                          });
-                                        },
-                                    ),
-
-                                  ],
+                                SizedBox(height: inBetweenHeight,),
+                                ProductTextField(
+                                    width: textFormWidth,
+                                    title: "Product Stock",
+                                    validation: validationList[0],
+                                    textEditingController: pStock,
+                                    textInputType: TextInputType.number,
+                                    onComplete: (){
+                                      node.unfocus();
+                                    }
                                 ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(left: 20,top: 20),
-                                width: textFormWidth-20,
-                                height: 50,
-                                child: Row(
-                                  children: [
-                                    Text("Hide the Product",
-                                      style: TextStyle(fontFamily: 'RR',fontSize: 20,color: Color(0xFF505050)),
-                                    ),
-                                    Spacer(),
-                                    CustomSwitch(
-                                        value: hideProduct,
-                                        onchange: (v){
-                                          setState(() {
-                                            hideProduct=v;
-                                          });
-                                        },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              ProductTextField(
-                                  width: textFormWidth,
-                                  title: "Price API",
-                                  validation: validationList[0],
-                                  textEditingController: dummyTextController,
-                                  onComplete: (){
-                                    node.unfocus();
-                                  },
-                                  isTextField: false,
-                                  widget: Container(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                      children: [
-                                        GestureDetector(
-                                          onTap: (){
+                                Container(
+                                  height: 50,
+                                  width:  770,
+                                  child: Row(
+                                    children: [
+                                      Spacer(),
+                                      CustomCheckBox(
+                                          show: showAlert,
+                                          ontap: (){
                                             setState(() {
-                                              priceApi=1;
+                                              showAlert=!showAlert;
                                             });
-
-                                          },
-                                          child: Container(
-                                            height: 50,
+                                          }
+                                      ),
+                                      SizedBox(width: 10,),
+                                      Icon(Icons.warning,color: Colors.red,),
+                                      Text("  Alert Stock Values",style: ts16(th.primaryColor4),)
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  alignment: Alignment.center,
+                                  width: textFormWidth+270,
+                                  child: CustomExpansionTile(
+                                    expand: showAlert,
+                                    child: ProductTextField(
+                                        width: textFormWidth,
+                                        title: "Alert Stock",
+                                        validation: validationList[0],
+                                        textEditingController: pAlertStock,
+                                        textInputType: TextInputType.number,
+                                        onComplete: (){
+                                          node.unfocus();
+                                        }
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: inBetweenHeight,),
+                                ProductTextField(
+                                    width: textFormWidth,
+                                    title: "Quantity Restriction",
+                                    validation: validationList[0],
+                                    textEditingController: pAlertStock,
+                                    onComplete: (){
+                                      node.unfocus();
+                                    },
+                                    isTextField: false,
+                                    widget: Container(
+                                    //  margin: EdgeInsets.only(left: 20,top: 20),
+                                      width: textFormWidth,
+                                      height: 50,
+                                      child: Row(
+                                        children: [
+                                          Text("Do you want Quantity Restriction ?    ",
+                                            style: TextStyle(fontFamily: 'RL',fontSize: 18,color: grey2),
+                                          ),
+                                       //   Spacer(),
+                                          CustomSwitch(
+                                            value: showQtyRest,
+                                            onchange: (v){
+                                              setState(() {
+                                                showQtyRest=v;
+                                              });
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                ),
+                                Container(
+                                  alignment: Alignment.center,
+                                  width: textFormWidth+270,
+                                  child: CustomExpansionTile(
+                                    expand: showQtyRest,
+                                    child: ProductTextField(
+                                      width: textFormWidth,
+                                      title: "",
+                                      validation: validationList[0],
+                                      isTextField: false,
+                                      onComplete: (){},
+                                      widget: Container(
+                                        width: textFormWidth,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            AddNewLabelTextField(
+                                              width: (textFormWidth/2)-10,
+                                              margin: EdgeInsets.only(top: 15),
+                                              hintText: "Minimum",
+                                            ),
+                                            AddNewLabelTextField(
+                                              width: (textFormWidth/2)-10,
+                                              margin: EdgeInsets.only(top: 15),
+                                              hintText: "Maximum",
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: inBetweenHeight,),
+                                GestureDetector(
+                                  onTap: (){
+                                    setState(() {
+                                      showPriceDetails=!showPriceDetails;
+                                    });
+                                  },
+                                  child: Container(
+                                    width: textFormWidth+270,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(7),
+                                      color: th.addNewAppBarColor
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                            padding:  EdgeInsets.only(left: 20,bottom: 10,top: 10),
                                             alignment: Alignment.centerLeft,
-                                           // padding:  EdgeInsets.only(left: SizeConfig.width20!),
-                                            color: Colors.transparent,
+                                            child: Text("Product Price Details / Shipping",style: ts18(grey1,),)
+                                        ),
+                                        Padding(
+                                          padding:  EdgeInsets.only(right:20.0),
+                                          child: Arrow(isOpen: showPriceDetails),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                CustomExpansionTile(
+                                  expand: showPriceDetails,
+                                  child: Container(
+                                    width: SizeConfig.screenWidth,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        ProductTextField(
+                                          width: textFormWidth,
+                                          title: "Product Price",
+                                          validation: validationList[0],
+                                          isTextField: false,
+                                          onComplete: (){},
+                                          widget: Container(
+                                            width: textFormWidth,
                                             child: Row(
-                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
-                                                AnimatedContainer(
-                                                  duration: animeDuration,
-                                                  curve: animeCurve,
-                                                  height: 25,
-                                                  width: 25,
-                                                  decoration: BoxDecoration(
-                                                      color: priceApi==1?th.loginBtn:Color(0xFFBABABA),
-                                                      shape: BoxShape.circle,
-                                                      border: Border.all(color: priceApi==1?th.primaryColor2:Color(0xFFDADADA),width: 7)
-                                                  ),
+                                                AddNewLabelTextField(
+                                                  width: (textFormWidth/2)-10,
+                                                  margin: EdgeInsets.only(top: 15),
+                                                  hintText: "Actual Price",
                                                 ),
-                                                SizedBox(width: 10,),
-                                                Text("FP",
-                                                  style: TextStyle(color: Color(0xFF2E2E2E),fontSize: 18,fontFamily: 'RR'),
-                                                )
+                                                AddNewLabelTextField(
+                                                  width: (textFormWidth/2)-10,
+                                                  margin: EdgeInsets.only(top: 15),
+                                                  hintText: "Offer Price",
+                                                ),
                                               ],
                                             ),
                                           ),
                                         ),
-                                        GestureDetector(
-                                          onTap: (){
-                                            setState(() {
-                                              priceApi=2;
-                                            });
+                                        SizedBox(height: inBetweenHeight,),
+                                        ProductTextField(
+                                          width: textFormWidth,
+                                          title: "Taxes",
+                                          validation: validationList[2],
+                                          textEditingController: dummyTextController,
+                                          onComplete: (){},
+                                          isTextField: false,
+                                          widget:CustomPopup(
+                                            hintText: "Select Taxes",
+                                            data: ["GST","CGST"],
+                                            selectedValue: selectedProductType,
+                                            width:textFormWidth ,
+                                            leftMargin: 0,
+                                            edgeInsets: EdgeInsets.only(left: 0),
+                                            onSelect: (v){
+                                              setState(() {
+                                                selectedProductType=v;
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                        SizedBox(height: inBetweenHeight,),
+                                        ProductTextField(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          width: textFormWidth,
+                                          paddTextFieldHeader2: EdgeInsets.only(top: 10),
+                                          title: "Shipping Price",
+                                          validation: validationList[2],
+                                          textEditingController: dummyTextController,
+                                          onComplete: (){},
+                                          isTextField: false,
+                                          widget:Column(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                height: 50,
+                                               // width:  770,
+                                                child: Row(
+                                                  children: [
+                                                  //  Spacer(),
+                                                    CustomCheckBox(
+                                                        show: showShippingPrice,
+                                                        ontap: (){
+                                                          setState(() {
+                                                            showShippingPrice=!showShippingPrice;
+                                                          });
+                                                        }
+                                                    ),
+                                                    SizedBox(width: 10,),
+                                                    Icon(Icons.warning,color: Colors.red,),
+                                                    Text("  Do you want to add Shipping Price ?",style: ts16(grey1,fontfamily: 'RL'),)
+                                                  ],
+                                                ),
+                                              ),
+                                              CustomExpansionTile(
+                                                expand: showShippingPrice,
+                                                child: AddNewLabelTextField(
+                                                  width: textFormWidth,
+                                                  margin: EdgeInsets.only(left: 0),
+                                                  hintText: "Enter Shipping Price",
+                                                ),
+                                              )
+                                            ],
+                                          ),
 
-                                          },
-                                          child: Container(
+                                        ),
+                                        SizedBox(height: inBetweenHeight,),
+                                        ProductTextField(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          width: textFormWidth,
+                                          paddTextFieldHeader2: EdgeInsets.only(top: 10),
+                                          title: "Select State / District",
+                                          validation: validationList[2],
+                                          textEditingController: dummyTextController,
+                                          onComplete: (){},
+                                          isTextField: false,
+                                          widget:Column(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                width: textFormWidth,
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    CustomPopup(
+                                                      hintText: "Select State",
+                                                      data: ["Tamilnadu","Andhra Pradesh","Kerala"],
+                                                      selectedValue: "",
+                                                      width:(textFormWidth/2)-10 ,
+                                                      leftMargin: 0,
+                                                      edgeInsets: EdgeInsets.only(left: 0),
+                                                      onSelect: (v){
+                                                        setState(() {
+                                                        //  selectedProductType=v;
+                                                        });
+                                                      },
+                                                    ),
+                                                    CustomPopup(
+                                                      hintText: "Select District",
+                                                      data: ["Chennai","Theni","Madurai"],
+                                                      selectedValue: "",
+                                                      width:(textFormWidth/2)-10 ,
+                                                      leftMargin: 0,
+                                                      edgeInsets: EdgeInsets.only(left: 0),
+                                                      onSelect: (v){
+                                                        setState(() {
+                                                         // selectedProductType=v;
+                                                        });
+                                                      },
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(height: inBetweenHeight,),
+                                              Container(
+                                                width: textFormWidth,
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    CustomPopup(
+                                                      hintText: "Select Taluk",
+                                                      data: ["Tamilnadu","Andhra Pradesh","Kerala"],
+                                                      selectedValue: "",
+                                                      width:(textFormWidth/2)-10 ,
+                                                      leftMargin: 0,
+                                                      edgeInsets: EdgeInsets.only(left: 0),
+                                                      onSelect: (v){
+                                                        setState(() {
+                                                          //  selectedProductType=v;
+                                                        });
+                                                      },
+                                                    ),
+                                                    CustomPopup(
+                                                      hintText: "Select Area",
+                                                      data: ["Chennai","Theni","Madurai"],
+                                                      selectedValue: "",
+                                                      width:(textFormWidth/2)-10 ,
+                                                      leftMargin: 0,
+                                                      edgeInsets: EdgeInsets.only(left: 0),
+                                                      onSelect: (v){
+                                                        setState(() {
+                                                          // selectedProductType=v;
+                                                        });
+                                                      },
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+
+                                        ),
+                                        SizedBox(height: inBetweenHeight,),
+                                        ProductTextField(
+                                          width: textFormWidth,
+                                          title: "Unit",
+                                          validation: validationList[2],
+                                          textEditingController: dummyTextController,
+                                          onComplete: (){},
+                                          isTextField: false,
+                                          widget:CustomPopup(
+                                            hintText: "Select Unit",
+                                            data: pn.units,
+                                            selectedValue: selectedUnit,
+                                            width:textFormWidth ,
+                                            leftMargin: 0,
+                                            edgeInsets: EdgeInsets.only(left: 0),
+                                            onSelect: (v){
+                                              setState(() {
+                                                selectedUnit=v;
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                        SizedBox(height: inBetweenHeight,),
+                                        ProductTextField(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          width: textFormWidth,
+                                          paddTextFieldHeader2: EdgeInsets.only(top: 10),
+                                          title: "Is Returnable Item",
+                                          validation: validationList[2],
+                                          textEditingController: dummyTextController,
+                                          onComplete: (){},
+                                          isTextField: false,
+                                          widget:Container(
                                             height: 50,
-                                            alignment: Alignment.centerLeft,
-                                           // padding:  EdgeInsets.only(left: SizeConfig.width20!),
-                                            color: Colors.transparent,
+                                            padding: EdgeInsets.only(top: 10),
+                                            // width:  770,
                                             child: Row(
-                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
-                                                AnimatedContainer(
-                                                  duration: animeDuration,
-                                                  curve: animeCurve,
-                                                  height: 25,
-                                                  width: 25,
-                                                  decoration: BoxDecoration(
-                                                      color: priceApi==2?th.loginBtn:Color(0xFFBABABA),
-                                                      shape: BoxShape.circle,
-                                                      border: Border.all(color: priceApi==2?th.primaryColor2:Color(0xFFDADADA),width: 7)
-                                                  ),
+                                                //  Spacer(),
+                                                CustomCheckBox(
+                                                    show: showReturnable,
+                                                    ontap: (){
+                                                      setState(() {
+                                                        showReturnable=!showReturnable;
+                                                      });
+                                                    }
                                                 ),
                                                 SizedBox(width: 10,),
-                                                Text("GOP",
-                                                  style: TextStyle(color: Color(0xFF2E2E2E),fontSize: 18,fontFamily: 'RR'),
-                                                )
+                                                Icon(Icons.warning,color: Colors.red,),
+                                                SizedBox(width: 10,),
+                                                Container(
+
+                                                    width: textFormWidth-70,
+
+                                                    child: Text("If it is returnable item mean need to mentioned with in day of returnable ?",style: ts16(grey1,fontfamily: 'RL'),))
+                                              ],
+                                            ),
+                                          ),
+
+                                        ),
+                                        SizedBox(height: inBetweenHeight,),
+                                        Container(
+                                          width: textFormWidth+270,
+                                          child: CustomExpansionTile(
+                                            expand:showReturnable ,
+                                            child: Column(
+                                              children: [
+                                                ProductTextField(
+                                                    width: textFormWidth,
+                                                    title: "Replacement Days",
+                                                    validation: validationList[0],
+
+                                                    onComplete: (){
+                                                      node.unfocus();
+                                                    }
+                                                ),
+                                                SizedBox(height: inBetweenHeight,),
+                                                ProductTextField(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    width: textFormWidth,
+                                                    title: "Policy",
+                                                    maxlines: 3,
+                                                    validation: validationList[0],
+
+                                                    onComplete: (){
+                                                      node.unfocus();
+                                                    }
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -499,121 +770,450 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                       ],
                                     ),
                                   ),
-                              ),
-
-                              ProductTextField(
-                                  width: SizeConfig.screenWidth!,
-                                  title: "Description",
-                                  validation: validationList[0],
-                                  textEditingController: pDescription,
-                                  maxlines: 3,
-                                  onComplete: (){
-                                    node.unfocus();
-                                  },
-                              ),
-                              ProductTextField(
-                                width: SizeConfig.screenWidth!,
-                                title: "Enter Tags",
-                                validation: validationList[2],
-                                textEditingController: dummyTextController,
-                                onComplete: (){},
-                                isTextField: false,
-                                widget: MultiTags(
-                                  hintText: 'Enter Tags',
-                                  data: tagsList,
-                                  textFieldWidth: 180,
-                                  width: SizeConfig.screenWidth!,
                                 ),
-                              ),
-                              ProductTextField(
-                                width: SizeConfig.screenWidth!,
-                                title: "SEO KeyWords",
-                                validation: validationList[2],
-                                textEditingController: dummyTextController,
-                                onComplete: (){},
-                                isTextField: false,
-                                widget: MultiTags(
-                                  hintText: 'Enter SEO KeyWords',
-                                  data: seoKeyWordsList,
-                                  textFieldWidth: 180,
-                                  width: SizeConfig.screenWidth!,
-                                ),
-                              ),
-                              ProductTextField(
-                                width: SizeConfig.screenWidth!,
-                                title: "SEO Titles",
-                                validation: validationList[2],
-                                textEditingController: dummyTextController,
-                                onComplete: (){},
-                                isTextField: false,
-                                widget: MultiTags(
-                                  hintText: 'Enter SEO Title',
-                                  data: seoTitlesList,
-                                  textFieldWidth: 180,
-                                  width: SizeConfig.screenWidth!,
-                                ),
-                              ),
 
-                              ProductTextField(
-                                  width: SizeConfig.screenWidth!*0.5+170,
-                                  title: "Highlights",
-                                  validation: validationList[0],
-                                  textEditingController: dummyTextController,
-                                  onComplete: (){
-                                    node.unfocus();
-                                  },
-                                  isTextField: false,
-                                  widget: AddMoreTextFieldAnimation(
-                                      data: highLightsList,
-                                      hintText: "Highlights",
-                                      addCB: addHighlights,
-                                      deleteCB: (i){
-                                        setState(() {
-                                          highLightsList.removeAt(i);
-                                        });
-                                      }
-                                  )
-                              ),
 
-                              //Add values
-                              GestureDetector(
-                                onTap: (){
-                                  addTempValues();
-                                  // setState(() {
-                                  //   isAddValueClick=true;
-                                  //   tempSubAddValues.clear();
-                                  //   selectedHeading=-1;
-                                  // });
-                                },
-                                child: Container(
-                                  width: SizeConfig.screenWidth,
-                                  alignment: Alignment.centerLeft,
-                                  child: Container(
-                                    height: 50,
-                                    width: 150,
-                                    margin: EdgeInsets.only(left: 20),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      border: Border.all(color: addNewTextFieldBorder),
-                                      color: Colors.white
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: Text("Add Values",style: textFormTs1,),
+
+                                SizedBox(height: inBetweenHeight+100,),
+
+
+
+                                ProductTextField(
+                                    width: textFormWidth,
+                                    title: "Pincode",
+                                    validation: validationList[0],
+                                    textEditingController: pPincode,
+                                    textInputType: TextInputType.number,
+                                    regExp: digitRegEx,
+                                    textLength: zipcodeLength,
+                                    onComplete: (){
+                                      node.unfocus();
+                                    }
+                                ),
+                                ProductTextField(
+                                    width: textFormWidth,
+                                    title: "CashBack",
+                                    validation: validationList[0],
+                                    textEditingController: pCashBack,
+                                    textInputType: TextInputType.number,
+                                    onComplete: (){
+                                      node.unfocus();
+                                    }
+                                ),
+
+
+                                ProductTextField(
+                                    width: textFormWidth,
+                                    title: "Website URL",
+                                    validation: validationList[0],
+                                    textEditingController: pWebsiteUrl,
+                                    onComplete: (){
+                                      node.unfocus();
+                                    }
+                                ),
+                                ProductTextField(
+                                    width: textFormWidth,
+                                    title: "Embedded You tube URL",
+                                    validation: validationList[0],
+                                    textEditingController: pYouTubeUrl,
+                                    onComplete: (){
+                                      node.unfocus();
+                                    }
+                                ),
+
+                                Container(
+                                  margin: EdgeInsets.only(left: 20,top: 20),
+                                  width: textFormWidth-20,
+                                  height: 50,
+                                  child: Row(
+                                    children: [
+                                      Text("Product Availability in Stock",
+                                        style: TextStyle(fontFamily: 'RR',fontSize: 20,color: Color(0xFF505050)),
+                                      ),
+                                      Spacer(),
+                                      CustomSwitch(
+                                          value: isProductAvailable,
+                                          onchange: (v){
+                                            setState(() {
+                                              isProductAvailable=v;
+                                            });
+                                          },
+                                      ),
+
+                                    ],
                                   ),
                                 ),
-                              ),
-                             for(int i=0;i<tempAddValues.length;i++)
-                               Container(
+                                Container(
+                                  margin: EdgeInsets.only(left: 20,top: 20),
+                                  width: textFormWidth-20,
+                                  height: 50,
+                                  child: Row(
+                                    children: [
+                                      Text("Hide the Product",
+                                        style: TextStyle(fontFamily: 'RR',fontSize: 20,color: Color(0xFF505050)),
+                                      ),
+                                      Spacer(),
+                                      CustomSwitch(
+                                          value: hideProduct,
+                                          onchange: (v){
+                                            setState(() {
+                                              hideProduct=v;
+                                            });
+                                          },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                ProductTextField(
+                                    width: textFormWidth,
+                                    title: "Price API",
+                                    validation: validationList[0],
+                                    textEditingController: dummyTextController,
+                                    onComplete: (){
+                                      node.unfocus();
+                                    },
+                                    isTextField: false,
+                                    widget: Container(
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        children: [
+                                          GestureDetector(
+                                            onTap: (){
+                                              setState(() {
+                                                priceApi=1;
+                                              });
+
+                                            },
+                                            child: Container(
+                                              height: 50,
+                                              alignment: Alignment.centerLeft,
+                                             // padding:  EdgeInsets.only(left: SizeConfig.width20!),
+                                              color: Colors.transparent,
+                                              child: Row(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  AnimatedContainer(
+                                                    duration: animeDuration,
+                                                    curve: animeCurve,
+                                                    height: 25,
+                                                    width: 25,
+                                                    decoration: BoxDecoration(
+                                                        color: priceApi==1?th.loginBtn:Color(0xFFBABABA),
+                                                        shape: BoxShape.circle,
+                                                        border: Border.all(color: priceApi==1?th.primaryColor2:Color(0xFFDADADA),width: 7)
+                                                    ),
+                                                  ),
+                                                  SizedBox(width: 10,),
+                                                  Text("FP",
+                                                    style: TextStyle(color: Color(0xFF2E2E2E),fontSize: 18,fontFamily: 'RR'),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          GestureDetector(
+                                            onTap: (){
+                                              setState(() {
+                                                priceApi=2;
+                                              });
+
+                                            },
+                                            child: Container(
+                                              height: 50,
+                                              alignment: Alignment.centerLeft,
+                                             // padding:  EdgeInsets.only(left: SizeConfig.width20!),
+                                              color: Colors.transparent,
+                                              child: Row(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  AnimatedContainer(
+                                                    duration: animeDuration,
+                                                    curve: animeCurve,
+                                                    height: 25,
+                                                    width: 25,
+                                                    decoration: BoxDecoration(
+                                                        color: priceApi==2?th.loginBtn:Color(0xFFBABABA),
+                                                        shape: BoxShape.circle,
+                                                        border: Border.all(color: priceApi==2?th.primaryColor2:Color(0xFFDADADA),width: 7)
+                                                    ),
+                                                  ),
+                                                  SizedBox(width: 10,),
+                                                  Text("GOP",
+                                                    style: TextStyle(color: Color(0xFF2E2E2E),fontSize: 18,fontFamily: 'RR'),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                ),
+
+                                ProductTextField(
+                                    width: textFormWidth,
+                                    title: "Description",
+                                    validation: validationList[0],
+                                    textEditingController: pDescription,
+                                    maxlines: 3,
+                                    onComplete: (){
+                                      node.unfocus();
+                                    },
+                                ),
+                                ProductTextField(
+                                  width: SizeConfig.screenWidth!-300,
+                                  title: "Enter Tags",
+                                  validation: validationList[2],
+                                  textEditingController: dummyTextController,
+                                  onComplete: (){},
+                                  isTextField: false,
+                                  widget: MultiTags(
+                                    hintText: 'Enter Tags',
+                                    data: tagsList,
+                                    textFieldWidth: 180,
+                                    width: SizeConfig.screenWidth!-300,
+                                  ),
+                                ),
+                                ProductTextField(
+                                  width: SizeConfig.screenWidth!-300,
+                                  title: "SEO KeyWords",
+                                  validation: validationList[2],
+                                  textEditingController: dummyTextController,
+                                  onComplete: (){},
+                                  isTextField: false,
+                                  widget: MultiTags(
+                                    hintText: 'Enter SEO KeyWords',
+                                    data: seoKeyWordsList,
+                                    textFieldWidth: 180,
+                                    width: SizeConfig.screenWidth!-300,
+                                  ),
+                                ),
+                                ProductTextField(
+                                  width: SizeConfig.screenWidth!-300,
+                                  title: "SEO Titles",
+                                  validation: validationList[2],
+                                  textEditingController: dummyTextController,
+                                  onComplete: (){},
+                                  isTextField: false,
+                                  widget: MultiTags(
+                                    hintText: 'Enter SEO Title',
+                                    data: seoTitlesList,
+                                    textFieldWidth: 180,
+                                    width: SizeConfig.screenWidth!-300,
+                                  ),
+                                ),
+
+                                ProductTextField(
+                                    width:530,
+                                    title: "Highlights",
+                                    validation: validationList[0],
+                                    textEditingController: dummyTextController,
+                                    onComplete: (){
+                                      node.unfocus();
+                                    },
+                                    isTextField: false,
+                                    widget: AddMoreTextFieldAnimation(
+                                        data: highLightsList,
+                                        wid: 530,
+                                        hintText: "Highlights",
+                                        addCB: addHighlights,
+                                        deleteCB: (i){
+                                          setState(() {
+                                            highLightsList.removeAt(i);
+                                          });
+                                        }
+                                    )
+                                ),
+
+                                //Add values
+                                GestureDetector(
+                                  onTap: (){
+                                    addTempValues();
+                                    // setState(() {
+                                    //   isAddValueClick=true;
+                                    //   tempSubAddValues.clear();
+                                    //   selectedHeading=-1;
+                                    // });
+                                  },
+                                  child: Container(
+                                    width: SizeConfig.screenWidth,
+                                    alignment: Alignment.centerLeft,
+                                    child: Container(
+                                      height: 50,
+                                      width: 150,
+                                      margin: EdgeInsets.only(left: 20),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        border: Border.all(color: addNewTextFieldBorder),
+                                        color: Colors.white
+                                      ),
+                                      alignment: Alignment.center,
+                                      child: Text("Add Values",style: textFormTs1,),
+                                    ),
+                                  ),
+                                ),
+                               for(int i=0;i<tempAddValues.length;i++)
+                                 Container(
+                                   padding: EdgeInsets.all(15),
+                                   margin: EdgeInsets.only(left: 20,right: 20),
+                                   width: width1,
+                                   decoration: BoxDecoration(
+                                       borderRadius: BorderRadius.circular(5),
+                                       border: Border.all(color: addNewTextFieldBorder),
+                                       color: Colors.white
+                                   ),
+                                   constraints: BoxConstraints(
+                                       minHeight: 100
+                                   ),
+                                   child: Column(
+                                     children: [
+                                       Row(
+                                         children: [
+                                           AddNewLabelTextField(
+                                             margin: EdgeInsets.only(left: 0),
+                                             width: width1*0.5,
+                                             hintText: "Enter Title",
+                                             textEditingController: tempAddValues[i].title,
+                                             onEditComplete: (){
+                                               node.unfocus();
+                                             },
+                                             onChange: (v){},
+                                           ),
+                                           Spacer(),
+                                           GestureDetector(
+                                             onTap: (){
+                                               if(tempAddValues[i].subAddValuesList.isEmpty){
+                                                 setState(() {
+                                                   tempAddValues[i].selectedHeading=1;
+                                                   addTempSubValues(i);
+                                                 });
+                                               }
+
+                                             },
+                                             child: Container(
+                                               height: 50,
+                                               width: 130,
+                                               decoration: BoxDecoration(
+                                                   borderRadius: BorderRadius.circular(5),
+                                                   border: Border.all(color: addNewTextFieldBorder),
+                                                   color:tempAddValues[i].selectedHeading==1?Colors.white: Colors.grey.withOpacity(0.25)
+                                               ),
+                                               alignment: Alignment.center,
+                                               child: Text("With Heading",style: textFormTs1,),
+                                             ),
+                                           ),
+                                           Spacer(),
+                                           GestureDetector(
+                                             onTap: (){
+                                               if(tempAddValues[i].subAddValuesList.isEmpty){
+                                                 setState(() {
+                                                   tempAddValues[i].selectedHeading=2;
+                                                   addTempSubValues(i);
+                                                 });
+                                               }
+                                             },
+                                             child: Container(
+                                               height: 50,
+                                               width: 130,
+                                               decoration: BoxDecoration(
+                                                   borderRadius: BorderRadius.circular(5),
+                                                   border: Border.all(color: addNewTextFieldBorder),
+                                                   color: tempAddValues[i].selectedHeading==2?Colors.white:Colors.grey.withOpacity(0.25)
+                                               ),
+                                               alignment: Alignment.center,
+                                               child: Text("Without Heading",style: textFormTs1,),
+                                             ),
+                                           ),
+                                           Spacer(),
+                                           AddBtn(ontap: (){
+                                             setState(() {
+                                               tempAddValues.removeAt(i);
+                                             });
+                                           },
+                                             color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
+                                             margin: EdgeInsets.only(left: 0),
+                                             widget: Icon(Icons.clear,color: Colors.white,),
+                                           ),
+                                         ],
+                                       ),
+                                       SizedBox(height: 15,),
+                                       for(int j=0;j<tempAddValues[i].subAddValuesList.length;j++)
+                                         Column(
+                                           children: [
+                                             tempAddValues[i].selectedHeading==1? Align(
+                                               alignment: Alignment.centerLeft,
+                                               child: AddNewLabelTextField(
+                                                 margin: EdgeInsets.only(left: 0,top: 10),
+                                                 width: width1*0.5,
+                                                 hintText: "Enter Heading",
+                                                 textEditingController: tempAddValues[i].subAddValuesList[j].heading,
+                                                 onEditComplete: (){
+                                                   node.unfocus();
+                                                 },
+                                                 onChange: (v){},
+                                               ),
+                                             ):Container(),
+                                             SizedBox(height: 10,),
+                                             Row(
+                                               children: [
+                                                 AddNewLabelTextField(
+                                                   margin: EdgeInsets.only(top: 0),
+                                                   width: width1*0.4,
+                                                   hintText: "Enter Title",
+                                                   textEditingController: tempAddValues[i].subAddValuesList[j].title,
+                                                   onEditComplete: (){
+                                                     node.unfocus();
+                                                   },
+                                                   onChange: (v){},
+                                                 ),
+                                                 Spacer(),
+                                                 AddNewLabelTextField(
+                                                   margin: EdgeInsets.only(left: 0),
+                                                   width: width1*0.4,
+                                                   hintText: "Enter Value",
+                                                   textEditingController: tempAddValues[i].subAddValuesList[j].value,
+                                                   onEditComplete: (){
+                                                     node.unfocus();
+                                                   },
+                                                   onChange: (v){},
+                                                 ),
+                                                 Spacer(),
+                                                 AddBtn(ontap: (){
+                                                   addTempSubValues(i);
+                                                 },
+                                                   color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
+                                                   margin: EdgeInsets.only(left: 0),
+                                                 ),
+                                                 Spacer(),
+                                                 AddBtn(ontap: (){
+                                                   setState(() {
+                                                     tempAddValues[i].subAddValuesList.removeAt(j);
+                                                   });
+                                                 },
+                                                   color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
+                                                   margin: EdgeInsets.only(left: 0),
+                                                   widget: Icon(Icons.clear,color: Colors.white,),
+                                                 ),
+                                               ],
+                                             )
+                                           ],
+                                         )
+
+
+                                     ],
+                                   ),
+                                 ),
+                               /*isAddValueClick?Container(
                                  padding: EdgeInsets.all(15),
-                                 margin: EdgeInsets.only(left: 20,right: 20),
-                                 width: width1,
+                                 margin: EdgeInsets.only(left: 20),
+                                 width: 600,
                                  decoration: BoxDecoration(
-                                     borderRadius: BorderRadius.circular(5),
-                                     border: Border.all(color: addNewTextFieldBorder),
-                                     color: Colors.white
+                                   borderRadius: BorderRadius.circular(5),
+                                   border: Border.all(color: addNewTextFieldBorder),
+                                   color: Colors.white
                                  ),
                                  constraints: BoxConstraints(
-                                     minHeight: 100
+                                   minHeight: 100
                                  ),
                                  child: Column(
                                    children: [
@@ -621,9 +1221,8 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                        children: [
                                          AddNewLabelTextField(
                                            margin: EdgeInsets.only(left: 0),
-                                           width: width1*0.5,
+                                           width: 200,
                                            hintText: "Enter Title",
-                                           textEditingController: tempAddValues[i].title,
                                            onEditComplete: (){
                                              node.unfocus();
                                            },
@@ -632,10 +1231,10 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                          Spacer(),
                                          GestureDetector(
                                            onTap: (){
-                                             if(tempAddValues[i].subAddValuesList.isEmpty){
+                                             if(tempSubAddValues.isEmpty){
                                                setState(() {
-                                                 tempAddValues[i].selectedHeading=1;
-                                                 addTempSubValues(i);
+                                                 selectedHeading=1;
+                                                 addTempSubValues();
                                                });
                                              }
 
@@ -646,7 +1245,7 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                              decoration: BoxDecoration(
                                                  borderRadius: BorderRadius.circular(5),
                                                  border: Border.all(color: addNewTextFieldBorder),
-                                                 color:tempAddValues[i].selectedHeading==1?Colors.white: Colors.grey.withOpacity(0.25)
+                                                 color:selectedHeading==1?Colors.white: Colors.grey.withOpacity(0.25)
                                              ),
                                              alignment: Alignment.center,
                                              child: Text("With Heading",style: textFormTs1,),
@@ -655,10 +1254,10 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                          Spacer(),
                                          GestureDetector(
                                            onTap: (){
-                                             if(tempAddValues[i].subAddValuesList.isEmpty){
+                                             if(tempSubAddValues.isEmpty){
                                                setState(() {
-                                                 tempAddValues[i].selectedHeading=2;
-                                                 addTempSubValues(i);
+                                                 selectedHeading=2;
+                                                 addTempSubValues();
                                                });
                                              }
                                            },
@@ -668,7 +1267,7 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                              decoration: BoxDecoration(
                                                  borderRadius: BorderRadius.circular(5),
                                                  border: Border.all(color: addNewTextFieldBorder),
-                                                 color: tempAddValues[i].selectedHeading==2?Colors.white:Colors.grey.withOpacity(0.25)
+                                                 color: selectedHeading==2?Colors.white:Colors.grey.withOpacity(0.25)
                                              ),
                                              alignment: Alignment.center,
                                              child: Text("Without Heading",style: textFormTs1,),
@@ -677,278 +1276,133 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                          Spacer(),
                                          AddBtn(ontap: (){
                                            setState(() {
-                                             tempAddValues.removeAt(i);
+                                             isAddValueClick=false;
+                                             tempSubAddValues.clear();
                                            });
                                          },
-                                           color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
+                                         color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
                                            margin: EdgeInsets.only(left: 0),
                                            widget: Icon(Icons.clear,color: Colors.white,),
                                          ),
                                        ],
                                      ),
-                                     SizedBox(height: 15,),
-                                     for(int j=0;j<tempAddValues[i].subAddValuesList.length;j++)
+                                     for(int i=0;i<tempSubAddValues.length;i++)
                                        Column(
-                                         children: [
-                                           tempAddValues[i].selectedHeading==1? Align(
-                                             alignment: Alignment.centerLeft,
-                                             child: AddNewLabelTextField(
-                                               margin: EdgeInsets.only(left: 0,top: 10),
-                                               width: width1*0.5,
-                                               hintText: "Enter Heading",
-                                               textEditingController: tempAddValues[i].subAddValuesList[j].heading,
-                                               onEditComplete: (){
-                                                 node.unfocus();
-                                               },
-                                               onChange: (v){},
-                                             ),
-                                           ):Container(),
-                                           SizedBox(height: 10,),
-                                           Row(
-                                             children: [
-                                               AddNewLabelTextField(
-                                                 margin: EdgeInsets.only(top: 0),
-                                                 width: width1*0.4,
-                                                 hintText: "Enter Title",
-                                                 textEditingController: tempAddValues[i].subAddValuesList[j].title,
-                                                 onEditComplete: (){
-                                                   node.unfocus();
-                                                 },
-                                                 onChange: (v){},
-                                               ),
-                                               Spacer(),
-                                               AddNewLabelTextField(
-                                                 margin: EdgeInsets.only(left: 0),
-                                                 width: width1*0.4,
-                                                 hintText: "Enter Value",
-                                                 textEditingController: tempAddValues[i].subAddValuesList[j].value,
-                                                 onEditComplete: (){
-                                                   node.unfocus();
-                                                 },
-                                                 onChange: (v){},
-                                               ),
-                                               Spacer(),
-                                               AddBtn(ontap: (){
-                                                 addTempSubValues(i);
-                                               },
-                                                 color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
-                                                 margin: EdgeInsets.only(left: 0),
-                                               ),
-                                               Spacer(),
-                                               AddBtn(ontap: (){
-                                                 setState(() {
-                                                   tempAddValues[i].subAddValuesList.removeAt(j);
-                                                 });
-                                               },
-                                                 color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
-                                                 margin: EdgeInsets.only(left: 0),
-                                                 widget: Icon(Icons.clear,color: Colors.white,),
-                                               ),
-                                             ],
-                                           )
-                                         ],
+                                        children: [
+                                         selectedHeading==1? Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: AddNewLabelTextField(
+                                              margin: EdgeInsets.only(left: 0,top: 10),
+                                              width: 200,
+                                              hintText: "Enter Heading",
+                                              textEditingController: tempSubAddValues[i].heading,
+                                              onEditComplete: (){
+                                                node.unfocus();
+                                              },
+                                              onChange: (v){},
+                                            ),
+                                          ):Container(),
+                                          SizedBox(height: 10,),
+                                          Row(
+                                            children: [
+                                              AddNewLabelTextField(
+                                                margin: EdgeInsets.only(top: 0),
+                                                width: 200,
+                                                hintText: "Enter Title",
+                                                textEditingController: tempSubAddValues[i].title,
+                                                onEditComplete: (){
+                                                  node.unfocus();
+                                                },
+                                                onChange: (v){},
+                                              ),
+                                              Spacer(),
+                                              AddNewLabelTextField(
+                                                margin: EdgeInsets.only(left: 0),
+                                                width: 200,
+                                                hintText: "Enter Value",
+                                                textEditingController: tempSubAddValues[i].value,
+                                                onEditComplete: (){
+                                                  node.unfocus();
+                                                },
+                                                onChange: (v){},
+                                              ),
+                                              Spacer(),
+                                              AddBtn(ontap: (){
+                                                addTempSubValues();
+                                              },
+                                                color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
+                                                margin: EdgeInsets.only(left: 0),
+                                              ),
+                                              Spacer(),
+                                              AddBtn(ontap: (){
+                                                setState(() {
+                                                  tempSubAddValues.removeAt(i);
+                                                });
+                                              },
+                                                color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
+                                                margin: EdgeInsets.only(left: 0),
+                                                widget: Icon(Icons.clear,color: Colors.white,),
+                                              ),
+                                            ],
+                                          )
+                                        ],
                                        )
 
 
                                    ],
                                  ),
-                               ),
-                             /*isAddValueClick?Container(
-                               padding: EdgeInsets.all(15),
-                               margin: EdgeInsets.only(left: 20),
-                               width: 600,
-                               decoration: BoxDecoration(
-                                 borderRadius: BorderRadius.circular(5),
-                                 border: Border.all(color: addNewTextFieldBorder),
-                                 color: Colors.white
-                               ),
-                               constraints: BoxConstraints(
-                                 minHeight: 100
-                               ),
-                               child: Column(
-                                 children: [
-                                   Row(
-                                     children: [
-                                       AddNewLabelTextField(
-                                         margin: EdgeInsets.only(left: 0),
-                                         width: 200,
-                                         hintText: "Enter Title",
-                                         onEditComplete: (){
-                                           node.unfocus();
-                                         },
-                                         onChange: (v){},
-                                       ),
-                                       Spacer(),
-                                       GestureDetector(
-                                         onTap: (){
-                                           if(tempSubAddValues.isEmpty){
-                                             setState(() {
-                                               selectedHeading=1;
-                                               addTempSubValues();
-                                             });
-                                           }
+                               ):Container(),*/
+                               // SizedBox(height: 50,),
 
-                                         },
-                                         child: Container(
-                                           height: 50,
-                                           width: 130,
-                                           decoration: BoxDecoration(
-                                               borderRadius: BorderRadius.circular(5),
-                                               border: Border.all(color: addNewTextFieldBorder),
-                                               color:selectedHeading==1?Colors.white: Colors.grey.withOpacity(0.25)
-                                           ),
-                                           alignment: Alignment.center,
-                                           child: Text("With Heading",style: textFormTs1,),
-                                         ),
-                                       ),
-                                       Spacer(),
-                                       GestureDetector(
-                                         onTap: (){
-                                           if(tempSubAddValues.isEmpty){
-                                             setState(() {
-                                               selectedHeading=2;
-                                               addTempSubValues();
-                                             });
-                                           }
-                                         },
-                                         child: Container(
-                                           height: 50,
-                                           width: 130,
-                                           decoration: BoxDecoration(
-                                               borderRadius: BorderRadius.circular(5),
-                                               border: Border.all(color: addNewTextFieldBorder),
-                                               color: selectedHeading==2?Colors.white:Colors.grey.withOpacity(0.25)
-                                           ),
-                                           alignment: Alignment.center,
-                                           child: Text("Without Heading",style: textFormTs1,),
-                                         ),
-                                       ),
-                                       Spacer(),
-                                       AddBtn(ontap: (){
-                                         setState(() {
-                                           isAddValueClick=false;
-                                           tempSubAddValues.clear();
-                                         });
-                                       },
-                                       color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
-                                         margin: EdgeInsets.only(left: 0),
-                                         widget: Icon(Icons.clear,color: Colors.white,),
-                                       ),
-                                     ],
-                                   ),
-                                   for(int i=0;i<tempSubAddValues.length;i++)
-                                     Column(
-                                      children: [
-                                       selectedHeading==1? Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: AddNewLabelTextField(
-                                            margin: EdgeInsets.only(left: 0,top: 10),
-                                            width: 200,
-                                            hintText: "Enter Heading",
-                                            textEditingController: tempSubAddValues[i].heading,
-                                            onEditComplete: (){
-                                              node.unfocus();
-                                            },
-                                            onChange: (v){},
-                                          ),
-                                        ):Container(),
-                                        SizedBox(height: 10,),
-                                        Row(
-                                          children: [
-                                            AddNewLabelTextField(
-                                              margin: EdgeInsets.only(top: 0),
-                                              width: 200,
-                                              hintText: "Enter Title",
-                                              textEditingController: tempSubAddValues[i].title,
-                                              onEditComplete: (){
-                                                node.unfocus();
-                                              },
-                                              onChange: (v){},
-                                            ),
-                                            Spacer(),
-                                            AddNewLabelTextField(
-                                              margin: EdgeInsets.only(left: 0),
-                                              width: 200,
-                                              hintText: "Enter Value",
-                                              textEditingController: tempSubAddValues[i].value,
-                                              onEditComplete: (){
-                                                node.unfocus();
-                                              },
-                                              onChange: (v){},
-                                            ),
-                                            Spacer(),
-                                            AddBtn(ontap: (){
-                                              addTempSubValues();
-                                            },
-                                              color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
-                                              margin: EdgeInsets.only(left: 0),
-                                            ),
-                                            Spacer(),
-                                            AddBtn(ontap: (){
-                                              setState(() {
-                                                tempSubAddValues.removeAt(i);
-                                              });
-                                            },
-                                              color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
-                                              margin: EdgeInsets.only(left: 0),
-                                              widget: Icon(Icons.clear,color: Colors.white,),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                     )
+                                PickImage(
+                                  image: image, title: "Select Logo",
+                                  cb: (v){
+                                    setState(() {
+                                      image=v;
+                                    });
+                                  },
+                                ),
+                                ///   validationList[2]?ValidationErrorText(title: validationText,):Container(),
+
+                                //  SizedBox(height: 50,),
 
 
-                                 ],
-                               ),
-                             ):Container(),*/
-                             // SizedBox(height: 50,),
+                                Container(
+                                  width: SizeConfig.screenWidth,
+                                  alignment: Alignment.center,
+                                  margin: EdgeInsets.only(bottom: 50),
+                                  child: SaveBtn(ontap: (){
 
-                              PickImage(image: image, title: "Select Logo",cb: (v){
-                                setState(() {
-                                  image=v;
-                                });
-                              },),
-                              ///   validationList[2]?ValidationErrorText(title: validationText,):Container(),
+                                    if(pName.text.isEmpty){setState(() {validationList[0]=true;});}
+                                    else{setState(() {validationList[0]=false;});}
 
-                              //  SizedBox(height: 50,),
+                                    if(pslug.text.isEmpty){setState(() {validationList[1]=true;});}
+                                    else{setState(() {validationList[1]=false;});}
 
+                                    if(selectedCategory.isEmpty){setState(() {validationList[1]=true;});}
+                                    else{setState(() {validationList[1]=false;});}
 
-                              Container(
-                                width: SizeConfig.screenWidth,
-                                alignment: Alignment.center,
-                                margin: EdgeInsets.only(bottom: 50),
-                                child: SaveBtn(ontap: (){
+                                    if(image==null){setState(() {validationList[2]=true;});}
+                                    else{setState(() {validationList[2]=false;});}
 
-                                  if(pName.text.isEmpty){setState(() {validationList[0]=true;});}
-                                  else{setState(() {validationList[0]=false;});}
-
-                                  if(pslug.text.isEmpty){setState(() {validationList[1]=true;});}
-                                  else{setState(() {validationList[1]=false;});}
-
-                                  if(selectedCategory.isEmpty){setState(() {validationList[1]=true;});}
-                                  else{setState(() {validationList[1]=false;});}
-
-                                  if(image==null){setState(() {validationList[2]=true;});}
-                                  else{setState(() {validationList[2]=false;});}
-
-                                  int length=validationList.where((element) => element==false).toList().length;
-                                  if(length==validationList.length){
+                                    int length=validationList.where((element) => element==false).toList().length;
+                                    if(length==validationList.length){
 
 
-                                    Navigator.pop(context);
-                                  }
+                                      Navigator.pop(context);
+                                    }
 
 
-                                }),
-                              ),
+                                  }),
+                                ),
 
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               GestureDetector(
@@ -1054,10 +1508,12 @@ class ProductTextField extends StatelessWidget {
   CrossAxisAlignment crossAxisAlignment;
   bool showValidation;
   EdgeInsets paddTextFieldHeader2;
+  EdgeInsets textFiedlMargin;
   ProductTextField({required this.width,this.titleWidth=250,required this.title,required this.validation, this.textEditingController,
   required this.onComplete,this.isTextField=true,this.widget,this.leftPadding=20,this.regExp='[A-Za-z0-9@., ]',this.textInputType=TextInputType.emailAddress,
   this.textLength=null,this.maxlines=1,this.titleColor=const Color(0xFF505050),this.suffixIcon,this.isEnable=true,
-  this.crossAxisAlignment=CrossAxisAlignment.center,this.showValidation=true,this.paddTextFieldHeader2=const EdgeInsets.only(left: 0)});
+  this.crossAxisAlignment=CrossAxisAlignment.center,this.showValidation=true,this.paddTextFieldHeader2=const EdgeInsets.only(left: 0),
+  this.textFiedlMargin=const EdgeInsets.only(left: 0)});
 
   @override
   Widget build(BuildContext context) {
@@ -1078,7 +1534,8 @@ class ProductTextField extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               isTextField?AddNewLabelTextField(
-                margin:maxlines==null ?EdgeInsets.only(right: 20,top: 10):maxlines!>1?EdgeInsets.only(right: 0,top: 10): marginAddNewTextField2,
+                margin: textFiedlMargin,
+                //margin:maxlines==null ?EdgeInsets.only(right: 20,top: 10):maxlines!>1?EdgeInsets.only(right: 0,top: 10): marginAddNewTextField2,
                 width: width,
                 textEditingController: textEditingController,
                 hintText: title,
@@ -1099,7 +1556,7 @@ class ProductTextField extends StatelessWidget {
               validation?ValidationErrorText(title: validationText,padd: paddTextFieldHeader2,):Container(),
             ],
           ):isTextField?AddNewLabelTextField(
-            margin:maxlines==null ?EdgeInsets.only(right: 20,top: 10):maxlines!>1?EdgeInsets.only(right: 20,top: 10): marginAddNewTextField2,
+            margin:textFiedlMargin,
             width: width,
             textEditingController: textEditingController,
             hintText: title,

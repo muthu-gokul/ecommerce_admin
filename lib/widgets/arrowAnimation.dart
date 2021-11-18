@@ -1,4 +1,6 @@
+import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 class Arrow extends StatefulWidget {
   bool isOpen;
   Arrow({required this.isOpen});
@@ -57,7 +59,7 @@ class _ArrowState extends State<Arrow> with TickerProviderStateMixin{
               child: Icon(
                 Icons.keyboard_arrow_down_outlined,
                 size: 25.0,
-                color: Color(0XFF595959),
+                color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor4,
               ),
             ),
       ),

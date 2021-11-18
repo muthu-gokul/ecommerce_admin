@@ -31,7 +31,7 @@ class _OverLayPopUpState extends State<OverLayPopUp> {
     return Column(
       crossAxisAlignment: widget.crossAxisAlignment,
       children: [
-        SizedBox(height: 10,),
+      //  SizedBox(height: 10,),
         GestureDetector(
           onTap:widget.ontap,
           child: AnimatedContainer(

@@ -38,7 +38,7 @@ TextStyle textFormHintTs1=TextStyle(fontFamily: 'RL',fontSize: 15,color: addNewT
 TextStyle whiteRM20=TextStyle(fontFamily: 'RM',color: Colors.white,fontSize: 20);
 
 
-double textFormWidth=400;
+double textFormWidth=500;
 double inBetweenHeight=20;
 
 CrossAxisAlignment cA1=CrossAxisAlignment.center;
