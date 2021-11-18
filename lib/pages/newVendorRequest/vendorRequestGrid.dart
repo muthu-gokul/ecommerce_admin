@@ -63,7 +63,7 @@ class _VendorRequestGridState extends State<VendorRequestGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(VendorRequestAdd()));
+                    Navigator.push(context, pr.PageRoute().fade(VendorRequestAdd()));
                   },
                   filterOnTap: (i){
                     setState(() {

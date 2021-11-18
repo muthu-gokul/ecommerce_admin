@@ -69,7 +69,7 @@ class _VendorListGridState extends State<VendorListGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(VendorListAdd()));
+                    Navigator.push(context, pr.PageRoute().fade(VendorListAdd()));
                   },
                   filterOnTap: (i){
                     setState(() {

@@ -6,6 +6,7 @@ import 'package:ecommerce_admin/pages/brand/brandGrid.dart';
 import 'package:ecommerce_admin/pages/product/productAddNew.dart';
 import 'package:ecommerce_admin/widgets/buttons/backBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
+import 'package:ecommerce_admin/widgets/customAppBar.dart';
 import 'package:ecommerce_admin/widgets/customTextField.dart';
 import 'package:ecommerce_admin/widgets/pickImage.dart';
 import 'package:flutter/material.dart';
@@ -27,31 +28,19 @@ class _BrandAddNewState extends State<BrandAddNew> {
   Widget build(BuildContext context) {
     final node=FocusScope.of(context);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Provider.of<ThemeNotifier>(context,listen: false).primaryColor3,
-        elevation: 0,
-        leadingWidth: 100,
-        leading: BackBtn(ontap: (){
-          Navigator.pop(context);
-        }),
-        title: Container(
-          height: 50,
-        //  color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor3,
-          child: Row(
-            children: [
-              Text("Brand / Add New",style: ts18(Colors.white,fontsize: 20,fontfamily: 'RM'),),
-            ],
-          ),
-        ),
-      ),
+
       body: Consumer<ThemeNotifier>(
         builder: (context,th,child)=>Consumer<ProductNotifier>(
           builder: (context,pn,child)=>  Container(
             height: SizeConfig.screenHeight,
             width: SizeConfig.screenWidth,
+            color: th.addNewBodyColor,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                CustomAppBarAddNew(
+                  title: "Add New Brand",
+                ),
                 SizedBox(height: inBetweenHeight,),
                 ProductTextField(
                     width: textFormWidth,

@@ -132,7 +132,7 @@ class _RatingsReviewsGridState extends State<RatingsReviewsGrid> {
 
                                     AddBtn(
                                       ontap: (){
-                                         Navigator.push(context, pr.PageRoute().slideFromLeftToRight(RatingsView()));
+                                         Navigator.push(context, pr.PageRoute().fade(RatingsView()));
                                       },
                                       color: Colors.transparent,
                                       hei: 30,

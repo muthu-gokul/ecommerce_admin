@@ -64,7 +64,7 @@ class _EmailSettingGridState extends State<EmailSettingGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(EmailSettingAdd()));
+                    Navigator.push(context, pr.PageRoute().fade(EmailSettingAdd()));
                   },
                   filterOnTap: (i){
                     setState(() {

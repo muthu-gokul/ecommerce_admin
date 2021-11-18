@@ -68,7 +68,7 @@ class _ReturnProductGridState extends State<ReturnProductGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                        Navigator.push(context, pr.PageRoute().slideFromLeftToRight(ReturnProductsAddNew()));
+                        Navigator.push(context, pr.PageRoute().fade(ReturnProductsAddNew()));
                   },
                   filterOnTap: (i){
                     setState(() {

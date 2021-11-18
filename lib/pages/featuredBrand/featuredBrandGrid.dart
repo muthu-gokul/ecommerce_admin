@@ -62,7 +62,7 @@ class _FeaturedBrandGridState extends State<FeaturedBrandGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(FeaturedBrandAdd() ));
+                    Navigator.push(context, pr.PageRoute().fade(FeaturedBrandAdd() ));
                   },
                   filterOnTap: (i){
                     setState(() {

@@ -71,7 +71,7 @@ class _ContactMsgGridState extends State<ContactMsgGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(ContactMsgAddNew()));
+                    Navigator.push(context, pr.PageRoute().fade(ContactMsgAddNew()));
                   },
                   filterOnTap: (i){
                     setState(() {

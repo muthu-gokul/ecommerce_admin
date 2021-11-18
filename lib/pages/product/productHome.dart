@@ -183,7 +183,7 @@ class _ProductHomeState extends State<ProductHome> {
                     });
                   },
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(CategoryAddNew()));
+                    Navigator.push(context, pr.PageRoute().fade(CategoryAddNew()));
                   },
                   searchFunc: (v){},
                   showAdd: true,
@@ -275,7 +275,7 @@ class _ProductHomeState extends State<ProductHome> {
                   gridHeaderList: [],
                   filterOnTap: (i){},
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(ProductAddNew()));
+                    Navigator.push(context, pr.PageRoute().fade(ProductAddNew()));
                   },
                   searchFunc: (v){},
                   headerWidget: Row(

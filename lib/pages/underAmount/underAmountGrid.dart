@@ -62,7 +62,7 @@ class _UnderAmountGridState extends State<UnderAmountGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(UnderAmountAdd()));
+                    Navigator.push(context, pr.PageRoute().fade(UnderAmountAdd()));
                   },
                   filterOnTap: (i){
                     setState(() {

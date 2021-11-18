@@ -63,7 +63,7 @@ class _ColorGridState extends State<ColorGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(ColorNewAdd()));
+                    Navigator.push(context, pr.PageRoute().fade(ColorNewAdd()));
                   },
                   filterOnTap: (i){
                     setState(() {

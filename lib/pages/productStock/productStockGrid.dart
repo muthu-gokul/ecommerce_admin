@@ -66,7 +66,7 @@ class _ProductStockGridState extends State<ProductStockGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(ProductStockAdd()));
+                    Navigator.push(context, pr.PageRoute().fade(ProductStockAdd()));
                   },
                   filterOnTap: (i){
                     setState(() {

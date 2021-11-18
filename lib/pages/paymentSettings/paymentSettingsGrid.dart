@@ -64,7 +64,7 @@ class _PaymentSettingsGridState extends State<PaymentSettingsGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(PaymentSettingsAddNew()));
+                    Navigator.push(context, pr.PageRoute().fade(PaymentSettingsAddNew()));
                   },
                   filterOnTap: (i){
                     setState(() {

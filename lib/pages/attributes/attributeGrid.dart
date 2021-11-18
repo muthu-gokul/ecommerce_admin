@@ -63,7 +63,7 @@ class _AttributeGridState extends State<AttributeGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(AttributeAdd()));
+                    Navigator.push(context, pr.PageRoute().fade(AttributeAdd()));
                   },
                   filterOnTap: (i){
                     setState(() {

@@ -378,7 +378,7 @@ class _PaymentGridState extends State<PaymentGrid> {
                                 showFilter: true,
                                 showExport: true,
                                 addBtnTap: (){
-                                  Navigator.push(context, pr.PageRoute().slideFromLeftToRight(PaymentAddNew(isPayable: false,)));
+                                  Navigator.push(context, pr.PageRoute().fade(PaymentAddNew(isPayable: false,)));
                                 },
                                 filterOnTap: (i){
                                   setState(() {

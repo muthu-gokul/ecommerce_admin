@@ -64,7 +64,7 @@ class _DeliveryBoysGridState extends State<DeliveryBoysGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(DeliveryBoysAdd()));
+                    Navigator.push(context, pr.PageRoute().fade(DeliveryBoysAdd()));
                   },
                   filterOnTap: (i){
                     setState(() {

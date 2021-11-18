@@ -65,7 +65,7 @@ class _PurchaseGridState extends State<PurchaseGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(PurchaseAddNew()));
+                    Navigator.push(context, pr.PageRoute().fade(PurchaseAddNew()));
                   },
                   filterOnTap: (i){
                     setState(() {

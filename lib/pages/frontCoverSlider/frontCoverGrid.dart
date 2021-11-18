@@ -61,7 +61,7 @@ class _FrontCoverSlidreGridState extends State<FrontCoverSlidreGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(FrontCoverSliderAdd()));
+                    Navigator.push(context, pr.PageRoute().fade(FrontCoverSliderAdd()));
                   },
                   filterOnTap: (i){
                     setState(() {

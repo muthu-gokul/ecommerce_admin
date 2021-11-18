@@ -66,7 +66,7 @@ class _AppGridState extends State<AppGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(AppAddNew()));
+                    Navigator.push(context, pr.PageRoute().fade(AppAddNew()));
                   },
                   filterOnTap: (i){
                     setState(() {

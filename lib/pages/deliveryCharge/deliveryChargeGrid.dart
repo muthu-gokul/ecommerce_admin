@@ -67,7 +67,7 @@ class _DeliveryChargeGridState extends State<DeliveryChargeGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(DeliveryChargeAddNew()));
+                    Navigator.push(context, pr.PageRoute().fade(DeliveryChargeAddNew()));
                   },
                   filterOnTap: (i){
                     setState(() {

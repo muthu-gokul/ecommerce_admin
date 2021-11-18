@@ -65,7 +65,7 @@ class _GiftCouponsGridState extends State<GiftCouponsGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(GiftCouponsAdd()));
+                    Navigator.push(context, pr.PageRoute().fade(GiftCouponsAdd()));
                   },
                   filterOnTap: (i){
                     setState(() {

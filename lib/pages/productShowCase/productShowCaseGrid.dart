@@ -69,7 +69,7 @@ class _ProductShowcaseGridState extends State<ProductShowcaseGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(ProductShowCaseAddNew()));
+                    Navigator.push(context, pr.PageRoute().fade(ProductShowCaseAddNew()));
                   },
                   filterOnTap: (i){
                     setState(() {

@@ -60,7 +60,7 @@ class _MobileColorAddState extends State<MobileColorAdd> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(SizeAdd()));
+                    Navigator.push(context, pr.PageRoute().fade(SizeAdd()));
                   },
                   filterOnTap: (i){
                     setState(() {

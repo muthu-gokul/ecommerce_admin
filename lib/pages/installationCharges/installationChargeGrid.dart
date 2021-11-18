@@ -63,7 +63,7 @@ class _InstallationChargesGirdState extends State<InstallationChargesGird> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(InstallationChargesAdd()));
+                    Navigator.push(context, pr.PageRoute().fade(InstallationChargesAdd()));
                   },
                   filterOnTap: (i){
                     setState(() {

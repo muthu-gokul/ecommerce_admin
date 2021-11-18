@@ -9,6 +9,7 @@ import 'package:ecommerce_admin/widgets/buttons/addBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/backBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/swtich.dart';
+import 'package:ecommerce_admin/widgets/customAppBar.dart';
 import 'package:ecommerce_admin/widgets/customOverLayPopUp.dart';
 import 'package:ecommerce_admin/widgets/customPopUp.dart';
 import 'package:ecommerce_admin/widgets/customTextField.dart';
@@ -45,23 +46,7 @@ class _PaymentAddNewState extends State<PaymentAddNew> {
   Widget build(BuildContext context) {
     final node=FocusScope.of(context);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Provider.of<ThemeNotifier>(context,listen: false).primaryColor3,
-        elevation: 0,
-        leadingWidth: 100,
-        leading: BackBtn(ontap: (){
-          Navigator.pop(context);
-        }),
-        title: Container(
-          height: 50,
-          //  color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor3,
-          child: Row(
-            children: [
-              Text("${widget.isPayable?"Payable Payment":"Receivable Payment"} / Add New",style: ts18(Colors.white,fontsize: 20,fontfamily: 'RM'),),
-            ],
-          ),
-        ),
-      ),
+
       body: Consumer<ThemeNotifier>(
         builder: (context,th,child)=>  Consumer<ProductNotifier>(
           builder: (context,pn,child)=> Stack(
@@ -69,10 +54,14 @@ class _PaymentAddNewState extends State<PaymentAddNew> {
               Container(
                 height: SizeConfig.screenHeight,
                 width: SizeConfig.screenWidth,
+                color:th.addNewBodyColor,
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: cA1,
                     children: [
+                      CustomAppBarAddNew(
+                        title: "Add New Payment",
+                      ),
                       SizedBox(height: inBetweenHeight,),
 
                       ProductTextField(

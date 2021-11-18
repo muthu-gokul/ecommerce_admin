@@ -45,7 +45,7 @@ class _BrandGridState extends State<BrandGrid> {
                   filterOnTap: (i){},
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(BrandAddNew()));
+                    Navigator.push(context, pr.PageRoute().fade(BrandAddNew()));
                   },
                   searchFunc: (v){},
                   headerWidget: Row(

@@ -62,7 +62,7 @@ class _TopOfferGridState extends State<TopOfferGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(TopOfferAdd()));
+                    Navigator.push(context, pr.PageRoute().fade(TopOfferAdd()));
                   },
                   filterOnTap: (i){
                     setState(() {

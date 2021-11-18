@@ -65,7 +65,7 @@ class _ShippingChargesGridState extends State<ShippingChargesGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(ShippingChargesAddNew()));
+                    Navigator.push(context, pr.PageRoute().fade(ShippingChargesAddNew()));
                   },
                   filterOnTap: (i){
                     setState(() {

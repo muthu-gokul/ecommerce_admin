@@ -63,7 +63,7 @@ class _StaffsGirdState extends State<StaffsGird> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(StaffsAdd()));
+                    Navigator.push(context, pr.PageRoute().fade(StaffsAdd()));
                   },
                   filterOnTap: (i){
                     setState(() {

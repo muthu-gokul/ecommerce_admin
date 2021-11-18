@@ -65,7 +65,7 @@ class _PincodeGridState extends State<PincodeGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(PincodeAddNew()));
+                    Navigator.push(context, pr.PageRoute().fade(PincodeAddNew()));
                   },
                   filterOnTap: (i){
                     setState(() {

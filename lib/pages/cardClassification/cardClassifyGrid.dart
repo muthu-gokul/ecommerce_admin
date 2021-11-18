@@ -62,7 +62,7 @@ class _CardClassificationGridState extends State<CardClassificationGrid> {
                   gridHeaderList: gridHeaderList,
                   showAdd: true,
                   addBtnTap: (){
-                    Navigator.push(context, pr.PageRoute().slideFromLeftToRight(CardClassificationAdd()));
+                    Navigator.push(context, pr.PageRoute().fade(CardClassificationAdd()));
                   },
                   filterOnTap: (i){
                     setState(() {

@@ -166,7 +166,7 @@ class _OrdersListGridState extends State<OrdersListGrid> {
                                   children: [
                                     AddBtn(
                                       ontap: (){
-                                        Navigator.push(context, pr.PageRoute().slideFromLeftToRight(OrdersListView()));
+                                        Navigator.push(context, pr.PageRoute().fade(OrdersListView()));
                                       },
                                       color: Colors.transparent,
                                       hei: 30,

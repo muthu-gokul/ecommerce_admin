@@ -98,7 +98,7 @@ class _ManageUsersGirdState extends State<ManageUsersGird> {
 
                        AddBtn(
                           ontap: (){
-                            Navigator.push(context, pr.PageRoute().slideFromLeftToRight(ManageUsersAddNew()));
+                            Navigator.push(context, pr.PageRoute().fade(ManageUsersAddNew()));
                           },
                           color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
                         ),

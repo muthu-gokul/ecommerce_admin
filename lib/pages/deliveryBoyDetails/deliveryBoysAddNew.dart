@@ -5,6 +5,7 @@ import 'package:ecommerce_admin/widgets/arrowAnimation.dart';
 import 'package:ecommerce_admin/widgets/buttons/backBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/swtich.dart';
+import 'package:ecommerce_admin/widgets/customAppBar.dart';
 import 'package:ecommerce_admin/widgets/customOverLayPopUp.dart';
 import 'package:ecommerce_admin/widgets/customPopUp.dart';
 import 'package:ecommerce_admin/widgets/customTextField.dart';
@@ -85,32 +86,20 @@ class _DeliveryBoysAddState extends State<DeliveryBoysAdd> with TickerProviderSt
   Widget build(BuildContext context) {
     final node=FocusScope.of(context);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Provider.of<ThemeNotifier>(context,listen: false).primaryColor3,
-        elevation: 0,
-        leadingWidth: 100,
-        leading: BackBtn(ontap: (){
-          Navigator.pop(context);
-        }),
-        title: Container(
-          height: 50,
-          //  color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor3,
-          child: Row(
-            children: [
-              Text("Delivery Boys / Add New",style: ts18(Colors.white,fontsize: 20,fontfamily: 'RM'),),
-            ],
-          ),
-        ),
-      ),
+
       body: Consumer<ThemeNotifier>(
         builder: (context,th,child)=>  Consumer<ProductNotifier>(
           builder: (context,pn,child)=> Container(
             height: SizeConfig.screenHeight,
             width: SizeConfig.screenWidth,
+            color:th.addNewBodyColor,
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: cA1,
                 children: [
+                  CustomAppBarAddNew(
+                    title: "Add New Delivery Boys",
+                  ),
                   SizedBox(height: 10,),
                   Container(
                       padding:  EdgeInsets.only(left: 10,bottom: 10,top: 10),

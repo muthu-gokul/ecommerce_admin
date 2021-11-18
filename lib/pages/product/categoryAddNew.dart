@@ -8,6 +8,7 @@ import 'package:ecommerce_admin/widgets/buttons/addBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/backBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
 import 'package:ecommerce_admin/widgets/circle.dart';
+import 'package:ecommerce_admin/widgets/customAppBar.dart';
 import 'package:ecommerce_admin/widgets/customPopUp.dart';
 import 'package:ecommerce_admin/widgets/customTextField.dart';
 import 'package:ecommerce_admin/widgets/multiTags.dart';
@@ -65,22 +66,14 @@ class _CategoryAddNewState extends State<CategoryAddNew> {
               Container(
                 height: SizeConfig.screenHeight,
                 width: SizeConfig.screenWidth,
+                color: th.addNewBodyColor,
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: cA1,
                     children: [
-                      Container(
-                        height: 50,
-                        color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor3,
-                        child: Row(
-                          children: [
-                            BackBtn(ontap: (){
-                              Navigator.pop(context);
-                            }),
-                            Text("Category / Add New",style: ts18(Colors.white,fontsize: 20,fontfamily: 'RM'),),
-                          ],
-                        ),
-                      ),
+                          CustomAppBarAddNew(
+                            title: "Add New Category",
+                          ),
                       SizedBox(height: inBetweenHeight,),
                       ProductTextField(
                           width: textFormWidth,
