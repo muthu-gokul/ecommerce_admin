@@ -4,10 +4,12 @@ import 'package:ecommerce_admin/model/categoryModel.dart';
 import 'package:ecommerce_admin/notifiers/productNotifier.dart';
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
 import 'package:ecommerce_admin/pages/brand/brandGrid.dart';
+import 'package:ecommerce_admin/pages/product/productAttributesGrid.dart';
 import 'package:ecommerce_admin/widgets/addMoreTextFieldAnimation.dart';
 import 'package:ecommerce_admin/widgets/arrowAnimation.dart';
 import 'package:ecommerce_admin/widgets/buttons/addBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/backBtn.dart';
+import 'package:ecommerce_admin/widgets/buttons/deleteBtnText.dart';
 import 'package:ecommerce_admin/widgets/buttons/saveBtn.dart';
 import 'package:ecommerce_admin/widgets/buttons/swtich.dart';
 import 'package:ecommerce_admin/widgets/customAppBar.dart';
@@ -18,8 +20,7 @@ import 'package:ecommerce_admin/widgets/customTextField.dart';
 import 'package:ecommerce_admin/widgets/multiTags.dart';
 import 'package:ecommerce_admin/widgets/overlayContainer.dart';
 import 'package:ecommerce_admin/widgets/pickImage.dart';
-import 'package:ecommerce_admin/widgets/popOver/src/popover.dart';
-import 'package:ecommerce_admin/widgets/popOver/src/popover_direction.dart';
+import 'package:scutiwidgets/pageRoutes.dart' as pr;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -67,7 +68,7 @@ class _ProductAddNewState extends State<ProductAddNew> {
   //Add Values
   int selectedHeading=-1;
   bool isAddValueClick=false;
-  List<SubAddValues> tempSubAddValues=[];
+  // List<SubAddValues> tempSubAddValues=[];
   List<AddValues> tempAddValues=[];
 
 
@@ -94,6 +95,8 @@ class _ProductAddNewState extends State<ProductAddNew> {
   bool showPriceDetails=false;
   bool showShippingPrice=false;
   bool showReturnable=false;
+  bool showProductDescription=false;
+  bool showAttributeTab=false;
 
   void addTempSubValues(int i){
       setState(() {
@@ -101,17 +104,31 @@ class _ProductAddNewState extends State<ProductAddNew> {
           SubAddValues(
               heading: TextEditingController(),
               title: TextEditingController(),
-              value: TextEditingController()
+              value: TextEditingController(),
+              innerSubAddValuesList: []
           )
         );
       });
+  }
+  void addInnerTempSubValues(int i,int j){
+    setState(() {
+      tempAddValues[i].subAddValuesList[j].innerSubAddValuesList.add(
+          SubAddValues(
+              heading: TextEditingController(),
+              title: TextEditingController(),
+              value: TextEditingController(),
+              innerSubAddValuesList: []
+          )
+      );
+    });
   }
   void addTempValues(){
     setState(() {
       tempAddValues.add(
           AddValues(
               title: TextEditingController(),
-              selectedHeading: -1,
+              //selectedHeading: -1,
+              selectedHeading: 1,
               subAddValuesList: []
           )
       );
@@ -133,7 +150,8 @@ class _ProductAddNewState extends State<ProductAddNew> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     final node=FocusScope.of(context);
-    width1=SizeConfig.screenWidth!-40;
+  //  width1=SizeConfig.screenWidth!-40;
+    width1=textFormWidth+275;
     return Scaffold(
 
       body: Consumer<ThemeNotifier>(
@@ -425,6 +443,8 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                       ),
                                     ),
                                 ),
+
+
                                 Container(
                                   alignment: Alignment.center,
                                   width: textFormWidth+270,
@@ -571,7 +591,7 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                                     ),
                                                     SizedBox(width: 10,),
                                                     Icon(Icons.warning,color: Colors.red,),
-                                                    Text("  Do you want to add Shipping Price ?",style: ts16(grey1,fontfamily: 'RL'),)
+                                                    Text("  Do you want to add Shipping Price ?",style: ts16(grey1,fontfamily: 'RL'),),
                                                   ],
                                                 ),
                                               ),
@@ -771,6 +791,528 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                     ),
                                   ),
                                 ),
+                                SizedBox(height: inBetweenHeight,),
+
+
+                                GestureDetector(
+                                  onTap: (){
+                                    setState(() {
+                                      showProductDescription=!showProductDescription;
+                                    });
+                                  },
+                                  child: Container(
+                                    width: textFormWidth+270,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(7),
+                                        color: th.addNewAppBarColor
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                            padding:  EdgeInsets.only(left: 20,bottom: 10,top: 10),
+                                            alignment: Alignment.centerLeft,
+                                            child: Text("Product Description",style: ts18(grey1,),)
+                                        ),
+                                        Padding(
+                                          padding:  EdgeInsets.only(right:20.0),
+                                          child: Arrow(isOpen: showProductDescription),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                CustomExpansionTile(
+                                  expand: showProductDescription,
+                                  child: Container(
+                                    width: SizeConfig.screenWidth,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        SizedBox(height: inBetweenHeight,),
+                                        ProductTextField(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          width: textFormWidth,
+                                          title: "Description",
+                                          validation: validationList[0],
+                                          textEditingController: pDescription,
+                                          maxlines: 3,
+                                          onComplete: (){
+                                            node.unfocus();
+                                          },
+                                        ),
+                                        SizedBox(height: inBetweenHeight,),
+                                        ProductTextField(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          width: textFormWidth,
+                                          title: "Tags",
+                                          validation: validationList[0],
+                                          onComplete: (){
+                                            node.unfocus();
+                                          },
+                                          isTextField: false,
+                                          widget: Container(
+                                            margin: EdgeInsets.only(left: 0,right: 0,bottom: 0),
+                                            width: textFormWidth,
+                                            // padding: EdgeInsets.only(top: 10,bottom: 10),
+                                            padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(5),
+                                                // border: Border.all(color: addNewTextFieldBorder),
+                                                color: addNewValuesBg
+                                            ),
+                                            //  height: 200,
+                                            child: MultiTags(
+                                              hintText: 'Enter Tags',
+                                              data: tagsList,
+                                              width: textFormWidth,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(height: inBetweenHeight,),
+                                        ProductTextField(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          width: textFormWidth,
+                                          title: "SEO Titles",
+                                          validation: validationList[0],
+                                          onComplete: (){
+                                            node.unfocus();
+                                          },
+                                          isTextField: false,
+                                          widget: Container(
+                                            margin: EdgeInsets.only(left: 0,right: 0,bottom: 0),
+                                            width: textFormWidth,
+                                            // padding: EdgeInsets.only(top: 10,bottom: 10),
+                                            padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(5),
+                                                // border: Border.all(color: addNewTextFieldBorder),
+                                                color: addNewValuesBg
+                                            ),
+                                            //  height: 200,
+                                            child: MultiTags(
+                                              hintText: 'Enter SEO Titles',
+                                              data: seoTitlesList,
+                                              width: textFormWidth,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(height: inBetweenHeight,),
+                                        ProductTextField(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          width: textFormWidth,
+                                          title: "SEO KeyWords",
+                                          validation: validationList[0],
+                                          onComplete: (){
+                                            node.unfocus();
+                                          },
+                                          isTextField: false,
+                                          widget: Container(
+                                            margin: EdgeInsets.only(left: 0,right: 0,bottom: 0),
+                                            width: textFormWidth,
+                                            // padding: EdgeInsets.only(top: 10,bottom: 10),
+                                            padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(5),
+                                                // border: Border.all(color: addNewTextFieldBorder),
+                                                color: addNewValuesBg
+                                            ),
+                                            //  height: 200,
+                                            child: MultiTags(
+                                              hintText: 'Enter SEO KeyWords',
+                                              data: seoKeyWordsList,
+                                              width: textFormWidth,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(height: inBetweenHeight,),
+                                        ProductTextField(
+                                            width: textFormWidth,
+                                            title: "Website URL",
+                                            validation: validationList[0],
+                                            textEditingController: pWebsiteUrl,
+                                            onComplete: (){
+                                              node.unfocus();
+                                            }
+                                        ),
+                                        SizedBox(height: inBetweenHeight,),
+                                        ProductTextField(
+                                            width: textFormWidth,
+                                            title: "Embedded You tube URL",
+                                            validation: validationList[0],
+                                            textEditingController: pYouTubeUrl,
+                                            onComplete: (){
+                                              node.unfocus();
+                                            }
+                                        ),
+                                        SizedBox(height: inBetweenHeight,),
+                                      ],
+                                    ),
+                                  ),
+
+                                ),
+                                SizedBox(height: inBetweenHeight,),
+
+
+                                Container(
+                                  width: textFormWidth+270,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(7),
+                                      color: th.addNewAppBarColor
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                          padding:  EdgeInsets.only(left: 20,bottom: 10,top: 10),
+                                          alignment: Alignment.centerLeft,
+                                          child: Text("Add Fields",style: ts18(grey1,),)
+                                      ),
+                                      AddBtnText(
+                                        ontap: (){
+                                          addTempValues();
+                                        },
+                                        margin:  EdgeInsets.only(right:20.0),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                for(int i=0;i<tempAddValues.length;i++)
+                                  Container(
+                                    padding: EdgeInsets.only(bottom: 0),
+                                    margin: EdgeInsets.only(left: 0,right: 0,top: 30,bottom: 20),
+                                    width: width1,
+                                    decoration: BoxDecoration(
+                                       // borderRadius: BorderRadius.circular(5),
+                                      //  border: Border.all(color: addNewTextFieldBorder),
+                                        border: Border(bottom: BorderSide(color: addNewTextFieldBorder,width: 2)),
+                                        color: Colors.white
+                                    ),
+                                    constraints: BoxConstraints(
+                                        minHeight: 100
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        ProductTextField(
+                                            width: textFormWidth,
+                                            title: "Physical Detail",
+                                            validation: validationList[0],
+                                            textEditingController: tempAddValues[i].title,
+                                            onComplete: (){
+                                              node.unfocus();
+                                            }
+                                        ),
+                                        Row(
+                                          children: [
+                                           /* AddNewLabelTextField(
+                                              margin: EdgeInsets.only(left: 0),
+                                              width: width1*0.5,
+                                              hintText: "Enter Title",
+                                              textEditingController: tempAddValues[i].title,
+                                              onEditComplete: (){
+                                                node.unfocus();
+                                              },
+                                              onChange: (v){},
+                                            ),*/
+                                            Spacer(),
+                                            CustomCheckBox(
+                                                show: tempAddValues[i].selectedHeading==1,
+                                                ontap: (){
+                                                  if(tempAddValues[i].subAddValuesList.isEmpty){
+                                                    setState(() {
+                                                      if(tempAddValues[i].selectedHeading==1){
+                                                        tempAddValues[i].selectedHeading=2;
+                                                      }
+                                                      else{
+                                                        tempAddValues[i].selectedHeading=1;
+                                                      }
+
+                                                      //addTempSubValues(i);
+                                                    });
+                                                  }
+                                                }
+                                            ),
+                                            SizedBox(width: 10,),
+                                            Text("  Do you want to add Specification with Heading ?",style: ts16(grey1,fontfamily: 'RL'),),
+                                            SizedBox(width: 75,),
+                                            AddBtnText(
+                                              ontap: (){
+                                                addTempSubValues(i);
+                                                /*if(tempAddValues[i].subAddValuesList.isEmpty){
+                                                  setState(() {
+                                                    tempAddValues[i].selectedHeading=1;
+                                                    addTempSubValues(i);
+                                                  });
+                                                }*/
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 15,),
+
+                                        for(int j=0;j<tempAddValues[i].subAddValuesList.length;j++)
+                                          ProductTextField(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              width: textFormWidth,
+                                              paddTextFieldHeader2: EdgeInsets.only(top: 20),
+                                              title: "Heading - ${j+1}",
+                                              validation: validationList[0],
+                                              textEditingController: pYouTubeUrl,
+                                              onComplete: (){
+                                                node.unfocus();
+                                              },
+                                            isTextField: false,
+                                            widget: Container(
+                                              margin: EdgeInsets.only(left: 0,right: 0,bottom: 20),
+                                              width: textFormWidth,
+                                              // padding: EdgeInsets.only(top: 10,bottom: 10),
+                                              padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
+                                              decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(5),
+                                                  // border: Border.all(color: addNewTextFieldBorder),
+                                                  color: addNewValuesBg
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  tempAddValues[i].selectedHeading==1? Align(
+                                                    alignment: Alignment.centerLeft,
+                                                    child: AddNewLabelTextField(
+                                                      margin: EdgeInsets.only(left: 0,top: 10),
+                                                      width: textFormWidth,
+                                                      hintText: "Enter Heading",
+                                                      textEditingController: tempAddValues[i].subAddValuesList[j].heading,
+                                                      onEditComplete: (){
+                                                        node.unfocus();
+                                                      },
+                                                      onChange: (v){},
+                                                    ),
+                                                  ):Container(),
+                                                  Row(
+                                                    children: [
+                                                      Spacer(),
+                                                      AddBtnText(
+                                                        ontap: (){
+                                                          addInnerTempSubValues(i, j);
+                                                          // addTempSubValues(i);
+                                                        },
+                                                      ),
+                                                      Text("  or  ",style: ts14(th.primaryColor4),),
+                                                       DeleteBtnText(
+                                                        ontap: (){
+                                                          setState(() {
+                                                            tempAddValues[i].subAddValuesList.removeAt(j);
+                                                          });
+                                                        }
+                                                    ),
+                                                    ],
+                                                  ),
+                                                  for(int k=0;k<tempAddValues[i].subAddValuesList[j].innerSubAddValuesList.length;k++)
+                                                    Column(
+                                                      children: [
+                                                        Row(
+                                                          children: [
+                                                            AddNewLabelTextField(
+                                                              margin: EdgeInsets.only(top: 0),
+                                                              width: textFormWidth*0.45,
+                                                              hintText: "Enter Title",
+                                                              textEditingController: tempAddValues[i].subAddValuesList[j].innerSubAddValuesList[k].title,
+                                                              onEditComplete: (){
+                                                                node.unfocus();
+                                                              },
+                                                              onChange: (v){},
+                                                            ),
+                                                            Spacer(),
+                                                            AddNewLabelTextField(
+                                                              margin: EdgeInsets.only(left: 0),
+                                                              width: textFormWidth*0.45,
+                                                              hintText: "Enter Value",
+                                                              textEditingController: tempAddValues[i].subAddValuesList[j].innerSubAddValuesList[k].value,
+                                                              onEditComplete: (){
+                                                                node.unfocus();
+                                                              },
+                                                              onChange: (v){},
+                                                            ),
+
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Spacer(),
+                                                            k==tempAddValues[i].subAddValuesList[j].innerSubAddValuesList.length-1?AddBtnText(
+                                                              ontap: (){
+                                                                addInnerTempSubValues(i, j);
+                                                              },
+                                                            ):Container(),
+                                                            k==tempAddValues[i].subAddValuesList[j].innerSubAddValuesList.length-1?
+                                                            Text("  or  ",style: ts14(th.primaryColor4),):Container(),
+                                                            DeleteBtnText(
+                                                                ontap: (){
+                                                                  setState(() {
+                                                                    tempAddValues[i].subAddValuesList[j].innerSubAddValuesList.removeAt(k);
+                                                                  });
+                                                                }
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
+                                     
+                                        Align(
+                                          alignment: Alignment.centerRight,
+                                          child: DeleteBtnText(
+                                            ontap: (){
+                                              setState(() {
+                                                tempAddValues.removeAt(i);
+                                              });
+                                            },
+                                          )
+                                        )
+
+
+                                      ],
+                                    ),
+                                  ),
+                                SizedBox(height: inBetweenHeight,),
+
+
+                                GestureDetector(
+                                  onTap: (){
+                                    setState(() {
+                                      showAttributeTab=!showAttributeTab;
+                                    });
+                                  },
+                                  child: Container(
+                                    width: textFormWidth+270,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(7),
+                                        color: th.addNewAppBarColor
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                            padding:  EdgeInsets.only(left: 20,bottom: 10,top: 10),
+                                            alignment: Alignment.centerLeft,
+                                            child: Text("Attribute Tab",style: ts18(grey1,),)
+                                        ),
+                                        Padding(
+                                          padding:  EdgeInsets.only(right:20.0),
+                                          child: Arrow(isOpen: showAttributeTab),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                CustomExpansionTile(
+                                  expand: showAttributeTab,
+                                  child: Container(
+                                    width: SizeConfig.screenWidth,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        SizedBox(height: inBetweenHeight,),
+                                        ProductTextField(
+                                          width: textFormWidth,
+                                          title: "Product Attributes",
+                                          validation: validationList[1],
+                                          isTextField: false,
+                                          onComplete: (){
+                                            node.unfocus();
+                                          },
+                                          widget:CustomPopup(
+                                            hintText: "Select Product Attributes",
+                                            data: ["Color","Size"],
+                                            selectedValue: "",
+                                            width:textFormWidth ,
+                                            leftMargin: 0,
+                                            edgeInsets: EdgeInsets.only(left: 0),
+                                            onSelect: (v){
+                                              setState(() {
+                                               // selectedProductType=v;
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                        SizedBox(height: inBetweenHeight,),
+                                        ProductTextField(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          width: textFormWidth,
+                                          title: "Color",
+                                          validation: validationList[0],
+                                          onComplete: (){
+                                            node.unfocus();
+                                          },
+                                          isTextField: false,
+                                          widget: Container(
+                                            margin: EdgeInsets.only(left: 0,right: 0,bottom: 0),
+                                            width: textFormWidth,
+                                            // padding: EdgeInsets.only(top: 10,bottom: 10),
+                                            padding: EdgeInsets.fromLTRB(20, 15, 20, 20),
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(5),
+                                                // border: Border.all(color: addNewTextFieldBorder),
+                                                color: addNewValuesBg
+                                            ),
+                                            //  height: 200,
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    CustomCheckBox(show: true, ontap:(){}),
+                                                    SizedBox(width: 10,),
+                                                    Icon(Icons.visibility,color: th.primaryColor2,size: 30,),
+                                                    SizedBox(width: 10,),
+                                                    Text("Do you want to visible this on product page ?",
+                                                      style: ts16(grey1,fontfamily: 'RL'),
+                                                    ),
+                                                  ],
+                                                ),
+                                                MultiTags(
+                                                  hintText: 'Enter Values',
+                                                  data: ["Red","Green","Yellow"],
+                                                  width: textFormWidth,
+                                                ),
+                                                SizedBox(height: 10,),
+                                                Row(
+                                                  children: [
+                                                    CustomCheckBox(show: true, ontap:(){}),
+                                                    SizedBox(width: 10,),
+                                                    Text("Used for variations ?",
+                                                      style: ts16(grey1,fontfamily: 'RL'),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(height: inBetweenHeight+30,),
+                                        SaveBtn2(
+                                            ontap: (){
+                                              Navigator.push(context, pr.PageRoute().fade(ProductAttributesGrid()));
+                                            },
+                                            color: th.primaryColor2,
+                                          title: "Save Attributes",
+                                        )
+
+
+
+
+                                      ],
+                                    ),
+                                  ),
+
+                                ),
+                                SizedBox(height: inBetweenHeight,),
 
 
 
@@ -778,7 +1320,7 @@ class _ProductAddNewState extends State<ProductAddNew> {
 
 
 
-                                ProductTextField(
+                                /*ProductTextField(
                                     width: textFormWidth,
                                     title: "Pincode",
                                     validation: validationList[0],
@@ -800,27 +1342,6 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                       node.unfocus();
                                     }
                                 ),
-
-
-                                ProductTextField(
-                                    width: textFormWidth,
-                                    title: "Website URL",
-                                    validation: validationList[0],
-                                    textEditingController: pWebsiteUrl,
-                                    onComplete: (){
-                                      node.unfocus();
-                                    }
-                                ),
-                                ProductTextField(
-                                    width: textFormWidth,
-                                    title: "Embedded You tube URL",
-                                    validation: validationList[0],
-                                    textEditingController: pYouTubeUrl,
-                                    onComplete: (){
-                                      node.unfocus();
-                                    }
-                                ),
-
                                 Container(
                                   margin: EdgeInsets.only(left: 20,top: 20),
                                   width: textFormWidth-20,
@@ -949,60 +1470,6 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                       ),
                                     ),
                                 ),
-
-                                ProductTextField(
-                                    width: textFormWidth,
-                                    title: "Description",
-                                    validation: validationList[0],
-                                    textEditingController: pDescription,
-                                    maxlines: 3,
-                                    onComplete: (){
-                                      node.unfocus();
-                                    },
-                                ),
-                                ProductTextField(
-                                  width: SizeConfig.screenWidth!-300,
-                                  title: "Enter Tags",
-                                  validation: validationList[2],
-                                  textEditingController: dummyTextController,
-                                  onComplete: (){},
-                                  isTextField: false,
-                                  widget: MultiTags(
-                                    hintText: 'Enter Tags',
-                                    data: tagsList,
-                                    textFieldWidth: 180,
-                                    width: SizeConfig.screenWidth!-300,
-                                  ),
-                                ),
-                                ProductTextField(
-                                  width: SizeConfig.screenWidth!-300,
-                                  title: "SEO KeyWords",
-                                  validation: validationList[2],
-                                  textEditingController: dummyTextController,
-                                  onComplete: (){},
-                                  isTextField: false,
-                                  widget: MultiTags(
-                                    hintText: 'Enter SEO KeyWords',
-                                    data: seoKeyWordsList,
-                                    textFieldWidth: 180,
-                                    width: SizeConfig.screenWidth!-300,
-                                  ),
-                                ),
-                                ProductTextField(
-                                  width: SizeConfig.screenWidth!-300,
-                                  title: "SEO Titles",
-                                  validation: validationList[2],
-                                  textEditingController: dummyTextController,
-                                  onComplete: (){},
-                                  isTextField: false,
-                                  widget: MultiTags(
-                                    hintText: 'Enter SEO Title',
-                                    data: seoTitlesList,
-                                    textFieldWidth: 180,
-                                    width: SizeConfig.screenWidth!-300,
-                                  ),
-                                ),
-
                                 ProductTextField(
                                     width:530,
                                     title: "Highlights",
@@ -1023,348 +1490,10 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                           });
                                         }
                                     )
-                                ),
-
-                                //Add values
-                                GestureDetector(
-                                  onTap: (){
-                                    addTempValues();
-                                    // setState(() {
-                                    //   isAddValueClick=true;
-                                    //   tempSubAddValues.clear();
-                                    //   selectedHeading=-1;
-                                    // });
-                                  },
-                                  child: Container(
-                                    width: SizeConfig.screenWidth,
-                                    alignment: Alignment.centerLeft,
-                                    child: Container(
-                                      height: 50,
-                                      width: 150,
-                                      margin: EdgeInsets.only(left: 20),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                        border: Border.all(color: addNewTextFieldBorder),
-                                        color: Colors.white
-                                      ),
-                                      alignment: Alignment.center,
-                                      child: Text("Add Values",style: textFormTs1,),
-                                    ),
-                                  ),
-                                ),
-                               for(int i=0;i<tempAddValues.length;i++)
-                                 Container(
-                                   padding: EdgeInsets.all(15),
-                                   margin: EdgeInsets.only(left: 20,right: 20),
-                                   width: width1,
-                                   decoration: BoxDecoration(
-                                       borderRadius: BorderRadius.circular(5),
-                                       border: Border.all(color: addNewTextFieldBorder),
-                                       color: Colors.white
-                                   ),
-                                   constraints: BoxConstraints(
-                                       minHeight: 100
-                                   ),
-                                   child: Column(
-                                     children: [
-                                       Row(
-                                         children: [
-                                           AddNewLabelTextField(
-                                             margin: EdgeInsets.only(left: 0),
-                                             width: width1*0.5,
-                                             hintText: "Enter Title",
-                                             textEditingController: tempAddValues[i].title,
-                                             onEditComplete: (){
-                                               node.unfocus();
-                                             },
-                                             onChange: (v){},
-                                           ),
-                                           Spacer(),
-                                           GestureDetector(
-                                             onTap: (){
-                                               if(tempAddValues[i].subAddValuesList.isEmpty){
-                                                 setState(() {
-                                                   tempAddValues[i].selectedHeading=1;
-                                                   addTempSubValues(i);
-                                                 });
-                                               }
-
-                                             },
-                                             child: Container(
-                                               height: 50,
-                                               width: 130,
-                                               decoration: BoxDecoration(
-                                                   borderRadius: BorderRadius.circular(5),
-                                                   border: Border.all(color: addNewTextFieldBorder),
-                                                   color:tempAddValues[i].selectedHeading==1?Colors.white: Colors.grey.withOpacity(0.25)
-                                               ),
-                                               alignment: Alignment.center,
-                                               child: Text("With Heading",style: textFormTs1,),
-                                             ),
-                                           ),
-                                           Spacer(),
-                                           GestureDetector(
-                                             onTap: (){
-                                               if(tempAddValues[i].subAddValuesList.isEmpty){
-                                                 setState(() {
-                                                   tempAddValues[i].selectedHeading=2;
-                                                   addTempSubValues(i);
-                                                 });
-                                               }
-                                             },
-                                             child: Container(
-                                               height: 50,
-                                               width: 130,
-                                               decoration: BoxDecoration(
-                                                   borderRadius: BorderRadius.circular(5),
-                                                   border: Border.all(color: addNewTextFieldBorder),
-                                                   color: tempAddValues[i].selectedHeading==2?Colors.white:Colors.grey.withOpacity(0.25)
-                                               ),
-                                               alignment: Alignment.center,
-                                               child: Text("Without Heading",style: textFormTs1,),
-                                             ),
-                                           ),
-                                           Spacer(),
-                                           AddBtn(ontap: (){
-                                             setState(() {
-                                               tempAddValues.removeAt(i);
-                                             });
-                                           },
-                                             color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
-                                             margin: EdgeInsets.only(left: 0),
-                                             widget: Icon(Icons.clear,color: Colors.white,),
-                                           ),
-                                         ],
-                                       ),
-                                       SizedBox(height: 15,),
-                                       for(int j=0;j<tempAddValues[i].subAddValuesList.length;j++)
-                                         Column(
-                                           children: [
-                                             tempAddValues[i].selectedHeading==1? Align(
-                                               alignment: Alignment.centerLeft,
-                                               child: AddNewLabelTextField(
-                                                 margin: EdgeInsets.only(left: 0,top: 10),
-                                                 width: width1*0.5,
-                                                 hintText: "Enter Heading",
-                                                 textEditingController: tempAddValues[i].subAddValuesList[j].heading,
-                                                 onEditComplete: (){
-                                                   node.unfocus();
-                                                 },
-                                                 onChange: (v){},
-                                               ),
-                                             ):Container(),
-                                             SizedBox(height: 10,),
-                                             Row(
-                                               children: [
-                                                 AddNewLabelTextField(
-                                                   margin: EdgeInsets.only(top: 0),
-                                                   width: width1*0.4,
-                                                   hintText: "Enter Title",
-                                                   textEditingController: tempAddValues[i].subAddValuesList[j].title,
-                                                   onEditComplete: (){
-                                                     node.unfocus();
-                                                   },
-                                                   onChange: (v){},
-                                                 ),
-                                                 Spacer(),
-                                                 AddNewLabelTextField(
-                                                   margin: EdgeInsets.only(left: 0),
-                                                   width: width1*0.4,
-                                                   hintText: "Enter Value",
-                                                   textEditingController: tempAddValues[i].subAddValuesList[j].value,
-                                                   onEditComplete: (){
-                                                     node.unfocus();
-                                                   },
-                                                   onChange: (v){},
-                                                 ),
-                                                 Spacer(),
-                                                 AddBtn(ontap: (){
-                                                   addTempSubValues(i);
-                                                 },
-                                                   color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
-                                                   margin: EdgeInsets.only(left: 0),
-                                                 ),
-                                                 Spacer(),
-                                                 AddBtn(ontap: (){
-                                                   setState(() {
-                                                     tempAddValues[i].subAddValuesList.removeAt(j);
-                                                   });
-                                                 },
-                                                   color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
-                                                   margin: EdgeInsets.only(left: 0),
-                                                   widget: Icon(Icons.clear,color: Colors.white,),
-                                                 ),
-                                               ],
-                                             )
-                                           ],
-                                         )
+                                ),*/
 
 
-                                     ],
-                                   ),
-                                 ),
-                               /*isAddValueClick?Container(
-                                 padding: EdgeInsets.all(15),
-                                 margin: EdgeInsets.only(left: 20),
-                                 width: 600,
-                                 decoration: BoxDecoration(
-                                   borderRadius: BorderRadius.circular(5),
-                                   border: Border.all(color: addNewTextFieldBorder),
-                                   color: Colors.white
-                                 ),
-                                 constraints: BoxConstraints(
-                                   minHeight: 100
-                                 ),
-                                 child: Column(
-                                   children: [
-                                     Row(
-                                       children: [
-                                         AddNewLabelTextField(
-                                           margin: EdgeInsets.only(left: 0),
-                                           width: 200,
-                                           hintText: "Enter Title",
-                                           onEditComplete: (){
-                                             node.unfocus();
-                                           },
-                                           onChange: (v){},
-                                         ),
-                                         Spacer(),
-                                         GestureDetector(
-                                           onTap: (){
-                                             if(tempSubAddValues.isEmpty){
-                                               setState(() {
-                                                 selectedHeading=1;
-                                                 addTempSubValues();
-                                               });
-                                             }
 
-                                           },
-                                           child: Container(
-                                             height: 50,
-                                             width: 130,
-                                             decoration: BoxDecoration(
-                                                 borderRadius: BorderRadius.circular(5),
-                                                 border: Border.all(color: addNewTextFieldBorder),
-                                                 color:selectedHeading==1?Colors.white: Colors.grey.withOpacity(0.25)
-                                             ),
-                                             alignment: Alignment.center,
-                                             child: Text("With Heading",style: textFormTs1,),
-                                           ),
-                                         ),
-                                         Spacer(),
-                                         GestureDetector(
-                                           onTap: (){
-                                             if(tempSubAddValues.isEmpty){
-                                               setState(() {
-                                                 selectedHeading=2;
-                                                 addTempSubValues();
-                                               });
-                                             }
-                                           },
-                                           child: Container(
-                                             height: 50,
-                                             width: 130,
-                                             decoration: BoxDecoration(
-                                                 borderRadius: BorderRadius.circular(5),
-                                                 border: Border.all(color: addNewTextFieldBorder),
-                                                 color: selectedHeading==2?Colors.white:Colors.grey.withOpacity(0.25)
-                                             ),
-                                             alignment: Alignment.center,
-                                             child: Text("Without Heading",style: textFormTs1,),
-                                           ),
-                                         ),
-                                         Spacer(),
-                                         AddBtn(ontap: (){
-                                           setState(() {
-                                             isAddValueClick=false;
-                                             tempSubAddValues.clear();
-                                           });
-                                         },
-                                         color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
-                                           margin: EdgeInsets.only(left: 0),
-                                           widget: Icon(Icons.clear,color: Colors.white,),
-                                         ),
-                                       ],
-                                     ),
-                                     for(int i=0;i<tempSubAddValues.length;i++)
-                                       Column(
-                                        children: [
-                                         selectedHeading==1? Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: AddNewLabelTextField(
-                                              margin: EdgeInsets.only(left: 0,top: 10),
-                                              width: 200,
-                                              hintText: "Enter Heading",
-                                              textEditingController: tempSubAddValues[i].heading,
-                                              onEditComplete: (){
-                                                node.unfocus();
-                                              },
-                                              onChange: (v){},
-                                            ),
-                                          ):Container(),
-                                          SizedBox(height: 10,),
-                                          Row(
-                                            children: [
-                                              AddNewLabelTextField(
-                                                margin: EdgeInsets.only(top: 0),
-                                                width: 200,
-                                                hintText: "Enter Title",
-                                                textEditingController: tempSubAddValues[i].title,
-                                                onEditComplete: (){
-                                                  node.unfocus();
-                                                },
-                                                onChange: (v){},
-                                              ),
-                                              Spacer(),
-                                              AddNewLabelTextField(
-                                                margin: EdgeInsets.only(left: 0),
-                                                width: 200,
-                                                hintText: "Enter Value",
-                                                textEditingController: tempSubAddValues[i].value,
-                                                onEditComplete: (){
-                                                  node.unfocus();
-                                                },
-                                                onChange: (v){},
-                                              ),
-                                              Spacer(),
-                                              AddBtn(ontap: (){
-                                                addTempSubValues();
-                                              },
-                                                color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
-                                                margin: EdgeInsets.only(left: 0),
-                                              ),
-                                              Spacer(),
-                                              AddBtn(ontap: (){
-                                                setState(() {
-                                                  tempSubAddValues.removeAt(i);
-                                                });
-                                              },
-                                                color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
-                                                margin: EdgeInsets.only(left: 0),
-                                                widget: Icon(Icons.clear,color: Colors.white,),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                       )
-
-
-                                   ],
-                                 ),
-                               ):Container(),*/
-                               // SizedBox(height: 50,),
-
-                                PickImage(
-                                  image: image, title: "Select Logo",
-                                  cb: (v){
-                                    setState(() {
-                                      image=v;
-                                    });
-                                  },
-                                ),
-                                ///   validationList[2]?ValidationErrorText(title: validationText,):Container(),
-
-                                //  SizedBox(height: 50,),
 
 
                                 Container(
@@ -1594,6 +1723,7 @@ class SubAddValues{
   TextEditingController heading;
   TextEditingController title;
   TextEditingController value;
-  SubAddValues({required this.heading,required this.title,required this.value});
+  List<SubAddValues> innerSubAddValuesList;
+  SubAddValues({required this.heading,required this.title,required this.value,required this.innerSubAddValuesList});
 }
 

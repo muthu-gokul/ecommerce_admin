@@ -23,12 +23,13 @@ class GridWithWidgetParam extends StatefulWidget {
   bool showAdd;
   bool showFilter;
   bool showExport;
+  bool showSearchAll;
   Color searchBg;
 
   GridWithWidgetParam({required this.headerHeight,required this.headerWidth,required this.headerWidget,
     required this.bodyHeight,required this.bodyWidth,required this.bodyWidget,this.showDeleteAll=false,
     required this.addBtnTap,required this.searchFunc,required this.gridHeaderList,required this.filterOnTap,
-   this.showAdd=false,this.searchBg=Colors.white,this.showExport=true,this.showFilter=true});
+   this.showAdd=false,this.searchBg=Colors.white,this.showExport=true,this.showFilter=true,this.showSearchAll=true});
 
   @override
   _GridWithWidgetParamState createState() => _GridWithWidgetParamState();
@@ -60,7 +61,7 @@ class _GridWithWidgetParamState extends State<GridWithWidgetParam> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
+        !widget.showSearchAll?Container():Container(
           height: widget.headerHeight,
           width: widget.headerWidth,
           alignment: Alignment.topCenter,
@@ -172,7 +173,7 @@ class _GridWithWidgetParamState extends State<GridWithWidgetParam> {
         Container(
           height: widget.headerHeight,
           width: widget.headerWidth,
-          margin: EdgeInsets.only(top: widget.headerHeight),
+          margin: EdgeInsets.only(top: widget.showSearchAll?widget.headerHeight:0),
           alignment: Alignment.topCenter,
           child:Theme(
             data: glowTransparent(context),
@@ -186,7 +187,7 @@ class _GridWithWidgetParamState extends State<GridWithWidgetParam> {
         Container(
           height: widget.bodyHeight,
           width: widget.bodyWidth,
-          margin: EdgeInsets.only(top: widget.headerHeight*2.0),
+          margin: EdgeInsets.only(top: widget.showSearchAll?widget.headerHeight*2.0:widget.headerHeight),
           alignment: Alignment.topCenter,
           child: Theme(
             data: glowTransparent(context),

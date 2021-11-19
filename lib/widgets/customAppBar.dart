@@ -7,7 +7,9 @@ import '../constants.dart';
 import 'buttons/backBtn.dart';
 class CustomAppBarAddNew extends StatelessWidget {
   String title;
-  CustomAppBarAddNew({required this.title});
+  bool diffColor;
+  Color color;
+  CustomAppBarAddNew({required this.title,this.diffColor=false,this.color=Colors.white});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class CustomAppBarAddNew extends StatelessWidget {
       height: 50,
       width: SizeConfig.screenWidth,
       decoration: BoxDecoration(
-        color:  Provider.of<ThemeNotifier>(context,listen: false).addNewAppBarColor,
+        color:  diffColor?color:Provider.of<ThemeNotifier>(context,listen: false).addNewAppBarColor,
         borderRadius: BorderRadius.circular(7),
       ),
       

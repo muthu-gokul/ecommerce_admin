@@ -26,6 +26,7 @@ import 'package:ecommerce_admin/model/pincodeModel/pincodeModel.dart';
 import 'package:ecommerce_admin/model/productModel.dart';
 import 'package:ecommerce_admin/model/productShowCaseModel/productShowcaseModel.dart';
 import 'package:ecommerce_admin/model/productStockModel.dart';
+import 'package:ecommerce_admin/model/productVariationModel.dart';
 import 'package:ecommerce_admin/model/purchaseModel/materialCategoryModel.dart';
 import 'package:ecommerce_admin/model/purchaseModel/purchaseGridModel.dart';
 import 'package:ecommerce_admin/model/purchaseModel/vendorHistoryModel.dart';
@@ -732,6 +733,15 @@ List<RatingsModel> ratings=[
   //AdminSubscriptionPlan
   List<AdminSubsPlanModel> adminSubsplan=[
     AdminSubsPlanModel(id: "1 ", code: "Plan 1 ",name: "Executive",planType: "Trial",monthlyAmount: "₹ 3000",yearlyAmount: "₹ 30000",),
+  ];
+
+  //ProductVariationModel
+  List<ProductVariationModel> variants=[
+    ProductVariationModel(productName: "T-shirt", color: "Green", size: "Small", regularPrice: 1200, offerPrice: 800, stock: 30),
+    ProductVariationModel(productName: "T-shirt", color: "Red", size: "Large", regularPrice: 1200, offerPrice: 800, stock: 10),
+    ProductVariationModel(productName: "T-shirt", color: "Yellow", size: "Small", regularPrice: 1200, offerPrice: 800, stock: 30),
+    ProductVariationModel(productName: "T-shirt", color: "Pink", size: "Large", regularPrice: 1200, offerPrice: 800, stock: 20),
+    ProductVariationModel(productName: "T-shirt", color: "Blue", size: "Small", regularPrice: 1200, offerPrice: 800, stock: 30),
   ];
 
 

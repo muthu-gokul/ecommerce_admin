@@ -1,4 +1,5 @@
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
+import 'package:ecommerce_admin/widgets/circle.dart';
 import 'package:ecommerce_admin/widgets/customTextField.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +12,7 @@ class MultiTags extends StatefulWidget {
   String hintText;
   double textFieldWidth;
   double width;
-  MultiTags({required this.data,required this.hintText,this.textFieldWidth=400,required this.width});
+  MultiTags({required this.data,required this.hintText,this.textFieldWidth=600,required this.width});
   @override
   _MultiTagsState createState() => _MultiTagsState();
 }
@@ -39,46 +40,97 @@ class _MultiTagsState extends State<MultiTags> {
         runSpacing: 10,
         children: [
           for(int i=0;i<widget.data.length;i++)
-            Container(
-              padding: EdgeInsets.only(top: 3,bottom: 3,left: 5,right: 5),
-              margin: EdgeInsets.only(left: 10),
-              width: (widget.data[i].length*8.0)+40,
-              alignment:Alignment.center,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2
-              ),
-              constraints: BoxConstraints(
-                minHeight: 35,
-                minWidth: 55,
-                // maxWidth:(tagsList[i].length*11)+35
-              ),
-              child: Row(
-                //    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text("${widget.data[i]}",style: ts16(Colors.white),),
-                  Spacer(),
-                  GestureDetector(
-                    onTap: (){
-                      setState(() {
-                        widget.data.removeAt(i);
-                      });
-                    },
-                    child: Container(
-                      width: 25,
-                      height: 25,
-                      //margin: EdgeInsets.only(left: 10),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor4
-                      ),
-                      alignment: Alignment.center,
-                      child: Icon(Icons.clear,color: Colors.white,size: 18,),
+            Padding(
+              padding: EdgeInsets.only(right: 10),
+              child: Chip(
+                padding: EdgeInsets.only(top: 0,bottom: 0,left: 5,right: 3),
+                backgroundColor: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
+
+                /*margin: EdgeInsets.only(left: 10),
+                //width: (widget.data[i].length*8.0)+40,
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2
+                ),*/
+               /* constraints: BoxConstraints(
+                  minHeight: 35,
+                  minWidth: 55,
+                  // maxWidth:(tagsList[i].length*11)+35
+                ),*/
+                label: Text("${widget.data[i]}",style: ts16(Colors.white),),
+                deleteIcon: Circle(
+                    hei: 25,
+                    color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor4,
+                    widget: Icon(Icons.clear,color: Colors.white,size: 18,)
+                ),
+                onDeleted: (){
+                  setState(() {
+                    widget.data.removeAt(i);
+                  });
+                },
+                /*deleteIcon: GestureDetector(
+                  onTap: (){
+                    setState(() {
+                      widget.data.removeAt(i);
+                    });
+                  },
+                  child: Container(
+                    width: 25,
+                    height: 25,
+                    //margin: EdgeInsets.only(left: 10),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor4
                     ),
-                  )
-                ],
+                    alignment: Alignment.center,
+                    child: Icon(Icons.clear,color: Colors.white,size: 18,),
+                  ),
+                ),*/
               ),
             ),
+            /*Flexible(
+              child: Container(
+                padding: EdgeInsets.only(top: 3,bottom: 3,left: 5,right: 5),
+                margin: EdgeInsets.only(left: 10),
+                //width: (widget.data[i].length*8.0)+40,
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2
+                ),
+               *//* constraints: BoxConstraints(
+                  minHeight: 35,
+                  minWidth: 55,
+                  // maxWidth:(tagsList[i].length*11)+35
+                ),*//*
+                child: Row(
+                  //    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text("${widget.data[i]}",style: ts16(Colors.white),),
+                    Spacer(),
+                    GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          widget.data.removeAt(i);
+                        });
+                      },
+                      child: Container(
+                        width: 25,
+                        height: 25,
+                        //margin: EdgeInsets.only(left: 10),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor4
+                        ),
+                        alignment: Alignment.center,
+                        child: Icon(Icons.clear,color: Colors.white,size: 18,),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),*/
 
           AddNewLabelTextField(
             margin: EdgeInsets.only(left: 0),

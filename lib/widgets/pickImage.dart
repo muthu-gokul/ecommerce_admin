@@ -93,8 +93,10 @@ class PickMultiImage extends StatefulWidget {
   String nullImage;
   double nullImageHei;
   double wid;
+  double imgWid;
+  double? hei;
   PickMultiImage({required this.images,required this.title,required this.cb,this.isPick=true,this.nullImage="assets/images/addnew-brand.jpg",
-    this.nullImageHei=50,required this.wid,required this.deleteCb});
+    this.nullImageHei=50,required this.wid,required this.deleteCb,this.hei,this.imgWid=80});
 
   @override
   _PickMultiImageState createState() => _PickMultiImageState();
@@ -110,60 +112,69 @@ class _PickMultiImageState extends State<PickMultiImage> {
   Widget build(BuildContext context) {
     return Container(
       width: widget.wid,
-      child: Wrap(
-        children: [
-          for(int i=0;i<widget.images!.length;i++)
-            kIsWeb?Image.network( widget.images![i].path,height: 70,)
-                :Container(
-                  height: 100,
-                  width: 90,
-                  margin: EdgeInsets.only(right: 15),
-                  child: Stack(
-                    children: [
-                      Container(
-                          margin: EdgeInsets.only(top: 10),
-                          height: 80,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5)
-                          ),
-                          child: Image.file(File(widget.images![i].path,),width: 80,fit: BoxFit.cover,)
-                      ),
-                      Positioned(
-                        right: 0,
-                        child: GestureDetector(
-                          onTap:(){
-                            widget.deleteCb(i);
-                          },
-                          child: Circle(
-                              hei: 25,
-                              color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
-                              widget: Icon(Icons.clear,color: Colors.white,size: 15,),
-                          ),
+      height: widget.hei,
+      child: SingleChildScrollView(
+        physics: widget.hei==null?NeverScrollableScrollPhysics():BouncingScrollPhysics(),
+        child: Wrap(
+          children: [
+            Container(
+              height: widget.hei==null?0:10,
+              width: widget.wid,
+            ),
+            for(int i=0;i<widget.images!.length;i++)
+              Container(
+                    height: 100,
+                  //  width: 90,
+                    width: widget.imgWid+10,
+                    margin: EdgeInsets.only(right: 15,),
+                    child: Stack(
+                      children: [
+                        Container(
+                            margin: EdgeInsets.only(top: 10),
+                            height: 80,
+                            clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5)
+                            ),
+                            child: kIsWeb?Image.network( widget.images![i].path,width: widget.imgWid,fit: BoxFit.cover,):
+                            Image.file(File(widget.images![i].path,),width: widget.imgWid,fit: BoxFit.cover,)
                         ),
-                      )
-                    ],
-                  )
-            ),
-          GestureDetector(
-            onTap: (){
-              pickImg();
-            },
-            child: Container(
-              height: 100,
-              width: 100,
-              color: Colors.transparent,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(widget.nullImage,height: widget.nullImageHei,),
-                  SizedBox(height: 10,),
-                  Text(widget.title,style: ts18(grey2,fontsize: 10),)
-                ],
+                        Positioned(
+                          right: 0,
+                          child: GestureDetector(
+                            onTap:(){
+                              widget.deleteCb(i);
+                            },
+                            child: Circle(
+                                hei: 25,
+                                color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor2,
+                                widget: Icon(Icons.clear,color: Colors.white,size: 15,),
+                            ),
+                          ),
+                        )
+                      ],
+                    )
               ),
-            ),
-          )
-        ],
+            GestureDetector(
+              onTap: (){
+                pickImg();
+              },
+              child: Container(
+                height: 100,
+                width: 100,
+                color: Colors.transparent,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(widget.nullImage,height: widget.nullImageHei,),
+                    SizedBox(height: 10,),
+                    Text(widget.title,style: ts18(grey2,fontsize: 10),)
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

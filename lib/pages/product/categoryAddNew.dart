@@ -171,7 +171,7 @@ class _CategoryAddNewState extends State<CategoryAddNew> {
                                               onTap: (){
                                                 addFilter();
                                               },
-                                              child: Text("Add more filter",style:  ts18(Provider.of<ThemeNotifier>(context,listen: false).primaryColor3,fontfamily: 'RR'),),
+                                              child: Text("Add more filter",style:  ts18(th.primaryColor3,fontfamily: 'RR'),),
                                             ),
                                             i==0?Container():Text("    or    ",style: ts16(Colors.grey),),
                                             i==0?Container():GestureDetector(
