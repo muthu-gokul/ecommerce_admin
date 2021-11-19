@@ -37,6 +37,8 @@ import 'package:ecommerce_admin/model/shippingCharge/shippingChargeModel.dart';
 import 'package:ecommerce_admin/model/sizeModel.dart';
 import 'package:ecommerce_admin/model/staffsModel.dart';
 import 'package:ecommerce_admin/model/subscriptionNEWAPPModel/adminSubsPlanModel.dart';
+import 'package:ecommerce_admin/model/subscriptionNEWAPPModel/subsInvoiceModel.dart';
+import 'package:ecommerce_admin/model/subscriptionNEWAPPModel/subscriberListModel.dart';
 import 'package:ecommerce_admin/model/taxesModel/groupModel.dart';
 import 'package:ecommerce_admin/model/taxesModel/taxesModel.dart';
 import 'package:ecommerce_admin/model/topOfferModel.dart';
@@ -742,6 +744,25 @@ List<RatingsModel> ratings=[
     ProductVariationModel(productName: "T-shirt", color: "Yellow", size: "Small", regularPrice: 1200, offerPrice: 800, stock: 30),
     ProductVariationModel(productName: "T-shirt", color: "Pink", size: "Large", regularPrice: 1200, offerPrice: 800, stock: 20),
     ProductVariationModel(productName: "T-shirt", color: "Blue", size: "Small", regularPrice: 1200, offerPrice: 800, stock: 30),
+  ];
+
+
+  //SubscribernPlan
+  List<SubsListModel> subsList=[
+    SubsListModel(sNo: "1 ", cmpnyName: "Sri Devi Store ",contactName: "vivek ",email: "vivek@tetrosoft.co.in",phoneNo: "+91 8695650491",licenceNo: "123456789012345",expirydate: "16-11-2022",status: "Active",),
+    SubsListModel(sNo: "2 ", cmpnyName: "Anjapper ",contactName: "vivek ",email: "vivek@tetrosoft.co.in",phoneNo: "+91 8695650491",licenceNo: "123456789012345",expirydate: "31-11-2022",status: "Expired",),
+    SubsListModel(sNo: "3 ", cmpnyName: "Sri Devi Store ",contactName: "vivek ",email: "vivek@tetrosoft.co.in",phoneNo: "+91 8695650491",licenceNo: "123456789012345",expirydate: "17-11-2022",status: "Cancel",),
+    SubsListModel(sNo: "4 ", cmpnyName: "Junior Kuppan ",contactName: "vivek ",email: "vivek@tetrosoft.co.in",phoneNo: "+91 8695650491",licenceNo: "123456789012345",expirydate: "16-11-2022",status: "Past Due",),
+    SubsListModel(sNo: "5 ", cmpnyName: "Sri Devi Store ",contactName: "vivek ",email: "vivek@tetrosoft.co.in",phoneNo: "+91 8695650491",licenceNo: "123456789012345",expirydate: "16-11-2022",status: "TrailPlan",),
+  ];
+
+  //SubscribernPlan
+  List<SubsInvoiceModel> subsInvoice=[
+    SubsInvoiceModel(company: "Sri Devi Store ", billDate: "16-11-2021",billNo: "INV00001 ",dueDate: "10-11-2021",billAmount: "9999",paidAmount: "9999",balanceAmt: "0",status: "Paid",),
+    SubsInvoiceModel(company: "Sri Devi Store ", billDate: "16-11-2021",billNo: "INV00001 ",dueDate: "10-11-2021",billAmount: "9999",paidAmount: "9999",balanceAmt: "0",status: "Paid",),
+    SubsInvoiceModel(company: "Sri Devi Store ", billDate: "16-11-2021",billNo: "INV00001 ",dueDate: "10-11-2021",billAmount: "9999",paidAmount: "9999",balanceAmt: "0",status: "Paid",),
+    SubsInvoiceModel(company: "Sri Devi Store ", billDate: "16-11-2021",billNo: "INV00001 ",dueDate: "10-11-2021",billAmount: "9999",paidAmount: "9999",balanceAmt: "0",status: "Paid",),
+
   ];
 
 

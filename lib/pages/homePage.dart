@@ -53,6 +53,8 @@ import 'refund/RefundGrid.dart';
 import 'settings/companySettings.dart';
 import 'settings/settings.dart';
 import 'staffs/staffsGrid.dart';
+import 'subscriptionNEWAPP/invoice/SubsInvoiceGrid.dart';
+import 'subscriptionNEWAPP/subscriberList/subscriberListGrid.dart';
 import 'taxes/taxesAddGroupsAdd.dart';
 import 'topOffers/topOfferGrid.dart';
 import 'underAmount/underAmountGrid.dart';
@@ -125,6 +127,8 @@ class _HomePageState extends State<HomePage> {
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Bulk SMS Message", widget: Icon(Icons.sms_failed_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Settings", widget: Icon(Icons.settings_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Admin Subscription Plan", widget: Icon(Icons.add_task_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Subscriber List", widget: Icon(Icons.add_task_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Invoice", widget: Icon(Icons.calendar_view_month_sharp,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
  ];
 
 
@@ -406,6 +410,8 @@ class _HomePageState extends State<HomePage> {
                       menuIndex==48?BulkSMS():
                       menuIndex==49?Settings():
                       menuIndex==50?AdminSubsPlanGrid():
+                      menuIndex==51?SubscriberListGrid():
+                      menuIndex==52?SubscriberInvoice():
                           Container()
 
                     ],
