@@ -6,5 +6,6 @@ class DrawerContentModel{
   Widget? widget;
   double rightPadd;
   double imgHeight;
-  DrawerContentModel({required this.img,required this.title, this.widget,this.rightPadd=5,required this.imgHeight});
+  bool isReport=false;
+  DrawerContentModel({required this.img,required this.title, this.widget,this.rightPadd=5,required this.imgHeight,this.isReport=false});
 }

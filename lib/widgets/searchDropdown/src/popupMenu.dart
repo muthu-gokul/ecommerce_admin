@@ -258,11 +258,9 @@ class _PopupMenu<T> extends StatelessWidget {
       );
     }
 
-    final CurveTween opacity =
-        CurveTween(curve: const Interval(0.0, 1.0 / 3.0));
+    final CurveTween opacity = CurveTween(curve: const Interval(0.0, 1.0 / 3.0));
     final CurveTween width = CurveTween(curve: Interval(0.0, unit));
-    final CurveTween height =
-        CurveTween(curve: Interval(0.0, unit * route!.items.length));
+    final CurveTween height = CurveTween(curve: Interval(0.0, unit * route!.items.length));
 
     final Widget child = ConstrainedBox(
       constraints: const BoxConstraints(minWidth: _kMenuMinWidth),
@@ -290,11 +288,12 @@ class _PopupMenu<T> extends StatelessWidget {
           child: Material(
             shape: route!.shape ?? popupMenuTheme.shape,
             color: route!.color ?? popupMenuTheme.color,
+           // color: Colors.red,
             type: MaterialType.card,
             elevation: route!.elevation ?? popupMenuTheme.elevation ?? 8.0,
             child: Align(
-              alignment: AlignmentDirectional.topEnd,
-              widthFactor: width.evaluate(route!.animation!),
+              alignment: AlignmentDirectional.topStart,
+              widthFactor: 1,
               heightFactor: height.evaluate(route!.animation!),
               child: child,
             ),
@@ -442,8 +441,8 @@ class _PopupMenuRoute<T> extends PopupRoute<T> {
   Animation<double> createAnimation() {
     return CurvedAnimation(
       parent: super.createAnimation(),
-      curve: Curves.linear,
-      reverseCurve: const Interval(0.0, _kMenuCloseIntervalEnd),
+      curve: Curves.easeIn,
+    //  reverseCurve: const Interval(0.0, _kMenuCloseIntervalEnd),
     );
   }
 
@@ -467,7 +466,6 @@ class _PopupMenuRoute<T> extends PopupRoute<T> {
         if (items[index].represents(initialValue)) selectedItemIndex = index;
       }
     }
-
     Widget menu = _PopupMenu<T>(route: this, semanticLabel: semanticLabel);
     if (captureInheritedThemes!) {
       menu = InheritedTheme.captureAll(showMenuContext!, menu);
@@ -605,3 +603,4 @@ Future<T?> customShowMenu<T>({
     ),
   );
 }
+//line no -289 animation builder  for menu pop up

@@ -1,5 +1,6 @@
 import 'package:ecommerce_admin/login.dart';
 import 'package:ecommerce_admin/notifiers/productNotifier.dart';
+import 'package:ecommerce_admin/notifiers/reportNotifier.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_)=>ThemeNotifier()),
         ChangeNotifierProvider(create: (_)=>ProductNotifier()),
+        ChangeNotifierProvider(create: (_)=>ReportNotifier()),
       ],
       child: MaterialApp(
         title: 'E-Commerce',

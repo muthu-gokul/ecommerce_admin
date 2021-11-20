@@ -1,5 +1,6 @@
 import 'package:ecommerce_admin/constants.dart';
 import 'package:ecommerce_admin/model/drawerContentModel.dart';
+import 'package:ecommerce_admin/notifiers/reportNotifier.dart';
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
 import 'package:ecommerce_admin/pages/cardClassification/cardClassifyGrid.dart';
 import 'package:ecommerce_admin/pages/customers/customersGrid.dart';
@@ -11,6 +12,7 @@ import 'package:ecommerce_admin/pages/product/productHome.dart';
 import 'package:ecommerce_admin/pages/profile.dart';
 import 'package:ecommerce_admin/pages/purchase/purchaseGrid.dart';
 import 'package:ecommerce_admin/pages/ratingsReviews/ratingsReviewsGrid.dart';
+import 'package:ecommerce_admin/pages/reports/reportGrid.dart';
 import 'package:ecommerce_admin/pages/returnProducts/returnProductGrid.dart';
 import 'package:ecommerce_admin/pages/settings/uomSettings.dart';
 import 'package:ecommerce_admin/pages/shippingCharges/shippingChargesGrid.dart';
@@ -129,6 +131,7 @@ class _HomePageState extends State<HomePage> {
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Admin Subscription Plan", widget: Icon(Icons.add_task_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Subscriber List", widget: Icon(Icons.add_task_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Invoice", widget: Icon(Icons.calendar_view_month_sharp,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Report 1", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
  ];
 
 
@@ -177,6 +180,9 @@ class _HomePageState extends State<HomePage> {
                               setState(() {
                                 menuIndex=i+1;
                               });
+                              if(drawerContentList[i].isReport){
+                                Provider.of<ReportNotifier>(context,listen: false).assignData(drawerContentList[i].title);
+                              }
                             },
                             widget: drawerContentList[i].widget,
                             drawerOpen: drawerOpen,
@@ -412,6 +418,7 @@ class _HomePageState extends State<HomePage> {
                       menuIndex==50?AdminSubsPlanGrid():
                       menuIndex==51?SubscriberListGrid():
                       menuIndex==52?SubscriberInvoice():
+                      menuIndex==53?ReportGrid():
                           Container()
 
                     ],

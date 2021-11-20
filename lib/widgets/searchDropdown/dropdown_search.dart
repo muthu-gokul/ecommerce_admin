@@ -266,6 +266,12 @@ class DropdownSearch<T> extends StatefulWidget {
   /// function to override position calculation
   final PositionCallback? positionCallback;
 
+
+  //Muthu Gokul
+  final VoidCallback ontap;
+  final Widget selectWidget;
+  final Widget dialogWidget;
+
   DropdownSearch({
     Key? key,
     this.onSaved,
@@ -325,6 +331,9 @@ class DropdownSearch<T> extends StatefulWidget {
     this.selectionListViewProps = const SelectionListViewProps(),
     this.focusNode,
     this.positionCallback,
+    required this.ontap,
+    required this.selectWidget,
+    required this.dialogWidget,
   })  : assert(!showSelectedItems || T == String || compareFn != null),
         this.searchFieldProps = searchFieldProps ?? TextFieldProps(),
         this.isMultiSelectionMode = false,
@@ -405,6 +414,9 @@ class DropdownSearch<T> extends StatefulWidget {
     this.selectionListViewProps = const SelectionListViewProps(),
     this.focusNode,
     this.positionCallback,
+    required this.ontap,
+    required this.selectWidget,
+    required this.dialogWidget,
   })  : assert(!showSelectedItems || T == String || compareFn != null),
         this.searchFieldProps = searchFieldProps ?? TextFieldProps(),
         this.onChangedMultiSelection = onChanged,
@@ -454,6 +466,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
     super.didUpdateWidget(oldWidget);
   }
 
+  //ONTAP CONTAINER
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<List<T?>>(
@@ -462,8 +475,17 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
         return IgnorePointer(
           ignoring: !widget.enabled,
           child: InkWell(
-            onTap: () => _selectSearchMode(),
-            child: _formField(),
+            onTap: () {
+                widget.ontap();
+               _selectSearchMode();
+            },
+            child: widget.selectWidget,
+            // child: Container(
+            //   height: 50,
+            //   width: widget.dialogMaxWidth,
+            //   color: Colors.red,
+            // ),
+         //   child: _formField(),
           ),
         );
       },
@@ -482,7 +504,9 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
         margin: EdgeInsets.symmetric(horizontal: 2),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Theme.of(context).primaryColorLight),
+           // color: Theme.of(context).primaryColorLight
+           color: Colors.red
+        ),
         child: Text(
           _selectedItemAsString(item),
           textAlign: TextAlign.center,
@@ -775,12 +799,17 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
         barrierDismissible: widget.popupBarrierDismissible,
         items: [
           CustomPopupMenuItem(
-            child: Container(
+            child: widget.dialogWidget,
+            /*child: Container(
               width: popupButtonObject.size.width,
-              child: _selectDialogInstance(defaultHeight: 224),
-            ),
+              color: Colors.red,
+              height: 224,
+             // child: _selectDialogInstance(defaultHeight: 224),
+
+            ),*/
           ),
-        ]);
+        ]
+    );
   }
 
   Widget _selectDialogInstance({double? defaultHeight}) {
@@ -881,7 +910,11 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
   Future _selectSearchMode() async {
     _handleFocus(true);
     if (widget.mode == Mode.MENU) {
-      await _openMenu();
+      Timer(Duration(milliseconds: 100),
+              () async {
+                await _openMenu();
+      });
+
     } else if (widget.mode == Mode.BOTTOM_SHEET) {
       await _openBottomSheet();
     } else {
@@ -961,3 +994,6 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
   ///close dropdownSearch popup if it's open
   void closeDropDownSearch() => _popupStateKey.currentState?.closePopup();
 }
+
+//ONTAP CONTAINER 457
+///openMenu 803 contains body of dropDown

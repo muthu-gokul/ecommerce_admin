@@ -5,13 +5,14 @@ import '../../constants.dart';
 
 class GridHeaderModel{
   String columnName;
+  String propertyName;
   double width;
   Alignment alignment;
   EdgeInsets edgeInsets;
   TextAlign textAlign;
   bool isActive;
   GridHeaderModel({required this.columnName,this.width=150,this.alignment=Alignment.centerLeft,
-    this.edgeInsets=const EdgeInsets.only(left: 10),this.textAlign= TextAlign.left,this.isActive=true});
+    this.edgeInsets=const EdgeInsets.only(left: 10),this.textAlign= TextAlign.left,this.isActive=true,this.propertyName=""});
 }
 
 class GridHeader extends StatelessWidget {
