@@ -1731,7 +1731,7 @@ class _ProductAddNewState extends State<ProductAddNew> {
 
 
 
-/*class ProductTextField extends StatelessWidget {
+class ProductTextField2 extends StatelessWidget {
   double width;
   String title;
   Color titleColor;
@@ -1747,9 +1747,10 @@ class _ProductAddNewState extends State<ProductAddNew> {
   int? maxlines;
   Widget? suffixIcon;
   bool isEnable;
-  ProductTextField({required this.width,required this.title,required this.validation, this.textEditingController,
+  EdgeInsets paddTextFieldHeader2;
+  ProductTextField2({required this.width,required this.title,required this.validation, this.textEditingController,
   required this.onComplete,this.isTextField=true,this.widget,this.leftPadding=20,this.regExp='[A-Za-z0-9@., ]',this.textInputType=TextInputType.emailAddress,
-  this.textLength=null,this.maxlines=1,this.titleColor=const Color(0xFF505050),this.suffixIcon,this.isEnable=true});
+  this.textLength=null,this.maxlines=1,this.titleColor=const Color(0xFF505050),this.suffixIcon,this.isEnable=true,this.paddTextFieldHeader2=const EdgeInsets.only(left: 0)});
 
   @override
   Widget build(BuildContext context) {
@@ -1788,7 +1789,7 @@ class _ProductAddNewState extends State<ProductAddNew> {
       ),
     );
   }
-}*/
+}
 class ProductTextField extends StatelessWidget {
   double width;
   double titleWidth;

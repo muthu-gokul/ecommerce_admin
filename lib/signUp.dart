@@ -175,9 +175,10 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin{
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    ProductTextField(
-                                      width: textFormWidth-290,
-                                      title: "Salutation ",
+                                    ProductTextField2(
+                                      width: 120,
+                                      title: "Salutation",
+                                      paddTextFieldHeader2: EdgeInsets.only(bottom: 10),
                                       titleColor: Colors.white,
                                       validation: validationList[1],
                                       textEditingController: salutation,
@@ -189,7 +190,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin{
                                             showCategoryDropDown=!showCategoryDropDown;
                                           });
                                         },
-                                        width: textFormWidth,
+                                        width: 120,
                                         hinttext: "Mr",
 
                                         selectedValue: selectedCategory,
@@ -205,8 +206,8 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin{
                                       ),
                                     ),
                                     SizedBox(width: 10,),
-                                    ProductTextField(
-                                        width: textFormWidth-200,
+                                    ProductTextField2(
+                                        width: textFormWidth-300,
                                         title: "First Name",
                                         titleColor: Colors.white,
                                         validation: validationList[1],
@@ -216,12 +217,12 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin{
                                         }
                                     ),
                                     SizedBox(width: 5,),
-                                    ProductTextField(
-                                        width: textFormWidth-200,
+                                    ProductTextField2(
+                                        width: textFormWidth-300,
                                         title: "Last Name",
                                         titleColor: Colors.white,
                                         validation: validationList[1],
-                                        textEditingController: firstName,
+
                                         onComplete: (){
                                           node.unfocus();
                                         }
@@ -230,7 +231,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin{
                                   ],
                                 ),
                                 SizedBox(height: 10,),
-                                ProductTextField(
+                                ProductTextField2(
                                     width: textFormWidth+130,
                                     title: "Company Name",
                                     titleColor: Colors.white,
@@ -241,7 +242,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin{
                                     }
                                 ),
                                 SizedBox(height: 10,),
-                                ProductTextField(
+                                ProductTextField2(
                                     width: textFormWidth+130,
                                     title: "Confirm Password",
                                     titleColor: Colors.white,
@@ -252,7 +253,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin{
                                     }
                                 ),
                                 SizedBox(height: 10,),
-                                ProductTextField(
+                                ProductTextField2(
                                     width: textFormWidth+130,
                                     title: "Email",
                                     titleColor: Colors.white,
@@ -263,7 +264,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin{
                                     }
                                 ),
                                 SizedBox(height: 10,),
-                                ProductTextField(
+                                ProductTextField2(
                                     width: textFormWidth+130,
                                     title: "Mobile Number",
                                     titleColor: Colors.white,
@@ -283,7 +284,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin{
                                   ),
                                 ),
                                 SizedBox(height: 10,),
-                                ProductTextField(
+                                ProductTextField2(
                                     width: textFormWidth+130,
                                     title: "Enter OTP Number",
                                     titleColor: Colors.white,
