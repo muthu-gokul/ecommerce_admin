@@ -61,7 +61,7 @@ class _ReportGridState extends State<ReportGrid> {
                       headerHeight: headerHeight,
                       headerWidth: width,
                       gridHeaderList: rn.gridHeaderList,
-                      showAdd: true,
+                      showAdd: false,
                       addBtnTap: (){
                         Navigator.push(context, pr.PageRoute().fade(AppAddNew()));
                       },

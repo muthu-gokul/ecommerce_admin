@@ -10,6 +10,7 @@ import 'package:ecommerce_admin/pages/invoice/invoiceGrid.dart';
 import 'package:ecommerce_admin/pages/pincode/pincodeGrid.dart';
 import 'package:ecommerce_admin/pages/product/productHome.dart';
 import 'package:ecommerce_admin/pages/profile.dart';
+import 'package:ecommerce_admin/pages/profile/profile2.dart';
 import 'package:ecommerce_admin/pages/purchase/purchaseGrid.dart';
 import 'package:ecommerce_admin/pages/ratingsReviews/ratingsReviewsGrid.dart';
 import 'package:ecommerce_admin/pages/reports/reportGrid.dart';
@@ -132,6 +133,21 @@ class _HomePageState extends State<HomePage> {
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Subscriber List", widget: Icon(Icons.add_task_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Invoice", widget: Icon(Icons.calendar_view_month_sharp,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Report 1", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Purchase Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Orders Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Product Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Variants Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Gift Coupons Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Most Rated Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Contact Detail Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Brand Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Payment Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Customer Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Vendor Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Invoice Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Receivable Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Payable Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Profile 2",rightPadd: 15,imgHeight: 25),
  ];
 
 
@@ -418,7 +434,8 @@ class _HomePageState extends State<HomePage> {
                       menuIndex==50?AdminSubsPlanGrid():
                       menuIndex==51?SubscriberListGrid():
                       menuIndex==52?SubscriberInvoice():
-                      menuIndex==53?ReportGrid():
+                      menuIndex==53 || menuIndex==54 || menuIndex==55  || menuIndex==56 || menuIndex==57  || menuIndex==58  || menuIndex==59 || menuIndex==60 || menuIndex==61 || menuIndex==62 || menuIndex==63 || menuIndex==64 || menuIndex==65 || menuIndex==66 || menuIndex==67?ReportGrid():
+                      menuIndex==68?Profile2():
                           Container()
 
                     ],

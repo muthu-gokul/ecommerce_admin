@@ -148,7 +148,7 @@ class _ProductAddNewState extends State<ProductAddNew> {
   void initState() {
    addHighlights();
    scrollController.addListener(() {
-     print(scrollController.offset);
+    // print(scrollController.offset);
    });
     super.initState();
   }
@@ -317,7 +317,7 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                 SizedBox(height: inBetweenHeight,),
 
 
-                                ProductTextField(
+                                /*ProductTextField(
                                   width: textFormWidth,
                                   title: "Select Category Testing",
                                   validation: validationList[2],
@@ -443,7 +443,7 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                       clearButtonSplashRadius: 20,
                                       selectedItem:selectedCategory,
                                       onBeforeChange: (a, b) {
-                                        /*if (b == null) {
+                                        *//*if (b == null) {
                         AlertDialog alert = AlertDialog(
                           title: Text("Are you sure..."),
                           content: Text("...you want to clear the selection$a $b"),
@@ -468,14 +468,14 @@ class _ProductAddNewState extends State<ProductAddNew> {
                             builder: (BuildContext context) {
                               return alert;
                             });
-                      }*/
+                      }*//*
 
                                         return Future.value(true);
                                       },
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: inBetweenHeight,),
+                                SizedBox(height: inBetweenHeight,),*/
 
 
 

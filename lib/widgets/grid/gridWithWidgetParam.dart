@@ -8,6 +8,7 @@ import 'package:ecommerce_admin/widgets/popOver/src/popover_direction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:scutiwidgets/size.dart';
 class GridWithWidgetParam extends StatefulWidget {
   double headerHeight;
   double headerWidth;
@@ -131,6 +132,9 @@ class _GridWithWidgetParamState extends State<GridWithWidgetParam> {
                                 offset: Offset(0,0)
                             )
                           ]
+                      ),
+                      constraints: BoxConstraints(
+                        maxHeight: SizeConfig.screenHeight!-325
                       ),
                       child:  ListView.builder(
                         itemCount: widget.gridHeaderList.length,
