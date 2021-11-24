@@ -323,7 +323,7 @@ class _DeliveryBoysAddState extends State<DeliveryBoysAdd> with TickerProviderSt
                               alignment: Alignment.centerLeft,
                               child: Text("Bank Information",style: ts18(grey1,fontsize: 20),)
                           ),
-                          Arrow(isOpen: deliveryBankInfoOpen),
+                          Arrow(isOpen: deliveryBankInfoOpen,color: th.primaryColor4,),
 
                         ],
                       ),
@@ -405,7 +405,7 @@ class _DeliveryBoysAddState extends State<DeliveryBoysAdd> with TickerProviderSt
                               alignment: Alignment.centerLeft,
                               child: Text("Delivery Configuration",style: ts18(grey1,fontsize: 20),)
                           ),
-                          Arrow(isOpen: deliveryCongigInfoOpen),
+                          Arrow(isOpen: deliveryCongigInfoOpen,color: th.primaryColor4,),
                         ],
                       ),
                     ),
@@ -510,7 +510,7 @@ class _DeliveryBoysAddState extends State<DeliveryBoysAdd> with TickerProviderSt
                               alignment: Alignment.centerLeft,
                               child: Text("Notification Configuration",style: ts18(grey1,fontsize: 20),)
                           ),
-                          Arrow(isOpen: deliveryNotiInfoOpen),
+                          Arrow(isOpen: deliveryNotiInfoOpen,color:th.primaryColor4),
                         ],
                       ),
                     ),

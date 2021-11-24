@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 class Arrow extends StatefulWidget {
   bool isOpen;
-  Arrow({required this.isOpen});
+  Color color;
+  Arrow({required this.isOpen,required this.color});
   @override
   _ArrowState createState() => _ArrowState();
 }
@@ -59,7 +60,7 @@ class _ArrowState extends State<Arrow> with TickerProviderStateMixin{
               child: Icon(
                 Icons.keyboard_arrow_down_outlined,
                 size: 25.0,
-                color: Provider.of<ThemeNotifier>(context,listen: false).primaryColor4,
+                color: widget.color,
               ),
             ),
       ),

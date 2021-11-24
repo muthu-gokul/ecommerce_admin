@@ -673,7 +673,7 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                         ),
                                         Padding(
                                           padding:  EdgeInsets.only(right:20.0),
-                                          child: Arrow(isOpen: showPriceDetails),
+                                          child: Arrow(isOpen: showPriceDetails,color: th.primaryColor4,),
                                         ),
                                       ],
                                     ),
@@ -989,7 +989,7 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                         ),
                                         Padding(
                                           padding:  EdgeInsets.only(right:20.0),
-                                          child: Arrow(isOpen: showProductDescription),
+                                          child: Arrow(isOpen: showProductDescription,color: th.primaryColor4),
                                         ),
                                       ],
                                     ),
@@ -1378,7 +1378,7 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                         ),
                                         Padding(
                                           padding:  EdgeInsets.only(right:20.0),
-                                          child: Arrow(isOpen: showAttributeTab),
+                                          child: Arrow(isOpen: showAttributeTab,color: th.primaryColor4),
                                         ),
                                       ],
                                     ),

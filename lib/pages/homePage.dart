@@ -20,11 +20,14 @@ import 'package:ecommerce_admin/pages/shippingCharges/shippingChargesGrid.dart';
 import 'package:ecommerce_admin/pages/subscriptionNEWAPP/adminSubscriptionPlan/adminSubsPlanGrid.dart';
 import 'package:ecommerce_admin/pages/users/usersGrid.dart';
 import 'package:ecommerce_admin/pages/wishList/wishListGird.dart';
+import 'package:ecommerce_admin/widgets/arrowAnimation.dart';
+import 'package:ecommerce_admin/widgets/circle.dart';
 import 'package:ecommerce_admin/widgets/popOver/src/popover.dart';
 import 'package:ecommerce_admin/widgets/popOver/src/popover_direction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:scutiwidgets/expandedSection.dart';
 import 'package:scutiwidgets/fittedText.dart';
 import 'package:scutiwidgets/size.dart';
 
@@ -78,76 +81,140 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
  int menuIndex=2;
+ String title="Product Details";
 
  List<DrawerContentModel> drawerContentList=[
-   DrawerContentModel(img: "assets/homepage/dashboard.svg", title: "Dashboard",imgHeight: 50,),
-   DrawerContentModel(img: "assets/homepage/salesReport.svg", title: "Product",imgHeight: 50,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Profile",widget: Icon(Icons.person_pin_circle_outlined,color: Colors.white,size: 28,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Brand",widget: Icon(Icons.branding_watermark,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Users",rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Customers",widget: Icon(Icons.person_pin_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Orders List",widget: Icon(Icons.star_border_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Product Showcase",widget: Icon(Icons.production_quantity_limits,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Payment Settings",widget: Icon(Icons.payments,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Front Cover",widget: Icon(Icons.local_convenience_store_rounded,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Feature Brand",widget: Icon(Icons.branding_watermark_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Under Amount",rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Top Offers",widget: Icon(Icons.local_offer_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Email Settings",widget: Icon(Icons.mail_outline,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Footer Page Settings",widget: Icon(Icons.square_foot,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/uom.svg", title: "UOM Settings",rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/purchase.svg", title: "Purchase",rightPadd: 5,imgHeight: 45,),
-   DrawerContentModel(img: "assets/homepage/goodsReceived.svg", title: "Goods Received",rightPadd: 5,imgHeight: 45,),
-   DrawerContentModel(img: "assets/icons/return.svg", title: "Return Products",rightPadd: 15,imgHeight: 32,),
-   DrawerContentModel(img: "assets/icons/return.svg", title: "Shipping Charges",  widget: Icon(Icons.attach_money,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/icons/return.svg", title: "Vendor List",  widget: Icon(Icons.person_pin,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/icons/return.svg", title: "New Vendor Request",  widget: Icon(Icons.person_add,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/icons/return.svg", title: "Company Settings",  widget: Icon(Icons.settings,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/icons/return.svg", title: "Pincode",  widget: Icon(Icons.pin_drop_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/icons/return.svg", title: "Card Classification",  widget: Icon(Icons.credit_card_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/icons/return.svg", title: "Gift Coupons",  widget: Icon(Icons.card_giftcard_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/icons/return.svg", title: "Bulk Coupon Generate",  widget: Icon(Icons.casino_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/icons/return.svg", title: "Wish List",  widget: Icon(Icons.favorite_border_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/icons/return.svg", title: "Staffs",  widget: Icon(Icons.perm_identity_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/icons/return.svg", title: "Refunds",  widget: Icon(Icons.assignment_return_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/icons/return.svg", title: "Contact Details",  widget: Icon(Icons.contact_page_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/icons/return.svg", title: "Product Stock",  widget: Icon(Icons.pest_control_rodent_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/icons/return.svg", title: "Attributes",  widget: Icon(Icons.attractions_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/icons/return.svg", title: "Add Color",  widget: Icon(Icons.color_lens_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/icons/return.svg", title: "Add Size",  widget: Icon(Icons.format_size_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/icons/return.svg", title: "Delivery Boys",  widget: Icon(Icons.delivery_dining_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/icons/return.svg", title: "Delivery Charge",  widget: Icon(Icons.delivery_dining_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/icons/return.svg", title: "Installation Charge",  widget: Icon(Icons.attach_money,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/icons/return.svg", title: "Ratings & Reviews",  widget: Icon(Icons.rate_review,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Manage Users",rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "User Access",rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Taxes", widget: Icon(Icons.local_grocery_store_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "App", widget: Icon(Icons.app_blocking_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Invoice", widget: Icon(Icons.attach_money,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Payment", widget: Icon(Icons.attach_money,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Contact Message", widget: Icon(Icons.message_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "News Letter", widget: Icon(Icons.legend_toggle_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Bulk SMS Message", widget: Icon(Icons.sms_failed_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Settings", widget: Icon(Icons.settings_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Admin Subscription Plan", widget: Icon(Icons.add_task_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Subscriber List", widget: Icon(Icons.add_task_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Invoice", widget: Icon(Icons.calendar_view_month_sharp,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Report 1", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Purchase Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Orders Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Product Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Variants Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Gift Coupons Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Most Rated Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Contact Detail Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Brand Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Payment Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Customer Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Vendor Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Invoice Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Receivable Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Payable Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true),
-   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Profile 2",rightPadd: 15,imgHeight: 25),
+   DrawerContentModel(img: "assets/homepage/dashboard.svg", title: "Dashboard",imgHeight: 50,index: 1),
+   DrawerContentModel(img: "assets/homepage/salesReport.svg", title: "Products",imgHeight: 50,index: -1,
+      list: [
+        DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Brand",widget: Icon(Icons.branding_watermark,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 4),
+        DrawerContentModel(img: "assets/homepage/salesReport.svg", title: "Product Details",imgHeight: 50,index: 2),
+        DrawerContentModel(img: "assets/icons/return.svg", title: "Ratings & Reviews",  widget: Icon(Icons.rate_review,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 39),
+        DrawerContentModel(img: "assets/icons/return.svg", title: "Wish List",  widget: Icon(Icons.favorite_border_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 28),
+      ]
+   ),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Orders List",widget: Icon(Icons.star_border_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 7),
+   DrawerContentModel(img: "assets/homepage/salesReport.svg", title: "Inventory ",imgHeight: 50,index: -1,
+      list: [
+        DrawerContentModel(img: "assets/homepage/purchase.svg", title: "Purchase",rightPadd: 5,imgHeight: 45,index: 17),
+        DrawerContentModel(img: "assets/homepage/goodsReceived.svg", title: "Goods Received",rightPadd: 5,imgHeight: 45,index: 18),
+        DrawerContentModel(img: "assets/icons/return.svg", title: "Product Stock",  widget: Icon(Icons.pest_control_rodent_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 32),
+        DrawerContentModel(img: "assets/icons/return.svg", title: "Return Products",rightPadd: 15,imgHeight: 32,index: 19),
+      ]
+   ),
+   DrawerContentModel(img: "assets/homepage/salesReport.svg", title: "Accounts & Finance ",imgHeight: 50,index: -1,
+       list: [
+         DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Payment Details", widget: Icon(Icons.attach_money,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 45),
+         DrawerContentModel(img: "assets/icons/return.svg", title: "Shipping Charges",  widget: Icon(Icons.attach_money,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 20),
+         DrawerContentModel(img: "assets/icons/return.svg", title: "Card Classification",  widget: Icon(Icons.credit_card_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 25),
+         DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Taxes", widget: Icon(Icons.local_grocery_store_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 42),
+         DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Invoice", widget: Icon(Icons.attach_money,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 44),
+         DrawerContentModel(img: "assets/icons/return.svg", title: "Refund",  widget: Icon(Icons.assignment_return_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 30),
+       ]
+   ),
+   DrawerContentModel(img: "assets/icons/return.svg", title: "Settings",  widget: Icon(Icons.settings,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 49,
+       list: [
+/*         DrawerContentModel(img: "assets/icons/return.svg", title: "Company Settings",  widget: Icon(Icons.settings,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+         DrawerContentModel(img: "assets/icons/return.svg", title: "New Vendor Request",  widget: Icon(Icons.person_add,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+         DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Customer Master",widget: Icon(Icons.person_pin_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+         DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "User Master",rightPadd: 15,imgHeight: 25,),
+         DrawerContentModel(img: "assets/icons/return.svg", title: "Staff Master",  widget: Icon(Icons.perm_identity_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+         DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Email Settings",widget: Icon(Icons.mail_outline,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+         DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Payment Settings",widget: Icon(Icons.payments,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+         DrawerContentModel(img: "assets/homepage/uom.svg", title: "Unit of Measure",rightPadd: 15,imgHeight: 25,),
+         DrawerContentModel(img: "assets/icons/return.svg", title: "Pincode",  widget: Icon(Icons.pin_drop_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+         DrawerContentModel(img: "assets/icons/return.svg", title: "Attributes",  widget: Icon(Icons.attractions_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+         DrawerContentModel(img: "assets/icons/return.svg", title: "Add Color",  widget: Icon(Icons.color_lens_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+         DrawerContentModel(img: "assets/icons/return.svg", title: "Add Size",  widget: Icon(Icons.format_size_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+         DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "App", widget: Icon(Icons.app_blocking_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),*/
+       ]
+   ),
+
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Reports", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true,index: -1,
+      list: [
+        DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Purchase Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true,index: 53),
+        DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Orders Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true,index: 54),
+        DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Product Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true,index: 55),
+        DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Variants Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true,index: 56),
+        DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Gift Coupons Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true,index: 57),
+        DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Most Rated Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true,index: 58),
+        DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Contact Detail Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true,index: 59),
+        DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Brand Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true,index: 60),
+        DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Payment Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true,index: 61),
+        DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Customer Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true,index: 62),
+        DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Vendor Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true,index: 63),
+        DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Invoice Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true,index: 64),
+        DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Receivable Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true,index: 65),
+        DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Payable Report", widget: Icon(Icons.notes,color: Colors.white,),rightPadd: 15,imgHeight: 25,isReport: true,index: 66),
+      ]
+   ),
+
+   DrawerContentModel(img: "assets/homepage/dashboard.svg", title: "Website ",imgHeight: 50,index: -1,
+       list: [
+         DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Front Cover Slider",widget: Icon(Icons.local_convenience_store_rounded,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 10),
+         DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Product Showcase",widget: Icon(Icons.production_quantity_limits,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 8),
+         DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Feature Brand",widget: Icon(Icons.branding_watermark_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 11),
+         DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Under Amount",rightPadd: 15,imgHeight: 25,index: 12),
+         DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Top Offers",widget: Icon(Icons.local_offer_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 13),
+         DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Footer Page Settings",widget: Icon(Icons.square_foot,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 15),
+         DrawerContentModel(img: "assets/icons/return.svg", title: "Contact Details", widget: Icon(Icons.contact_page_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 31),
+
+         ]
+   ),
+
+   DrawerContentModel(img: "assets/homepage/dashboard.svg", title: "Delivery",imgHeight: 50,index: -1,
+      list: [
+        DrawerContentModel(img: "assets/icons/return.svg", title: "Delivery Boys",  widget: Icon(Icons.delivery_dining_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 36),
+        DrawerContentModel(img: "assets/icons/return.svg", title: "Delivery Charge",  widget: Icon(Icons.delivery_dining_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 37),
+        DrawerContentModel(img: "assets/icons/return.svg", title: "Installation Charge",  widget: Icon(Icons.attach_money,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 38),
+      ]
+   ),
+
+
+   DrawerContentModel(img: "assets/homepage/dashboard.svg", title: "Marketing ",imgHeight: 50,index: -1,
+       list: [
+         DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "News Letter", widget: Icon(Icons.legend_toggle_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 47),
+         DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Contact Message", widget: Icon(Icons.message_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 46),
+         DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Bulk SMS Message", widget: Icon(Icons.sms_failed_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 48),
+         DrawerContentModel(img: "assets/icons/return.svg", title: "Gift Coupons",  widget: Icon(Icons.card_giftcard_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 26),
+         DrawerContentModel(img: "assets/icons/return.svg", title: "Bulk Coupon Generate",  widget: Icon(Icons.casino_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 27),
+        ]
+   ),
+ //DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Profile",widget: Icon(Icons.person_pin_circle_outlined,color: Colors.white,size: 28,),rightPadd: 15,imgHeight: 25,),
+
+
+
+
+
+
+
+
+   DrawerContentModel(img: "assets/icons/return.svg", title: "Vendor List",  widget: Icon(Icons.person_pin,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 21),
+
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Manage Users",rightPadd: 15,imgHeight: 25,index: 40),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "User Access",rightPadd: 15,imgHeight: 25,index: 41),
+
+
+
+
+
+
+
+   //DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Settings", widget: Icon(Icons.settings_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Admin Subscription Plan", widget: Icon(Icons.add_task_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 50),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Subscriber List", widget: Icon(Icons.add_task_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 51),
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Invoice", widget: Icon(Icons.calendar_view_month_sharp,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 52),
+
+
+
+
+
+
+
+
+
+
+   DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Profile 2",rightPadd: 15,imgHeight: 25,index: 68),
  ];
 
 
@@ -187,23 +254,72 @@ class _HomePageState extends State<HomePage> {
                         ),
                         SizedBox(height: 20,),
                         for(int i=0;i<drawerContentList.length;i++)
-                        DrawerContent(
-                            img:drawerContentList[i].img,
-                            isSelect: menuIndex==(i+1)?true:false,
-                            imgHeight: drawerContentList[i].imgHeight,
-                            rightPadd: drawerContentList[i].rightPadd,
-                            ontap: (){
-                              setState(() {
-                                menuIndex=i+1;
-                              });
-                              if(drawerContentList[i].isReport){
-                                Provider.of<ReportNotifier>(context,listen: false).assignData(drawerContentList[i].title);
-                              }
-                            },
-                            widget: drawerContentList[i].widget,
-                            drawerOpen: drawerOpen,
-                            title: drawerContentList[i].title,
-                        ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              DrawerContent(
+                                img:drawerContentList[i].img,
+                                isSelect: menuIndex==drawerContentList[i].index,
+                                imgHeight: drawerContentList[i].imgHeight,
+                                rightPadd:drawerContentList[i].list.isEmpty? drawerContentList[i].rightPadd:15.0,
+                                ontap: (){
+                                  if(drawerContentList[i].list.isEmpty){
+                                    setState(() {
+                                      menuIndex=drawerContentList[i].index;
+                                      title=drawerContentList[i].title;
+                                    });
+                                  }
+                                  else{
+                                    setState(() {
+                                      drawerContentList[i].isExpand=!drawerContentList[i].isExpand;
+                                    });
+                                  }
+                                },
+                                widget:drawerContentList[i].list.isEmpty?drawerContentList[i].widget:
+                                Arrow(isOpen: drawerContentList[i].isExpand,color: Colors.white,),
+                                drawerOpen: drawerOpen,
+                                title: drawerContentList[i].title,
+                              ),
+                              CustomExpansionTile(
+                                  expand:  drawerContentList[i].isExpand,
+                                  child: Container(
+                                    height: drawerContentList[i].list.length*50,
+                                   // width: drawerOpen?250:100,
+                                    width: drawerOpen?235:80,
+                                    alignment: Alignment.centerLeft,
+                                    //padding: EdgeInsets.only(left: 10),
+                                    child: ListView.builder(
+                                    itemCount: drawerContentList[i].list.length,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemBuilder: (ctx,j){
+                                      return DrawerContent(
+                                        img:drawerContentList[i].list[j].img,
+                                       // isSelect: menuIndex==(j+1)?true:false,
+                                        isSelect: menuIndex==drawerContentList[i].list[j].index,
+                                        imgHeight: drawerContentList[i].list[j].imgHeight,
+                                        rightPadd: drawerContentList[i].list[j].rightPadd,
+                                        leftPadd: 10,
+                                        ontap: (){
+                                          setState(() {
+                                            menuIndex=drawerContentList[i].list[j].index;
+                                            title=drawerContentList[i].list[j].title;
+                                          });
+                                          if(drawerContentList[i].list[j].isReport){
+                                            Provider.of<ReportNotifier>(context,listen: false).assignData(drawerContentList[i].list[j].title);
+                                          }
+                                        },
+                                        widget: drawerContentList[i].list[j].widget,
+                                        drawerOpen: drawerOpen,
+                                        title: drawerContentList[i].list[j].title,
+                                      );
+                                    },
+                                  )
+                                  ),
+
+                              ),
+                            ],
+                          ),
+
 
                         SizedBox(height: 50,),
                       ],
@@ -236,7 +352,7 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           children: [
                             SizedBox(width: 20,),
-                            Text("${drawerContentList[menuIndex-1].title}",
+                            Text("${title}",
                               style: TextStyle(fontSize: 18.5,color: grey1,fontFamily: 'RR',letterSpacing: 0.2),
                             ),
                             Spacer(),
@@ -488,12 +604,13 @@ class DrawerContent extends StatelessWidget {
   VoidCallback ontap;
   double imgHeight;
   double rightPadd;
+  double leftPadd;
   Color imgColor;
   Widget? widget;
   bool drawerOpen;
   String title;
   DrawerContent({required this.img,required this.isSelect,required this.ontap,required this.imgHeight,this.rightPadd=5,
-  this.imgColor=Colors.white,this.widget,required this.drawerOpen,required this.title});
+  this.imgColor=Colors.white,this.widget,required this.drawerOpen,required this.title,this.leftPadd=0.0});
 
   @override
   Widget build(BuildContext context) {
@@ -512,20 +629,25 @@ class DrawerContent extends StatelessWidget {
             )
         ),
         alignment: Alignment.centerRight,
-        padding: EdgeInsets.only(right: rightPadd),
+        padding: EdgeInsets.only(right: rightPadd,),
         child: Row(
           children: [
+            leftPadd==0?Container():Padding(
+              padding: EdgeInsets.only(left: 13),
+              child: Circle(hei: 8, color: Provider.of<ThemeNotifier>(context,listen:false).primaryColor1),
+            ),
+            SizedBox(width:leftPadd==0? 10:8,),
             AnimatedOpacity(
               duration: animeDuration,
               opacity: drawerOpen?1:0,
               child: AnimatedContainer(
                 duration: animeDuration,
                 curve: animeCurve,
-                width: drawerOpen?169:0,
+                width: drawerOpen?155:0,
                 child: FittedText(
                   height: 19,
-                  width: 165,
-                  text: "   $title",
+                  width: 155,
+                  text: "$title",
                   alignment: Alignment.centerLeft,
                   textStyle: ts18(Colors.white,),
                 ),
@@ -534,7 +656,7 @@ class DrawerContent extends StatelessWidget {
            // SizedBox(width: drawerOpen?0:15,),
             Spacer(),
             Container(
-            //  width: 50,
+              //width: 50,
               alignment: Alignment.center,
 
               child: widget==null?SvgPicture.asset(img,color: imgColor,height: imgHeight,):widget!,
