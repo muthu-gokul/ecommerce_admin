@@ -117,7 +117,7 @@ class _SettingsState extends State<Settings> with TickerProviderStateMixin{
                         child: AnimatedContainer(
                           duration: Duration(milliseconds: 300),
                           curve: Curves.easeIn,
-                          width: 250,
+                          width: 200,
                           height: 170,
                           decoration: BoxDecoration(
                             color:i==selectedIndex?th.primaryColor2: th.primaryColor2.withOpacity(0.05),
