@@ -317,7 +317,7 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                 SizedBox(height: inBetweenHeight,),
 
 
-                                /*ProductTextField(
+                                ProductTextField(
                                   width: textFormWidth,
                                   title: "Select Category Testing",
                                   validation: validationList[2],
@@ -443,39 +443,12 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                       clearButtonSplashRadius: 20,
                                       selectedItem:selectedCategory,
                                       onBeforeChange: (a, b) {
-                                        *//*if (b == null) {
-                        AlertDialog alert = AlertDialog(
-                          title: Text("Are you sure..."),
-                          content: Text("...you want to clear the selection$a $b"),
-                          actions: [
-                            TextButton(
-                              child: Text("OK"),
-                              onPressed: () {
-                                Navigator.of(context).pop(true);
-                              },
-                            ),
-                            TextButton(
-                              child: Text("NOT OK"),
-                              onPressed: () {
-                                Navigator.of(context).pop(false);
-                              },
-                            ),
-                          ],
-                        );
-
-                        return showDialog<bool>(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return alert;
-                            });
-                      }*//*
-
                                         return Future.value(true);
                                       },
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: inBetweenHeight,),*/
+                                SizedBox(height: inBetweenHeight,),
 
 
 

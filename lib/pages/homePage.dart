@@ -285,7 +285,7 @@ class _HomePageState extends State<HomePage> {
                                   child: Container(
                                     height: drawerContentList[i].list.length*50,
                                    // width: drawerOpen?250:100,
-                                    width: drawerOpen?235:80,
+                                    width: drawerOpen?240:80,
                                     alignment: Alignment.centerLeft,
                                     //padding: EdgeInsets.only(left: 10),
                                     child: ListView.builder(
@@ -620,7 +620,7 @@ class DrawerContent extends StatelessWidget {
         duration: animeDuration,
         curve: animeCurve,
         height: 50,
-        width: drawerOpen?235:80,
+        width: drawerOpen?240:80,
         decoration: BoxDecoration(
             color:isSelect? Provider.of<ThemeNotifier>(context,listen:false).primaryColor4:Colors.transparent,
             borderRadius: BorderRadius.only(
