@@ -47,7 +47,8 @@ class _VendorRequestGridState extends State<VendorRequestGrid> {
 
   @override
   Widget build(BuildContext context) {
-    width=SizeConfig.screenWidth!-100;
+  //  width=SizeConfig.screenWidth!-100;
+    width=SizeConfig.screenWidth!;
     return Consumer<ThemeNotifier>(
       builder: (context,th,child)=>Consumer<ProductNotifier>(
         builder: (context,pn,child)=>  Container(
