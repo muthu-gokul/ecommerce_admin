@@ -27,6 +27,7 @@ import 'package:ecommerce_admin/model/productModel.dart';
 import 'package:ecommerce_admin/model/productShowCaseModel/productShowcaseModel.dart';
 import 'package:ecommerce_admin/model/productStockModel.dart';
 import 'package:ecommerce_admin/model/productVariationModel.dart';
+import 'package:ecommerce_admin/model/profile/planDetailsModel.dart';
 import 'package:ecommerce_admin/model/purchaseModel/materialCategoryModel.dart';
 import 'package:ecommerce_admin/model/purchaseModel/purchaseGridModel.dart';
 import 'package:ecommerce_admin/model/purchaseModel/vendorHistoryModel.dart';
@@ -765,6 +766,18 @@ List<RatingsModel> ratings=[
 
   ];
 
+
+
+  //PlanDetails
+  List<PlanDetailModel> planDetail=[
+    PlanDetailModel(date: "06-11-2021 ", time: "09:30AM",amount: "2000 ",plan: "Standard",transcId: "912232342999",),
+    PlanDetailModel(date: "06-11-2021 ", time: "09:30AM",amount: "2000 ",plan: "Standard",transcId: "912232342999",),
+    PlanDetailModel(date: "06-11-2021 ", time: "09:30AM",amount: "2000 ",plan: "Standard",transcId: "912232342999",),
+    PlanDetailModel(date: "06-11-2021 ", time: "09:30AM",amount: "2000 ",plan: "Standard",transcId: "912232342999",),
+    PlanDetailModel(date: "06-11-2021 ", time: "09:30AM",amount: "2000 ",plan: "Standard",transcId: "912232342999",),
+    PlanDetailModel(date: "06-11-2021 ", time: "09:30AM",amount: "2000 ",plan: "Standard",transcId: "912232342999",),
+    PlanDetailModel(date: "06-11-2021 ", time: "09:30AM",amount: "2000 ",plan: "Standard",transcId: "912232342999",),
+  ];
 
 
 
