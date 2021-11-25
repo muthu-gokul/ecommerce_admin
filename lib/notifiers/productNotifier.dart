@@ -17,6 +17,7 @@ import 'package:ecommerce_admin/model/frontCoverModel.dart';
 import 'package:ecommerce_admin/model/giftCouponsModel.dart';
 import 'package:ecommerce_admin/model/goodsReceivedModel/goodsReceivedAddModel.dart';
 import 'package:ecommerce_admin/model/goodsReceivedModel/goodsReceivedModel.dart';
+import 'package:ecommerce_admin/model/holidayModel.dart';
 import 'package:ecommerce_admin/model/installationModel.dart';
 import 'package:ecommerce_admin/model/invoiceModel.dart';
 import 'package:ecommerce_admin/model/ordersList/ordersListModel.dart';
@@ -779,6 +780,10 @@ List<RatingsModel> ratings=[
     PlanDetailModel(date: "06-11-2021 ", time: "09:30AM",amount: "2000 ",plan: "Standard",transcId: "912232342999",),
   ];
 
+  //Holidays
+  List<HolidayModel> holidays=[
+    HolidayModel(name: "Pongal", fromDate: "14-01-2021", toDate: "17-01-2021"),
+  ];
 
 
 

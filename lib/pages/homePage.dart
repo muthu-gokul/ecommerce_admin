@@ -6,6 +6,7 @@ import 'package:ecommerce_admin/pages/cardClassification/cardClassifyGrid.dart';
 import 'package:ecommerce_admin/pages/customers/customersGrid.dart';
 import 'package:ecommerce_admin/pages/deliveryCharge/deliveryChargeGrid.dart';
 import 'package:ecommerce_admin/pages/goodsReceived/goodsReceivedGrid.dart';
+import 'package:ecommerce_admin/pages/holiday/holidayGrid.dart';
 import 'package:ecommerce_admin/pages/invoice/invoiceGrid.dart';
 import 'package:ecommerce_admin/pages/pincode/pincodeGrid.dart';
 import 'package:ecommerce_admin/pages/product/productHome.dart';
@@ -153,10 +154,9 @@ class _HomePageState extends State<HomePage> {
         DrawerContentModel(img: "assets/icons/return.svg", title: "Delivery Boys",  widget: Icon(Icons.delivery_dining_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 36),
         DrawerContentModel(img: "assets/icons/return.svg", title: "Delivery Charge",  widget: Icon(Icons.delivery_dining_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 37),
         DrawerContentModel(img: "assets/icons/return.svg", title: "Installation Charge",  widget: Icon(Icons.attach_money,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 38),
+        DrawerContentModel(img: "assets/icons/return.svg", title: "Holiday",  widget: Icon(Icons.attach_money,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 69),
       ]
    ),
-
-
    DrawerContentModel(img: "assets/homepage/dashboard.svg", title: "Marketing ",imgHeight: 50,index: -1,
        list: [
          DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "News Letter", widget: Icon(Icons.legend_toggle_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 47),
@@ -169,12 +169,6 @@ class _HomePageState extends State<HomePage> {
  //DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Profile",widget: Icon(Icons.person_pin_circle_outlined,color: Colors.white,size: 28,),rightPadd: 15,imgHeight: 25,),
 
 
-
-
-
-
-
-
    DrawerContentModel(img: "assets/icons/return.svg", title: "Vendor List",  widget: Icon(Icons.person_pin,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 21),
 
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Manage Users",rightPadd: 15,imgHeight: 25,index: 40),
@@ -182,19 +176,10 @@ class _HomePageState extends State<HomePage> {
 
 
 
-
-
-
-
    //DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Settings", widget: Icon(Icons.settings_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,),
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Admin Subscription Plan", widget: Icon(Icons.add_task_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 50),
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Subscriber List", widget: Icon(Icons.add_task_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 51),
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Invoice", widget: Icon(Icons.calendar_view_month_sharp,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 52),
-
-
-
-
-
 
 
 
@@ -538,6 +523,7 @@ class _HomePageState extends State<HomePage> {
                       menuIndex==52?SubscriberInvoice():
                       menuIndex==53 || menuIndex==54 || menuIndex==55  || menuIndex==56 || menuIndex==57  || menuIndex==58  || menuIndex==59 || menuIndex==60 || menuIndex==61 || menuIndex==62 || menuIndex==63 || menuIndex==64 || menuIndex==65 || menuIndex==66 || menuIndex==67?AllReports():
                       menuIndex==68?Profile2():
+                      menuIndex==69?HolidayGrid():
                           Container()
 
                     ],

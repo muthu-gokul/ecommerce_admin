@@ -75,8 +75,8 @@ ts15(Color color,{String fontfamily='RR'}){
 ts16(Color color,{String fontfamily='RR'}){
   return TextStyle(fontSize: 16,fontFamily: fontfamily,color: color,letterSpacing: 0.1);
 }
-ts18(Color color,{String fontfamily='RR',double fontsize=18}){
-  return TextStyle(fontSize: fontsize,fontFamily: fontfamily,color: color,letterSpacing: 0.1,);
+ts18(Color color,{String fontfamily='RR',double fontsize=18,double ls=0.1}){
+  return TextStyle(fontSize: fontsize,fontFamily: fontfamily,color: color,letterSpacing: ls,);
 }
 
 
