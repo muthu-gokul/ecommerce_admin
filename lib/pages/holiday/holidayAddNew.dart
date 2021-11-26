@@ -14,6 +14,7 @@ import 'package:ecommerce_admin/widgets/customAppBar.dart';
 import 'package:ecommerce_admin/widgets/customOverLayPopUp.dart';
 import 'package:ecommerce_admin/widgets/customPopUp.dart';
 import 'package:ecommerce_admin/widgets/customTextField.dart';
+import 'package:ecommerce_admin/widgets/deletePopUp.dart';
 import 'package:ecommerce_admin/widgets/multiTags.dart';
 import 'package:ecommerce_admin/widgets/pickImage.dart';
 import 'package:ecommerce_admin/widgets/singleDatePickerWidget.dart';
@@ -36,6 +37,8 @@ class _HolidayAddNewState extends State<HolidayAddNew> {
 
   XFile? image=null;
   List<bool> validationList= List<bool>.generate(3, (i) => false);
+
+  bool showDelete=false;
 
 
 
@@ -110,9 +113,9 @@ class _HolidayAddNewState extends State<HolidayAddNew> {
                         width: textFormWidth+(40),
                         alignment: Alignment.center,
                         child: SaveBtn(ontap: (){
-
-
-
+                          setState(() {
+                            showDelete=!showDelete;
+                          });
                         }),
                       ),
 
@@ -120,111 +123,19 @@ class _HolidayAddNewState extends State<HolidayAddNew> {
                   ),
                 ),
               ),
-              Container(
-                height: SizeConfig.screenHeight,
-                width: SizeConfig.screenWidth,
-                color:Colors.black45,
-                alignment: Alignment.center,
-                child: Container(
-                  height: 290,
-                  width: 380,
-                  decoration: BoxDecoration(
-                  //    color: Colors.red
-                  ),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        bottom:0,
-                        child: Container(
-                          height: 250,
-                          width: 380,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20)
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Text("You are about to delete a product",
-                                style: ts18(Color(0xff222222),fontfamily: 'RM'),
-                              ),
-                              SizedBox(height: 20,),
-                              Container(
-                                width: 300,
-                                child: Text("This will delete your product from catalog",
-                                  style: TextStyle(color:Color(0xff9B9B9B),fontFamily: 'RR',fontSize: 16,),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              SizedBox(height: 5,),
-                              Text(" Are you sure ?",
-                                  style: TextStyle(color:Color(0xff9B9B9B),fontFamily: 'RM',fontSize: 16,)
-                              ),
-                              SizedBox(height: 30,),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  GestureDetector(
-                                    child: Container(
-                                      width: 100,
-                                      height: 37,
-                                      decoration: BoxDecoration(
-
-                                      ),
-                                      alignment: Alignment.center,
-                                      child: Text("Cancel",style: ts18(Color(0xff222222),fontfamily: 'RM',fontsize: 15.7,ls: 0.5),),
-                                    ),
-                                  ),
-                                  GestureDetector(
-                                    child: Container(
-                                      width: 100,
-                                      height: 37,
-                                      decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius: BorderRadius.circular(8)
-                                      ),
-                                      alignment: Alignment.center,
-                                      child: Text("Delete",style: ts16(Colors.white,fontfamily: 'RM'),),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 30,),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Align(
-                          alignment: Alignment.topCenter,
-                          child: Circle(
-                            hei:80,
-                              color: Color(0xff8c8c8c),
-
-                           //   color: Color(0xffffffff),
-                              widget: Center(
-                                  child: Circle(
-                                      hei: 60,
-                                      color: Colors.red,
-                                      bs: [
-                                        BoxShadow(
-                                          color:  Color(0xff8c8c8c).withOpacity(1),
-                                          blurRadius: 15,
-                                          spreadRadius: 2,
-                                          offset: Offset(0,10)
-                                        )
-                                      ],
-                                    widget: Center(child: SvgPicture.asset("assets/icons/delete.svg",color: Colors.white,height: 30,)),
-                                  )
-                              )
-                          )
-                      ),
-
-
-                    ],
-                  ),
-                ),
-              ),
-
+              DeletePopUp(
+                  showDelete: showDelete,
+                  deleteCb: (){
+                    setState(() {
+                      showDelete=false;
+                    });
+                  },
+                  cancelCb: (){
+                    setState(() {
+                      showDelete=false;
+                    });
+                  }
+             ),
             ],
           ),
         ),

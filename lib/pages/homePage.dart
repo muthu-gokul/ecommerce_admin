@@ -2,6 +2,7 @@ import 'package:ecommerce_admin/constants.dart';
 import 'package:ecommerce_admin/model/drawerContentModel.dart';
 import 'package:ecommerce_admin/notifiers/reportNotifier.dart';
 import 'package:ecommerce_admin/notifiers/themeNotifier.dart';
+import 'package:ecommerce_admin/pages/about/about.dart';
 import 'package:ecommerce_admin/pages/cardClassification/cardClassifyGrid.dart';
 import 'package:ecommerce_admin/pages/customers/customersGrid.dart';
 import 'package:ecommerce_admin/pages/deliveryCharge/deliveryChargeGrid.dart';
@@ -37,6 +38,8 @@ import 'addColor/colorGrid.dart';
 import 'addSize/sizeGrid.dart';
 import 'appMaster/appGrid.dart';
 import 'attributes/attributeGrid.dart';
+import 'blog/blogGrid.dart';
+import 'branch/branchGrid.dart';
 import 'brand/brandGrid.dart';
 import 'bulkCouponGenerat/bulkCouponGenerate.dart';
 import 'contactDetails/contactDetails.dart';
@@ -83,11 +86,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
  int menuIndex=2;
+ int expandIndex=-1;
  String title="Product Details";
 
  List<DrawerContentModel> drawerContentList=[
    DrawerContentModel(img: "assets/homepage/dashboard.svg", title: "Dashboard",imgHeight: 50,index: 1),
-   DrawerContentModel(img: "assets/homepage/salesReport.svg", title: "Products",imgHeight: 50,index: -1,
+   DrawerContentModel(img: "assets/homepage/salesReport.svg", title: "Products",imgHeight: 50,index: 100,
       list: [
         DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Brand",widget: Icon(Icons.branding_watermark,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 4),
         DrawerContentModel(img: "assets/homepage/salesReport.svg", title: "Product Details",imgHeight: 50,index: 2),
@@ -96,7 +100,7 @@ class _HomePageState extends State<HomePage> {
       ]
    ),
    DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Orders List",widget: Icon(Icons.star_border_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 7),
-   DrawerContentModel(img: "assets/homepage/salesReport.svg", title: "Inventory ",imgHeight: 50,index: -1,
+   DrawerContentModel(img: "assets/homepage/salesReport.svg", title: "Inventory ",imgHeight: 50,index: 101,
       list: [
         DrawerContentModel(img: "assets/homepage/purchase.svg", title: "Purchase",rightPadd: 5,imgHeight: 45,index: 17),
         DrawerContentModel(img: "assets/homepage/goodsReceived.svg", title: "Goods Received",rightPadd: 5,imgHeight: 45,index: 18),
@@ -104,7 +108,7 @@ class _HomePageState extends State<HomePage> {
         DrawerContentModel(img: "assets/icons/return.svg", title: "Return Products",rightPadd: 15,imgHeight: 32,index: 19),
       ]
    ),
-   DrawerContentModel(img: "assets/homepage/salesReport.svg", title: "Accounts & Finance ",imgHeight: 50,index: -1,
+   DrawerContentModel(img: "assets/homepage/salesReport.svg", title: "Accounts & Finance ",imgHeight: 50,index: 102,
        list: [
          DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Payment Details", widget: Icon(Icons.attach_money,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 45),
          DrawerContentModel(img: "assets/icons/return.svg", title: "Shipping Charges",  widget: Icon(Icons.attach_money,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 20),
@@ -136,7 +140,7 @@ class _HomePageState extends State<HomePage> {
 
    ),
 
-   DrawerContentModel(img: "assets/homepage/dashboard.svg", title: "Website ",imgHeight: 50,index: -1,
+   DrawerContentModel(img: "assets/homepage/dashboard.svg", title: "Website ",imgHeight: 50,index: 103,
        list: [
          DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Front Cover Slider",widget: Icon(Icons.local_convenience_store_rounded,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 10),
          DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Product Showcase",widget: Icon(Icons.production_quantity_limits,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 8),
@@ -145,11 +149,12 @@ class _HomePageState extends State<HomePage> {
          DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Top Offers",widget: Icon(Icons.local_offer_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 13),
          DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Footer Page Settings",widget: Icon(Icons.square_foot,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 15),
          DrawerContentModel(img: "assets/icons/return.svg", title: "Contact Details", widget: Icon(Icons.contact_page_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 31),
-
+         DrawerContentModel(img: "assets/icons/return.svg", title: "About", widget: Icon(Icons.contact_page_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 70),
+         DrawerContentModel(img: "assets/icons/return.svg", title: "Blog", widget: Icon(Icons.contact_page_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 71),
          ]
    ),
 
-   DrawerContentModel(img: "assets/homepage/dashboard.svg", title: "Delivery",imgHeight: 50,index: -1,
+   DrawerContentModel(img: "assets/homepage/dashboard.svg", title: "Delivery",imgHeight: 50,index: 104,
       list: [
         DrawerContentModel(img: "assets/icons/return.svg", title: "Delivery Boys",  widget: Icon(Icons.delivery_dining_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 36),
         DrawerContentModel(img: "assets/icons/return.svg", title: "Delivery Charge",  widget: Icon(Icons.delivery_dining_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 37),
@@ -157,7 +162,7 @@ class _HomePageState extends State<HomePage> {
         DrawerContentModel(img: "assets/icons/return.svg", title: "Holiday",  widget: Icon(Icons.attach_money,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 69),
       ]
    ),
-   DrawerContentModel(img: "assets/homepage/dashboard.svg", title: "Marketing ",imgHeight: 50,index: -1,
+   DrawerContentModel(img: "assets/homepage/dashboard.svg", title: "Marketing ",imgHeight: 50,index: 105,
        list: [
          DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "News Letter", widget: Icon(Icons.legend_toggle_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 47),
          DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Contact Message", widget: Icon(Icons.message_outlined,color: Colors.white,),rightPadd: 15,imgHeight: 25,index: 46),
@@ -230,29 +235,40 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               DrawerContent(
                                 img:drawerContentList[i].img,
-                                isSelect: menuIndex==drawerContentList[i].index,
+                                isSelect:expandIndex!=-1?expandIndex==drawerContentList[i].index: menuIndex==drawerContentList[i].index,
                                 imgHeight: drawerContentList[i].imgHeight,
                                 rightPadd:drawerContentList[i].list.isEmpty? drawerContentList[i].rightPadd:15.0,
                                 ontap: (){
                                   if(drawerContentList[i].list.isEmpty){
                                     setState(() {
                                       menuIndex=drawerContentList[i].index;
+                                      expandIndex=-1;
                                       title=drawerContentList[i].title;
                                     });
                                   }
                                   else{
-                                    setState(() {
-                                      drawerContentList[i].isExpand=!drawerContentList[i].isExpand;
-                                    });
+                                    if(expandIndex==drawerContentList[i].index){
+                                      setState(() {
+                                        expandIndex=-1;
+                                      });
+                                    }
+                                    else{
+                                      setState(() {
+                                        menuIndex=-1;
+                                        expandIndex=drawerContentList[i].index;
+                                        // drawerContentList[i].isExpand=!drawerContentList[i].isExpand;
+                                      });
+                                    }
+
                                   }
                                 },
-                                widget:drawerContentList[i].list.isEmpty?drawerContentList[i].widget:
-                                Arrow(isOpen: drawerContentList[i].isExpand,color: Colors.white,),
+                                arrow:drawerContentList[i].list.isEmpty?Container():
+                                Arrow(isOpen: expandIndex==drawerContentList[i].index,color: Colors.white,),
                                 drawerOpen: drawerOpen,
                                 title: drawerContentList[i].title,
                               ),
                               CustomExpansionTile(
-                                  expand:  drawerContentList[i].isExpand,
+                                  expand:  expandIndex==drawerContentList[i].index,
                                   child: Container(
                                     height: drawerContentList[i].list.length*50,
                                    // width: drawerOpen?250:100,
@@ -265,8 +281,8 @@ class _HomePageState extends State<HomePage> {
                                     itemBuilder: (ctx,j){
                                       return DrawerContent(
                                         img:drawerContentList[i].list[j].img,
-                                       // isSelect: menuIndex==(j+1)?true:false,
-                                        isSelect: menuIndex==drawerContentList[i].list[j].index,
+                                        isSelect: false,
+                                        isTextClr: menuIndex==drawerContentList[i].list[j].index,
                                         imgHeight: drawerContentList[i].list[j].imgHeight,
                                         rightPadd: drawerContentList[i].list[j].rightPadd,
                                         leftPadd: 10,
@@ -279,7 +295,7 @@ class _HomePageState extends State<HomePage> {
                                             Provider.of<ReportNotifier>(context,listen: false).assignData(drawerContentList[i].list[j].title);
                                           }
                                         },
-                                        widget: drawerContentList[i].list[j].widget,
+                                        widget: Container(),
                                         drawerOpen: drawerOpen,
                                         title: drawerContentList[i].list[j].title,
                                       );
@@ -323,7 +339,9 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           children: [
                             SizedBox(width: 20,),
-                            Text("${title}",
+                            Text(menuIndex==3?"Profile":
+                            menuIndex==40?"Manage Users":menuIndex==41?"User Access":
+                            "${title}",
                               style: TextStyle(fontSize: 18.5,color: grey1,fontFamily: 'RR',letterSpacing: 0.2),
                             ),
                             Spacer(),
@@ -367,22 +385,25 @@ class _HomePageState extends State<HomePage> {
                                                 });
                                               },
                                             "Profile",
-                                            Icon(Icons.person_outline,size: 20,color: menuIndex==3?Colors.white:th.primaryColor3,),
+                                            null,
                                             isSelect: menuIndex==3?true:false,
+                                            iconData: Icons.person_outline,
                                         ),
                                         profile(
                                                 () {
                                               Navigator.pop(ctx1);
                                             },
                                             "Inbox",
-                                            Icon(Icons.mail_outline,size: 20,color: th.primaryColor3,)
+                                            null,
+                                            iconData: Icons.mail_outline
                                         ),
                                         profile(
                                                 () {
                                               Navigator.pop(ctx1);
                                             },
                                             "Chat",
-                                            Icon(Icons.chat_outlined,size: 20,color: th.primaryColor3,)
+                                            null,
+                                            iconData: Icons.chat_outlined
                                         ),
                                         Container(
                                           height: 1,
@@ -395,26 +416,45 @@ class _HomePageState extends State<HomePage> {
                                               Navigator.pop(ctx1);
                                             },
                                             "Settings",
-                                            Icon(Icons.settings,size: 20,color: th.primaryColor3,)
+                                            null,
+                                            iconData: Icons.settings
                                         ),
                                         profile(
                                                 () {
+                                                  setState(() {
+                                                    menuIndex=40;
+                                                  });
+                                              Navigator.pop(ctx1);
+                                            },
+                                            "Manage Users",
+                                            null,
+                                          isSelect: menuIndex==40?true:false,
+                                          iconData: Icons.person_outline
+                                        ),
+                                        profile(
+                                                () {
+                                                  setState(() {
+                                                    menuIndex=41;
+                                                  });
                                               Navigator.pop(ctx1);
                                             },
                                             "User Access",
-                                            Icon(Icons.vpn_key_outlined,size: 20,color: th.primaryColor3,)
+                                            null,
+                                          isSelect: menuIndex==41?true:false,
+                                          iconData: Icons.vpn_key_outlined
                                         ),
                                         profile(
                                                 () {
                                               Navigator.pop(ctx1);
                                             },
                                             "FAQ",
-                                            Icon(Icons.wine_bar,size: 20,color: th.primaryColor3,)
+                                            null,
+                                          iconData: Icons.wine_bar
                                         ),
                                         Container(
                                           height: 1,
                                           width: 120,
-                                          margin: EdgeInsets.only(top: 13,bottom: 13),
+                                          margin: EdgeInsets.only(top: 13,bottom: 0),
                                           color: addNewTextFieldBorder,
                                         ),
                                         profile(
@@ -431,7 +471,7 @@ class _HomePageState extends State<HomePage> {
                                     onPop: () => print('Popover was popped!'),
                                     direction: PopoverDirection.bottom,
                                     width: 200,
-                                    height: 290,
+                                    height: 305,
                                     arrowHeight: 0,
                                     arrowWidth: 0,
                                     //  backgroundColor: Color(0xFFf6f6f6),
@@ -524,6 +564,8 @@ class _HomePageState extends State<HomePage> {
                       menuIndex==53 || menuIndex==54 || menuIndex==55  || menuIndex==56 || menuIndex==57  || menuIndex==58  || menuIndex==59 || menuIndex==60 || menuIndex==61 || menuIndex==62 || menuIndex==63 || menuIndex==64 || menuIndex==65 || menuIndex==66 || menuIndex==67?AllReports():
                       menuIndex==68?Profile2():
                       menuIndex==69?HolidayGrid():
+                      menuIndex==70?AboutWebAdd():
+                      menuIndex==71?BlogGrid():
                           Container()
 
                     ],
@@ -538,7 +580,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  profile(VoidCallback ontap,String title,Widget prefix,{Color? textColor=null,bool isSelect=false}){
+  profile(VoidCallback ontap,String title,Widget? prefix,{Color? textColor=null,bool isSelect=false,IconData iconData=Icons.eleven_mp}){
     return InkWell(
       onTap:ontap,
       child: Container(
@@ -555,7 +597,7 @@ class _HomePageState extends State<HomePage> {
         child:  Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            prefix,
+            prefix==null?  Icon(iconData,size: 20,color: isSelect?Colors.white:Provider.of<ThemeNotifier>(context,listen: false).primaryColor3,):prefix!,
             SizedBox(width: 10,),
             Text("$title",
               style: TextStyle(fontFamily: 'RR',fontSize: 16,color:isSelect?Colors.white: textColor==null?grey3:textColor
@@ -570,7 +612,7 @@ class _HomePageState extends State<HomePage> {
 
 }
 
-class DrawerContent extends StatelessWidget {
+/*class DrawerContent extends StatelessWidget {
   String img;
   bool isSelect;
   VoidCallback ontap;
@@ -592,13 +634,14 @@ class DrawerContent extends StatelessWidget {
         duration: animeDuration,
         curve: animeCurve,
         height: 50,
-        width: drawerOpen?240:80,
+        width: drawerOpen?250:80,
         decoration: BoxDecoration(
             color:isSelect? Provider.of<ThemeNotifier>(context,listen:false).primaryColor4:Colors.transparent,
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(25),
-              bottomRight: Radius.circular(25),
-            )
+            borderRadius: BorderRadius.all(Radius.circular(25))
+            // borderRadius: BorderRadius.only(
+            //   topRight: Radius.circular(25),
+            //   bottomRight: Radius.circular(25),
+            // )
         ),
         alignment: Alignment.centerRight,
         padding: EdgeInsets.only(right: rightPadd,),
@@ -633,6 +676,87 @@ class DrawerContent extends StatelessWidget {
 
               child: widget==null?SvgPicture.asset(img,color: imgColor,height: imgHeight,):widget!,
             ),
+
+          ],
+        ),
+      ),
+    );
+  }
+}*/
+class DrawerContent extends StatelessWidget {
+  String img;
+  bool isSelect;
+  VoidCallback ontap;
+  double imgHeight;
+  double rightPadd;
+  double leftPadd;
+  Color imgColor;
+  Widget? widget;
+  bool drawerOpen;
+  String title;
+  Widget? arrow;
+  bool isTextClr;
+  DrawerContent({required this.img,required this.isSelect,required this.ontap,required this.imgHeight,this.rightPadd=5,
+  this.imgColor=Colors.white,this.widget,required this.drawerOpen,required this.title,this.leftPadd=0.0,this.arrow,this.isTextClr=false});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: ontap,
+      child: AnimatedContainer(
+        duration: animeDuration,
+        curve: animeCurve,
+        height: 50,
+        width: drawerOpen?250:80,
+        decoration: BoxDecoration(
+            color:isSelect? Provider.of<ThemeNotifier>(context,listen:false).primaryColor4:Colors.transparent,
+            borderRadius: BorderRadius.all(Radius.circular(25))
+            // borderRadius: BorderRadius.only(
+            //   topRight: Radius.circular(25),
+            //   bottomRight: Radius.circular(25),
+            // )
+        ),
+        alignment: Alignment.centerRight,
+        padding: EdgeInsets.only(right: 0,),
+        child: Row(
+          children: [
+            /*leftPadd==0?Container():Padding(
+              padding: EdgeInsets.only(left: 13),
+              child: Circle(hei: 8, color: Provider.of<ThemeNotifier>(context,listen:false).primaryColor1),
+            ),
+            SizedBox(width:leftPadd==0? 10:8,),*/
+            Container(
+              width: 50,
+              height: 50,
+              alignment: Alignment.center,
+
+              child: widget==null?SvgPicture.asset(img,color: imgColor,height: imgHeight,):widget!,
+            ),
+            leftPadd==0?Container():Padding(
+              padding: EdgeInsets.only(left: 13,right: 10),
+              child: Circle(hei: 8, color: Provider.of<ThemeNotifier>(context,listen:false).primaryColor4),
+            ),
+            AnimatedOpacity(
+              duration: animeDuration,
+              opacity: drawerOpen?1:0,
+              child: AnimatedContainer(
+                duration: animeDuration,
+                curve: animeCurve,
+              //  color: Colors.red,
+                width: drawerOpen?leftPadd==0?160:159:0,
+                child: FittedText(
+                  height: 19,
+                  width: 155,
+                  text: "$title",
+                  alignment: Alignment.centerLeft,
+                  textStyle: ts18(isTextClr?Provider.of<ThemeNotifier>(context,listen:false).primaryColor4:Colors.white,),
+                ),
+              ),
+            ),
+           arrow==null?Container():arrow!
+           // SizedBox(width: drawerOpen?0:15,),
+           // Spacer(),
+
 
           ],
         ),

@@ -7,6 +7,7 @@ import 'package:ecommerce_admin/pages/addColor/colorGrid.dart';
 import 'package:ecommerce_admin/pages/addSize/sizeGrid.dart';
 import 'package:ecommerce_admin/pages/appMaster/appGrid.dart';
 import 'package:ecommerce_admin/pages/attributes/attributeGrid.dart';
+import 'package:ecommerce_admin/pages/branch/branchGrid.dart';
 import 'package:ecommerce_admin/pages/customers/customersGrid.dart';
 import 'package:ecommerce_admin/pages/emailSetting/emailSettingGrid.dart';
 import 'package:ecommerce_admin/pages/homePage.dart';
@@ -74,6 +75,7 @@ class _SettingsState extends State<Settings> with TickerProviderStateMixin{
         DrawerContentModel(img: "assets/icons/return.svg", title: "Add Color",  widget: Icon(Icons.color_lens_outlined,color: Colors.white,size: icoSize,),rightPadd: 15,imgHeight: 25,index: 11,widget2: ColorGrid()),
         DrawerContentModel(img: "assets/icons/return.svg", title: "Add Size",  widget: Icon(Icons.format_size_outlined,color: Colors.white,size: icoSize,),rightPadd: 15,imgHeight: 25,index: 12,widget2: SizeGrid()),
         DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "App", widget: Icon(Icons.app_blocking_outlined,color: Colors.white,size: icoSize,),rightPadd: 15,imgHeight: 25,index: 13,widget2: AppGrid()),
+        DrawerContentModel(img: "assets/homepage/user-profile.svg", title: "Branch", widget: Icon(Icons.app_blocking_outlined,color: Colors.white,size: icoSize,),rightPadd: 15,imgHeight: 25,index: 13,widget2: BranchGrid()),
       ];
     });
     super.initState();

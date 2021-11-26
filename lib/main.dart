@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'notifiers/themeNotifier.dart';
+import 'pages/homePage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,7 +31,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: Login(),
+        //home: Login(),
+        home: HomePage(),
       ),
     );
   }

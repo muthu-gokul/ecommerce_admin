@@ -3,6 +3,8 @@ import 'package:ecommerce_admin/model/UOMSettingsModel/conversionModel.dart';
 import 'package:ecommerce_admin/model/UOMSettingsModel/uomModel.dart';
 import 'package:ecommerce_admin/model/appModel.dart';
 import 'package:ecommerce_admin/model/attributeModel.dart';
+import 'package:ecommerce_admin/model/blogModel.dart';
+import 'package:ecommerce_admin/model/branchModel.dart';
 import 'package:ecommerce_admin/model/brandModel.dart';
 import 'package:ecommerce_admin/model/cardClassificationModel.dart';
 import 'package:ecommerce_admin/model/categoryModel.dart';
@@ -785,7 +787,21 @@ List<RatingsModel> ratings=[
     HolidayModel(name: "Pongal", fromDate: "14-01-2021", toDate: "17-01-2021"),
   ];
 
+  //Blog
+  List<BlogModel> blogDetail=[
+    BlogModel(date: "06-11-2021 ", title: "Heading",detail: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",views: "100K",),
+    BlogModel(date: "06-11-2021 ", title: "Heading",detail: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",views: "100K",),
+    BlogModel(date: "06-11-2021 ", title: "Heading",detail: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",views: "100K",),
+    BlogModel(date: "06-11-2021 ", title: "Heading",detail: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",views: "100K",),
+    BlogModel(date: "06-11-2021 ", title: "Heading",detail: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",views: "100K",),
+  ];
 
+  //BranchModel
+  List<BranchModel> branchDetail=[
+    BranchModel(branchCode: "MDU", locality: "Madurai Main",district: "Madurai",state: "Tamil Nadu",addedDate: "22.10.2021",),
+    BranchModel(branchCode: "CBE", locality: "Gandhipuram",district: "Coimbatore",state: "Tamil Nadu",addedDate: "22.10.2021",),
+    BranchModel(branchCode: "MDU", locality: "Madurai Main",district: "Madurai",state: "Tamil Nadu",addedDate: "22.10.2021",),
+  ];
 
   List<UserAccessModel> data=[];
   List<dynamic> v=[

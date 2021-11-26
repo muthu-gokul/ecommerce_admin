@@ -516,10 +516,10 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin{
                             color: th.primaryColor2,
                             borderRadius: BorderRadius.circular(25)
                         ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        child: ListView(
+                      //    mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            //SizedBox(height: SizeConfig.screenHeight! * 0.1,),
+                            SizedBox(height: SizeConfig.screenHeight! * 0.03,),
                             SizeConfig.screenWidth!<980?Container():Image.asset("assets/login/logo.jpg",height: 150,),
                             SizedBox(height: 10,),
 
