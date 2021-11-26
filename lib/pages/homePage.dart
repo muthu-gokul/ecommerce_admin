@@ -28,6 +28,7 @@ import 'package:ecommerce_admin/widgets/circle.dart';
 import 'package:ecommerce_admin/widgets/popOver/src/popover.dart';
 import 'package:ecommerce_admin/widgets/popOver/src/popover_direction.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:scutiwidgets/expandedSection.dart';
@@ -270,10 +271,11 @@ class _HomePageState extends State<HomePage> {
                               CustomExpansionTile(
                                   expand:  expandIndex==drawerContentList[i].index,
                                   child: Container(
+                                //    color: Colors.red,
                                     height: drawerContentList[i].list.length*50,
                                    // width: drawerOpen?250:100,
                                     width: drawerOpen?240:80,
-                                    alignment: Alignment.centerLeft,
+                                    alignment: Alignment.topCenter,
                                     //padding: EdgeInsets.only(left: 10),
                                     child: ListView.builder(
                                     itemCount: drawerContentList[i].list.length,
@@ -295,7 +297,7 @@ class _HomePageState extends State<HomePage> {
                                             Provider.of<ReportNotifier>(context,listen: false).assignData(drawerContentList[i].list[j].title);
                                           }
                                         },
-                                        widget: Container(),
+                                        widget: Container(height: 0,width: 0,),
                                         drawerOpen: drawerOpen,
                                         title: drawerContentList[i].list[j].title,
                                       );
@@ -701,14 +703,16 @@ class DrawerContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky, overlays: []);
     return GestureDetector(
       onTap: ontap,
       child: AnimatedContainer(
         duration: animeDuration,
         curve: animeCurve,
         height: 50,
-        width: drawerOpen?250:80,
+        width: drawerOpen?250:100,
         decoration: BoxDecoration(
+          //color: Colors.white,
             color:isSelect? Provider.of<ThemeNotifier>(context,listen:false).primaryColor4:Colors.transparent,
             borderRadius: BorderRadius.all(Radius.circular(25))
             // borderRadius: BorderRadius.only(
