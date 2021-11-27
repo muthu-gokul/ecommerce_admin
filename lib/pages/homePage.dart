@@ -599,7 +599,7 @@ class _HomePageState extends State<HomePage> {
         child:  Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            prefix==null?  Icon(iconData,size: 20,color: isSelect?Colors.white:Provider.of<ThemeNotifier>(context,listen: false).primaryColor3,):prefix!,
+            prefix==null?  Icon(iconData,size: 20,color: isSelect?Colors.white:Provider.of<ThemeNotifier>(context,listen: false).primaryColor3,):prefix,
             SizedBox(width: 10,),
             Text("$title",
               style: TextStyle(fontFamily: 'RR',fontSize: 16,color:isSelect?Colors.white: textColor==null?grey3:textColor
