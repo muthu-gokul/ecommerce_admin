@@ -405,7 +405,7 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
       case DatePickerEntryMode.input:
         picker = Form(
           key: _formKey,
-          autovalidate: _autoValidate,
+          autovalidateMode: AutovalidateMode.disabled,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 24),
          ///   height: orientation == Orientation.portrait ? _inputFormPortraitHeight : _inputFormLandscapeHeight,
