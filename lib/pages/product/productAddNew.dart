@@ -334,7 +334,7 @@ class _ProductAddNewState extends State<ProductAddNew> {
                                     },
                                     data: pn.categoryDropDownList,
                                     scrollTap: () {
-                                      scrollController.jumpTo(400);
+                                    //  scrollController.jumpTo(400);
                                     },
                                     width: textFormWidth,
                                     isToJson: false,
